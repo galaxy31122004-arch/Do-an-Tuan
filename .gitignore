@@ -8,5 +8,6 @@ tests/build/
 *.elf
 *.map
 *.obj
+*.pdb
 tests/protocol-test.exe
 tests/protocol-test
