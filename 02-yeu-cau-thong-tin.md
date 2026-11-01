@@ -1,6 +1,7 @@
 # Nội dung đã xác nhận và giới hạn cập nhật
 
 ## Đã xác nhận
+- Cập nhật: dùng module TXS0108E cho I²C/UART, OE từ GPIO27; dùng Burn-E nạp/verify HEX PIC, bỏ bước cài/build compiler trên máy này.
 - PIC16F877A giữ vai trò xử lý đo và hiển thị; ESP32 phụ trách mạng, trao đổi với PIC qua UART.
 - Cảm biến DHT11 và RTC DS1307 được giữ lại từ bản gốc.
 - Đổi LCD 2004 sang OLED trắng 0,96 inch I²C dùng SSD1315 theo module người dùng chọn.
@@ -20,7 +21,7 @@
 ## Chưa chốt và không suy đoán
 - Dịch vụ/bản triển khai cụ thể, gói tính năng và giao thức truyền cloud.
 - Chu kỳ đo/gửi, ngưỡng cảnh báo, thời gian lưu dữ liệu.
-- Sơ đồ chân, nguồn và chuyển mức tín hiệu; driver OLED sẽ đối chiếu module thực tế.
+- Bảng nối dây và chuyển mức TXS0108E đã có; footprint, pinout module/cáp Burn-E và driver OLED cần đối chiếu phần cứng thực tế.
 - Không thêm thông số điện áp, địa chỉ bus hoặc thông số cảm biến chưa kiểm chứng vào bản tóm tắt.
 
 ## Bàn giao

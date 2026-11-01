@@ -7,16 +7,16 @@
  <text x="40" y="78">PIC DIP-40 · ESP32-WROOM-32 DevKit · 9600 baud · I²C 100 kHz</text>
  <rect x="35" y="102" width="1370" height="125" rx="12" class="note"/>
  <text x="55" y="133" class="head">Power: one regulated 5 V / 2 A source</text>
- <text x="55" y="166">J1 +5V → F1 (1 A hold) → +5V rail: PIC, DS1307, AHCT125, DHT11, ESP32 5V/VIN</text>
- <text x="55" y="195">ESP32 3V3 → OLED VCC + Q1/Q2 gates + LV pull-ups. All grounds common. Do not feed 5 V into 3V3.</text>
+ <text x="55" y="166">J1 +5V → F1 (1 A hold) → +5V: PIC, DS1307, TXS VCCB, DHT11, ESP32 5V/VIN</text>
+ <text x="55" y="195">ESP32 3V3 → OLED VCC + TXS VCCA. All grounds common. OE → GPIO27 + R4 100k to GND.</text>
  <rect x="460" y="280" width="390" height="355" rx="12" class="box"/>
  <text x="485" y="320" class="head">U1 · PIC16F877A</text>
  <text x="485" y="356">VDD 11,32 → +5V</text><text x="485" y="384">VSS 12,31 → GND</text>
  <text x="485" y="422">RB0 / 33 ← DHT11 DATA</text>
  <text x="485" y="459">RC3 / 18 → SCL_HV</text>
  <text x="485" y="492">RC4 / 23 ↔ SDA_HV</text>
- <text x="485" y="533">RC6 TX / 25 → UART divider</text>
- <text x="485" y="568">RC7 RX / 26 ← AHCT125 output</text>
+ <text x="485" y="533">RC6 TX / 25 → TXS B3</text>
+ <text x="485" y="568">RC7 RX / 26 ← TXS B4</text>
  <text x="485" y="607">RB1 / 34 ← SW1 page button</text>
  <rect x="45" y="280" width="300" height="190" rx="12" class="box"/>
  <text x="65" y="316" class="head">U5 · DHT11 bare</text>
@@ -32,13 +32,13 @@
  <path d="M345 608 H379 V492 H460 M345 638 H412 V459 H460" class="sig"/>
  <rect x="970" y="280" width="425" height="180" rx="12" class="box"/>
  <text x="990" y="316" class="head">OLED SSD1315 · 0.96 inch</text>
- <text x="990" y="350">VCC → 3V3 · GND → GND</text><text x="990" y="380">SDA/SCL → LV side of Q1/Q2</text>
+ <text x="990" y="350">VCC → 3V3 · GND → GND</text><text x="990" y="380">SDA/SCL → TXS A1/A2</text>
  <text x="990" y="410">0x3C default · check module labels</text>
  <text x="990" y="440" class="small">C5 100nF + C8 10µF across 3V3/GND</text>
  <rect x="960" y="490" width="435" height="165" rx="12" class="box"/>
- <text x="980" y="523" class="head">Q1/Q2 · BSS138 I²C shifter</text>
- <text x="980" y="553">D pin 3 = HV · S pin 2 = LV</text><text x="980" y="582">G pin 1 = 3V3</text>
- <text x="980" y="612">R6/R7 4.7k → +5V (HV)</text><text x="980" y="640">R8/R9 4.7k → 3V3 (LV)</text>
+ <text x="980" y="523" class="head">U4 · TXS0108E module</text>
+ <text x="980" y="553">VCCA=3V3 · VCCB=5V · GND</text><text x="980" y="582">B1 SDA_HV ↔ A1 OLED SDA</text>
+ <text x="980" y="612">B2 SCL_HV ↔ A2 OLED SCL</text><text x="980" y="640">C3/C13 100nF · built-in pull-ups</text>
  <path d="M850 459 H909 V550 H960 M850 492 H890 V580 H960" class="sig"/>
  <path d="M1320 490 V460 M1360 490 V460" class="low"/>
  <rect x="45" y="785" width="535" height="245" rx="12" class="box"/>
@@ -47,16 +47,16 @@
  <text x="65" y="882">C9/C10 22pF → GND (check crystal load)</text>
  <text x="65" y="911">MCLR/1 → R1 10k → +5V; SW2 → GND</text>
  <text x="65" y="940">RB1/34 → R3 10k → +5V; SW1 → GND</text>
- <text x="65" y="972">J3: 1 VPP · 2 VDD · 3 GND · 4 PGD/40</text>
- <text x="65" y="1001">5 PGC/39 · 6 NC. C1/C2 100nF at PIC VDD.</text>
+ <text x="65" y="972">Burn-E: program/verify HEX off-board.</text>
+ <text x="65" y="1001">J3 service ICSP: see wiring.md; check cable.</text>
  <rect x="660" y="755" width="735" height="275" rx="12" class="box"/>
- <text x="680" y="790" class="head">U2 ESP32 + UART level adaptation</text>
- <text x="680" y="827" class="wire">PIC TX/25 → R4 10k → NODE → ESP32 GPIO16 RX</text>
- <text x="680" y="857">NODE → R5 20k → GND (5V → about 3.33V)</text>
- <text x="680" y="894" class="wire">ESP32 GPIO17 TX → U4 pin 2 → U4 pin 3 → PIC RX/26</text>
- <text x="680" y="926">U4 SN74AHCT125: pin14 +5V, pin7 GND, pin1 /OE GND</text>
- <text x="680" y="956">Unused /OE 4,10,13 → +5V; inputs 5,9,12 → GND</text>
- <text x="680" y="986">Unused outputs 6,8,11 NC. C3 100nF at U4; C7 470µF at ESP32.</text>
+ <text x="680" y="790" class="head">U2 ESP32 + U4 TXS0108E UART</text>
+ <text x="680" y="827" class="wire">PIC TX/25 → TXS B3 ↔ A3 → ESP32 GPIO16 RX</text>
+ <text x="680" y="857">No divider or separate UART buffer.</text>
+ <text x="680" y="894" class="wire">ESP32 GPIO17 TX → TXS A4 ↔ B4 → PIC RX/26</text>
+ <text x="680" y="926">GPIO27 → OE; R4 100k OE → GND; enable after 100ms.</text>
+ <text x="680" y="956">A5–A8/B5–B8 NC. Inspect any module OE jumper.</text>
+ <text x="680" y="986">C7 470µF at ESP32. Module headers J5A/J5B: check footprint.</text>
  <path d="M850 533 H920 V705 H1060 V755 M850 568 H880 V725 H1120 V755" class="sig"/>
  <text x="40" y="1070" class="small">Assembly overview, not a PCB production netlist. Full pin tables: wiring.md · Every fitted part: BOM.md / BOM.csv</text>
 </svg>

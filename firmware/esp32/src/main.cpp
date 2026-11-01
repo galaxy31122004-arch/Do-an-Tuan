@@ -88,10 +88,14 @@ static bool publish(const Sample &s) {
 }
 
 void setup() {
+    digitalWrite(LEVEL_OE_PIN,LOW);
+    pinMode(LEVEL_OE_PIN,OUTPUT);
     Serial.begin(115200);
     samples=xQueueCreate(1,sizeof(Sample));
     if(!samples) { Serial.println("Queue allocation failed"); abort(); }
     Serial2.setRxBufferSize(256); Serial2.begin(9600,SERIAL_8N1,PIC_RX_PIN,PIC_TX_PIN);
+    delay(100); /* VCCA/VCCB settle; R4 holds OE low before GPIO configuration. */
+    digitalWrite(LEVEL_OE_PIN,HIGH);
     WiFi.mode(WIFI_STA); WiFi.setAutoReconnect(true);
     if(configured()) WiFi.begin(WIFI_SSID,WIFI_PASSWORD);
     else Serial.println("Configure include/secrets.h with Wi-Fi, HTTPS host, device token and CA.");

@@ -34,7 +34,7 @@ AXON lưu trạng thái tại `.planning/state.json`; bối cảnh, kiến trúc
 ## Chạy thử
 
 1. Lắp và kiểm tra nguồn theo tài liệu phần cứng; chưa có PCB sản xuất tự động từ sơ đồ này.
-2. Build PIC với MPLAB XC8. Build ESP32 bằng `pio run -d firmware/esp32 -e esp32dev`.
+2. Nạp PIC bằng Burn-E với HEX được biên dịch từ đúng mã nguồn, chạy Verify rồi cắm PIC vào mạch. Bỏ bước cài/build compiler trên máy này theo yêu cầu; workspace chưa có HEX PIC đã kiểm chứng. Build ESP32 bằng `pio run -d firmware/esp32 -e esp32dev`.
 3. Tạo `firmware/esp32/include/secrets.h` từ file example; điền Wi-Fi, HTTPS host, device token và root CA. Không đưa credentials lên Git.
 4. Tạo device `ENV-MONITOR-01`, import dashboard và cấu hình alarm rules theo hướng dẫn nền tảng.
 5. Có thể dùng environment `demo` để phát dữ liệu giả có nhãn trước khi gắn PIC.
@@ -42,5 +42,6 @@ AXON lưu trạng thái tại `.planning/state.json`; bối cảnh, kiến trúc
 ## Trạng thái kiểm tra
 
 - ESP32 live và demo đã build trên máy phát triển; kiểm thử UART/calendar native và kiểm tra cấu trúc dashboard/BOM có trong `tests/`.
-- Chưa có XC8 trên máy nên chưa xác nhận build, bộ nhớ hoặc timing PIC. Chưa nạp lên mạch thật.
+- Đã chọn module TXS0108E: bốn kênh I²C/UART, OE từ GPIO27. Xem bảng chân trước khi lắp.
+- Quy trình PIC dùng Burn-E; chưa xác nhận HEX, bộ nhớ hoặc timing PIC. Chưa nạp lên mạch thật.
 - Chưa import vào tenant thật. Dashboard cần thiết bị, root CA, token và alarm rules của deployment thực tế; không có tài khoản hoặc tài nguyên cloud nào được tạo tự động.

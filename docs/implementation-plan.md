@@ -4,15 +4,15 @@
 
 **Architecture:** PIC16F877A at 20 MHz/5 V owns DHT11, DS1307, OLED and a page button. ESP32 DevKit exchanges checksummed UART frames with PIC and posts timestamped telemetry over verified HTTPS to the ThingsBoard-compatible device API. Dashboard runs inside the existing IoT platform.
 
-**Stack:** MPLAB XC8 for PIC, PlatformIO Arduino ESP32, portable C protocol/calendar, Python host verification. No cloud credentials are included.
+**Stack:** PIC C source retained; user skips local compiler installation/build and programs HEX with Burn-E. PlatformIO Arduino ESP32, portable C protocol/calendar, Python host verification. No cloud credentials are included.
 
 ## Steps
 - [x] Define and test the portable UART protocol and UTC calendar using native C assertions, including invalid checksum, field overflow and invalid sensor/time flags.
-- [x] Implement PIC drivers with bounded waits, no framebuffer, RTC time sync from ESP32 and OLED pages; provide XC8 build instructions. XC8 compilation and memory report remain pending.
+- [x] Implement PIC drivers with bounded waits, no framebuffer, RTC time sync from ESP32 and OLED pages; provide Burn-E HEX programming/verify instructions. A verified PIC HEX and memory report are not available.
 - [x] Implement ESP32 UART task and latest-only HTTPS sender; validate certificates, NTP and connection status; discard historical offline records.
 - [x] Generate dashboard JSON from the platform's official widget schema, with telemetry cards, history chart/table, server threshold controls and alarms. Add setup instructions for device profile alarm rules.
 - [x] Document every signal, physical pin, supply, divider, pull-up, decoupler, oscillator and programming header; deliver CSV and readable BOM plus a standalone SVG wiring diagram.
 - [x] Run native protocol tests, ESP32 release/demo builds, dashboard and BOM integrity checks. Report hardware/PIC/cloud verification limits explicitly.
 
 ## Verification limits
-No PIC programmer, assembled PCB, cloud account or XC8 compiler has been provided. Build ESP32 locally; do not upload or create cloud resources. Dashboard import needs confirmation against the actual ThingsBoard/Core IoT deployment.
+User owns a Burn-E programmer; exact revision, cable pinout and software were not provided. Local compiler installation/build is excluded at the user's request. No assembled PCB or cloud account has been provided. Build ESP32 locally; do not upload or create cloud resources. Dashboard import needs confirmation against the actual deployment.

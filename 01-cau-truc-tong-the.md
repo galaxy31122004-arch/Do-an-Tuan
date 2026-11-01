@@ -14,4 +14,5 @@
 5. Mô phỏng và kiểm tra: mô phỏng phần phù hợp và kiểm thử tích hợp bằng mạch thật.
 
 ## Trạng thái
+Đã cập nhật thêm module TXS0108E cho I²C/UART và nạp/verify PIC bằng Burn-E. Bỏ bước cài/build compiler PIC trên máy này theo yêu cầu; chưa có HEX PIC được kiểm chứng.
 Người dùng đã đồng ý kiến trúc, phạm vi cloud/web, đổi OLED và yêu cầu cập nhật tài liệu. Bổ sung mới nhất: dùng nền tảng có sẵn như Core IoT/ThingsBoard. Không đặt thêm cổng duyệt cho các quyết định đã được chấp thuận.

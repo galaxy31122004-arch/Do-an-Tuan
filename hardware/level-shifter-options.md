@@ -1,8 +1,8 @@
-# Vì sao có BSS138? Có thể thay TXS0108E không?
+# Phương án đã chọn: module TXS0108E
 
-Thiết kế hiện tại tách hai rail logic: PIC/DS1307 5 V và OLED/ESP32 3,3 V. BSS138 chuyển hai đường open-drain SDA/SCL giữa hai rail; điện trở ở mỗi phía kéo đường lên đúng nguồn của phía đó. Nguồn OLED được seller ghi 3,3–5 V không tự chứng minh chân SDA/SCL chịu được pull-up 5 V.
+Người dùng đã chọn một module TXS0108E để chuyển mức giữa PIC/DS1307 5 V và OLED/ESP32 3,3 V. BOM, bảng chân, SVG và firmware ESP32 dùng chung phương án này.
 
-**Có thể dùng một module TXS0108E thay các khối chuyển mức hiện tại.** TI công bố hỗ trợ open-drain và push-pull, VCCA 1,4–3,6 V, VCCB 1,65–5,5 V và VCCA ≤ VCCB. Với mạch này: A=3,3 V, B=5 V. Module cần dây ngắn, nguồn lọc tốt và OE điều khiển đúng mức VCCA. Chưa đổi BOM mặc định vì người dùng đang hỏi lý do, chưa chọn thay phương án.
+TI công bố hỗ trợ open-drain và push-pull, VCCA 1,4–3,6 V, VCCB 1,65–5,5 V và VCCA ≤ VCCB. Với mạch này: A=3,3 V, B=5 V. Module cần dây ngắn, nguồn lọc tốt và OE điều khiển đúng mức VCCA.
 
 ## Ánh xạ thay thế
 
@@ -13,8 +13,8 @@ Thiết kế hiện tại tách hai rail logic: PIC/DS1307 5 V và OLED/ESP32 3,
 | A3/B3 | ESP32 GPIO16 RX | PIC RC6 TX chân 25 |
 | A4/B4 | ESP32 GPIO17 TX | PIC RC7 RX chân 26 |
 
-GND module nối GND chung; VCCA=3,3 V; VCCB=5 V. OE tham chiếu VCCA: giữ thấp khi khởi động theo hướng dẫn TI rồi đưa lên 3,3 V để bật; không cấp 5 V vào OE. Cách kéo/điều khiển OE, tụ lọc và pull-up phải đối chiếu schematic module cụ thể trước khi chốt. Không nối thêm mạch chia áp vào đường đã qua TXS.
+GND chung; VCCA=3,3 V; VCCB=5 V. OE nối ESP32 GPIO27 và R4 100 kΩ xuống GND. Firmware giữ OE thấp, chờ 100 ms cho nguồn ổn định rồi bật; kiểm tra module không kéo cứng OE lên nguồn. C3 lọc VCCB, C13 lọc VCCA. Không cấp 5 V vào OE/GPIO27; không thêm chia áp vào đường đã qua TXS.
 
-Nếu đổi: bỏ Q1/Q2, U4/SK3 và R4/R5; rà soát R6–R9 vì TXS/module có cơ chế kéo lên bên trong. Không tự lắp thêm mọi pull-up 4,7k như phương án BSS138. Thêm module, header và tụ nguồn phù hợp footprint thực tế. Chân UART/I²C trong firmware giữ nguyên; nếu OE điều khiển bằng GPIO thì bổ sung cấu hình tương ứng.
+Đã bỏ cặp MOSFET, buffer và chia áp cũ; U4 nay là module TXS0108E. Không lắp bốn pull-up bus cũ vì TXS có pull-up nội; đối chiếu pull-up có sẵn trên OLED/module và đo tín hiệu. J5A/J5B dự kiến hai header 1x10, phải đo module thực tế. Các kênh còn lại để NC.
 
 Nguồn chính thức: [TI TXS0108E](https://www.ti.com/product/TXS0108E), datasheet trên cùng trang. Thông số hãng đã đọc ngày 2026-11-01 (RSCH-20261101-0005). Việc chuyển module cụ thể vẫn cần đo tín hiệu trên mạch.

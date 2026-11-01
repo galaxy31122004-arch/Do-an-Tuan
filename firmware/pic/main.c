@@ -13,6 +13,7 @@ static uint8_t wifi_ok=0,cloud_ok=0;
 static uint32_t last_send_uptime=0;
 static uint16_t status_age=600;
 static uint8_t tx_crc;
+static bool oled_ready=false;
 
 void __interrupt() irq(void) {
     if(PIR1bits.RCIF) {
@@ -142,7 +143,9 @@ static bool oled_cmd(uint8_t command) {
 }
 static void oled_init(void) {
     static const uint8_t commands[]={0xAE,0xD5,0x80,0xA8,0x3F,0xD3,0,0x40,0x8D,0x14,0x20,0x02,0xA1,0xC8,0xDA,0x12,0x81,0x7F,0xD9,0xF1,0xDB,0x40,0xA4,0xA6,0xAF};
-    uint8_t i; for(i=0;i<sizeof commands;++i) if(!oled_cmd(commands[i])) break;
+    uint8_t i; oled_ready=false;
+    for(i=0;i<sizeof commands;++i) if(!oled_cmd(commands[i])) return;
+    oled_ready=true;
 }
 static uint8_t glyph(char c,uint8_t column) {
     if(c>='0'&&c<='9') return glyphs[c-'0'][column];
@@ -169,6 +172,8 @@ end: i2c_stop();
 static void decimal(char *p,uint16_t n,uint8_t width) { while(width) { p[--width]=(char)('0'+n%10); n/=10; } }
 static void screen(uint8_t page,uint16_t temp,uint16_t hum,uint8_t flags,uint32_t epoch) {
     char line[22]; rtc_time_t t;
+    /* ESP32 may enable the TXS after PIC boot. Retry instead of losing OLED permanently. */
+    if(!oled_ready) { oled_init(); if(!oled_ready) return; }
     oled_line(0,page?"NETWORK STATUS":"ENVIRONMENT MONITOR");
     if(!page) {
         if(flags&1) {

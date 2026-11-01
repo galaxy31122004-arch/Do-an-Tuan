@@ -14,7 +14,9 @@
 | PIC MCLR chân 1 | R1 10 kΩ lên +5 V; SW2 từ MCLR xuống GND |
 | PIC RB1 chân 34 | SW1 xuống GND; R3 10 kΩ lên +5 V |
 | ESP32 chân 5V/VIN theo board | +5 V, không phải chân 3V3 |
-| ESP32 3V3 | Rail 3,3 V chỉ cấp OLED và hai gate BSS138/pull-up LV |
+| ESP32 3V3 | Rail 3,3 V cấp OLED và TXS0108E VCCA |
+| TXS0108E VCCB / VCCA | +5 V / 3,3 V; C3/C13 100 nF lọc từng rail sang GND |
+| TXS0108E OE | ESP32 GPIO27; R4 100 kΩ từ OE xuống GND |
 | C6 100 nF, C7 470 µF | +5 V–GND sát ESP32 |
 | C11 10 µF | +5 V–GND gần PIC/RTC |
 | +5 V → R10 1 kΩ → anode D1 | Cathode LED xuống GND |
@@ -51,51 +53,56 @@ Không áp dụng thứ tự này cho module 3 chân. Đặt cảm biến xa ngu
 
 DS1307 lưu **UTC**. ESP32 lấy NTP và gửi thời gian cho PIC; OLED hiển thị UTC+7. Pin chỉ giữ RTC, không cấp cho PIC/ESP32. Không có mạch sạc pin trong thiết kế.
 
-## 4. OLED và chuyển mức I²C
+## 4. OLED và module TXS0108E
 
-| Net | Phía 5 V | Phía 3,3 V |
+| Kênh | Phía A: 3,3 V | Phía B: 5 V |
 |---|---|---|
-| SDA | PIC RC4 chân 23 + DS1307 chân 5 + Q1 D chân 3; R6 4,7 kΩ lên 5 V | Q1 S chân 2 + OLED SDA; R8 4,7 kΩ lên 3,3 V |
-| SCL | PIC RC3 chân 18 + DS1307 chân 6 + Q2 D chân 3; R7 4,7 kΩ lên 5 V | Q2 S chân 2 + OLED SCL; R9 4,7 kΩ lên 3,3 V |
-| Gate | Q1/Q2 G chân 1 đều nối 3,3 V | Không nối gate lên 5 V |
-| OLED VCC/GND | — | 3,3 V/GND; C5 100 nF và C8 10 µF |
+| A1/B1 — SDA | OLED SDA | PIC RC4/23 + DS1307 SDA/5 |
+| A2/B2 — SCL | OLED SCL | PIC RC3/18 + DS1307 SCL/6 |
+| A3/B3 — PIC phát | ESP32 GPIO16/RX2 | PIC RC6/TX/25 |
+| A4/B4 — ESP32 phát | ESP32 GPIO17/TX2 | PIC RC7/RX/26 |
+| A5–A8/B5–B8 | NC | NC |
+| OLED VCC/GND | 3,3 V/GND; C5 100 nF + C8 10 µF | — |
 
-Pinout BSS138 SOT-23 cần đối chiếu hãng mua. Địa chỉ 7-bit mặc định firmware: OLED `0x3C`, DS1307 `0x68`; nếu OLED dùng `0x3D`, đổi `OLED_ADDR`. Kiểm tra pull-up đã gắn trên OLED trước khi lắp R8/R9. Không đưa trực tiếp SDA/SCL 5 V sang module OLED chưa xác minh mức logic.
+Đấu module theo nhãn A/B và VCCA/VCCB/OE/GND, không dùng số chân IC trần để suy ra header. J5A/J5B dự kiến hai hàng 1x10, xác minh module thực tế trước khi làm PCB. OLED mặc định `0x3C`, DS1307 `0x68`; đổi `OLED_ADDR` nếu màn dùng `0x3D`.
+
+OE=GPIO27, R4 100 kΩ kéo xuống GND. ESP32 giữ thấp lúc boot, chờ 100 ms rồi bật mức 3,3 V. Kiểm tra/tháo pull-up hoặc cầu nối kéo cứng OE lên nguồn nếu module có; không đưa 5 V vào GPIO27/OE. PIC thử khởi tạo OLED lại khi TXS chưa bật lúc boot.
+
+TXS có pull-up nội, không lắp R6–R9 của thiết kế cũ. Đối chiếu pull-up đã có trên OLED/module, đo tải bus và giữ dây ngắn. C3/C13 100 nF lọc VCCB/VCCA; xem datasheet TI trong `docs/sources.md`.
 
 ## 5. UART hai chiều, 9600 baud 8N1
 
 ```text
-PIC RC6/TX chân 25 ─ R4 10k ─┬─ ESP32 GPIO16/RX2
-                              R5 20k
-                               │
-                              GND
-
-ESP32 GPIO17/TX2 ─ U4 pin 2 (1A)
-                   U4 pin 3 (1Y) ─ PIC RC7/RX chân 26
-U4 pin 1 (/1OE) = GND; pin 14 = +5V; pin 7 = GND
+PIC RC6/TX/25 → TXS B3 ↔ A3 → ESP32 GPIO16/RX2
+PIC RC7/RX/26 ← TXS B4 ↔ A4 ← ESP32 GPIO17/TX2
+TXS VCCB=5V, VCCA=3V3, GND chung, OE=GPIO27 + R4 100k xuống GND
 ```
 
-U4 là **SN74AHCT125**, không phải HC125. C3 100 nF sát chân 14/7. Các /OE không dùng (4,10,13) nối +5 V; input 5,9,12 nối GND; output 6,8,11 để NC. Không nối PIC TX thẳng vào GPIO16. Không dùng module ESP32-WROVER vì GPIO16/17 có thể dành cho PSRAM.
+Không còn bộ chia áp TX hoặc buffer riêng. Không nối PIC TX thẳng vào GPIO16 hoặc thêm bộ chia áp trên đường đã qua TXS. Không dùng ESP32-WROVER thay trực tiếp vì GPIO16/17 có thể dành cho PSRAM.
 
-## 6. ICSP nạp PIC
+## 6. Burn-E nạp PIC; J3 là header dịch vụ dự phòng
+
+Quy trình chính: ngắt nguồn, tháo PIC khỏi SK1, đặt vào đế/adapter tương thích của Burn-E đúng hướng dẫn của phiên bản đang dùng, chọn PIC16F877A, mở file HEX, nạp và verify. Cắm PIC trở lại khi mạch tắt nguồn. Không suy đoán vị trí chân 1 trên đế ZIF.
+
+J3 chỉ dùng nếu bản Burn-E đó hỗ trợ ICSP và đã đối chiếu pinout cáp. Thứ tự dưới đây là quy ước PCB, không phải khẳng định thứ tự chân đầu cáp Burn-E.
 
 | J3 | PIC |
 |---|---|
 | 1 VPP/MCLR | Chân 1 |
-| 2 VDD sense | Rail +5 V |
+| 2 VDD | Rail +5 V |
 | 3 GND | GND |
 | 4 PGD | RB7 chân 40 |
 | 5 PGC | RB6 chân 39 |
 | 6 AUX | NC |
 
-Đánh dấu chân 1. Không nhấn reset khi nạp. Chỉ để một thiết bị cấp nguồn; nếu dùng nguồn mạch ngoài, PICkit chỉ sense VDD. Không cho VPP đi vào ESP32/OLED.
+Đánh dấu chân 1. Nếu dùng ICSP, chọn nguồn target theo hướng dẫn Burn-E; không cấp đồng thời nguồn mạch nạp và adapter nếu không được thiết kế cho phép. Không cho VPP đi vào ESP32/OLED. Không coi Burn-E là bộ debug trực tiếp trong MPLAB.
 
 ## 7. Trình tự kiểm tra trước khi cắm IC
 
 1. Kiểm tra chập 5 V/GND và chiều tụ hóa, pin, IC; cấp nguồn giới hạn dòng.
 2. Đo 5 V và 3,3 V, kiểm tra nguồn ESP32 ổn định khi Wi-Fi phát.
-3. Cắm/nạp PIC, kiểm tra thạch anh; cắm RTC và OLED, xác nhận ACK I²C.
+3. Nạp/verify PIC bằng Burn-E ngoài mạch rồi cắm PIC khi tắt nguồn. Cắm RTC/OLED và ESP32, xác nhận OE=3,3 V sau boot rồi kiểm tra thạch anh và ACK I²C.
 4. Gắn DHT11, kiểm tra số đo và nút chuyển trang; quan sát TX PIC bằng USB-UART/logic analyzer đúng mức điện áp.
 5. Gắn chuyển mức UART và ESP32; xác nhận gói M/S/T, đồng bộ RTC, rồi mới kiểm tra cloud.
 
-Nguồn tra cứu: Microchip DS39582C và TI SN74AHCT125, đã ghi trong ledger RSCH-20261101-0002; OLED theo RSCH-20261101-0004. Datasheet và tài liệu tham khảo được liệt kê trong `docs/sources.md`.
+Nguồn: Microchip DS39582C (RSCH-20261101-0002), TI TXS0108E (RSCH-20261101-0005), OLED (RSCH-20261101-0004). Burn-E do người dùng xác nhận; chưa có model/pinout cáp cụ thể nên thao tác theo đúng phiên bản đang sở hữu.

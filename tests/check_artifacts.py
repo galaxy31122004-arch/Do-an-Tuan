@@ -33,8 +33,10 @@ for row in rows:
     for name in names:
         assert name not in refs, name
         refs.add(name)
-assert all(f'C{i}' in refs for i in range(1,13))
-assert all(f'R{i}' in refs for i in range(1,11))
-assert {'U1','U2','U3','U4','U5','U6','Q1','Q2','Y1','Y2','BH1','SW1','SW2','J3'}<=refs
+assert all(f'C{i}' in refs for i in range(1,14))
+assert {'R1','R2','R3','R4','R10'}<=refs
+assert not {'Q1','Q2','SK3','R5','R6','R7','R8','R9'} & refs
+assert any(row['Reference']=='U4' and 'TXS0108E' in row['Component'] for row in rows)
+assert {'U1','U2','U3','U4','U5','U6','Y1','Y2','BH1','SW1','SW2','J3','J5A','J5B'}<=refs
 assert not (root/'firmware/esp32/include/secrets.h').exists(), 'Private secrets must not enter the deliverable'
 print(f'PASS: {len(widgets)} widgets, aliases and telemetry keys; {len(refs)} unique BOM parts')

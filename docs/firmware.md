@@ -2,7 +2,7 @@
 
 ## Phần cứng mặc định
 
-PIC16F877A DIP-40 / 20 MHz / 5 V; DHT11 tại RB0; nút trang RB1; MSSP I²C RC3/RC4; UART RC6/RC7, 9600 8N1. ESP32-WROOM-32 DevKit nhận tại GPIO16 và phát tại GPIO17. Xem `hardware/wiring.md` trước khi cấp nguồn.
+PIC16F877A DIP-40 / 20 MHz / 5 V; DHT11 tại RB0; nút trang RB1; MSSP I²C RC3/RC4; UART RC6/RC7, 9600 8N1. ESP32-WROOM-32 DevKit nhận tại GPIO16, phát tại GPIO17, GPIO27 điều khiển OE module TXS0108E. Xem `hardware/wiring.md` trước khi cấp nguồn.
 
 ## ESP32 — PlatformIO
 
@@ -18,13 +18,17 @@ Thay COM6 bằng cổng thực tế; lệnh upload chỉ chạy khi người dù
 
 Firmware gửi tối đa một bản ghi mới mỗi 10 giây; chờ frame PIC mới sau khi Wi-Fi kết nối lại. HTTPS có timeout, UART chạy task riêng và queue chỉ chứa một bản mới nhất. Lỗi gửi không tạo backlog. Khi NTP hợp lệ, ESP32 gửi thời gian UTC để PIC ghi DS1307; thử lại mỗi 10 giây nếu RTC chưa hợp lệ, sau đó đồng bộ định kỳ một giờ. Bộ ESP32 Arduino hiện dùng time_t 32-bit, vì vậy cần nâng toolchain trước mốc năm 2038.
 
-## PIC — MPLAB X / XC8
+## PIC — nạp HEX bằng Burn-E
 
-1. Cài MPLAB X, XC8 và device pack có PIC16F877A. Tạo Standalone Project, chọn đúng chip và programmer.
-2. Thêm `firmware/pic/main.c`; giữ nguyên `board.h` và `../common/protocol.h` theo cây thư mục.
-3. Clock cấu hình HS với Y1 20 MHz. Firmware đã chứa config bits, không bật LVP hoặc watchdog ngoài ý muốn.
-4. Build bằng IDE hoặc chạy `firmware/pic/build.ps1 -Compiler 'đường-dẫn/xc8-cc.exe'`. Kiểm tra memory summary phải vừa **368 byte RAM và 8K program words**, đồng thời xem cảnh báo stack/call depth; chưa xác nhận được các mục này khi chưa có XC8.
-5. Nạp file HEX do XC8 sinh ra qua ICSP J3; kiểm tra oscillator, I²C, UART trên mạch thật.
+Theo lựa chọn của người dùng, bỏ bước cài/build compiler trên máy này; quy trình thao tác tập trung vào Burn-E. Burn-E nạp HEX, không biên dịch C. Mã `main.c` hiện viết theo cú pháp XC8 (`xc.h`); cần có file HEX được biên dịch từ đúng mã nguồn và kiểm tra bộ nhớ trước khi nạp. Workspace chưa có HEX PIC đã kiểm chứng, không dùng HEX của mạch khác.
+
+1. Mở phần mềm đi kèm đúng phiên bản Burn-E và xác nhận phần mềm nhận mạch nạp.
+2. Tắt nguồn PCB, tháo PIC khỏi SK1; đặt PIC16F877A DIP-40 vào vị trí đế/adapter được Burn-E hướng dẫn. Không suy đoán vị trí chân 1 hoặc đầu cáp.
+3. Chọn đúng PIC16F877A, mở HEX và kiểm tra config: HS, Y1 20 MHz, LVP OFF, watchdog OFF theo firmware. Không ghi đè tùy tiện config bits.
+4. Nạp theo trình tự phần mềm cung cấp rồi chạy Verify; kiểm tra kết quả thành công trước khi tháo chip.
+5. Tắt nguồn/nhả đế theo hướng dẫn Burn-E, lấy PIC ra, cắm lại SK1 đúng chiều khi PCB chưa cấp điện. Cấp nguồn và kiểm tra đo/hiển thị/UART.
+
+J3 là header ICSP dự phòng, không bắt buộc cho cách nạp ngoài mạch. Chỉ dùng khi bản Burn-E hỗ trợ và đã đối chiếu pinout cáp, nguồn và VPP. Không coi Burn-E là bộ debug trong MPLAB.
 
 Driver OLED dùng font chữ hoa 5×7 và truyền từng dòng, không cần framebuffer 1.024 byte. Hiển thị hai trang qua nút nhấn chống dội; thông báo mạng trên PIC hết hạn nếu không nhận trạng thái ESP32. `LAST SEND` là thời gian ESP32 nhận HTTP 2xx, không khẳng định mọi widget đã cập nhật. OLED dùng địa chỉ 0x3C; chỉnh `board.h` nếu module là 0x3D. Bộ lệnh khởi tạo cần kiểm tra trên SSD1315 thực tế; không coi build là bằng chứng màn hình đã hoạt động.
 
@@ -55,4 +59,4 @@ tests/protocol-test.exe
 python tests/check_artifacts.py
 ```
 
-Các kiểm tra này không thay thế đo timing DHT, kiểm chứng memory XC8, kiểm tra điện áp hoặc import dashboard vào deployment thực tế.
+Các kiểm tra này không thay thế đo timing DHT, xác nhận bộ nhớ/HEX PIC bằng compiler phù hợp, kiểm tra điện áp hoặc import dashboard vào deployment thực tế. Việc bỏ bước cài/compiler không biến mã C thành file nạp được.
