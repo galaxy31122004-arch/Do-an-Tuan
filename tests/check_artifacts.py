@@ -1,5 +1,6 @@
 """Check native dashboard connections and complete BOM reference uniqueness."""
 import csv
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -40,3 +41,31 @@ assert any(row['Reference']=='U4' and 'TXS0108E' in row['Component'] for row in 
 assert {'U1','U2','U4','U5','U6','Y1','SW1','SW2','J3','J5A','J5B'}<=refs
 assert not (root/'firmware/esp32/include/secrets.h').exists(), 'Private secrets must not enter the deliverable'
 print(f'PASS: {len(widgets)} widgets, aliases and telemetry keys; {len(refs)} unique BOM parts')
+
+assert any(row['Reference']=='U1' and 'AT89S52' in row['Component'] for row in rows)
+assert any('C2' in row['Reference'].split(',') and '10 µF' in row['Component'] for row in rows)
+
+# The delivered image must be valid Intel HEX, fit AT89S52's 8KB, and match sources.
+release=root/'firmware/at89s52/release'
+manifest=json.loads((release/'build-info.json').read_text())
+hexfile=release/'environment-monitor.hex'
+assert hashlib.sha256(hexfile.read_bytes()).hexdigest()==manifest['hex_sha256']
+for name,digest in manifest['source_sha256'].items():
+    assert hashlib.sha256((root/name).read_bytes().replace(b'\r\n',b'\n')).hexdigest()==digest, name
+addresses=set();eof=False
+for line in hexfile.read_text().splitlines():
+    assert line.startswith(':') and not eof
+    record=bytes.fromhex(line[1:])
+    size,high,low,kind=record[:4]
+    assert len(record)==size+5 and sum(record)%256==0
+    if kind==0:
+        start=(high<<8)|low
+        assert start+size<=8192
+        for address in range(start,start+size):
+            assert address not in addresses
+            addresses.add(address)
+    else:
+        assert kind==1 and size==0
+        eof=True
+assert eof and addresses and min(addresses)==0
+print(f'PASS: AT89S52 Intel HEX checksums, {len(addresses)} programmed bytes, source hashes')

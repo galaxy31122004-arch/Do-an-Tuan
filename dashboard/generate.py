@@ -83,7 +83,7 @@ def main():
     card('Time synchronized','time_ok','',8,26,'#7c3aed')
     card('Simulation mode','demo','',16,26,'#d97706')
 
-    result=dict(title='ENV Monitor — PIC + ESP32-C3',image=None,mobileHide=False,mobileOrder=0,
+    result=dict(title='ENV Monitor — AT89S52 + ESP32-C3',image=None,mobileHide=False,mobileOrder=0,
         configuration=dict(description='DHT11 / NTP / SSD1315 — One-device IoT monitoring',
             widgets=widgets,entityAliases={ALIAS:dict(id=ALIAS,alias='ENV-MONITOR-01',filter=dict(type='entityName',entityType='DEVICE',resolveMultiple=False,entityNameFilter='ENV-MONITOR-01'))},
             timewindow=dict(displayValue='',selectedTab=0,realtime=dict(interval=1000,timewindowMs=3600000),aggregation=dict(type='NONE',limit=2000)),

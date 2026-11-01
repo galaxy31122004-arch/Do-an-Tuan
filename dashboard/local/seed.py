@@ -43,7 +43,7 @@ def provision():
     profiles=api('/api/deviceProfiles?pageSize=100&page=0')['data']
     profile=next((p for p in profiles if p['name']=='ENV Monitor NTP'),None)
     if profile is None:
-        profile={'name':'ENV Monitor NTP','description':'Local demo: PIC, ESP32-C3, NTP, no external RTC',
+        profile={'name':'ENV Monitor NTP','description':'Local demo: AT89S52, ESP32-C3, NTP, no external RTC',
                  'type':'DEFAULT','transportType':'DEFAULT','provisionType':'DISABLED','default':False,
                  'profileData':{'configuration':{'type':'DEFAULT'},'transportConfiguration':{'type':'DEFAULT'},'provisionConfiguration':{'type':'DISABLED'}}}
         rules=[]
@@ -79,9 +79,9 @@ def provision():
         if 'HTTP 404' not in str(exc): raise
         device=None
     if not device:
-        device=api('/api/device',{'name':'ENV-MONITOR-01','label':'PIC + ESP32-C3 — SIMULATED DATA','type':'ENV Monitor NTP','deviceProfileId':profile['id']})
-    elif device.get('label')!='PIC + ESP32-C3 — SIMULATED DATA':
-        device['label']='PIC + ESP32-C3 — SIMULATED DATA';device=api('/api/device',device)
+        device=api('/api/device',{'name':'ENV-MONITOR-01','label':'AT89S52 + ESP32-C3 — SIMULATED DATA','type':'ENV Monitor NTP','deviceProfileId':profile['id']})
+    elif device.get('label')!='AT89S52 + ESP32-C3 — SIMULATED DATA':
+        device['label']='AT89S52 + ESP32-C3 — SIMULATED DATA';device=api('/api/device',device)
     ident=device['id']['id']
     api(f'/api/plugins/telemetry/DEVICE/{ident}/SERVER_SCOPE',{'temperature_min':20,'temperature_max':28,'humidity_min':40,'humidity_max':75,'inactivityTimeout':60000})
     credentials=api(f'/api/device/{ident}/credentials')
@@ -91,7 +91,7 @@ def provision():
         records.append({'ts':now-(180-i)*20000,'values':{'temperature':round(27+2.5*math.sin(i/12),1),'humidity':round(65+6*math.cos(i/15),1),'sensor_ok':True,'time_ok':True,'demo':True,'rssi':-55,'sequence':i}})
     api('/api/v1/'+urllib.parse.quote(token)+'/telemetry',records)
     dashboard=json.loads((ROOT.parent/'environment-monitor.json').read_text(encoding='utf-8'))
-    dashboard['title']='ENV Monitor — ESP32-C3 · SIMULATED DATA'
+    dashboard['title']='ENV Monitor — AT89S52 + ESP32-C3 · SIMULATED DATA'
     existing=api('/api/tenant/dashboards?pageSize=100&page=0')['data']
     old=next((d for d in existing if d['title']==dashboard['title']),None)
     if old is None and SESSION.exists():

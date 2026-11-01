@@ -8,7 +8,7 @@
 
 struct Sample { measurement_t value; uint32_t arrived; };
 static QueueHandle_t samples;
-static HardwareSerial picUart(1); /* ESP32-C3 has UART0/UART1; USB CDC is the console. */
+static HardwareSerial hostUart(1); /* ESP32-C3 has UART0/UART1; USB CDC is the console. */
 static volatile bool cloudOk=false;
 static volatile uint32_t lastSuccess=0;
 static volatile uint32_t lastSuccessEpoch=0;
@@ -18,7 +18,7 @@ static void sendControl(char kind,const char *body) {
     char payload[64],wire[80];
     snprintf(payload,sizeof payload,"%c,%s",kind,body);
     snprintf(wire,sizeof wire,"$%s*%02X\n",payload,frame_crc(payload));
-    picUart.print(wire);
+    hostUart.print(wire);
 }
 
 /* Dedicated UART task keeps consuming frames while HTTPS blocks in loop(). */
@@ -26,8 +26,8 @@ static void uartTask(void *) {
     char line[96]; size_t used=0; bool dropping=false;
     uint32_t statusAt=0,syncAt=0;
     for(;;) {
-        while(picUart.available()) {
-            char c=(char)picUart.read();
+        while(hostUart.available()) {
+            char c=(char)hostUart.read();
             if(c=='$') { used=0; dropping=false; }
             if(c=='\r') continue;
             if(c=='\n') {
@@ -36,7 +36,7 @@ static void uartTask(void *) {
                     if(parse_measurement(line,&s.value)) {
                         s.arrived=millis();
                         time_t received=time(nullptr);
-                        /* Timestamp near frame reception; the PIC only mirrors time for display. */
+                        /* Timestamp near frame reception; the AT89S52 only mirrors time for display. */
                         if(received>=1704067200) { s.value.epoch=(uint32_t)received; s.value.flags|=2; }
                         else { s.value.epoch=0; s.value.flags&=(uint8_t)~2; }
                         xQueueOverwrite(samples,&s);
@@ -100,15 +100,15 @@ void setup() {
     Serial.begin(115200);
     samples=xQueueCreate(1,sizeof(Sample));
     if(!samples) { Serial.println("Queue allocation failed"); abort(); }
-    picUart.setRxBufferSize(256); picUart.begin(9600,SERIAL_8N1,PIC_RX_PIN,PIC_TX_PIN);
+    hostUart.setRxBufferSize(256); hostUart.begin(9600,SERIAL_8N1,AT89S52_RX_PIN,AT89S52_TX_PIN);
     delay(100); /* VCCA/VCCB settle; R4 holds OE low before GPIO configuration. */
     digitalWrite(LEVEL_OE_PIN,HIGH);
     WiFi.mode(WIFI_STA); WiFi.setAutoReconnect(true);
     if(configured()) WiFi.begin(WIFI_SSID,WIFI_PASSWORD);
     else Serial.println("Configure include/secrets.h with Wi-Fi, HTTPS host, device token and CA.");
     configTime(0,0,"pool.ntp.org","time.google.com");
-    xTaskCreate(uartTask,"pic-uart",4096,nullptr,1,nullptr);
-    Serial.println(DEMO_MODE?"DEMO: synthetic data, not sensor readings":"LIVE: waiting for PIC frames");
+    xTaskCreate(uartTask,"host-uart",4096,nullptr,1,nullptr);
+    Serial.println(DEMO_MODE?"DEMO: synthetic data, not sensor readings":"LIVE: waiting for AT89S52 frames");
 }
 
 void loop() {

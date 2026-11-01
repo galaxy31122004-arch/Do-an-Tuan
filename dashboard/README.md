@@ -19,7 +19,7 @@ File **`environment-monitor.json`** là dashboard native để import vào nền
 
 ## 3. Thiết lập cảnh báo trên nền tảng
 
-Import dashboard **không tự tạo alarm rules**. Để bảng cảnh báo hoạt động, tạo device profile riêng cho ENV-MONITOR-01 và cấu hình các alarm rule dưới đây; không đổi profile dùng chung của thiết bị khác. Ngưỡng là server attributes, không gửi xuống PIC.
+Import dashboard **không tự tạo alarm rules**. Để bảng cảnh báo hoạt động, tạo device profile riêng cho ENV-MONITOR-01 và cấu hình các alarm rule dưới đây; không đổi profile dùng chung của thiết bị khác. Ngưỡng là server attributes, không gửi xuống AT89S52.
 
 Tại device → Attributes → Server attributes, tạo bốn khóa số `temperature_min`, `temperature_max`, `humidity_min`, `humidity_max`. Điền ngưỡng phù hợp với yêu cầu bài thí nghiệm. Form trên dashboard chỉnh đúng bốn khóa này; luôn giữ min < max. Đây là ngưỡng do người dùng đặt, không phải giới hạn an toàn của kho/nông nghiệp.
 
@@ -37,8 +37,8 @@ Trong Device profile → Alarm rules, chọn giá trị so sánh **dynamic value
 
 ## 4. Kiểm tra nghiệm thu
 
-- Dùng env `demo` để kiểm tra kết nối trước khi có PIC: widget `demo` phải hiện true. Các số này là giả lập và không được ghi thành kết quả cảm biến.
-- Dùng env `esp32dev` với PIC: `demo=false`, `sensor_ok=true`, `time_ok=true`; đối chiếu số đo OLED và dashboard.
+- Dùng env `demo` để kiểm tra kết nối trước khi có AT89S52: widget `demo` phải hiện true. Các số này là giả lập và không được ghi thành kết quả cảm biến.
+- Dùng env `esp32c3` với AT89S52: `demo=false`, `sensor_ok=true`, `time_ok=true`; đối chiếu số đo OLED và dashboard.
 - Thử thay ngưỡng qua dashboard để tạo rồi xóa cảnh báo, xác nhận bảng có lịch sử.
 - Ngắt Internet trên thiết bị: OLED vẫn chạy; sau timeout thẻ active đổi false; kết nối lại chỉ có bản ghi mới.
 - Tháo DHT11: sensor_ok=false; không có nhiệt độ/độ ẩm giả 0 được thêm vào lịch sử.

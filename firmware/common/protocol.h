@@ -11,7 +11,9 @@ static uint8_t crc8_update(uint8_t crc,uint8_t value) {
     for(bit=0;bit<8;++bit) crc=(crc&0x80)?(uint8_t)((crc<<1)^0x07):(uint8_t)(crc<<1);
     return crc;
 }
+#ifndef ENV_HOST_ONLY
 static uint8_t frame_crc(const char *p) { uint8_t c=0; while(*p) c=crc8_update(c,(uint8_t)*p++); return c; }
+#endif
 static int8_t hex_digit(char c) {
     if(c>='0'&&c<='9') return c-'0';
     if(c>='A'&&c<='F') return c-'A'+10;
@@ -38,6 +40,7 @@ static bool read_u32(const char **p, uint32_t *v, char end) {
     if(*s!=end) return false;
     *p=s+1; *v=x; return true;
 }
+#ifndef ENV_HOST_ONLY
 static bool parse_measurement(const char *s, measurement_t *m) {
     uint32_t v; bool negative;
     if(!frame_valid(s)||s[1]!='M'||s[2]!=',') return false;
@@ -53,10 +56,14 @@ static bool parse_measurement(const char *s, measurement_t *m) {
     if((m->flags&2)&&(m->epoch<946684800UL||m->epoch>=4102444800UL)) return false;
     return true;
 }
+
+#endif
 static uint8_t month_days(uint16_t y,uint8_t m) {
     if(m==2) return (y%4==0)?29:28; /* Supported range 2000..2099. */
     return (m==4||m==6||m==9||m==11)?30:31;
 }
+
+#ifndef ENV_HOST_ONLY
 static inline bool calendar_to_epoch(const utc_time_t *t,uint32_t *out) {
     uint32_t days=10957; uint16_t y; uint8_t m;
     if(t->year<2000||t->year>2099||t->month<1||t->month>12||t->day<1||t->day>month_days(t->year,t->month)||t->hour>23||t->minute>59||t->second>59) return false;
@@ -65,6 +72,8 @@ static inline bool calendar_to_epoch(const utc_time_t *t,uint32_t *out) {
     *out=((days+t->day-1)*24+t->hour)*3600UL+t->minute*60UL+t->second;
     return true;
 }
+
+#endif
 static inline bool epoch_to_calendar(uint32_t e,utc_time_t *t) {
     uint32_t days; uint16_t n;
     if(e<946684800UL||e>=4102444800UL) return false;

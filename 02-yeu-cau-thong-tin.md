@@ -1,9 +1,9 @@
 # Nội dung đã xác nhận và giới hạn cập nhật
 
 ## Đã xác nhận
-- Cập nhật: dùng module TXS0108E cho I²C/UART, OE từ GPIO6; dùng Burn-E nạp/verify HEX PIC, bỏ bước cài/build compiler trên máy này.
-- PIC16F877A giữ vai trò xử lý đo và hiển thị; ESP32 phụ trách mạng, trao đổi với PIC qua UART.
-- Giữ DHT11; bỏ RTC, thạch anh 32,768 kHz và pin dự phòng. ESP32 lấy NTP và gửi giờ UTC cho PIC hiển thị UTC+7.
+- Cập nhật: dùng module TXS0108E cho I²C/UART, OE từ GPIO6; dùng Burn-E nạp/verify HEX AT89S52, bỏ bước cài/build compiler trên máy này.
+- AT89S52 giữ vai trò xử lý đo và hiển thị; ESP32 phụ trách mạng, trao đổi với AT89S52 qua UART.
+- Giữ DHT11; bỏ RTC, thạch anh 32,768 kHz và pin dự phòng. ESP32 lấy NTP và gửi giờ UTC cho AT89S52 hiển thị UTC+7.
 - Đổi LCD 2004 sang OLED trắng 0,96 inch I²C dùng SSD1315 theo module người dùng chọn.
 - Hai trang OLED, nút chuyển trang; hiển thị số đo, thời gian và trạng thái kết nối.
 - Mạch thật kết nối Internet; một thiết bị và một tài khoản chủ thiết bị.
