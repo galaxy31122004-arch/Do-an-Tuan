@@ -35,19 +35,69 @@ PARTS=[
 ]
 
 def main():
+    # Retail quotes are maintained in the sourced purchasing sheet. Unit prices
+    # below allocate pack/strip prices to the parts actually fitted on one PCB.
+    with (ROOT/'cost-estimate.csv').open(encoding='utf-8-sig',newline='') as f:
+        quotes=list(csv.DictReader(f))
+    by_ref={ref:row for row in quotes for ref in row['Reference'].split(',')}
+    def unit_price(ref):
+        quote=by_ref[ref]
+        if not quote['Price per purchase unit VND']: return None
+        price=int(quote['Price per purchase unit VND'])
+        if ref in {'R1','R2','R3','R4','R10'}: return price//50
+        if ref=='D1': return price//100
+        if ref in {'SW1','SW2'}: return price//10
+        pins={'J2A':8,'J2B':8,'J4':4,'J5A':10,'J5B':10,'J3':6}
+        if ref in pins: return price*pins[ref]//40
+        return price
+    def money(value):
+        return 'Chưa xác nhận' if value is None else f'{value:,}'.replace(',','.')+'đ'
+    expanded=[]
+    for refs,quantity,part,package,note in PARTS:
+        names=refs.split(',')
+        prices=[unit_price(ref) for ref in names]
+        assert all(price==prices[0] for price in prices), refs
+        unit=prices[0];subtotal=None if unit is None else unit*quantity
+        quote=by_ref[names[0]]
+        expanded.append((refs,quantity,part,package,note,unit,subtotal,quote['Source'],quote['Note']))
+    used_total=sum(row[6] for row in expanded if row[6] is not None)
+    parts_purchase=sum(int(row['Subtotal VND']) for row in quotes if row['Reference']!='PCB' and row['Subtotal VND'])
+    pcb=int(by_ref['PCB']['Subtotal VND'])
     with (ROOT/'BOM.csv').open('w',encoding='utf-8-sig',newline='') as f:
-        writer=csv.writer(f); writer.writerow(['Reference','Quantity','Component','Package','Assembly note']); writer.writerows(PARTS)
+        writer=csv.writer(f)
+        writer.writerow(['Reference','Quantity','Component','Package','Assembly note','Unit price VND','Fitted subtotal VND','Price source','Price basis / purchasing note'])
+        for refs,quantity,part,package,note,unit,subtotal,source,basis in expanded:
+            writer.writerow([refs,quantity,part,package,note,'' if unit is None else unit,'' if subtotal is None else subtotal,source,basis])
     lines=['# Danh sách đầy đủ linh kiện trên mạch','',
         'Phương án lắp: PIC dùng IC rời có đế; ESP32, OLED và TXS0108E là module cắm header. Mọi đế/header trong bảng đều được hàn lên PCB. IC/module cắm vào sau khi kiểm tra nguồn. Không cộng lại những linh kiện đã có sẵn bên trong module.', '',
-        '| Ký hiệu | SL | Linh kiện | Kiểu lắp | Vị trí / lưu ý |','|---|---:|---|---|---|']
-    lines += [f'| {r} | {n} | {part} | {pkg} | {note} |' for r,n,part,pkg,note in PARTS]
+        'Giá tham khảo ngày **01/11/2026**, đơn vị VND. Bảng đầu ghi **đơn giá một linh kiện và thành tiền theo số lượng lắp**; bảng mua theo gói ở dưới ghi tiền cần trả khi mua mới. Đơn giá trở/LED/nút/header được quy đổi từ gói/thanh, không phải xác nhận shop bán lẻ từng chiếc.', '',
+        '| Ký hiệu | SL lắp | Linh kiện | Đơn giá/chi tiết | Thành tiền lắp | Kiểu lắp | Vị trí / lưu ý |','|---|---:|---|---:|---:|---|---|']
+    for refs,n,part,package,note,unit,subtotal,source,basis in expanded:
+        label=f'[{part}]({source})' if source.startswith('http') else part
+        lines.append(f'| {refs} | {n} | {label} | {money(unit)} | {money(subtotal)} | {package} | {note}. Giá: {basis} |')
     lines += ['',f'**Tổng số chi tiết trong bảng:** {sum(p[1] for p in PARTS)} (bao gồm IC/module/đế; không gồm PCB và vật tư ngoài mạch).',
+        '',f'**Giá trị linh kiện dùng trên một mạch: {money(used_total)}, chưa gồm F1.**',
+        '', '## Tiền mua thực tế theo gói/thanh', '',
+        '| Mục | Số đơn vị/gói mua | Giá mỗi đơn vị/gói | Thành tiền mua | Quy cách / ghi chú |',
+        '|---|---:|---:|---:|---|']
+    for quote in quotes:
+        price=None if not quote['Price per purchase unit VND'] else int(quote['Price per purchase unit VND'])
+        subtotal=None if not quote['Subtotal VND'] else int(quote['Subtotal VND'])
+        label=f"{quote['Reference']}: {quote['Item']}"
+        if quote['Source'].startswith('http'):label=f"[{label}]({quote['Source']})"
+        lines.append(f"| {label} | {quote['Purchase units/packs']} | {money(price)} | {money(subtotal)} | {quote['Note']} |")
+    lines += ['',f'- Linh kiện mua mới theo gói/thanh: **{money(parts_purchase)}**, chưa gồm F1.',
+        f'- In PCB theo giá người dùng: **{money(pcb)}**.',
+        f'- **Tổng tiền mua + PCB: {money(parts_purchase+pcb)}, chưa gồm F1.**',
+        f'- Nếu chỉ phân bổ lượng linh kiện dùng trên một PCB: **{money(used_total+pcb)}**, chưa gồm F1. Phần chênh lệch là linh kiện dư từ gói/thanh mua.',
+        '- F1 chưa có giá đúng quy cách, để trống trong CSV; không tính thành 0đ. Giá tụ tham khảo cần xác nhận đúng điện môi; trở 10kΩ/100kΩ ở nguồn giá đang báo hết hàng.',
+        '- Chưa gồm vận chuyển, adapter/cáp, vỏ, thiếc/flux và công hàn. Burn-E đã có nên không mua lại.',
         '', '## Vật tư đi kèm, không hàn trực tiếp', '',
         '- 1 adapter DC 5 V / 2 A ổn áp, dây cấp nguồn và dây USB lập trình ESP32.',
         '- 1 PCB theo kích thước thực tế ESP32/OLED; thiếc, flux và dây nối cho bản thử.',
         '- Mạch nạp Burn-E đang sử dụng, cáp USB và phần mềm đúng phiên bản để nạp/verify HEX PIC16F877A; đây là dụng cụ dùng lại, không hàn lên mạch.',
         '', '## Điều kiện mua/lắp', '',
-        '- BOM không có giá vì chưa khảo sát giá mua. Không đặt PCB chỉ dựa vào sơ đồ luồng: cần schematic/netlist và kiểm tra footprint.',
+        '- Nguồn giá chi tiết và quy cách mua nằm ngay trong hai bảng trên; ledger RSCH-20261101-0009/0010. Không đặt PCB chỉ dựa vào sơ đồ luồng: cần schematic/netlist và kiểm tra footprint.',
         '- TXS0108E có pull-up nội. Không lắp thêm bốn điện trở 4,7 kΩ kéo bus như thiết kế cũ; kiểm tra pull-up có sẵn trên OLED/module và đo dạng sóng.',
         '- OE nối GPIO6 và R4 100 kΩ xuống GND; không để module kéo cứng OE lên nguồn. Phải kiểm tra/tháo cầu nối hoặc pull-up OE nếu module đã gắn.',
         '- Chọn ESP32-C3 SuperMini đã hàn chân đực. Nếu hàng mua chưa có chân, bổ sung 2 thanh header đực 1x8; không tính trùng với header có sẵn.',
