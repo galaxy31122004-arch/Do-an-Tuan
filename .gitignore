@@ -1,0 +1,12 @@
+.tools/
+**/.pio/
+**/__pycache__/
+firmware/esp32/include/secrets.h
+firmware/pic/build/
+tests/build/
+*.hex
+*.elf
+*.map
+*.obj
+tests/protocol-test.exe
+tests/protocol-test

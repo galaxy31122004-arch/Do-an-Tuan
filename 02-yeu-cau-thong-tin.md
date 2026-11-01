@@ -1,0 +1,27 @@
+# Nội dung đã xác nhận và giới hạn cập nhật
+
+## Đã xác nhận
+- PIC16F877A giữ vai trò xử lý đo và hiển thị; ESP32 phụ trách mạng, trao đổi với PIC qua UART.
+- Cảm biến DHT11 và RTC DS1307 được giữ lại từ bản gốc.
+- Đổi LCD 2004 sang OLED trắng 0,96 inch I²C dùng SSD1315 theo module người dùng chọn.
+- Hai trang OLED, nút chuyển trang; hiển thị số đo, thời gian và trạng thái kết nối.
+- Mạch thật kết nối Internet; một thiết bị và một tài khoản chủ thiết bị.
+- Lưu thời gian đo, nhiệt độ, độ ẩm, mã thiết bị; dashboard số đo, lịch sử, lọc thời gian, xuất CSV; cấu hình ngưỡng và lịch sử cảnh báo.
+- Mất mạng vẫn đo và hiển thị; tự kết nối lại; phiên bản đầu không lưu bù.
+- Dùng nền tảng có sẵn như Core IoT/ThingsBoard; đây là yêu cầu thiết kế, không phải tuyên bố mọi bản dịch vụ đều sẵn tất cả tính năng.
+
+## Phạm vi từng mục
+- Mục 1: giải thích ngắn nhu cầu; không khẳng định kết quả hoặc độ chính xác chưa đo.
+- Mục 2: liệt kê mục tiêu theo phạm vi đã duyệt.
+- Mục 3: thể hiện đầy đủ nguồn, đo, xử lý, hiển thị và kết nối từ xa.
+- Mục 4: mô tả luồng và xử lý lỗi; cảnh báo ngưỡng thực hiện trên nền tảng/web, chưa yêu cầu còi hoặc điều khiển tải.
+- Mục 5: kế hoạch kiểm thử, không ghi thành kết quả đã đạt.
+
+## Chưa chốt và không suy đoán
+- Dịch vụ/bản triển khai cụ thể, gói tính năng và giao thức truyền cloud.
+- Chu kỳ đo/gửi, ngưỡng cảnh báo, thời gian lưu dữ liệu.
+- Sơ đồ chân, nguồn và chuyển mức tín hiệu; driver OLED sẽ đối chiếu module thực tế.
+- Không thêm thông số điện áp, địa chỉ bus hoặc thông số cảm biến chưa kiểm chứng vào bản tóm tắt.
+
+## Bàn giao
+Bản Word mới giữ cấu trúc năm mục, bản gốc giữ nguyên. Nội dung là mục tiêu thiết kế để người dùng và giảng viên xem xét, không phải báo cáo kết quả thực nghiệm.

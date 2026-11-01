@@ -1,0 +1,9 @@
+#ifndef BOARD_H
+#define BOARD_H
+#define _XTAL_FREQ 20000000UL
+#define OLED_ADDR 0x3C
+#define LOCAL_OFFSET_SECONDS 25200UL
+#define DHT_PIN PORTBbits.RB0
+#define DHT_DIR TRISBbits.TRISB0
+#define PAGE_BUTTON PORTBbits.RB1
+#endif
