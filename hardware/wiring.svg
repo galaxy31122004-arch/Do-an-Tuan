@@ -4,11 +4,11 @@
  </style></defs>
  <rect width="1440" height="1100" fill="#f8fafc"/>
  <text x="40" y="48" class="title">PIC16F877A + ESP32 — System wiring</text>
- <text x="40" y="78">PIC DIP-40 · ESP32-WROOM-32 DevKit · 9600 baud · I²C 100 kHz</text>
+ <text x="40" y="78">PIC DIP-40 · ESP32-C3 SuperMini · 9600 baud · I²C 100 kHz</text>
  <rect x="35" y="102" width="1370" height="125" rx="12" class="note"/>
  <text x="55" y="133" class="head">Power: one regulated 5 V / 2 A source</text>
- <text x="55" y="166">J1 +5V → F1 (1 A hold) → +5V: PIC, DS1307, TXS VCCB, DHT11, ESP32 5V/VIN</text>
- <text x="55" y="195">ESP32 3V3 → OLED VCC + TXS VCCA. All grounds common. OE → GPIO27 + R4 100k to GND.</text>
+ <text x="55" y="166">J1 +5V → F1 (1 A hold) → +5V: PIC, TXS VCCB, DHT11, ESP32 5V/VIN</text>
+ <text x="55" y="195">ESP32 3V3 → OLED VCC + TXS VCCA. All grounds common. OE → GPIO6 + R4 100k to GND.</text>
  <rect x="460" y="280" width="390" height="355" rx="12" class="box"/>
  <text x="485" y="320" class="head">U1 · PIC16F877A</text>
  <text x="485" y="356">VDD 11,32 → +5V</text><text x="485" y="384">VSS 12,31 → GND</text>
@@ -23,13 +23,14 @@
  <text x="65" y="350">1 VCC → +5V</text><text x="65" y="380">2 DATA → RB0</text>
  <text x="65" y="410">3 NC · 4 GND → GND</text><text x="65" y="442" class="small">R2 4.7k: DATA → +5V</text>
  <path d="M345 380 H400 V420 H460" class="sig"/>
- <rect x="45" y="505" width="300" height="235" rx="12" class="box"/>
- <text x="65" y="542" class="head">U3 · DS1307 DIP-8</text>
- <text x="65" y="577">8 VCC → +5V · 4 GND</text>
- <text x="65" y="608">5 SDA → SDA_HV</text><text x="65" y="638">6 SCL → SCL_HV</text>
- <text x="65" y="669">1/2 → Y2 32.768 kHz</text><text x="65" y="699">3 VBAT → CR2032 +</text>
- <text x="65" y="725" class="small">Pin 7 NC · no battery charger</text>
- <path d="M345 608 H379 V492 H460 M345 638 H412 V459 H460" class="sig"/>
+ <rect x="45" y="505" width="300" height="235" rx="12" class="note"/>
+ <text x="65" y="542" class="head">Time source: ESP32 NTP</text>
+ <text x="65" y="577">Internet NTP → ESP32 UTC</text>
+ <text x="65" y="608">UART T frame → PIC display</text>
+ <text x="65" y="638">OLED: UTC+7</text>
+ <text x="65" y="669">Boot without sync:</text>
+ <text x="65" y="699">TIME NOT SYNCED</text>
+ <text x="65" y="725" class="small">No external RTC / backup battery</text>
  <rect x="970" y="280" width="425" height="180" rx="12" class="box"/>
  <text x="990" y="316" class="head">OLED SSD1315 · 0.96 inch</text>
  <text x="990" y="350">VCC → 3V3 · GND → GND</text><text x="990" y="380">SDA/SCL → TXS A1/A2</text>
@@ -51,10 +52,10 @@
  <text x="65" y="1001">J3 service ICSP: see wiring.md; check cable.</text>
  <rect x="660" y="755" width="735" height="275" rx="12" class="box"/>
  <text x="680" y="790" class="head">U2 ESP32 + U4 TXS0108E UART</text>
- <text x="680" y="827" class="wire">PIC TX/25 → TXS B3 ↔ A3 → ESP32 GPIO16 RX</text>
+ <text x="680" y="827" class="wire">PIC TX/25 → TXS B3 ↔ A3 → ESP32 GPIO4 RX</text>
  <text x="680" y="857">No divider or separate UART buffer.</text>
- <text x="680" y="894" class="wire">ESP32 GPIO17 TX → TXS A4 ↔ B4 → PIC RX/26</text>
- <text x="680" y="926">GPIO27 → OE; R4 100k OE → GND; enable after 100ms.</text>
+ <text x="680" y="894" class="wire">ESP32 GPIO5 TX → TXS A4 ↔ B4 → PIC RX/26</text>
+ <text x="680" y="926">GPIO6 → OE; R4 100k OE → GND; enable after 100ms.</text>
  <text x="680" y="956">A5–A8/B5–B8 NC. Inspect any module OE jumper.</text>
  <text x="680" y="986">C7 470µF at ESP32. Module headers J5A/J5B: check footprint.</text>
  <path d="M850 533 H920 V705 H1060 V755 M850 568 H880 V725 H1120 V755" class="sig"/>

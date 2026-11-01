@@ -9,5 +9,8 @@ tests/build/
 *.map
 *.obj
 *.pdb
+dashboard/local/.env
+dashboard/local/session.json
+dashboard/local/demo.log
 tests/protocol-test.exe
 tests/protocol-test

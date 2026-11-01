@@ -8,11 +8,11 @@
 
 ## Các mục
 1. Lý do chọn đề tài: nhu cầu đo tại chỗ, lưu lịch sử và giám sát từ xa.
-2. Mục tiêu: DHT11, DS1307, PIC, OLED SSD1315, ESP32, dashboard và cảnh báo.
-3. Sơ đồ khối: cảm biến/RTC → PIC → OLED; PIC ↔ ESP32 → Wi-Fi/Internet → nền tảng IoT → dashboard.
+2. Mục tiêu: DHT11, NTP từ ESP32, PIC, OLED SSD1315, ESP32, dashboard và cảnh báo.
+3. Sơ đồ khối: cảm biến → PIC → OLED; PIC ↔ ESP32 → Wi-Fi/Internet → nền tảng IoT → dashboard.
 4. Nguyên lý hoạt động: thu thập, hiển thị, truyền bản ghi, lưu trữ, cảnh báo và xử lý lỗi.
 5. Mô phỏng và kiểm tra: mô phỏng phần phù hợp và kiểm thử tích hợp bằng mạch thật.
 
 ## Trạng thái
-Đã cập nhật thêm module TXS0108E cho I²C/UART và nạp/verify PIC bằng Burn-E. Bỏ bước cài/build compiler PIC trên máy này theo yêu cầu; chưa có HEX PIC được kiểm chứng.
-Người dùng đã đồng ý kiến trúc, phạm vi cloud/web, đổi OLED và yêu cầu cập nhật tài liệu. Bổ sung mới nhất: dùng nền tảng có sẵn như Core IoT/ThingsBoard. Không đặt thêm cổng duyệt cho các quyết định đã được chấp thuận.
+Đã cập nhật thêm module TXS0108E cho I²C/UART và nạp/verify PIC bằng Burn-E; bỏ module thời gian thực, dùng NTP từ ESP32. Bỏ bước cài/build compiler PIC trên máy này theo yêu cầu; chưa có HEX PIC được kiểm chứng.
+Người dùng đã đồng ý kiến trúc, phạm vi cloud/web, đổi OLED và yêu cầu cập nhật tài liệu. Bổ sung mới nhất: dùng nền tảng có sẵn như ThingsBoard. Không đặt thêm cổng duyệt cho các quyết định đã được chấp thuận.

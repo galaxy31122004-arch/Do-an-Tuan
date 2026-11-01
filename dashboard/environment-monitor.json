@@ -1,12 +1,12 @@
 {
-  "title": "ENV Monitor — PIC + ESP32",
+  "title": "ENV Monitor — PIC + ESP32-C3",
   "image": null,
   "mobileHide": false,
   "mobileOrder": 0,
   "configuration": {
-    "description": "DHT11 / DS1307 / SSD1315 — One-device IoT monitoring",
+    "description": "DHT11 / NTP / SSD1315 — One-device IoT monitoring",
     "widgets": {
-      "dd2d99ee-d80f-5b5b-b406-ffe7a880fe75": {
+      "5d118023-95e5-527e-9b0c-d95ed3c0ccf2": {
         "typeFullFqn": "system.cards.value_card",
         "type": "latest",
         "config": {
@@ -18,7 +18,7 @@
               "dataKeys": [
                 {
                   "name": "temperature",
-                  "label": "Nhiệt độ",
+                  "label": "Temperature",
                   "color": "#ef6c38",
                   "type": "timeseries",
                   "settings": {}
@@ -95,7 +95,7 @@
               }
             }
           },
-          "title": "Nhiệt độ",
+          "title": "Temperature",
           "dropShadow": true,
           "enableFullscreen": false,
           "titleStyle": {
@@ -144,13 +144,13 @@
           },
           "titleColor": "#0f172a"
         },
-        "id": "dd2d99ee-d80f-5b5b-b406-ffe7a880fe75",
+        "id": "5d118023-95e5-527e-9b0c-d95ed3c0ccf2",
         "sizeX": 8,
         "sizeY": 4,
         "col": 0,
         "row": 0
       },
-      "da0edaa1-a35e-598a-a7fa-80f39045d26d": {
+      "a4d9b19b-247f-5696-9b23-08bdd103f8c8": {
         "typeFullFqn": "system.cards.value_card",
         "type": "latest",
         "config": {
@@ -162,7 +162,7 @@
               "dataKeys": [
                 {
                   "name": "humidity",
-                  "label": "Độ ẩm",
+                  "label": "Humidity",
                   "color": "#0284c7",
                   "type": "timeseries",
                   "settings": {}
@@ -239,7 +239,7 @@
               }
             }
           },
-          "title": "Độ ẩm",
+          "title": "Humidity",
           "dropShadow": true,
           "enableFullscreen": false,
           "titleStyle": {
@@ -288,13 +288,13 @@
           },
           "titleColor": "#0f172a"
         },
-        "id": "da0edaa1-a35e-598a-a7fa-80f39045d26d",
+        "id": "a4d9b19b-247f-5696-9b23-08bdd103f8c8",
         "sizeX": 8,
         "sizeY": 4,
         "col": 8,
         "row": 0
       },
-      "2a3cdb84-00b5-5cd9-ab2f-be7ec77b5b39": {
+      "f0f00ae9-c347-540a-b6cd-696487c32e69": {
         "typeFullFqn": "system.cards.value_card",
         "type": "latest",
         "config": {
@@ -306,7 +306,7 @@
               "dataKeys": [
                 {
                   "name": "active",
-                  "label": "Thiết bị hoạt động (true/false)",
+                  "label": "Device online",
                   "color": "#059669",
                   "type": "attribute",
                   "settings": {}
@@ -383,7 +383,7 @@
               }
             }
           },
-          "title": "Thiết bị hoạt động (true/false)",
+          "title": "Device online",
           "dropShadow": true,
           "enableFullscreen": false,
           "titleStyle": {
@@ -432,13 +432,13 @@
           },
           "titleColor": "#0f172a"
         },
-        "id": "2a3cdb84-00b5-5cd9-ab2f-be7ec77b5b39",
+        "id": "f0f00ae9-c347-540a-b6cd-696487c32e69",
         "sizeX": 8,
         "sizeY": 4,
         "col": 16,
         "row": 0
       },
-      "1b732e94-279b-5e49-8947-a0131fece44f": {
+      "403ebe50-1a17-5a00-b046-f3235a8479c9": {
         "typeFullFqn": "system.time_series_chart",
         "type": "timeseries",
         "sizeX": 12,
@@ -452,7 +452,7 @@
               "dataKeys": [
                 {
                   "name": "temperature",
-                  "label": "Lịch sử nhiệt độ",
+                  "label": "Temperature history",
                   "color": "#ef6c38",
                   "type": "timeseries",
                   "settings": {
@@ -676,7 +676,7 @@
                 "splitLinesColor": "rgba(0, 0, 0, 0.12)",
                 "id": "default",
                 "order": 0,
-                "min": 0
+                "min": null
               }
             },
             "noAggregationBarWidthSettings": {
@@ -704,7 +704,7 @@
             },
             "padding": "12px"
           },
-          "title": "Lịch sử nhiệt độ",
+          "title": "Temperature history",
           "dropShadow": true,
           "enableFullscreen": true,
           "titleStyle": null,
@@ -754,9 +754,9 @@
         },
         "row": 4,
         "col": 0,
-        "id": "1b732e94-279b-5e49-8947-a0131fece44f"
+        "id": "403ebe50-1a17-5a00-b046-f3235a8479c9"
       },
-      "1f4c3b40-2576-54c8-9747-c5f142d9f6c7": {
+      "c6c295df-f0c0-5e4c-b1ce-be1d9835a694": {
         "typeFullFqn": "system.time_series_chart",
         "type": "timeseries",
         "sizeX": 12,
@@ -770,7 +770,7 @@
               "dataKeys": [
                 {
                   "name": "humidity",
-                  "label": "Lịch sử độ ẩm",
+                  "label": "Humidity history",
                   "color": "#0284c7",
                   "type": "timeseries",
                   "settings": {
@@ -825,7 +825,7 @@
               {
                 "type": "latestKey",
                 "yAxisId": "default",
-                "units": "°C",
+                "units": "%RH",
                 "decimals": 0,
                 "lineColor": "rgb(233, 30, 99)",
                 "lineType": "solid",
@@ -961,7 +961,7 @@
             },
             "yAxes": {
               "default": {
-                "units": "°C",
+                "units": "%RH",
                 "decimals": 0,
                 "show": true,
                 "label": "",
@@ -994,7 +994,7 @@
                 "splitLinesColor": "rgba(0, 0, 0, 0.12)",
                 "id": "default",
                 "order": 0,
-                "min": 0
+                "min": null
               }
             },
             "noAggregationBarWidthSettings": {
@@ -1022,7 +1022,7 @@
             },
             "padding": "12px"
           },
-          "title": "Lịch sử độ ẩm",
+          "title": "Humidity history",
           "dropShadow": true,
           "enableFullscreen": true,
           "titleStyle": null,
@@ -1072,9 +1072,9 @@
         },
         "row": 4,
         "col": 12,
-        "id": "1f4c3b40-2576-54c8-9747-c5f142d9f6c7"
+        "id": "c6c295df-f0c0-5e4c-b1ce-be1d9835a694"
       },
-      "aff3691d-2b0c-5677-b0e6-096e2945b7d9": {
+      "44dbfa2a-9116-531e-ad78-f60d10d32fce": {
         "typeFullFqn": "system.cards.timeseries_table",
         "type": "timeseries",
         "config": {
@@ -1086,35 +1086,35 @@
               "dataKeys": [
                 {
                   "name": "temperature",
-                  "label": "Nhiệt độ",
+                  "label": "Temperature",
                   "color": "#2563eb",
                   "type": "timeseries",
                   "settings": {}
                 },
                 {
                   "name": "humidity",
-                  "label": "Độ ẩm",
+                  "label": "Humidity",
                   "color": "#2563eb",
                   "type": "timeseries",
                   "settings": {}
                 },
                 {
                   "name": "sensor_ok",
-                  "label": "Cảm biến hợp lệ",
+                  "label": "Sensor valid",
                   "color": "#2563eb",
                   "type": "timeseries",
                   "settings": {}
                 },
                 {
-                  "name": "rtc_ok",
-                  "label": "RTC hợp lệ",
+                  "name": "time_ok",
+                  "label": "Time valid",
                   "color": "#2563eb",
                   "type": "timeseries",
                   "settings": {}
                 },
                 {
                   "name": "demo",
-                  "label": "Dữ liệu giả lập",
+                  "label": "Simulated data",
                   "color": "#2563eb",
                   "type": "timeseries",
                   "settings": {}
@@ -1151,7 +1151,7 @@
               "direction": "DESC"
             }
           },
-          "title": "Lịch sử đo / xuất CSV",
+          "title": "Measurement history / CSV export",
           "dropShadow": true,
           "enableFullscreen": true,
           "titleStyle": {
@@ -1174,13 +1174,13 @@
           "borderRadius": "12px",
           "margin": "0px"
         },
-        "id": "aff3691d-2b0c-5677-b0e6-096e2945b7d9",
+        "id": "44dbfa2a-9116-531e-ad78-f60d10d32fce",
         "sizeX": 14,
         "sizeY": 8,
         "col": 0,
         "row": 11
       },
-      "fbcb3b02-0cfa-5fd3-9a59-73f7322d2bd2": {
+      "3133731f-8e15-52c6-9fef-65dc25b756ff": {
         "type": "latest",
         "sizeX": 10,
         "sizeY": 8,
@@ -1193,7 +1193,7 @@
               "dataKeys": [
                 {
                   "name": "temperature_min",
-                  "label": "Nhiệt độ thấp (°C)",
+                  "label": "Low temperature (°C)",
                   "color": "#2563eb",
                   "type": "attribute",
                   "settings": {
@@ -1209,7 +1209,7 @@
                 },
                 {
                   "name": "temperature_max",
-                  "label": "Nhiệt độ cao (°C)",
+                  "label": "High temperature (°C)",
                   "color": "#2563eb",
                   "type": "attribute",
                   "settings": {
@@ -1225,7 +1225,7 @@
                 },
                 {
                   "name": "humidity_min",
-                  "label": "Độ ẩm thấp (%RH)",
+                  "label": "Low humidity (%RH)",
                   "color": "#2563eb",
                   "type": "attribute",
                   "settings": {
@@ -1241,7 +1241,7 @@
                 },
                 {
                   "name": "humidity_max",
-                  "label": "Độ ẩm cao (%RH)",
+                  "label": "High humidity (%RH)",
                   "color": "#2563eb",
                   "type": "attribute",
                   "settings": {
@@ -1299,11 +1299,11 @@
             "fieldsAlignment": "column",
             "fieldsInRow": 1,
             "groupTitle": "ENV-MONITOR-01",
-            "widgetTitle": "Ngưỡng trên nền tảng",
+            "widgetTitle": "Alarm thresholds",
             "columnGap": 10,
             "rowGap": 5
           },
-          "title": "Cấu hình ngưỡng cảnh báo",
+          "title": "Alarm thresholds",
           "dropShadow": true,
           "enableFullscreen": false,
           "enableDataExport": false,
@@ -1325,12 +1325,12 @@
           "borderRadius": "12px",
           "margin": "0px"
         },
-        "id": "fbcb3b02-0cfa-5fd3-9a59-73f7322d2bd2",
+        "id": "3133731f-8e15-52c6-9fef-65dc25b756ff",
         "typeFullFqn": "system.input_widgets.update_multiple_attributes",
         "col": 14,
         "row": 11
       },
-      "241461a2-1dc3-5fd6-aed0-f7cf9d8e7fc4": {
+      "c305defc-6569-525d-bf47-4968a392b22b": {
         "type": "alarm",
         "sizeX": 24,
         "sizeY": 7,
@@ -1364,7 +1364,7 @@
             "alarmsTitle": "Alarms",
             "enableFilter": true
           },
-          "title": "Lịch sử cảnh báo",
+          "title": "Alarm history",
           "dropShadow": true,
           "enableFullscreen": false,
           "titleStyle": {
@@ -1455,12 +1455,12 @@
           "borderRadius": "12px",
           "margin": "0px"
         },
-        "id": "241461a2-1dc3-5fd6-aed0-f7cf9d8e7fc4",
+        "id": "c305defc-6569-525d-bf47-4968a392b22b",
         "typeFullFqn": "system.alarm_widgets.alarms_table",
         "col": 0,
         "row": 19
       },
-      "d9539542-5a02-5faa-8f6e-ec7866d66855": {
+      "f0d0a666-d1a2-5613-b2fe-4e43faf05cd0": {
         "typeFullFqn": "system.cards.value_card",
         "type": "latest",
         "config": {
@@ -1472,7 +1472,7 @@
               "dataKeys": [
                 {
                   "name": "sensor_ok",
-                  "label": "Cảm biến hợp lệ (true/false)",
+                  "label": "Sensor valid",
                   "color": "#059669",
                   "type": "timeseries",
                   "settings": {}
@@ -1549,7 +1549,7 @@
               }
             }
           },
-          "title": "Cảm biến hợp lệ (true/false)",
+          "title": "Sensor valid",
           "dropShadow": true,
           "enableFullscreen": false,
           "titleStyle": {
@@ -1598,13 +1598,13 @@
           },
           "titleColor": "#0f172a"
         },
-        "id": "d9539542-5a02-5faa-8f6e-ec7866d66855",
+        "id": "f0d0a666-d1a2-5613-b2fe-4e43faf05cd0",
         "sizeX": 8,
         "sizeY": 4,
         "col": 0,
         "row": 26
       },
-      "cc234665-61de-5350-88c6-3148bd7ac7ab": {
+      "01c733c8-a37b-5496-ae1f-9f22d99a5a76": {
         "typeFullFqn": "system.cards.value_card",
         "type": "latest",
         "config": {
@@ -1615,8 +1615,8 @@
               "name": "Environment monitor",
               "dataKeys": [
                 {
-                  "name": "rtc_ok",
-                  "label": "RTC hợp lệ (true/false)",
+                  "name": "time_ok",
+                  "label": "Time synchronized",
                   "color": "#7c3aed",
                   "type": "timeseries",
                   "settings": {}
@@ -1693,7 +1693,7 @@
               }
             }
           },
-          "title": "RTC hợp lệ (true/false)",
+          "title": "Time synchronized",
           "dropShadow": true,
           "enableFullscreen": false,
           "titleStyle": {
@@ -1742,13 +1742,13 @@
           },
           "titleColor": "#0f172a"
         },
-        "id": "cc234665-61de-5350-88c6-3148bd7ac7ab",
+        "id": "01c733c8-a37b-5496-ae1f-9f22d99a5a76",
         "sizeX": 8,
         "sizeY": 4,
         "col": 8,
         "row": 26
       },
-      "890666ac-e981-57db-b8fe-140a6cdd0a7e": {
+      "a300d948-ae1d-5ad9-b4bd-d7d3f52e8e1d": {
         "typeFullFqn": "system.cards.value_card",
         "type": "latest",
         "config": {
@@ -1760,7 +1760,7 @@
               "dataKeys": [
                 {
                   "name": "demo",
-                  "label": "Giả lập (true/false)",
+                  "label": "Simulation mode",
                   "color": "#d97706",
                   "type": "timeseries",
                   "settings": {}
@@ -1837,7 +1837,7 @@
               }
             }
           },
-          "title": "Giả lập (true/false)",
+          "title": "Simulation mode",
           "dropShadow": true,
           "enableFullscreen": false,
           "titleStyle": {
@@ -1886,7 +1886,7 @@
           },
           "titleColor": "#0f172a"
         },
-        "id": "890666ac-e981-57db-b8fe-140a6cdd0a7e",
+        "id": "a300d948-ae1d-5ad9-b4bd-d7d3f52e8e1d",
         "sizeX": 8,
         "sizeY": 4,
         "col": 16,
@@ -1927,12 +1927,12 @@
     },
     "states": {
       "default": {
-        "name": "Giám sát môi trường",
+        "name": "Environment monitoring",
         "root": true,
         "layouts": {
           "main": {
             "widgets": {
-              "dd2d99ee-d80f-5b5b-b406-ffe7a880fe75": {
+              "5d118023-95e5-527e-9b0c-d95ed3c0ccf2": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "col": 0,
@@ -1940,7 +1940,7 @@
                 "mobileOrder": 1,
                 "mobileHeight": 4
               },
-              "da0edaa1-a35e-598a-a7fa-80f39045d26d": {
+              "a4d9b19b-247f-5696-9b23-08bdd103f8c8": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "col": 8,
@@ -1948,7 +1948,7 @@
                 "mobileOrder": 2,
                 "mobileHeight": 4
               },
-              "2a3cdb84-00b5-5cd9-ab2f-be7ec77b5b39": {
+              "f0f00ae9-c347-540a-b6cd-696487c32e69": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "col": 16,
@@ -1956,7 +1956,7 @@
                 "mobileOrder": 3,
                 "mobileHeight": 4
               },
-              "1b732e94-279b-5e49-8947-a0131fece44f": {
+              "403ebe50-1a17-5a00-b046-f3235a8479c9": {
                 "sizeX": 12,
                 "sizeY": 7,
                 "col": 0,
@@ -1964,7 +1964,7 @@
                 "mobileOrder": 4,
                 "mobileHeight": 7
               },
-              "1f4c3b40-2576-54c8-9747-c5f142d9f6c7": {
+              "c6c295df-f0c0-5e4c-b1ce-be1d9835a694": {
                 "sizeX": 12,
                 "sizeY": 7,
                 "col": 12,
@@ -1972,7 +1972,7 @@
                 "mobileOrder": 5,
                 "mobileHeight": 7
               },
-              "aff3691d-2b0c-5677-b0e6-096e2945b7d9": {
+              "44dbfa2a-9116-531e-ad78-f60d10d32fce": {
                 "sizeX": 14,
                 "sizeY": 8,
                 "col": 0,
@@ -1980,7 +1980,7 @@
                 "mobileOrder": 6,
                 "mobileHeight": 8
               },
-              "fbcb3b02-0cfa-5fd3-9a59-73f7322d2bd2": {
+              "3133731f-8e15-52c6-9fef-65dc25b756ff": {
                 "sizeX": 10,
                 "sizeY": 8,
                 "col": 14,
@@ -1988,7 +1988,7 @@
                 "mobileOrder": 7,
                 "mobileHeight": 8
               },
-              "241461a2-1dc3-5fd6-aed0-f7cf9d8e7fc4": {
+              "c305defc-6569-525d-bf47-4968a392b22b": {
                 "sizeX": 24,
                 "sizeY": 7,
                 "col": 0,
@@ -1996,7 +1996,7 @@
                 "mobileOrder": 8,
                 "mobileHeight": 7
               },
-              "d9539542-5a02-5faa-8f6e-ec7866d66855": {
+              "f0d0a666-d1a2-5613-b2fe-4e43faf05cd0": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "col": 0,
@@ -2004,7 +2004,7 @@
                 "mobileOrder": 9,
                 "mobileHeight": 4
               },
-              "cc234665-61de-5350-88c6-3148bd7ac7ab": {
+              "01c733c8-a37b-5496-ae1f-9f22d99a5a76": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "col": 8,
@@ -2012,7 +2012,7 @@
                 "mobileOrder": 10,
                 "mobileHeight": 4
               },
-              "890666ac-e981-57db-b8fe-140a6cdd0a7e": {
+              "a300d948-ae1d-5ad9-b4bd-d7d3f52e8e1d": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "col": 16,

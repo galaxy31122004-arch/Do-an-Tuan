@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include "board.h"
 #include "../common/protocol.h"
+#include "../common/clock.h"
 #pragma config FOSC=HS, WDTE=OFF, PWRTE=ON, BOREN=ON, LVP=OFF, CPD=OFF, WRT=OFF, CP=OFF
 
 /* RX lives in interrupt context; each incoming line fits in 48 bytes. */
@@ -14,6 +15,7 @@ static uint32_t last_send_uptime=0;
 static uint16_t status_age=600;
 static uint8_t tx_crc;
 static bool oled_ready=false;
+static utc_mirror_t clock_mirror={0};
 
 void __interrupt() irq(void) {
     if(PIR1bits.RCIF) {
@@ -57,44 +59,12 @@ static bool i2c_write(uint8_t data) {
     while(!PIR1bits.SSPIF) if(!--guard) return false;
     return !SSPCON2bits.ACKSTAT;
 }
-static bool i2c_read(uint8_t *data,bool last) {
-    uint16_t guard=60000;
-    if(!i2c_idle()) return false;
-    SSPCON2bits.RCEN=1;
-    while(!SSPSTATbits.BF) if(!--guard) return false;
-    *data=SSPBUF;
-    SSPCON2bits.ACKDT=last?1:0; SSPCON2bits.ACKEN=1;
-    return i2c_idle();
-}
-static uint8_t bcd(uint8_t x) { return (x/10)*16+x%10; }
-static uint8_t unbcd(uint8_t x) { return (x>>4)*10+(x&15); }
-static bool rtc_read(uint32_t *epoch) {
-    uint8_t d[7],i; rtc_time_t t;
-    if(!i2c_start()||!i2c_write(0xD0)||!i2c_write(0)) goto bad;
-    i2c_stop();
-    if(!i2c_start()||!i2c_write(0xD1)) goto bad;
-    for(i=0;i<7;++i) if(!i2c_read(&d[i],i==6)) goto bad;
-    i2c_stop();
-    if((d[0]&0x80)||(d[2]&0x40)) return false; /* CH or unsupported 12-hour mode. */
-    for(i=0;i<7;++i) if((d[i]&15)>9||(d[i]>>4)>9) return false;
-    t.year=2000+unbcd(d[6]); t.month=unbcd(d[5]); t.day=unbcd(d[4]);
-    t.hour=unbcd(d[2]); t.minute=unbcd(d[1]); t.second=unbcd(d[0]);
-    return rtc_to_epoch(&t,epoch);
-bad: i2c_stop(); return false;
-}
-static void rtc_set(uint32_t epoch) {
-    rtc_time_t t;
-    if(!epoch_to_rtc(epoch,&t)) return;
-    if(!i2c_start()||!i2c_write(0xD0)||!i2c_write(0)) goto done;
-    if(!i2c_write(bcd(t.second))||!i2c_write(bcd(t.minute))||!i2c_write(bcd(t.hour))||!i2c_write(1)||!i2c_write(bcd(t.day))||!i2c_write(bcd(t.month))||!i2c_write(bcd(t.year-2000))) goto done;
-done: i2c_stop();
-}
 static void control(void) {
     const char *p; uint32_t a,b,c;
     if(!rx_ready) return;
     p=(const char*)rx;
     if(frame_valid(p)&&p[2]==',') {
-        if(p[1]=='T') { p+=3; if(read_u32(&p,&a,'*')) rtc_set(a); }
+        if(p[1]=='T') { p+=3; if(read_u32(&p,&a,'*')) (void)utc_mirror_set(&clock_mirror,a); }
         else if(p[1]=='S') {
             p+=3;
             if(read_u32(&p,&a,',')&&read_u32(&p,&b,',')&&read_u32(&p,&c,'*')&&a<=1&&b<=1) {
@@ -171,7 +141,7 @@ end: i2c_stop();
 }
 static void decimal(char *p,uint16_t n,uint8_t width) { while(width) { p[--width]=(char)('0'+n%10); n/=10; } }
 static void screen(uint8_t page,uint16_t temp,uint16_t hum,uint8_t flags,uint32_t epoch) {
-    char line[22]; rtc_time_t t;
+    char line[22]; utc_time_t t;
     /* ESP32 may enable the TXS after PIC boot. Retry instead of losing OLED permanently. */
     if(!oled_ready) { oled_init(); if(!oled_ready) return; }
     oled_line(0,page?"NETWORK STATUS":"ENVIRONMENT MONITOR");
@@ -182,15 +152,15 @@ static void screen(uint8_t page,uint16_t temp,uint16_t hum,uint8_t flags,uint32_
             s="HUM:  000.0 %"; for(i=0;(line[i]=s[i])!=0;++i) {}
             decimal(line+6,hum/10,3); line[10]=(char)('0'+hum%10); oled_line(4,line);
         } else { oled_line(2,"SENSOR ERROR"); oled_line(4,"CHECK DHT11"); }
-        if((flags&2)&&epoch_to_rtc(epoch+LOCAL_OFFSET_SECONDS,&t)) {
+        if((flags&2)&&epoch_to_calendar(epoch+LOCAL_OFFSET_SECONDS,&t)) {
             uint8_t i; const char *s="0000-00-00 00:00:00"; for(i=0;(line[i]=s[i])!=0;++i) {}
             decimal(line,t.year,4); decimal(line+5,t.month,2); decimal(line+8,t.day,2);
             decimal(line+11,t.hour,2); decimal(line+14,t.minute,2); decimal(line+17,t.second,2); oled_line(6,line);
-        } else oled_line(6,"RTC NOT SET");
+        } else oled_line(6,"TIME NOT SYNCED");
     } else {
         oled_line(2,wifi_ok?"WIFI: CONNECTED":"WIFI: OFFLINE");
         oled_line(4,cloud_ok?"CLOUD: HTTP OK":"CLOUD: WAIT / ERROR");
-        if(last_send_uptime&&epoch_to_rtc(last_send_uptime+LOCAL_OFFSET_SECONDS,&t)) {
+        if(last_send_uptime&&epoch_to_calendar(last_send_uptime+LOCAL_OFFSET_SECONDS,&t)) {
             uint8_t i; const char *s="LAST SEND: 00:00:00"; for(i=0;(line[i]=s[i])!=0;++i) {}
             decimal(line+11,t.hour,2); decimal(line+14,t.minute,2); decimal(line+17,t.second,2); oled_line(6,line);
         } else oled_line(6,"LAST SEND: NONE");
@@ -208,6 +178,7 @@ void main(void) {
     __delay_ms(100); oled_init();
     for(;;) {
         control();
+        utc_mirror_tick(&clock_mirror);
         if(status_age<600) ++status_age;
         else { wifi_ok=0; cloud_ok=0; }
         if(!PAGE_BUTTON) {
@@ -217,7 +188,7 @@ void main(void) {
         if(!tick) {
             flags=0; epoch=0; temp=0; humidity=0;
             if(dht_read(&temp,&humidity)) flags|=1;
-            if(rtc_read(&epoch)) flags|=2;
+            if(utc_mirror_get(&clock_mirror,&epoch)) flags|=2;
             measurement(++seq,epoch,temp,humidity,flags); refresh=1;
         }
         if(refresh) { screen(page,temp,humidity,flags,epoch); refresh=0; }

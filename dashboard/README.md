@@ -1,13 +1,13 @@
-# Dashboard ThingsBoard / Core IoT
+# Dashboard ThingsBoard
 
-File **`environment-monitor.json`** là dashboard native để import vào nền tảng, không phải một website/backend riêng. Có 11 widget: nhiệt độ, độ ẩm, hoạt động, hai biểu đồ, bảng lịch sử, form bốn ngưỡng, bảng cảnh báo, tình trạng cảm biến/RTC và dấu hiệu dữ liệu giả lập.
+File **`environment-monitor.json`** là dashboard native để import vào nền tảng, không phải một website/backend riêng. Có 11 widget: nhiệt độ, độ ẩm, hoạt động, hai biểu đồ, bảng lịch sử, form bốn ngưỡng, bảng cảnh báo, tình trạng cảm biến/đồng bộ thời gian và dấu hiệu dữ liệu giả lập.
 
 ## 1. Tạo thiết bị và cấu hình firmware
 
 1. Đăng nhập bằng tài khoản tenant có quyền quản lý thiết bị/dashboard. Tạo device tên chính xác **ENV-MONITOR-01**, transport mặc định có hỗ trợ HTTP. Mỗi thiết bị được nhận diện bởi device access token; không dùng JWT tài khoản người dùng thay token thiết bị.
 2. Sao chép `firmware/esp32/include/secrets.example.h` thành `secrets.h`. Điền SSID, mật khẩu, HTTPS origin, token thiết bị và PEM root CA của domain. Token không xuất hiện trong dashboard JSON và không commit vào Git.
 3. Build/nạp ESP32. Serial Monitor 115200 sẽ báo HTTP 2xx khi nền tảng nhận bản ghi. Không dùng `setInsecure()` để bỏ kiểm tra TLS. Firmware cần Internet/NTP để xác thực thời gian chứng chỉ.
-4. Nếu triển khai Core IoT, xác nhận deployment hỗ trợ device HTTP API `/api/v1/<token>/telemetry` và có các widget tương ứng. Đây là tích hợp qua API tương thích ThingsBoard, không mặc định mọi bản Core IoT có cùng tính năng/quyền.
+4. Nền tảng đã chọn: ThingsBoard. Bản demo thật chạy cục bộ bằng Docker, xem `local/README.md`. Firmware thiết bị vẫn dùng HTTPS với CA/token của deployment khi kết nối mạch thật.
 
 ## 2. Import dashboard
 
@@ -38,13 +38,13 @@ Trong Device profile → Alarm rules, chọn giá trị so sánh **dynamic value
 ## 4. Kiểm tra nghiệm thu
 
 - Dùng env `demo` để kiểm tra kết nối trước khi có PIC: widget `demo` phải hiện true. Các số này là giả lập và không được ghi thành kết quả cảm biến.
-- Dùng env `esp32dev` với PIC: `demo=false`, `sensor_ok=true`, `rtc_ok=true`; đối chiếu số đo OLED và dashboard.
+- Dùng env `esp32dev` với PIC: `demo=false`, `sensor_ok=true`, `time_ok=true`; đối chiếu số đo OLED và dashboard.
 - Thử thay ngưỡng qua dashboard để tạo rồi xóa cảnh báo, xác nhận bảng có lịch sử.
 - Ngắt Internet trên thiết bị: OLED vẫn chạy; sau timeout thẻ active đổi false; kết nối lại chỉ có bản ghi mới.
 - Tháo DHT11: sensor_ok=false; không có nhiệt độ/độ ẩm giả 0 được thêm vào lịch sử.
 
 ## Tính tương thích và nguồn
 
-JSON được tạo từ schema/widget mặc định trong mã nguồn ThingsBoard chính thức (RSCH-20261101-0003). Chưa import vào tenant thật vì chưa có URL/tài khoản. Bản ThingsBoard/Core IoT cũ thiếu `system.cards.value_card` hoặc `system.time_series_chart` cần thay bằng widget tương đương qua editor. `generate.py` tạo lại file từ upstream khi có mạng; file JSON đi kèm đã tạo sẵn, không cần chạy generator để import.
+JSON được tạo từ schema/widget mặc định trong mã nguồn ThingsBoard chính thức (RSCH-20261101-0003), đã import và xem bằng trình duyệt trên ThingsBoard CE 4.3.1.8 cục bộ. Bản cũ thiếu `system.cards.value_card` hoặc `system.time_series_chart` cần thay bằng widget tương đương qua editor. `generate.py` tạo lại file từ upstream khi có mạng; file JSON đi kèm đã tạo sẵn, không cần chạy generator để import. Script `local/seed.py` còn tạo profile có năm alarm rule và rule chain xử lý riêng cho thiết bị demo; import dashboard ở server khác vẫn cần cấu hình profile/chain theo phần 3.
 
 Mã nguồn widget tham chiếu thuộc ThingsBoard Authors, Apache License 2.0: https://github.com/thingsboard/thingsboard . Dashboard chỉ dùng các widget hệ thống đã cài trên server, không nhúng mã controller của bên thứ ba.

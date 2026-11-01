@@ -11,3 +11,8 @@ Ngày tra cứu: 2026-11-01. Các lựa chọn chức năng xuất phát từ ph
 - **Thông tin người dùng:** dùng Burn-E để nạp PIC; chưa cung cấp phiên bản/pinout cáp. Không suy đoán chi tiết đế nạp hay tên phần mềm của model cụ thể.
 
 Chưa có kết quả thực nghiệm phần cứng. Không có cam kết độ chính xác cảm biến hoặc hiệu năng mạng chưa đo.
+
+- **RSCH-20261101-0006:** [ThingsBoard Docker](https://thingsboard.io/docs/user-guide/install/docker/): bản cài CE cục bộ, PostgreSQL và bước khởi tạo dữ liệu.
+- **RSCH-20261101-0007:** [Device profile model](https://github.com/thingsboard/thingsboard/blob/master/ui-ngx/src/app/shared/models/device.models.ts), [query model](https://github.com/thingsboard/thingsboard/blob/master/ui-ngx/src/app/shared/models/query/query.models.ts): alarm rules với ngưỡng động từ attributes; cấu hình đã chạy trên bản local.
+- **RSCH-20261101-0008:** [ESP32-C3 UART](https://docs.espressif.com/projects/esp-idf/en/stable/esp32c3/api-reference/peripherals/uart.html): dùng UART1 và GPIO matrix; SuperMini chọn GPIO4/5, OE GPIO6.
+- **RSCH-20261101-0009/0010:** giá bán IC/module và linh kiện nhỏ ngày 01/11/2026; xem liên kết từng dòng tại `hardware/cost-estimate.md`. PCB120.000đ do người dùng cung cấp, không phải giá tra từ nhà sản xuất.

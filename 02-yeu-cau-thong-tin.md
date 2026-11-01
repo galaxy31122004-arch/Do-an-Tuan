@@ -1,15 +1,15 @@
 # Nội dung đã xác nhận và giới hạn cập nhật
 
 ## Đã xác nhận
-- Cập nhật: dùng module TXS0108E cho I²C/UART, OE từ GPIO27; dùng Burn-E nạp/verify HEX PIC, bỏ bước cài/build compiler trên máy này.
+- Cập nhật: dùng module TXS0108E cho I²C/UART, OE từ GPIO6; dùng Burn-E nạp/verify HEX PIC, bỏ bước cài/build compiler trên máy này.
 - PIC16F877A giữ vai trò xử lý đo và hiển thị; ESP32 phụ trách mạng, trao đổi với PIC qua UART.
-- Cảm biến DHT11 và RTC DS1307 được giữ lại từ bản gốc.
+- Giữ DHT11; bỏ RTC, thạch anh 32,768 kHz và pin dự phòng. ESP32 lấy NTP và gửi giờ UTC cho PIC hiển thị UTC+7.
 - Đổi LCD 2004 sang OLED trắng 0,96 inch I²C dùng SSD1315 theo module người dùng chọn.
 - Hai trang OLED, nút chuyển trang; hiển thị số đo, thời gian và trạng thái kết nối.
 - Mạch thật kết nối Internet; một thiết bị và một tài khoản chủ thiết bị.
 - Lưu thời gian đo, nhiệt độ, độ ẩm, mã thiết bị; dashboard số đo, lịch sử, lọc thời gian, xuất CSV; cấu hình ngưỡng và lịch sử cảnh báo.
 - Mất mạng vẫn đo và hiển thị; tự kết nối lại; phiên bản đầu không lưu bù.
-- Dùng nền tảng có sẵn như Core IoT/ThingsBoard; đây là yêu cầu thiết kế, không phải tuyên bố mọi bản dịch vụ đều sẵn tất cả tính năng.
+- Dùng nền tảng có sẵn như ThingsBoard; đây là yêu cầu thiết kế, không phải tuyên bố mọi bản dịch vụ đều sẵn tất cả tính năng.
 
 ## Phạm vi từng mục
 - Mục 1: giải thích ngắn nhu cầu; không khẳng định kết quả hoặc độ chính xác chưa đo.

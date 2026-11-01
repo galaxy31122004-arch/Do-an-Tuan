@@ -4,8 +4,8 @@
 #include <stdbool.h>
 
 typedef struct { uint32_t sequence, epoch; int16_t temperature10; uint16_t humidity10; uint8_t flags; } measurement_t;
-typedef struct { uint16_t year; uint8_t month, day, hour, minute, second; } rtc_time_t;
-/* Flags: bit 0 = valid sensor, bit 1 = valid UTC RTC. CRC-8/SMBUS detects line errors, not attacks. */
+typedef struct { uint16_t year; uint8_t month, day, hour, minute, second; } utc_time_t;
+/* Flags: bit 0 = valid sensor, bit 1 = valid UTC time. CRC-8/SMBUS detects line errors, not attacks. */
 static uint8_t crc8_update(uint8_t crc,uint8_t value) {
     uint8_t bit; crc^=value;
     for(bit=0;bit<8;++bit) crc=(crc&0x80)?(uint8_t)((crc<<1)^0x07):(uint8_t)(crc<<1);
@@ -57,7 +57,7 @@ static uint8_t month_days(uint16_t y,uint8_t m) {
     if(m==2) return (y%4==0)?29:28; /* Supported range 2000..2099. */
     return (m==4||m==6||m==9||m==11)?30:31;
 }
-static inline bool rtc_to_epoch(const rtc_time_t *t,uint32_t *out) {
+static inline bool calendar_to_epoch(const utc_time_t *t,uint32_t *out) {
     uint32_t days=10957; uint16_t y; uint8_t m;
     if(t->year<2000||t->year>2099||t->month<1||t->month>12||t->day<1||t->day>month_days(t->year,t->month)||t->hour>23||t->minute>59||t->second>59) return false;
     for(y=2000;y<t->year;++y) days+=y%4==0?366:365;
@@ -65,7 +65,7 @@ static inline bool rtc_to_epoch(const rtc_time_t *t,uint32_t *out) {
     *out=((days+t->day-1)*24+t->hour)*3600UL+t->minute*60UL+t->second;
     return true;
 }
-static inline bool epoch_to_rtc(uint32_t e,rtc_time_t *t) {
+static inline bool epoch_to_calendar(uint32_t e,utc_time_t *t) {
     uint32_t days; uint16_t n;
     if(e<946684800UL||e>=4102444800UL) return false;
     t->second=e%60; e/=60; t->minute=e%60; e/=60; t->hour=e%24;

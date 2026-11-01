@@ -8,17 +8,17 @@
 
 struct Sample { measurement_t value; uint32_t arrived; };
 static QueueHandle_t samples;
+static HardwareSerial picUart(1); /* ESP32-C3 has UART0/UART1; USB CDC is the console. */
 static volatile bool cloudOk=false;
 static volatile uint32_t lastSuccess=0;
 static volatile uint32_t lastSuccessEpoch=0;
-static volatile bool picRtcValid=false;
 static uint32_t lineErrors=0;
 
 static void sendControl(char kind,const char *body) {
     char payload[64],wire[80];
     snprintf(payload,sizeof payload,"%c,%s",kind,body);
     snprintf(wire,sizeof wire,"$%s*%02X\n",payload,frame_crc(payload));
-    Serial2.print(wire);
+    picUart.print(wire);
 }
 
 /* Dedicated UART task keeps consuming frames while HTTPS blocks in loop(). */
@@ -26,14 +26,21 @@ static void uartTask(void *) {
     char line[96]; size_t used=0; bool dropping=false;
     uint32_t statusAt=0,syncAt=0;
     for(;;) {
-        while(Serial2.available()) {
-            char c=(char)Serial2.read();
+        while(picUart.available()) {
+            char c=(char)picUart.read();
             if(c=='$') { used=0; dropping=false; }
             if(c=='\r') continue;
             if(c=='\n') {
                 if(!dropping&&used) {
                     line[used]=0; Sample s;
-                    if(parse_measurement(line,&s.value)) { s.arrived=millis(); picRtcValid=(s.value.flags&2)!=0; xQueueOverwrite(samples,&s); }
+                    if(parse_measurement(line,&s.value)) {
+                        s.arrived=millis();
+                        time_t received=time(nullptr);
+                        /* Timestamp near frame reception; the PIC only mirrors time for display. */
+                        if(received>=1704067200) { s.value.epoch=(uint32_t)received; s.value.flags|=2; }
+                        else { s.value.epoch=0; s.value.flags&=(uint8_t)~2; }
+                        xQueueOverwrite(samples,&s);
+                    }
                     else ++lineErrors;
                 }
                 used=0; dropping=false;
@@ -49,8 +56,8 @@ static void uartTask(void *) {
             sendControl('S',body); statusAt=now;
         }
         time_t utc=time(nullptr);
-        if(utc>=1704067200 && now-statusAt>200 && now-statusAt<800 && (!syncAt||now-syncAt>=(picRtcValid?3600000UL:10000UL))) {
-            char body[16]; snprintf(body,sizeof body,"%lu",(unsigned long)utc);
+        if(now-statusAt>200 && now-statusAt<800 && (!syncAt||now-syncAt>=1000)) {
+            char body[16]; snprintf(body,sizeof body,"%lu",utc>=1704067200?(unsigned long)utc:0UL);
             sendControl('T',body); syncAt=now?now:1;
         }
         vTaskDelay(pdMS_TO_TICKS(5));
@@ -75,12 +82,12 @@ static bool publish(const Sample &s) {
     const measurement_t &m=s.value;
     /* Omit invalid measurements rather than publishing fabricated zero values. */
     if(m.flags&1) {
-        snprintf(values,sizeof values,"{\"temperature\":%.1f,\"humidity\":%.1f,\"sensor_ok\":true,\"rtc_ok\":%s,\"sequence\":%lu,\"rssi\":%d,\"demo\":%s}",
+        snprintf(values,sizeof values,"{\"temperature\":%.1f,\"humidity\":%.1f,\"sensor_ok\":true,\"time_ok\":%s,\"sequence\":%lu,\"rssi\":%d,\"demo\":%s}",
             m.temperature10/10.0,m.humidity10/10.0,(m.flags&2)?"true":"false",(unsigned long)m.sequence,WiFi.RSSI(),DEMO_MODE?"true":"false");
-    } else snprintf(values,sizeof values,"{\"sensor_ok\":false,\"rtc_ok\":%s,\"sequence\":%lu,\"rssi\":%d,\"demo\":%s}",
+    } else snprintf(values,sizeof values,"{\"sensor_ok\":false,\"time_ok\":%s,\"sequence\":%lu,\"rssi\":%d,\"demo\":%s}",
         (m.flags&2)?"true":"false",(unsigned long)m.sequence,WiFi.RSSI(),DEMO_MODE?"true":"false");
     if(m.flags&2) snprintf(body,sizeof body,"{\"ts\":%llu,\"values\":%s}",(unsigned long long)m.epoch*1000ULL,values);
-    else snprintf(body,sizeof body,"%s",values); /* Server timestamps until RTC becomes valid. */
+    else snprintf(body,sizeof body,"%s",values); /* Server timestamps if a valid UTC stamp is unavailable. */
     int code=http.POST((uint8_t*)body,strlen(body));
     http.end();
     Serial.printf("Telemetry HTTP %d; seq=%lu; UART errors=%lu\n",code,(unsigned long)m.sequence,(unsigned long)lineErrors);
@@ -93,7 +100,7 @@ void setup() {
     Serial.begin(115200);
     samples=xQueueCreate(1,sizeof(Sample));
     if(!samples) { Serial.println("Queue allocation failed"); abort(); }
-    Serial2.setRxBufferSize(256); Serial2.begin(9600,SERIAL_8N1,PIC_RX_PIN,PIC_TX_PIN);
+    picUart.setRxBufferSize(256); picUart.begin(9600,SERIAL_8N1,PIC_RX_PIN,PIC_TX_PIN);
     delay(100); /* VCCA/VCCB settle; R4 holds OE low before GPIO configuration. */
     digitalWrite(LEVEL_OE_PIN,HIGH);
     WiFi.mode(WIFI_STA); WiFi.setAutoReconnect(true);
