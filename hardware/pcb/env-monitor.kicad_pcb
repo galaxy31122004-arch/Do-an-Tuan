@@ -10917,7 +10917,7 @@
 				)
 			)
 		)
-		(property "Value" "RELAY COM/NC"
+		(property "Value" "RELAY COM/NO"
 			(at 2.54 5.72 0)
 			(layer "F.Fab")
 			(uuid "791db2dc-6cf7-455f-af60-18810015d689")

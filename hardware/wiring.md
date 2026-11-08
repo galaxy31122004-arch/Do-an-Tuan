@@ -6,7 +6,7 @@
 
 | Kết nối | Đi đến |
 |---|---|
-| J1 jack DC tâm (+) và J7 domino chân 1 (song song) → D2 SR360 anode | Cathode D2 = VIN: C14 100 µF + C15 330 nF xuống GND, vào LM7805 IN |
+| J1 jack DC tâm (+) và J7 domino chân 1 (song song) → D2 SR360 anode | Cathode D2 = VIN: C14 100 µF xuống GND, vào LM7805 IN |
 | U7 LM7805 OUT | Rail +5 V; C16 100 nF sát chân OUT |
 | U7 LM7805 GND / tab | GND; tab vít M3 xuống vùng đồng GND làm tản nhiệt |
 | J1 vỏ (−), J7 chân 2 | GND chung toàn mạch; chân switch của jack để trống |
@@ -17,10 +17,8 @@
 | AT89S52 P3.3 chân 13 | SW1 xuống GND; R3 10 kΩ lên +5 V |
 | ESP32 chân 5V/VIN theo board | +5 V, không phải chân 3V3 |
 | ESP32 3V3 | Rail 3,3 V cấp OLED và TXS0108E VCCA |
-| TXS0108E VCCB / VCCA | +5 V / 3,3 V; C3/C13 100 nF lọc từng rail sang GND |
+| TXS0108E VCCB / VCCA | +5 V / 3,3 V (tụ lọc có sẵn trên module) |
 | TXS0108E OE | ESP32 GPIO0; R4 100 kΩ từ OE xuống GND |
-| C6 100 nF, C7 470 µF | +5 V–GND sát ESP32 |
-| C11 10 µF | +5 V–GND gần AT89S52 |
 | +5 V → R10 1 kΩ → anode D1 | Cathode LED xuống GND |
 | TP1 / TP2 / TP3 | +5 V / 3,3 V / GND |
 
@@ -39,8 +37,6 @@ Nhìn chính diện lưới cảm biến và chân hướng xuống, xác minh l
 | 3 NC | Để hở |
 | 4 GND | GND |
 
-C12 100 nF đặt sát chân 1/4 của DHT11 để lọc nguồn cảm biến.
-
 Không áp dụng thứ tự này cho module 3 chân. Đặt cảm biến xa nguồn nhiệt ESP32 và bộ nguồn.
 
 ## 3. Nguồn thời gian NTP từ ESP32
@@ -58,13 +54,13 @@ Không lắp module thời gian thực hoặc pin dự phòng. ESP32 lấy UTC t
 | A1–A3, A6/B1–B3, B6 | NC | NC |
 
 Kênh chọn theo vị trí trên PCB: GPIO4/GPIO3/GPIO0 nằm thẳng trên A4/A5/OE; A7/A8 gần J4, B7/B8 về phía P1.0/P1.1.
-| OLED VCC/GND | 3,3 V/GND; C5 100 nF + C8 10 µF | — |
+| OLED VCC/GND | 3,3 V/GND (tụ có sẵn trên module) | — |
 
 Đấu module theo nhãn A/B và VCCA/VCCB/OE/GND, không dùng số chân IC trần để suy ra header. J5A/J5B dự kiến hai hàng 1x10, xác minh module thực tế trước khi làm PCB. OLED mặc định `0x3C`; đổi `OLED_ADDR` nếu màn dùng `0x3D`.
 
 OE=GPIO0, R4 100 kΩ kéo xuống GND. ESP32 giữ thấp lúc boot, chờ 100 ms rồi bật mức 3,3 V. Kiểm tra/tháo pull-up hoặc cầu nối kéo cứng OE lên nguồn nếu module có; không đưa 5 V vào GPIO6/OE. AT89S52 thử khởi tạo OLED lại khi TXS chưa bật lúc boot.
 
-TXS có pull-up nội, không lắp R6–R9 của thiết kế cũ. Đối chiếu pull-up đã có trên OLED/module, đo tải bus và giữ dây ngắn. C3/C13 100 nF lọc VCCB/VCCA; xem datasheet TI trong `docs/sources.md`.
+TXS có pull-up nội, không lắp R6–R9 của thiết kế cũ. Đối chiếu pull-up đã có trên OLED/module, đo tải bus và giữ dây ngắn. xem datasheet TI trong `docs/sources.md`.
 
 ## 5. UART hai chiều, 9600 baud 8N1
 
@@ -104,17 +100,17 @@ Phía điều khiển (LED của PC817) dùng **+5V** sạch từ LM7805. Phía 
 | 12 V | U8 PC817 chân 4 / 3 | Collector → +12V; emitter → R5 |
 | 12 V | R5 4,7 kΩ, R7 10 kΩ | Emitter PC817 → R5 → base Q1; R7 base → GND |
 | 12 V | Q1 2SC1815-GR (E-C-B) | E → GND; C → cuộn K1 chân 2 |
-| 12 V | K1 SRD-12VDC-SL-C | Cuộn chân 5 → +12V, chân 2 → Q1; COM chân 1, NC chân 4; NO bỏ trống |
+| 12 V | K1 SRD-12VDC-SL-C | Cuộn chân 5 → +12V, chân 2 → Q1; COM chân 1, NO chân 3 ra J6; NC chân 4 bỏ trống |
 | 12 V | D3 1N4007 | Cathode +12V (chân 5), anode chân 2 |
-| Tải | J6 | 1 COM, 2 NC |
+| Tải | J6 | 1 COM, 2 NO |
 
 P2.0 **mức thấp** → LED PC817 sáng → Q1 dẫn → relay bật; khi reset P2.0 ở mức cao nên relay không đóng. Dòng LED ≈ 1,5 mA, trong giới hạn kéo xuống của AT89S52. Cuộn 12 V khoảng 30 mA; dòng base qua R5 4,7 kΩ khoảng 1–2 mA (giới hạn bởi CTR của PC817), dư để Q1 bão hòa với C1815 loại **GR**/**Y**.
 
 **Khi vẽ PCB:** cho dòng GND của cuộn relay (emitter Q1) về điểm GND chung gần C14 bằng đường riêng, không đi vòng dưới vùng AT89S52/ESP32.
 
-**Nguồn trong điều khiển, nguồn ngoài đóng cắt:** tiếp điểm chỉ đóng cắt nguồn ngoài của tải và không nối điện với mạch. Đấu: (+) nguồn ngoài → J6 chân 1 (COM); J6 chân 2 (NC) → tải → (−) nguồn ngoài.
+**Nguồn trong điều khiển, nguồn ngoài đóng cắt:** tiếp điểm chỉ đóng cắt nguồn ngoài của tải và không nối điện với mạch. Đấu: (+) nguồn ngoài → J6 chân 1 (COM); J6 chân 2 (NO) → tải → (−) nguồn ngoài.
 
-Tải nối qua **NC**: relay tắt thì tải có điện, relay bật thì tải bị ngắt. Firmware bật relay khi nhiệt độ ≥ 32,0 °C (ngắt tải), tắt khi ≤ 30,0 °C, và tắt khi DHT11 lỗi. Ngưỡng đặt trong `firmware/v0.2.0/at89s52/board.h`. Chỉ đóng cắt tải điện áp thấp; không đưa điện lưới lên PCB.
+Tải nối qua **NO**: relay bật thì tải có điện (ví dụ chạy quạt), relay tắt thì tải bị ngắt. Firmware bật relay khi nhiệt độ ≥ 32,0 °C, tắt khi ≤ 30,0 °C, và tắt khi DHT11 lỗi. Ngưỡng đặt trong `firmware/v0.2.0/at89s52/board.h`. Chỉ đóng cắt tải điện áp thấp; không đưa điện lưới lên PCB.
 
 ## 7. Trình tự kiểm tra trước khi cắm IC
 

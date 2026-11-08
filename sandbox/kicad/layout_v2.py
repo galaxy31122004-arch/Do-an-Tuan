@@ -41,7 +41,7 @@ NETS = {
     'SDA5': 'U1.1 U4.19', 'SCL5': 'U1.2 U4.18', 'MOSI': 'U1.6 J3.6', 'MISO': 'U1.7 J3.4', 'SCK': 'U1.8 J3.5',
     'TX51': 'U1.11 U4.15', 'RX51': 'U1.10 U4.16', 'DHT_DATA': 'U1.12 U5.2 R2.2', 'BTN_PAGE': 'U1.13 R3.2 SW1.1',
     'RELAY_IN': 'U1.21 U8.2', 'LED_RLY': 'R6.2 U8.1', 'OPTO_E': 'U8.3 R5.1', 'QB': 'R5.2 Q1Y.3 R7.1', 'COIL_LO': 'Q1Y.2 K1.2 D3.2',
-    'RLY_COM': 'K1.1 J6Y.1', 'RLY_NC': 'K1.4 J6Y.2',
+    'RLY_COM': 'K1.1 J6Y.1', 'RLY_NO': 'K1.3 J6Y.2',
     'SDA3': 'U4.9 J4.4', 'SCL3': 'U4.8 J4.3', 'TX51_3V3': 'U4.5 U2.4', 'RX51_3V3': 'U4.6 U2.5',
     'OE': 'U4.10 U2.8 R4.1',
 }
@@ -81,6 +81,6 @@ TMP_LIB = {'J1X': 'Connector:Barrel_Jack_Switch', 'D2X': 'Device:D', 'Q1Y': 'Tra
 VALUES = {'R6': '2k2', 'D2X': 'SR360', 'K1': 'SRD-12VDC-SL-C', 'R5': '4k7'}
 FOOTPRINTS = {'D2X': 'Diode_THT:D_DO-201AD_P15.24mm_Horizontal'}
 CAPTIONS = {}
-NC = ('J1X.3 K1.3 U5.3 U1.3 U1.4 U1.5 U1.14 U1.15 U1.16 U1.17 U1.22 U1.23 U1.24 U1.25 U1.26 U1.27 U1.28 U1.29 U1.30 '
+NC = ('J1X.3 K1.4 U5.3 U1.3 U1.4 U1.5 U1.14 U1.15 U1.16 U1.17 U1.22 U1.23 U1.24 U1.25 U1.26 U1.27 U1.28 U1.29 U1.30 '
       'U1.32 U1.33 U1.34 U1.35 U1.36 U1.37 U1.38 U1.39 U4.2 U4.3 U4.4 U4.7 U4.12 U4.13 U4.14 U4.17 '
       'U2.6 U2.7 U2.9 U2.10 U2.11 U2.12 U2.13 U2.14 U2.15 U2.16')

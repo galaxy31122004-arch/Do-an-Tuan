@@ -10,9 +10,8 @@ R2,"Điện trở 4,7kΩ 1/4W 1%",1,6000,6000,https://chotroihn.vn/tro-vach-1-4w
 R4,Điện trở 100kΩ 1/4W 1%,1,6000,6000,https://chotroihn.vn/tro-vach-1-4w-1-50c,"Mua gói 50, dùng 1; trang báo hết hàng biến thể này; cần xác nhận nguồn khác"
 R10,Điện trở 1kΩ 1/4W 1%,1,6000,6000,https://chotroihn.vn/tro-vach-1-4w-1-50c,"Mua gói 50, dùng 1"
 R5,Điện trở 4.7kΩ 1/4W,1,,,,Chưa khảo sát giá; có thể lấy từ gói 4,7kΩ của R2
-"C1,C3,C5,C6,C12,C13,C16",Tụ gốm 100nF,7,500,3500,https://chotroihn.vn/tu-gom-vang-50v,Giá biến thể 0.1uF/104; đối chiếu điện môi X7R theo BOM trước khi mua
-C7,Tụ hóa 470uF 10V,1,1000,1000,https://chotroihn.vn/tu-hoa-10v,1 tụ
-"C2,C8,C11",Tụ hóa 10uF 16V,3,1000,3000,https://chotroihn.vn/tu-hoa-16v,"3 tụ 10uF 16V; C2 reset, C8/C11 lọc nguồn; kiểm tra cực tính"
+"C1,C16",Tụ gốm 100nF,2,500,1000,https://chotroihn.vn/tu-gom-vang-50v,Giá biến thể 0.1uF/104; đối chiếu điện môi X7R theo BOM trước khi mua
+C2,Tụ hóa 10uF 16V,1,1000,1000,https://chotroihn.vn/tu-hoa-16v,"C2 reset; kiểm tra cực tính"
 "C9,C10",Tụ gốm 22pF,2,500,1000,https://chotroihn.vn/tu-gom-vang-50v,Giá biến thể 22P; xác nhận C0G/NP0 và tải thạch anh trước khi mua
 D1,LED xanh lá 3mm,1,29000,29000,https://chotroihn.vn/goi-100-con-led-duc-3mm,"Mua gói 100, dùng 1"
 U7,LM7805 TO-220,1,,,,Chưa khảo sát giá
@@ -22,7 +21,6 @@ Q1,Transistor 2SC1815-GR TO-92,1,,,,Chưa khảo sát giá
 R6,Điện trở 2.2kΩ 1/4W,1,,,,Chưa khảo sát giá
 U8,Opto PC817 DIP-4,1,,,,Chưa khảo sát giá
 C14,Tụ hóa 100uF 25V,1,,,,Chưa khảo sát giá
-C15,Tụ gốm 330nF,1,,,,Chưa khảo sát giá
 "SW1,SW2",Nút nhấn 6x6,1,5000,5000,https://chotroihn.vn/bo-10-nut-nhan-4-chan,"Mua gói 10, dùng 2"
 J1,Jack DC 5.5x2.1 hàn mạch,1,,,,Chưa khảo sát giá
 J7,Domino 2 chân 5.08mm,1,,,,Chưa khảo sát giá
