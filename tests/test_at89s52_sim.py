@@ -13,7 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser()
 parser.add_argument('--s51', required=True)
-parser.add_argument('--build-dir', type=Path, default=ROOT / 'firmware/at89s52/build')
+parser.add_argument('--build-dir', type=Path, default=ROOT / 'firmware/v0.1.0/at89s52/build')
 args = parser.parse_args()
 listing = (args.build_dir / 'main.rst').read_text()
 

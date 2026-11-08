@@ -1,6 +1,6 @@
 # Sơ đồ nối dây — bản lắp mạch thật
 
-Đối chiếu với `firmware/at89s52/board.h` và `firmware/esp32/include/settings.h`. Số chân AT89S52 áp dụng **DIP-40**; board mạng là **ESP32-C3 SuperMini, hai hàng chân 1x8**, tra theo nhãn GPIO trên hàng mua. Đây là hướng dẫn kết nối, chưa phải bộ PCB sản xuất đã ERC/DRC.
+Đối chiếu với `firmware/v0.1.0/at89s52/board.h` và `firmware/v0.1.0/esp32/include/settings.h`. Số chân AT89S52 áp dụng **DIP-40**; board mạng là **ESP32-C3 SuperMini, hai hàng chân 1x8**, tra theo nhãn GPIO trên hàng mua. Đây là hướng dẫn kết nối, chưa phải bộ PCB sản xuất đã ERC/DRC.
 
 ## 1. Nguồn và khối AT89S52
 

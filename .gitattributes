@@ -1,2 +1,2 @@
 # Preserve the exact released image bytes used by build-info.json.
-firmware/at89s52/release/environment-monitor.hex text eol=lf
+firmware/v0.1.0/at89s52/release/environment-monitor.hex text eol=lf

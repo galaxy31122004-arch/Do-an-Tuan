@@ -1,11 +1,11 @@
 .tools/
 **/.pio/
 **/__pycache__/
-firmware/esp32/include/secrets.h
-firmware/at89s52/build/
+firmware/v0.1.0/esp32/include/secrets.h
+firmware/v0.1.0/at89s52/build/
 tests/build/
 *.hex
-!firmware/at89s52/release/environment-monitor.hex
+!firmware/v0.1.0/at89s52/release/environment-monitor.hex
 *.elf
 *.map
 *.obj

@@ -1,8 +1,8 @@
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
-#include "../firmware/common/protocol.h"
-#include "../firmware/common/clock.h"
+#include "../firmware/v0.1.0/common/protocol.h"
+#include "../firmware/v0.1.0/common/clock.h"
 
 int main(void) {
     assert(frame_crc("123456789")==0xF4); /* CRC-8/SMBUS published check vector. */

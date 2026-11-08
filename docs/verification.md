@@ -12,7 +12,7 @@
 - Playwright trên Edge: biểu đồ đúng °C/%RH, không có page error; lưu ngưỡng high temperature=29 thành công qua UI, kiểm tra API rồi khôi phục 28. Native alarm history có bản ghi từ profile/rule chain riêng.
 - Bảng giá bao phủ đủ 38 reference: các mục đã có giá + PCB120.000đ = 403.500đ; F1 chưa có giá đúng quy cách và chưa được cộng. Không biến giá giữ chỗ thành giá mua thực tế.
 
-- AT89S52: SDCC mcs51 small, 11,0592 MHz/12T, Flash 7.276/8.192 byte, không dùng RAM ngoài; vùng stack ban đầu 52 byte. HEX và hash nguồn tại `firmware/at89s52/release/`.
+- AT89S52: SDCC mcs51 small, 11,0592 MHz/12T, Flash 7.276/8.192 byte, không dùng RAM ngoài; vùng stack ban đầu 52 byte. HEX và hash nguồn tại `firmware/v0.1.0/at89s52/release/`.
 - uCsim C52: chạy 2.000.000 lệnh, xuất các frame đo lỗi cảm biến có CRC đúng; CPU vẫn chạy. Tiêm frame S/T hoàn chỉnh vào bộ đệm, ép hai trang OLED với ACK giả trong bộ nhớ mô phỏng: stack cao nhất 0xF0 (còn 15 byte), không tràn. Đây chưa phải kiểm tra RX UART điện thực hay mọi đường ngắt.
 - DHT11: vòng bắt xung bằng assembly đã thay phần C gây trễ giữa hai cạnh. Mô phỏng 40 bit 65/0/25/0/90 với xung 26/70, 22/65 và 30/75 µs giải mã đúng `41 00 19 00 5A`.
 - Review độc lập sau sửa: không còn lỗi firmware quan trọng được phát hiện; cần tiếp tục thử UART RX, DHT/TXS/OLED trên phần cứng.
