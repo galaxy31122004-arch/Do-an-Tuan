@@ -4,10 +4,10 @@ Tại thời điểm hoàn thành báo cáo, mạch thật chưa được chế 
 
 ## 4.1. Quy trình thi công
 
-1. Hoàn thiện đi dây mạch in, chạy kiểm tra luật thiết kế (DRC) và xuất tệp Gerber để đặt in.
-2. Đo khoảng cách hai hàng chân của module ESP32-C3 SuperMini và TXS0108E thật, rồi hiệu chỉnh footprint trước khi đặt in.
+1. Đo khoảng cách hai hàng chân của module ESP32-C3 SuperMini và TXS0108E thật, đối chiếu footprint; nếu lệch thì sửa footprint, đi lại dây đoạn liên quan và chạy lại DRC.
+2. Xuất tệp Gerber và tệp khoan từ KiCad để đặt in mạch hai lớp 92,5 × 84,7 mm.
 3. Hàn linh kiện theo thứ tự từ thấp đến cao:
-   - điện trở, diode;
+   - điện trở, diode (R8, R9 nằm dưới module TXS0108E nên hàn sát mặt bo);
    - đế IC, header;
    - tụ, thạch anh, nút nhấn;
    - relay, cầu đấu, jack DC;

@@ -18,6 +18,7 @@ Mức viết: `khái quát` · `vừa đủ` · `chuyên sâu` · `tùy chỉnh`
 - Đồng ý mức viết từng chương như bảng.
 - Mạch thật chưa làm/đo: chương 4 viết dạng kế hoạch kiểm thử, kết quả bổ sung sau.
 - Không có lời cảm ơn.
+- 2026-11-08: cập nhật theo PCB bản cuối (I²C P0.3/P0.4 + R8/R9, UART qua TXS B1/B2, ESP32 RX=GPIO3/TX=GPIO4, bo 92,5 × 84,7 mm đã đi dây, GND phủ hai mặt, bỏ LED D1/R10); hình 2.2, 2.3 và lưu đồ ESP32 dựng lại; Word 40 trang chờ duyệt.
 - Dàn ý tệp 01 đã duyệt. Tiến độ: Mở đầu, Chương 1, 2 đã duyệt; Chương 3, 4, Kết luận, TLTK, Phụ lục viết theo yêu cầu "viết hết" và dựng Word `drafts/bao-cao-do-an-2.docx`, chờ duyệt.
 
 ## Câu hỏi ưu tiên (đã trả lời)

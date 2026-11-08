@@ -104,7 +104,7 @@ Hai ngưỡng khai báo bằng hằng `RELAY_ON_T10` và `RELAY_OFF_T10` trong t
 
 ### 3.3.5. Giao tiếp I²C và hiển thị OLED
 
-- **I²C bằng phần mềm:** các hàm START, STOP và ghi byte điều khiển trực tiếp chân P1.0 và P1.1.
+- **I²C bằng phần mềm:** các hàm START, STOP và ghi byte điều khiển trực tiếp chân P0.3 (SDA) và P0.4 (SCL). Cổng P0 là cực máng hở: ghi 1 là thả đường dây, điện trở R8, R9 kéo lên mức cao; ghi 0 là kéo xuống.
   - Khi thả đường SCL, chương trình chờ SCL thực sự lên mức cao trước khi tiếp tục, vì thiết bị nhận có thể giữ SCL ở mức thấp để làm chậm bus (clock stretching).
   - Mỗi byte gửi đi được kiểm tra bit ACK.
 - **Hiển thị chữ:** bảng font 5 × 7 điểm lưu trong bộ nhớ chương trình. Mỗi dòng chữ tương ứng một trang 8 điểm của SSD1315, nên màn hình có 8 dòng, mỗi dòng tối đa khoảng 21 ký tự.
@@ -131,7 +131,7 @@ Hai ngưỡng khai báo bằng hằng `RELAY_ON_T10` và `RELAY_OFF_T10` trong t
 
 ### 3.4.1. Khởi động
 
-1. Đặt GPIO0 (chân OE của TXS0108E) ở mức thấp, rồi khởi tạo UART1 với tốc độ 9600 bit/s, RX = GPIO4, TX = GPIO3.
+1. Đặt GPIO0 (chân OE của TXS0108E) ở mức thấp, rồi khởi tạo UART1 với tốc độ 9600 bit/s, RX = GPIO3, TX = GPIO4.
 2. Chờ 100 ms cho nguồn ổn định, sau đó đưa OE lên mức cao để bật bộ chuyển mức.
 3. Kết nối Wi-Fi ở chế độ station và bật tự kết nối lại.
 4. Cấu hình NTP với máy chủ `pool.ntp.org` và `time.google.com`.

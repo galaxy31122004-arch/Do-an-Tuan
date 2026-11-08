@@ -77,7 +77,7 @@ flow('luu-do-at89s52.png', [
 ])
 flow('luu-do-esp32.png', [
     ('round', 'Bắt đầu'),
-    ('square', 'OE = thấp; UART1 9600 (RX GPIO4, TX GPIO3)'),
+    ('square', 'OE = thấp; UART1 9600 (RX GPIO3, TX GPIO4)'),
     ('square', 'Chờ 100 ms → OE = cao; Wi-Fi STA; cấu hình NTP'),
     ('square', 'Tác vụ host-uart: nhận khung M (kiểm CRC) → hàng đợi;\ngửi khung S mỗi 1 s và khung T'),
     ('diamond', 'Wi-Fi + giờ hợp lệ + đủ 10 s?'),

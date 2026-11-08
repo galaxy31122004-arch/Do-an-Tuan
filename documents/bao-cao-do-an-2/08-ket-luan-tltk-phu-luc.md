@@ -11,7 +11,7 @@
   - bộ chuyển mức TXS0108E nối với ESP32-C3;
   - khối relay điều khiển qua opto PC817.
 
-  Sơ đồ nguyên lý đã vẽ trên KiCad, kiểm tra luật điện đạt 0 lỗi. Mạch in 100 × 100 mm đang được bố trí.
+  Sơ đồ nguyên lý đã vẽ trên KiCad, kiểm tra luật điện (ERC) đạt 0 lỗi. Mạch in hai lớp 92,5 × 84,7 mm đã đi dây hoàn chỉnh, kiểm tra luật thiết kế (DRC) không còn lỗi điện.
 - **Firmware AT89S52:** đọc DHT11, hiển thị hai trang trên OLED, điều khiển relay có trễ (bật ở 32 °C, tắt ở 30 °C) và truyền khung dữ liệu có CRC.
 - **Firmware ESP32-C3:** kết nối Wi-Fi, đồng bộ NTP, gửi dữ liệu lên ThingsBoard qua HTTPS và tự kết nối lại khi mất mạng.
 - **Dashboard ThingsBoard:** hiển thị số đo, biểu đồ lịch sử, xuất CSV, ngưỡng và lịch sử cảnh báo, trạng thái relay.

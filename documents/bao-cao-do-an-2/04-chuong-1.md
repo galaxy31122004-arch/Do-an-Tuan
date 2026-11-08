@@ -55,7 +55,7 @@ Module OLED 0,96 inch có độ phân giải 128 × 64 điểm, dùng IC điều
 - Mỗi giao dịch bắt đầu bằng điều kiện START, gửi địa chỉ 7 bit kèm bit đọc/ghi, rồi các byte dữ liệu. Mỗi byte được thiết bị nhận xác nhận bằng bit ACK, và giao dịch kết thúc bằng điều kiện STOP.
 - Module OLED trong đề tài dùng địa chỉ 0x3C.
 
-AT89S52 không có khối I²C phần cứng. Giao tiếp được thực hiện bằng phần mềm: điều khiển trực tiếp hai chân P1.0 (SDA) và P1.1 (SCL), tốc độ dưới 100 kHz.
+AT89S52 không có khối I²C phần cứng. Giao tiếp được thực hiện bằng phần mềm: điều khiển trực tiếp hai chân P0.3 (SDA) và P0.4 (SCL), tốc độ dưới 100 kHz.
 
 ## 1.6. Giao tiếp nối tiếp UART
 

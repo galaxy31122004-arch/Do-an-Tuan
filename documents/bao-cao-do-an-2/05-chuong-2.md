@@ -19,7 +19,7 @@ Phần cứng cần đáp ứng các yêu cầu sau:
                                            └─► Cuộn relay K1, Q1, phototransistor PC817
 
  DHT11 ──1 dây──► AT89S52 ◄── SW1 (đổi trang)
-                    │ P1.0/P1.1 (I²C 5 V)    ┌──► OLED SSD1315 (I²C 3,3 V)
+                    │ P0.3/P0.4 (I²C 5 V)    ┌──► OLED SSD1315 (I²C 3,3 V)
                     ├──────────────► TXS0108E ┤
                     │ P3.0/P3.1 (UART 5 V)   └──► ESP32-C3 UART1 ──Wi-Fi──► ThingsBoard
                     │                              GPIO0 ──► OE của TXS0108E
@@ -32,7 +32,7 @@ Các khối chính:
 
 - **Khối nguồn:** biến 12 V thành 5 V; cấp 12 V riêng cho phía relay.
 - **Khối xử lý trung tâm AT89S52:** đọc cảm biến, hiển thị, điều khiển relay và truyền dữ liệu.
-- **Khối hiển thị và giao diện:** OLED, nút đổi trang, nút reset, đèn báo nguồn.
+- **Khối hiển thị và giao diện:** OLED, nút đổi trang, nút reset.
 - **Khối chuyển mức logic TXS0108E:** nối các đường tín hiệu 5 V với các đường 3,3 V.
 - **Khối kết nối mạng ESP32-C3:** Wi-Fi, NTP, gửi dữ liệu lên nền tảng IoT.
 - **Khối relay cách ly quang:** đóng cắt tải ngoài theo nhiệt độ.
@@ -46,7 +46,7 @@ Các khối chính:
 - **Ổn áp 5 V:** đường +12V cấp cho LM7805 (U7) để tạo đường **+5V**. Tụ hóa C14 (100 µF, ≥ 25 V) lọc ở đầu vào; tụ gốm C16 (100 nF) đặt sát chân ra.
 - **Nguồn 3,3 V:** lấy từ bộ ổn áp có sẵn trên bo ESP32-C3 SuperMini (chân 3V3). Nguồn này cấp cho OLED và phía A của TXS0108E.
 - **Phía relay:** cuộn relay, phototransistor của PC817 và transistor Q1 lấy nguồn trực tiếp từ +12V. Như vậy dòng cuộn relay không đi qua LM7805 và không gây sụt áp trên đường 5 V.
-- **Báo nguồn và đo kiểm:** LED D1 qua điện trở R10 1 kΩ báo có nguồn 5 V. Ba điểm đo TP1, TP2, TP3 tương ứng +5V, +3V3 và GND.
+- **Điểm đo kiểm:** ba điểm đo TP1, TP2, TP3 tương ứng +5V, +3V3 và GND.
 
 ### 2.3.2. Tính toán tỏa nhiệt LM7805
 
@@ -57,11 +57,11 @@ Công suất tỏa nhiệt trên LM7805:
 - P = (V_IN − V_OUT) × I ≈ (12 − 0,5 − 5) × 0,18 ≈ 1,2 W khi hoạt động bình thường.
 - P có thể lên gần 2,5 W ở dòng đỉnh.
 
-Vì vậy LM7805 được đặt nằm ngang, vít tab xuống mạch in. Tab của LM7805 nối GND nên có thể bắt trực tiếp xuống vùng đồng GND rộng ở cả hai mặt mạch, không cần đệm cách điện. Nhiều via nối hai mặt đồng để dẫn nhiệt. Nếu khi thử nghiệm thấy LM7805 quá nóng, có thể gắn thêm tản nhôm hoặc dùng adapter 9 V.
+Vì vậy LM7805 được đặt nằm ngang, vít tab xuống mạch in. Tab của LM7805 nối GND nên có thể bắt trực tiếp xuống vùng đồng GND, không cần đệm cách điện. Mạch in phủ đồng GND ở cả hai mặt; hai mặt nối với nhau qua các chân xuyên lỗ nối GND. Nếu khi thử nghiệm thấy LM7805 quá nóng, có thể gắn thêm tản nhôm hoặc dùng adapter 9 V.
 
 ## 2.4. Khối vi điều khiển AT89S52
 
-- **Nguồn:** chân 40 (VCC) nối +5V, chân 20 nối GND; tụ C1 100 nF đặt sát hai chân này.
+- **Nguồn:** chân 40 (VCC) nối +5V, chân 20 nối GND; tụ C1 100 nF đặt cạnh chân 40, cực còn lại nối vùng đồng GND.
 - **Dao động:** thạch anh Y1 11,0592 MHz nối giữa XTAL1 (chân 19) và XTAL2 (chân 18). Tụ C9 và C10 22 pF nối từ mỗi đầu thạch anh xuống GND.
 - **Reset:** AT89S52 reset ở mức cao. Mạch reset gồm C2 10 µF từ +5V xuống chân RST (chân 9) và R1 10 kΩ từ RST xuống GND.
   - Khi cấp nguồn, C2 nạp điện qua R1 nên giữ RST ở mức cao trong khoảng thời gian cỡ R1·C2 ≈ 100 ms rồi giảm dần về mức thấp. Như vậy chip được reset tự động khi bật nguồn.
@@ -73,16 +73,16 @@ Vì vậy LM7805 được đặt nằm ngang, vít tab xuống mạch in. Tab c�
 
 | Chân | Tên | Chức năng | Nối tới |
 |---|---|---|---|
-| 1 | P1.0 | SDA I²C (phần mềm) | TXS0108E B8 |
-| 2 | P1.1 | SCL I²C (phần mềm) | TXS0108E B7 |
 | 6, 7, 8 | P1.5, P1.6, P1.7 | MOSI, MISO, SCK | J3 (ISP) |
 | 9 | RST | Reset | C2, R1, SW2, J3 |
-| 10 | P3.0/RXD | Nhận UART | TXS0108E B5 |
-| 11 | P3.1/TXD | Phát UART | TXS0108E B4 |
+| 10 | P3.0/RXD | Nhận UART | TXS0108E B2 |
+| 11 | P3.1/TXD | Phát UART | TXS0108E B1 |
 | 12 | P3.2 | Dữ liệu DHT11 | U5 chân 2, R2 kéo lên |
 | 13 | P3.3 | Nút đổi trang | SW1, R3 kéo lên |
 | 18, 19 | XTAL2, XTAL1 | Dao động | Y1, C9, C10 |
 | 21 | P2.0 | Điều khiển relay | Cathode LED PC817 |
+| 35 | P0.4 | SCL I²C (phần mềm) | TXS0108E B7, R9 kéo lên |
+| 36 | P0.3 | SDA I²C (phần mềm) | TXS0108E B8, R8 kéo lên |
 | 31 | EA | Chạy Flash nội | +5V |
 | 20, 40 | GND, VCC | Nguồn | GND, +5V |
 
@@ -97,7 +97,7 @@ Vì vậy LM7805 được đặt nằm ngang, vít tab xuống mạch in. Tab c�
 ## 2.6. Khối hiển thị OLED
 
 - Module OLED 0,96 inch cắm vào đế J4 (1×4 chân, bước 2,54 mm), thứ tự chân GND, VCC, SCL, SDA.
-- Module cấp nguồn **3,3 V**. Hai đường SCL, SDA đi qua kênh A7 và A8 của TXS0108E để nối với P1.1 và P1.0 của AT89S52.
+- Module cấp nguồn **3,3 V**. Hai đường SCL, SDA đi qua kênh A7 và A8 của TXS0108E để nối với P0.4 (chân 35) và P0.3 (chân 36) của AT89S52.
 - Địa chỉ I²C mặc định là 0x3C. Nếu module dùng 0x3D thì đổi hằng `OLED_ADDR` trong firmware.
 - Footprint của J4 có vẽ đường viền thật của module, khoảng 27,3 × 27,8 mm, kèm 4 lỗ M2 để bắt cọc đỡ. Nhờ vậy khi bố trí mạch in thấy được phần diện tích module chiếm.
 
@@ -110,20 +110,21 @@ TXS0108E dùng dạng module cắm vào hai hàng đế 1×10 chân.
   - Nối GPIO0 của ESP32-C3. Điện trở R4 100 kΩ kéo OE xuống GND.
   - Khi ESP32 đang khởi động, OE ở mức thấp nên mọi kênh ở trạng thái trở kháng cao.
   - Sau khoảng 100 ms, khi nguồn hai phía đã ổn định, firmware ESP32 mới đưa OE lên mức cao để bật các kênh.
-- Không lắp thêm điện trở kéo lên cho I²C vì TXS0108E đã có điện trở kéo lên nội. Cần kiểm tra module mua về: nếu có điện trở hoặc cầu nối kéo cứng OE lên nguồn thì phải tháo ra.
+- **Điện trở kéo lên I²C:** cổng P0 của AT89S52 là cực máng hở và không có điện trở kéo lên nội, nên phía 5 V có R8, R9 (10 kΩ) kéo SDA, SCL lên +5V. Phía 3,3 V dùng điện trở kéo lên nội của TXS0108E và điện trở có sẵn trên module OLED.
+- Cần kiểm tra module TXS0108E mua về: nếu có điện trở hoặc cầu nối kéo cứng OE lên nguồn thì phải tháo ra.
 
 **Bảng 2.2. Phân kênh TXS0108E**
 
 | Kênh | Phía A (3,3 V) | Phía B (5 V) | Tín hiệu |
 |---|---|---|---|
-| A4/B4 | ESP32 GPIO4 (RX UART1) | AT89S52 P3.1 (TXD) | AT89S52 → ESP32 |
-| A5/B5 | ESP32 GPIO3 (TX UART1) | AT89S52 P3.0 (RXD) | ESP32 → AT89S52 |
-| A7/B7 | OLED SCL | AT89S52 P1.1 | Xung nhịp I²C |
-| A8/B8 | OLED SDA | AT89S52 P1.0 | Dữ liệu I²C |
+| A1/B1 | ESP32 GPIO3 (RX UART1) | AT89S52 P3.1 (TXD) | AT89S52 → ESP32 |
+| A2/B2 | ESP32 GPIO4 (TX UART1) | AT89S52 P3.0 (RXD) | ESP32 → AT89S52 |
+| A7/B7 | OLED SCL | AT89S52 P0.4 | Xung nhịp I²C |
+| A8/B8 | OLED SDA | AT89S52 P0.3 | Dữ liệu I²C |
 | OE | ESP32 GPIO0, R4 xuống GND | — | Bật/tắt bộ chuyển mức |
-| A1–A3, A6, B1–B3, B6 | Để trống | Để trống | — |
+| A3–A6, B3–B6 | Để trống | Để trống | — |
 
-Các kênh được chọn theo vị trí linh kiện trên mạch in. Trên PCB, chân GPIO4, GPIO3 và GPIO0 của ESP32 nằm thẳng hàng phía trên chân A4, A5 và OE. Kênh A7, A8 gần đế OLED; kênh B7, B8 hướng về phía P1.0, P1.1. Cách chọn này giúp đường mạch ngắn và không bắt chéo nhau.
+Các kênh và chân được chọn theo vị trí linh kiện trên mạch in. Kênh B1, B2 nằm ngay phía trên chân 11, 10 (P3.1, P3.0) của AT89S52; GPIO3, GPIO4 của ESP32 được gán sao cho hai đường từ A1, A2 lên ESP32 không bắt chéo. I²C được đưa sang P0.3, P0.4 (chân 36, 35) vì hai chân này nằm ngay dưới kênh B8, B7. Kênh A7, A8 gần đế OLED. Cách chọn này giúp đường mạch ngắn và ít bắt chéo. UART không chuyển sang P0 được vì bộ UART phần cứng của AT89S52 chỉ ra ở P3.0, P3.1.
 
 **ESP32-C3 SuperMini (U2)** cắm trên hai hàng đế 1×8 chân, lấy nguồn từ +5V qua chân 5V. Không cắm cáp USB vào ESP32 khi mạch đang cấp nguồn 12 V, để tránh cấp ngược nguồn giữa USB và LM7805.
 
@@ -171,36 +172,41 @@ Sơ đồ nguyên lý được vẽ trên KiCad 10 (dự án `env-monitor`).
 
 ## 2.10. Thiết kế mạch in
 
-- **Kích thước:** bo mạch 100 × 100 mm. Linh kiện xuyên lỗ; IC và module cắm trên đế.
+- **Kích thước và cấu trúc:** bo mạch hai lớp, 92,5 × 84,7 mm. Linh kiện xuyên lỗ, lắp ở mặt trên; IC và module cắm trên đế.
 - **Độ rộng đường mạch theo lớp net:**
 
   **Bảng 2.4. Lớp net và độ rộng đường mạch**
 
   | Lớp net | Các net | Độ rộng | Khoảng cách |
   |---|---|---|---|
-  | Tín hiệu (mặc định) | Các net còn lại | 0,5 mm | 0,25 mm |
-  | Power | +5V, +3V3, GND | 1,0 mm | 0,3 mm |
+  | Tín hiệu (mặc định) | Các net còn lại | 0,3–0,5 mm | 0,25 mm |
+  | Power | +5V, +3V3, GND | 1,0 mm (một số nhánh ngắn 0,5 mm) | 0,3 mm |
   | Power_12V | +12V, đường jack → SR360, hai đường tải qua J6 | 2,0 mm | 0,5 mm |
 
+- **Vùng đồng:** GND được phủ ở cả mặt trên và mặt dưới. Đường +5V đi bằng dây, không phủ đồng, để tránh nguy cơ chập giữa +5V và các chân khác khi hàn.
 - **Nguyên tắc bố trí:**
-  - LM7805 và vùng đồng tản nhiệt đặt ở mép bo, gần đầu vào nguồn.
-  - DHT11 đặt xa nguồn nhiệt.
-  - ESP32 đặt ngay trên TXS0108E để các đường tín hiệu thẳng hàng.
-  - Khối relay và cầu đấu tải gom về một góc bo, cách xa vùng tín hiệu.
-  - Dòng GND của cuộn relay đi đường riêng về điểm GND chung gần C14.
-- **Trạng thái:** mạch in đang trong giai đoạn bố trí, chưa đi dây hoàn chỉnh. Khoảng cách hai hàng chân của module ESP32 và TXS0108E cần đo trên module thật để hiệu chỉnh footprint trước khi đặt in.
+  - LM7805, jack nguồn và cầu đấu 12 V đặt ở mép trên bên trái, gần nhau.
+  - DHT11 đặt ở mép phải, xa LM7805.
+  - ESP32 đặt ngay trên TXS0108E; AT89S52 đặt ngay dưới TXS0108E để các đường UART, I²C ngắn.
+  - Khối relay và cầu đấu tải J6 gom về cạnh trái, cách xa vùng tín hiệu.
+  - R8, R9 (điện trở kéo lên I²C) nằm ngang bên dưới module TXS0108E; phải hàn sát mặt bo trước khi cắm module.
+  - Module OLED nằm trọn trong bo, ở góc trên bên phải.
+- **Lỗ bắt vít:** một lỗ M3 ở góc phải dưới và một lỗ M2.5 ở góc trái dưới. Hai góc trên không còn chỗ do jack nguồn và module OLED.
+- **Đi dây:** các đường chính được đi tay; phần còn lại đi bằng công cụ tự động Freerouting, sau đó kiểm tra và sửa bằng KiCad.
+- **Kiểm tra luật thiết kế (DRC):** không còn chân chưa nối và không có lỗi điện. Còn 6 cảnh báo do R8, R9 nằm trong vùng chiếm chỗ của module TXS0108E (bố trí có chủ ý) và 3 lỗi nhỏ về chữ in lụa.
+- **Trước khi đặt in:** đo khoảng cách hai hàng chân của module ESP32-C3 và TXS0108E mua về để đối chiếu footprint, sau đó xuất tệp Gerber và tệp khoan.
 
-*Hình 2.3. Bố trí linh kiện trên mạch in (chèn khi hoàn tất đi dây).*
+*Hình 2.3. Mạch in, mặt trên.*
 
 ## 2.11. Bảng vật tư và dự toán chi phí
 
 Bảng vật tư đầy đủ gồm 42 chi tiết, xem Phụ lục. Giá tham khảo ngày 01/11/2026:
 
-- Phần linh kiện đã có giá, tính theo lượng dùng trên một mạch: **217.310 đồng**.
+- Phần linh kiện đã có giá, tính theo lượng dùng trên một mạch: **217.140 đồng**.
 - In PCB: **120.000 đồng**.
 
 Một số linh kiện chưa khảo sát giá nên chưa tính vào tổng: J1, J6, J7, U7, D2, D3, Q1, R5, R6, U8, C14, K1. Tổng chi phí sẽ được cập nhật khi đủ giá.
 
 ## 2.12. Kết luận chương
 
-Chương 2 đã trình bày thiết kế phần cứng gồm khối nguồn 12 V/5 V/3,3 V, khối AT89S52, khối cảm biến và hiển thị, khối chuyển mức TXS0108E cùng ESP32-C3, khối relay cách ly quang, sơ đồ nguyên lý, nguyên tắc thiết kế mạch in và dự toán chi phí. Chương 3 sẽ trình bày phần mềm điều khiển các khối phần cứng này.
+Chương 2 đã trình bày thiết kế phần cứng gồm khối nguồn 12 V/5 V/3,3 V, khối AT89S52, khối cảm biến và hiển thị, khối chuyển mức TXS0108E cùng ESP32-C3, khối relay cách ly quang, sơ đồ nguyên lý, mạch in hai lớp đã đi dây và kiểm tra DRC, cùng dự toán chi phí. Chương 3 sẽ trình bày phần mềm điều khiển các khối phần cứng này.
