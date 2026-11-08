@@ -23,6 +23,7 @@ Chỉ ghi dự án, đường dẫn và quyền chỉnh sửa đã được ngư
 5. Giữ nguyên bản gốc và file người dùng chỉnh. Bản xuất mới không ghi đè bản review; mọi bản giao bắt buộc có phiên bản và lưu ở `versions/` (xem mục Phiên bản).
 6. Ghi phương án chưa chốt vào `considerations/`. Không coi phương án là yêu cầu đã duyệt.
 7. Báo kết quả dựa trên kiểm tra thực tế phù hợp; ghi rõ những phần chưa chạy. Tài liệu kiểm thử nằm ở `documents/verification/`.
+8. **KiCad: đóng trước khi cập nhật.** Trước khi AI ghi bất kỳ file nào trong `hardware/pcb/` (`.kicad_sch`, `.kicad_pcb`, thư viện), kiểm tra tiến trình `kicad`, `eeschema`, `pcbnew`. Nếu đang chạy: so file trên ổ đĩa với bản commit gần nhất (`git diff --ignore-cr-at-eol`); nếu khác thì đó là chỉnh sửa tay của người dùng, hỏi trước khi ghi đè; nếu không khác thì đóng KiCad **không lưu** (`Stop-Process`), cập nhật, chạy lại kiểm tra netlist/ERC, commit, rồi mở lại dự án bằng `kicad.exe hardware/pcb/env-monitor.kicad_pro`. Lý do: cửa sổ KiCad còn mở giữ bản cũ trong bộ nhớ và đã từng lưu đè lên bản mới.
 
 ## Phiên bản (bắt buộc)
 
