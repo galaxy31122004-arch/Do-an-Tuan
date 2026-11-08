@@ -2,7 +2,10 @@
 import pathlib, pcbnew
 PCB = str(pathlib.Path(__file__).resolve().parents[2] / 'hardware/pcb/env-monitor.kicad_pcb')
 b = pcbnew.LoadBoard(PCB)
-for netname, layer in (('GND', pcbnew.B_Cu), ('+5V', pcbnew.F_Cu)):
+WANT = (('GND', pcbnew.B_Cu), ('GND', pcbnew.F_Cu))  # GND both sides; no +5V pour (user: shorts risk)
+for z in list(b.Zones()):
+    if (z.GetNetname(), z.GetLayer()) not in WANT: print('removed', z.GetNetname()); b.Delete(z)
+for netname, layer in WANT:
     if any(z.GetNetname() == netname and z.GetLayer() == layer for z in b.Zones()): continue
     bb = b.GetBoardEdgesBoundingBox()
     z = pcbnew.ZONE(b); z.SetLayer(layer); z.SetNet(b.GetNetsByName()[netname])
