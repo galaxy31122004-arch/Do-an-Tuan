@@ -22,7 +22,9 @@ F1,1,Cầu chì tự phục hồi Ihold 1 A ≥6 V,Radial THT,Mắc nối tiếp
 J1,1,Terminal cấp nguồn 2 chân,"Pitch 5,08 mm",Đầu vào 5 V và GND; ghi rõ cực tính,1500,1500,https://chotroihn.vn/terminal-kf301-300v-15a,1 terminal
 "J2A,J2B",2,Header cái 1x8,"Pitch 2,54 mm",Đế cắm ESP32; đo khoảng cách hai hàng của board thực tế,400,800,https://chotroihn.vn/jump-cai-don-1-40p-2-54,2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt
 J4,1,Header cái 1x4,"Pitch 2,54 mm",Đế cắm OLED,200,200,https://chotroihn.vn/jump-cai-don-1-40p-2-54,2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt
-J3,1,Header ISP AT89S52 1x6,"Pitch 2,54 mm",RST/VCC/GND/MISO/SCK/MOSI; nạp chính bằng Burn-E ngoài mạch,300,300,https://chotroihn.vn/jump-duc-don-1x40p-2-54,"1 thanh 40 chân, dùng 6 chân ISP AT89S52; giả định chân đực module đi kèm module"
+J3,1,Header ISP AT89S52 1x6,"Pitch 2,54 mm",RST/VCC/GND/MISO/SCK/MOSI; nạp chính bằng Burn-E ngoài mạch,300,300,https://chotroihn.vn/jump-duc-don-1x40p-2-54,"1 thanh 40 chân, dùng 6 chân ISP AT89S52 + 3 chân relay; giả định chân đực module đi kèm module"
 "J5A,J5B",2,Header cái 1x10 cho module TXS0108E,"Pitch 2,54 mm, xác minh hàng mua",Hàn đế module; chỉnh số chân/footprint nếu module thực tế khác,500,1000,https://chotroihn.vn/jump-cai-don-1-40p-2-54,2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt
+J6,1,Header đực 1x3 cho relay,"Pitch 2,54 mm",+5V/GND/IN; IN nối AT89S52 P2.0 chân 21; ghi rõ thứ tự chân trên PCB,150,150,https://chotroihn.vn/jump-duc-don-1x40p-2-54,"1 thanh 40 chân, dùng 6 chân ISP AT89S52 + 3 chân relay; giả định chân đực module đi kèm module"
+K1,1,"Module relay 1 kênh 5 V có opto, kích mức thấp","Module ngoài, cắm dây vào J6",Nối J6 bằng dây; tiếp điểm chỉ dùng tải điện áp thấp trong đồ án; xác minh mức kích và jumper trên module,,,,Chưa khảo sát giá; không dùng giá giữ chỗ trong tổng
 SK1,1,Đế IC DIP-40,"Wide 15,24 mm","Đế AT89S52, hàn đế rồi cắm IC",1500,1500,https://chotroihn.vn/de-ic,Biến thể 40 chân; xác nhận loại rộng cho AT89S52 DIP40
 "TP1,TP2,TP3",3,Test point vòng dây,THT,"Đo 5 V / 3,3 V / GND",0,0,,Tận dụng chân/dây cắt thừa của header đã tính; không mua thêm

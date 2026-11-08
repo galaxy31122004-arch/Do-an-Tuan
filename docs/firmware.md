@@ -9,10 +9,10 @@ AT89S52 DIP-40 / 11,0592 MHz / 5 V; DHT11 P3.2/12; nút trang P3.3/13; I²C ph�
 Đích hiện tại là ESP32-C3 SuperMini 4 MB: dùng cấu hình chip `esp32-c3-devkitm-1` với USB CDC làm console. UART1 nối AT89S52 tại RX=GPIO4, TX=GPIO5; OE=GPIO6. Không dùng Serial2 hoặc sơ đồ chân WROOM cũ. Nếu lần đầu chưa thấy cổng USB để nạp, giữ BOOT, nhấn/thả RESET rồi thả BOOT để vào download mode theo board thực tế. Chừa GPIO18/19 cho USB; không dùng chân strap GPIO2/8/9 cho UART/OE trong thiết kế này.
 
 ```powershell
-Copy-Item firmware/v0.1.0/esp32/include/secrets.example.h firmware/v0.1.0/esp32/include/secrets.h
+Copy-Item firmware/v0.2.0/esp32/include/secrets.example.h firmware/v0.2.0/esp32/include/secrets.h
 # Điền Wi-Fi, HTTPS origin, device token và CA trong secrets.h.
-pio run -d firmware/v0.1.0/esp32 -e esp32c3
-pio run -d firmware/v0.1.0/esp32 -e esp32c3 -t upload --upload-port COM6
+pio run -d firmware/v0.2.0/esp32 -e esp32c3
+pio run -d firmware/v0.2.0/esp32 -e esp32c3 -t upload --upload-port COM6
 pio device monitor -b 115200 --port COM6
 ```
 
@@ -22,7 +22,7 @@ Firmware gửi tối đa một bản ghi mới mỗi 10 giây; chờ frame AT89S
 
 ## AT89S52 — nạp HEX bằng Burn-E
 
-Đã chuyển mã sang SDCC cho họ 8051, không dùng XC8. File nạp: [`environment-monitor.hex`](../firmware/v0.1.0/at89s52/release/environment-monitor.hex). Burn-E là phần mềm nạp/so sánh Flash trên chip, không biên dịch C hay kiểm chứng logic firmware. Người dùng sẽ tự thực hiện Verify; chưa có kết quả nạp/Verify phần cứng.
+Đã chuyển mã sang SDCC cho họ 8051, không dùng XC8. File nạp: [`environment-monitor.hex`](../firmware/v0.2.0/at89s52/release/environment-monitor.hex). Burn-E là phần mềm nạp/so sánh Flash trên chip, không biên dịch C hay kiểm chứng logic firmware. Người dùng sẽ tự thực hiện Verify; chưa có kết quả nạp/Verify phần cứng.
 
 1. Mở Burn-E Programmer 9.00.88, chọn family **AT89S**, device **AT89S52** (không chọn AT89LS51/52). Phiên làm việc đã chọn AT89S52.
 2. Tắt nguồn target, nối theo mục J3 trong `hardware/wiring.md`. Cần thạch anh ngoài 11,0592 MHz và EA chân 31 nối +5 V; không giả định một đế ZIF trần đã có đủ các kết nối.
@@ -35,7 +35,7 @@ J3: 1 RST/9; 2 +5V/40; 3 GND/20; 4 MISO P1.6/7; 5 SCK P1.7/8; 6 MOSI P1.5/6. RST
 ### Biên dịch lại khi sửa mã
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File firmware/v0.1.0/at89s52/build.ps1 -SdccPath .tools/sdcc-portable/sdcc/bin/sdcc.exe
+powershell -NoProfile -ExecutionPolicy Bypass -File firmware/v0.2.0/at89s52/build.ps1 -SdccPath .tools/sdcc-portable/sdcc/bin/sdcc.exe
 ```
 
 Script yêu cầu SDCC có thư viện mcs51 small, kiểm tra giới hạn Flash 8 KB/RAM trong và tạo HEX cùng báo cáo/hash nguồn. Cấu hình build, dung lượng và giới hạn kiểm tra nằm tại `release/build-info.json` và `release/memory.txt`. Không dùng model large hoặc RAM ngoài: PCB không có XRAM. Chưa xác nhận timing cảm biến/stack ở mọi đường chạy trên chip thật.

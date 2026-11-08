@@ -1,0 +1,34 @@
+{
+  "target": "AT89S52 DIP40, 11.0592 MHz, classic 12T, no external RAM",
+  "compiler": "SDCC : mcs51/z80/z180/r2k/r2ka/r3ka/r4k/r5k/r6k/sm83/tlcs90/ez80/z80n/r800/ds390/pic16/pic14/TININative/ds400/hc08/s08/stm8/pdk13/pdk14/pdk15/mos6502/mos65c02/huc6280/f8/f8l TD- 4.6.4 #17109 (MINGW64)\npublished under GNU General Public License (GPL)",
+  "compiler_sha256": "3e6d36e152dcd627fa28fb33b1bbf14865cdcf06d536ddcf08dbd18b4968acd2",
+  "flags": [
+    "-mmcs51",
+    "--std-c99",
+    "--opt-code-size",
+    "--iram-size",
+    "256",
+    "--code-size",
+    "8192",
+    "--out-fmt-ihx"
+  ],
+  "runtime_origin": "SDCC 4.5.0 official mcs51 small libraries (RSCH-20261101-0012)",
+  "library_sha256": {
+    "libfloat.lib": "2a93a9fc158681034c0a5173dc65ee51cbba0edfa1a2f30bcb489536fcb38855",
+    "libint.lib": "bbd501a000714980dc7e24ecf1ba33d28980589fdfb49b1b953183df803aa5e4",
+    "liblong.lib": "9c6913411d24165d6bbd8010079988c0d6bc45fc6aba058e67f5dafd75b6f8a7",
+    "liblonglong.lib": "5d3313987fbda8acab8bce929a25d15cd3701f8633e908f2892f73025179dabb",
+    "libsdcc.lib": "13c7111c6f6e81c1d21a8a345bb3f15658c1dc5ac47e1be9f37509bb8b623f16",
+    "mcs51.lib": "a557b568454266f971e7f35ab6475350c954a8a2ab72c4d092e7f848fa35ef35"
+  },
+  "source_hash_format": "UTF-8 file bytes, CRLF normalized to LF",
+  "source_sha256": {
+    "firmware/v0.2.0/at89s52/main.c": "6c52e94d7c1f07360801f8ee573963d03332821b048f501adbf9ca53b3bf1963",
+    "firmware/v0.2.0/at89s52/board.h": "a3bb17a3bba7666d23159099c74878603bf2f814fdab132c69d0541d00eefd80",
+    "firmware/v0.2.0/at89s52/build.py": "5c5c4662591901a930b6ad3d87267bd57d8503e4b8da5e903e9959930c2dcc4b",
+    "firmware/v0.2.0/common/protocol.h": "4f307361b39e0352d36eb93a73aef7615bb9da2d032cb71b3e841b295263c6a1",
+    "firmware/v0.2.0/common/clock.h": "3b8bec653fd4c56728ebc54599751c565ec75872b353a2a7305b854b282c30ef"
+  },
+  "hex_sha256": "f4cace953b341eaccb9134e8f23de09f8c9f669024156fce8f36d10a1cc4e689",
+  "hardware_verify": "Not performed; user will Verify with Burn-E"
+}

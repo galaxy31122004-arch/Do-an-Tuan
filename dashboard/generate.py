@@ -82,6 +82,7 @@ def main():
     card('Sensor valid','sensor_ok','',0,26,'#059669')
     card('Time synchronized','time_ok','',8,26,'#7c3aed')
     card('Simulation mode','demo','',16,26,'#d97706')
+    card('Relay (fan)','relay','',0,30,'#475569',icon='mode_fan')
 
     result=dict(title='ENV Monitor — AT89S52 + ESP32-C3',image=None,mobileHide=False,mobileOrder=0,
         configuration=dict(description='DHT11 / NTP / SSD1315 — One-device IoT monitoring',

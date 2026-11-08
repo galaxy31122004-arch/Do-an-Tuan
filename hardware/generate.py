@@ -30,6 +30,8 @@ PARTS=[
 ('J4',1,'Header cái 1x4','Pitch 2,54 mm','Đế cắm OLED'),
 ('J3',1,'Header ISP AT89S52 1x6','Pitch 2,54 mm','RST/VCC/GND/MISO/SCK/MOSI; nạp chính bằng Burn-E ngoài mạch'),
 ('J5A,J5B',2,'Header cái 1x10 cho module TXS0108E','Pitch 2,54 mm, xác minh hàng mua','Hàn đế module; chỉnh số chân/footprint nếu module thực tế khác'),
+('J6',1,'Header đực 1x3 cho relay','Pitch 2,54 mm','+5V/GND/IN; IN nối AT89S52 P2.0 chân 21; ghi rõ thứ tự chân trên PCB'),
+('K1',1,'Module relay 1 kênh 5 V có opto, kích mức thấp','Module ngoài, cắm dây vào J6','Nối J6 bằng dây; tiếp điểm chỉ dùng tải điện áp thấp trong đồ án; xác minh mức kích và jumper trên module'),
 ('SK1',1,'Đế IC DIP-40','Wide 15,24 mm','Đế AT89S52, hàn đế rồi cắm IC'),
 ('TP1,TP2,TP3',3,'Test point vòng dây','THT','Đo 5 V / 3,3 V / GND')
 ]
@@ -47,7 +49,7 @@ def main():
         if ref in {'R1','R2','R3','R4','R10'}: return price//50
         if ref=='D1': return price//100
         if ref in {'SW1','SW2'}: return price//10
-        pins={'J2A':8,'J2B':8,'J4':4,'J5A':10,'J5B':10,'J3':6}
+        pins={'J2A':8,'J2B':8,'J4':4,'J5A':10,'J5B':10,'J3':6,'J6':3}
         if ref in pins: return price*pins[ref]//40
         return price
     def money(value):
@@ -90,7 +92,7 @@ def main():
         f'- In PCB theo giá người dùng: **{money(pcb)}**.',
         f'- **Tổng tiền mua + PCB: {money(parts_purchase+pcb)}, chưa gồm F1.**',
         f'- Nếu chỉ phân bổ lượng linh kiện dùng trên một PCB: **{money(used_total+pcb)}**, chưa gồm F1. Phần chênh lệch là linh kiện dư từ gói/thanh mua.',
-        '- F1 chưa có giá đúng quy cách, để trống trong CSV; không tính thành 0đ. Giá tụ tham khảo cần xác nhận đúng điện môi; trở 10kΩ/100kΩ ở nguồn giá đang báo hết hàng.',
+        '- F1 và K1 (module relay) chưa có giá đúng quy cách, để trống trong CSV; không tính thành 0đ. Giá tụ tham khảo cần xác nhận đúng điện môi; trở 10kΩ/100kΩ ở nguồn giá đang báo hết hàng.',
         '- Chưa gồm vận chuyển, adapter/cáp, vỏ, thiếc/flux và công hàn. Burn-E đã có nên không mua lại.',
         '', '## Vật tư đi kèm, không hàn trực tiếp', '',
         '- 1 adapter DC 5 V / 2 A ổn áp, dây cấp nguồn và dây USB lập trình ESP32.',

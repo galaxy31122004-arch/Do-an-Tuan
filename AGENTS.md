@@ -48,8 +48,8 @@ Giữ env build cho mỗi phiên bản cũ còn biên dịch được (tên env 
 AGENTS.md                         Quy tắc chung
 .agents/skills/                   Skill local bản gốc
 .claude/skills/                   File dẫn hướng skill cho Claude
-firmware/v0.1.0/at89s52/                 Firmware AT89S52 (main.c)
-firmware/v0.1.0/esp32/                   Firmware ESP32-C3 (PlatformIO)
+firmware/v0.2.0/at89s52/                 Firmware AT89S52 (main.c)
+firmware/v0.2.0/esp32/                   Firmware ESP32-C3 (PlatformIO)
 dashboard/                        Dashboard ThingsBoard và bản local
 hardware/                         BOM, bảng giá, generate.py
 tests/                            Kiểm thử

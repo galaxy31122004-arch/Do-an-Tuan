@@ -18,7 +18,8 @@ F1,Cầu chì PTC radial Ihold 1A,1,,,,Chưa có giá hợp lệ đúng quy các
 "SW1,SW2",Nút nhấn 6x6,1,5000,5000,https://chotroihn.vn/bo-10-nut-nhan-4-chan,"Mua gói 10, dùng 2"
 J1,Terminal KF301 2 chân,1,1500,1500,https://chotroihn.vn/terminal-kf301-300v-15a,1 terminal
 "J2A,J2B,J4,J5A,J5B","Header cái 2,54mm",2,2000,4000,https://chotroihn.vn/jump-cai-don-1-40p-2-54,2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt
-J3,"Header đực 2,54mm",1,2000,2000,https://chotroihn.vn/jump-duc-don-1x40p-2-54,"1 thanh 40 chân, dùng 6 chân ISP AT89S52; giả định chân đực module đi kèm module"
+"J3,J6","Header đực 2,54mm",1,2000,2000,https://chotroihn.vn/jump-duc-don-1x40p-2-54,"1 thanh 40 chân, dùng 6 chân ISP AT89S52 + 3 chân relay; giả định chân đực module đi kèm module"
+K1,Module relay 1 kênh 5V opto,1,,,,Chưa khảo sát giá; không dùng giá giữ chỗ trong tổng
 SK1,Đế IC 40 chân,1,1500,1500,https://chotroihn.vn/de-ic,Biến thể 40 chân; xác nhận loại rộng cho AT89S52 DIP40
 "TP1,TP2,TP3",Test point tự làm,0,0,0,,Tận dụng chân/dây cắt thừa của header đã tính; không mua thêm
 PCB,In PCB theo giá người dùng,1,120000,120000,User supplied,"Giá người dùng cung cấp, không phải giá nhà sản xuất đã khảo sát"

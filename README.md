@@ -7,6 +7,7 @@ Thiết kế đã thống nhất: **DHT11 → AT89S52 → OLED SSD1315**; **AT89
 - Nền tảng có sẵn theo hướng ThingsBoard; dịch vụ cụ thể chưa chốt.
 - Dashboard: số đo mới nhất, biểu đồ, lịch sử, lọc thời gian, CSV và cảnh báo ngưỡng.
 - Mất mạng vẫn đo tại chỗ; tự kết nối lại, chưa lưu bù.
+- Relay (firmware v0.2.0): AT89S52 tự bật tải ≥ 32,0 °C, tắt ≤ 30,0 °C, tắt khi lỗi cảm biến; trạng thái hiện trên OLED và dashboard.
 
 ## Tài liệu
 
@@ -22,8 +23,8 @@ AXON lưu trạng thái tại `.planning/state.json`; bối cảnh, kiến trúc
 
 | Thành phần | Tệp / hướng dẫn |
 |---|---|
-| AT89S52 — đọc DHT11, giờ từ ESP32, OLED, UART | [main.c](firmware/v0.1.0/at89s52/main.c) |
-| ESP32 — UART, Wi-Fi, HTTPS, NTP | [main.cpp](firmware/v0.1.0/esp32/src/main.cpp) |
+| AT89S52 — đọc DHT11, giờ từ ESP32, OLED, UART | [main.c](firmware/v0.2.0/at89s52/main.c) |
+| ESP32 — UART, Wi-Fi, HTTPS, NTP | [main.cpp](firmware/v0.2.0/esp32/src/main.cpp) |
 | Build, nạp và giao thức | [Hướng dẫn firmware](docs/firmware.md) |
 | Dashboard native để import | [environment-monitor.json](dashboard/environment-monitor.json) |
 | Tạo thiết bị, dashboard và alarm rules | [Hướng dẫn nền tảng](dashboard/README.md) |
@@ -36,8 +37,8 @@ AXON lưu trạng thái tại `.planning/state.json`; bối cảnh, kiến trúc
 ## Chạy thử
 
 1. Lắp và kiểm tra nguồn theo tài liệu phần cứng; chưa có PCB sản xuất tự động từ sơ đồ này.
-2. Nạp AT89S52 bằng Burn-E với HEX được biên dịch từ đúng mã nguồn, chạy Verify rồi cắm AT89S52 vào mạch. File HEX đã build: `firmware/v0.1.0/at89s52/release/environment-monitor.hex`; bạn tự chạy Verify trên chip bằng Burn-E. Build ESP32 bằng `pio run -d firmware/v0.1.0/esp32 -e esp32c3`.
-3. Tạo `firmware/v0.1.0/esp32/include/secrets.h` từ file example; điền Wi-Fi, HTTPS host, device token và root CA. Không đưa credentials lên Git.
+2. Nạp AT89S52 bằng Burn-E với HEX được biên dịch từ đúng mã nguồn, chạy Verify rồi cắm AT89S52 vào mạch. File HEX đã build: `firmware/v0.2.0/at89s52/release/environment-monitor.hex`; bạn tự chạy Verify trên chip bằng Burn-E. Build ESP32 bằng `pio run -d firmware/v0.2.0/esp32 -e esp32c3`.
+3. Tạo `firmware/v0.2.0/esp32/include/secrets.h` từ file example; điền Wi-Fi, HTTPS host, device token và root CA. Không đưa credentials lên Git.
 4. Tạo device `ENV-MONITOR-01`, import dashboard và cấu hình alarm rules theo hướng dẫn nền tảng.
 5. Có thể dùng environment `demo` để phát dữ liệu giả có nhãn trước khi gắn AT89S52.
 
@@ -46,5 +47,5 @@ AXON lưu trạng thái tại `.planning/state.json`; bối cảnh, kiến trúc
 - ESP32 live và demo đã build trên máy phát triển; kiểm thử UART/calendar native và kiểm tra cấu trúc dashboard/BOM có trong `tests/`.
 - Không dùng RTC/pin dự phòng. ESP32 lấy giờ NTP, gửi cho AT89S52 hiển thị UTC+7; khởi động chưa có mạng báo chưa đồng bộ.
 - Đã chọn module TXS0108E: bốn kênh I²C/UART, OE từ GPIO6. Xem bảng chân trước khi lắp.
-- AT89S52 đã build bằng SDCC trong giới hạn Flash/RAM; HEX và báo cáo tại `firmware/v0.1.0/at89s52/release/`. Người dùng tự Verify bằng Burn-E; chưa kiểm thử mạch thật.
+- AT89S52 đã build bằng SDCC trong giới hạn Flash/RAM; HEX và báo cáo tại `firmware/v0.2.0/at89s52/release/`. Người dùng tự Verify bằng Burn-E; chưa kiểm thử mạch thật.
 - Dashboard đã import và kiểm tra trên ThingsBoard CE cục bộ tại `http://127.0.0.1:18080`; dữ liệu có nhãn giả lập. Chưa kết nối mạch thật hoặc triển khai Internet. Xem [cách chạy/dừng demo](dashboard/local/README.md).

@@ -10,7 +10,7 @@ doc=json.loads((root/'dashboard/environment-monitor.json').read_text(encoding='u
 config=doc['configuration']
 widgets=config['widgets']
 layout=config['states']['default']['layouts']['main']['widgets']
-assert len(widgets)==11 and set(widgets)==set(layout)
+assert len(widgets)==12 and set(widgets)==set(layout)
 aliases=config['entityAliases']
 assert len(aliases)==1
 alias=next(iter(aliases.values()))
@@ -24,7 +24,7 @@ for widget in widgets.values():
         data_names.update(item['name'] for item in source['dataKeys'])
     if 'alarmSource' in cfg:
         assert cfg['alarmSource']['entityAliasId'] in aliases
-assert {'temperature','humidity','sensor_ok','time_ok','demo','temperature_min','temperature_max','humidity_min','humidity_max'}<=data_names
+assert {'temperature','humidity','sensor_ok','time_ok','demo','relay','temperature_min','temperature_max','humidity_min','humidity_max'}<=data_names
 with (root/'hardware/BOM.csv').open(encoding='utf-8-sig',newline='') as stream:
     rows=list(csv.DictReader(stream))
 refs=set()
@@ -39,14 +39,14 @@ assert {'R1','R2','R3','R4','R10'}<=refs
 assert not {'Q1','Q2','SK3','R5','R6','R7','R8','R9','U3','Y2','BH1','SK2','C4'} & refs
 assert any(row['Reference']=='U4' and 'TXS0108E' in row['Component'] for row in rows)
 assert {'U1','U2','U4','U5','U6','Y1','SW1','SW2','J3','J5A','J5B'}<=refs
-assert not (root/'firmware/v0.1.0/esp32/include/secrets.h').exists(), 'Private secrets must not enter the deliverable'
+assert not (root/'firmware/v0.2.0/esp32/include/secrets.h').exists(), 'Private secrets must not enter the deliverable'
 print(f'PASS: {len(widgets)} widgets, aliases and telemetry keys; {len(refs)} unique BOM parts')
 
 assert any(row['Reference']=='U1' and 'AT89S52' in row['Component'] for row in rows)
 assert any('C2' in row['Reference'].split(',') and '10 µF' in row['Component'] for row in rows)
 
 # The delivered image must be valid Intel HEX, fit AT89S52's 8KB, and match sources.
-release=root/'firmware/v0.1.0/at89s52/release'
+release=root/'firmware/v0.2.0/at89s52/release'
 manifest=json.loads((release/'build-info.json').read_text())
 hexfile=release/'environment-monitor.hex'
 assert hashlib.sha256(hexfile.read_bytes()).hexdigest()==manifest['hex_sha256']

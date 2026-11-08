@@ -5,7 +5,7 @@ File **`environment-monitor.json`** là dashboard native để import vào nền
 ## 1. Tạo thiết bị và cấu hình firmware
 
 1. Đăng nhập bằng tài khoản tenant có quyền quản lý thiết bị/dashboard. Tạo device tên chính xác **ENV-MONITOR-01**, transport mặc định có hỗ trợ HTTP. Mỗi thiết bị được nhận diện bởi device access token; không dùng JWT tài khoản người dùng thay token thiết bị.
-2. Sao chép `firmware/v0.1.0/esp32/include/secrets.example.h` thành `secrets.h`. Điền SSID, mật khẩu, HTTPS origin, token thiết bị và PEM root CA của domain. Token không xuất hiện trong dashboard JSON và không commit vào Git.
+2. Sao chép `firmware/v0.2.0/esp32/include/secrets.example.h` thành `secrets.h`. Điền SSID, mật khẩu, HTTPS origin, token thiết bị và PEM root CA của domain. Token không xuất hiện trong dashboard JSON và không commit vào Git.
 3. Build/nạp ESP32. Serial Monitor 115200 sẽ báo HTTP 2xx khi nền tảng nhận bản ghi. Không dùng `setInsecure()` để bỏ kiểm tra TLS. Firmware cần Internet/NTP để xác thực thời gian chứng chỉ.
 4. Nền tảng đã chọn: ThingsBoard. Bản demo thật chạy cục bộ bằng Docker, xem `local/README.md`. Firmware thiết bị vẫn dùng HTTPS với CA/token của deployment khi kết nối mạch thật.
 

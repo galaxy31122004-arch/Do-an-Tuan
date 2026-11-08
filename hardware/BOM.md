@@ -29,14 +29,16 @@ Giá tham khảo ngày **01/11/2026**, đơn vị VND. Bảng đầu ghi **đơn
 | J1 | 1 | [Terminal cấp nguồn 2 chân](https://chotroihn.vn/terminal-kf301-300v-15a) | 1.500đ | 1.500đ | Pitch 5,08 mm | Đầu vào 5 V và GND; ghi rõ cực tính. Giá: 1 terminal |
 | J2A,J2B | 2 | [Header cái 1x8](https://chotroihn.vn/jump-cai-don-1-40p-2-54) | 400đ | 800đ | Pitch 2,54 mm | Đế cắm ESP32; đo khoảng cách hai hàng của board thực tế. Giá: 2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt |
 | J4 | 1 | [Header cái 1x4](https://chotroihn.vn/jump-cai-don-1-40p-2-54) | 200đ | 200đ | Pitch 2,54 mm | Đế cắm OLED. Giá: 2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt |
-| J3 | 1 | [Header ISP AT89S52 1x6](https://chotroihn.vn/jump-duc-don-1x40p-2-54) | 300đ | 300đ | Pitch 2,54 mm | RST/VCC/GND/MISO/SCK/MOSI; nạp chính bằng Burn-E ngoài mạch. Giá: 1 thanh 40 chân, dùng 6 chân ISP AT89S52; giả định chân đực module đi kèm module |
+| J3 | 1 | [Header ISP AT89S52 1x6](https://chotroihn.vn/jump-duc-don-1x40p-2-54) | 300đ | 300đ | Pitch 2,54 mm | RST/VCC/GND/MISO/SCK/MOSI; nạp chính bằng Burn-E ngoài mạch. Giá: 1 thanh 40 chân, dùng 6 chân ISP AT89S52 + 3 chân relay; giả định chân đực module đi kèm module |
 | J5A,J5B | 2 | [Header cái 1x10 cho module TXS0108E](https://chotroihn.vn/jump-cai-don-1-40p-2-54) | 500đ | 1.000đ | Pitch 2,54 mm, xác minh hàng mua | Hàn đế module; chỉnh số chân/footprint nếu module thực tế khác. Giá: 2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt |
+| J6 | 1 | [Header đực 1x3 cho relay](https://chotroihn.vn/jump-duc-don-1x40p-2-54) | 150đ | 150đ | Pitch 2,54 mm | +5V/GND/IN; IN nối AT89S52 P2.0 chân 21; ghi rõ thứ tự chân trên PCB. Giá: 1 thanh 40 chân, dùng 6 chân ISP AT89S52 + 3 chân relay; giả định chân đực module đi kèm module |
+| K1 | 1 | Module relay 1 kênh 5 V có opto, kích mức thấp | Chưa xác nhận | Chưa xác nhận | Module ngoài, cắm dây vào J6 | Nối J6 bằng dây; tiếp điểm chỉ dùng tải điện áp thấp trong đồ án; xác minh mức kích và jumper trên module. Giá: Chưa khảo sát giá; không dùng giá giữ chỗ trong tổng |
 | SK1 | 1 | [Đế IC DIP-40](https://chotroihn.vn/de-ic) | 1.500đ | 1.500đ | Wide 15,24 mm | Đế AT89S52, hàn đế rồi cắm IC. Giá: Biến thể 40 chân; xác nhận loại rộng cho AT89S52 DIP40 |
 | TP1,TP2,TP3 | 3 | Test point vòng dây | 0đ | 0đ | THT | Đo 5 V / 3,3 V / GND. Giá: Tận dụng chân/dây cắt thừa của header đã tính; không mua thêm |
 
-**Tổng số chi tiết trong bảng:** 38 (bao gồm IC/module/đế; không gồm PCB và vật tư ngoài mạch).
+**Tổng số chi tiết trong bảng:** 40 (bao gồm IC/module/đế; không gồm PCB và vật tư ngoài mạch).
 
-**Giá trị linh kiện dùng trên một mạch: 223.690đ, chưa gồm F1.**
+**Giá trị linh kiện dùng trên một mạch: 223.840đ, chưa gồm F1.**
 
 ## Tiền mua thực tế theo gói/thanh
 
@@ -61,7 +63,8 @@ Giá tham khảo ngày **01/11/2026**, đơn vị VND. Bảng đầu ghi **đơn
 | [SW1,SW2: Nút nhấn 6x6](https://chotroihn.vn/bo-10-nut-nhan-4-chan) | 1 | 5.000đ | 5.000đ | Mua gói 10, dùng 2 |
 | [J1: Terminal KF301 2 chân](https://chotroihn.vn/terminal-kf301-300v-15a) | 1 | 1.500đ | 1.500đ | 1 terminal |
 | [J2A,J2B,J4,J5A,J5B: Header cái 2,54mm](https://chotroihn.vn/jump-cai-don-1-40p-2-54) | 2 | 2.000đ | 4.000đ | 2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt |
-| [J3: Header đực 2,54mm](https://chotroihn.vn/jump-duc-don-1x40p-2-54) | 1 | 2.000đ | 2.000đ | 1 thanh 40 chân, dùng 6 chân ISP AT89S52; giả định chân đực module đi kèm module |
+| [J3,J6: Header đực 2,54mm](https://chotroihn.vn/jump-duc-don-1x40p-2-54) | 1 | 2.000đ | 2.000đ | 1 thanh 40 chân, dùng 6 chân ISP AT89S52 + 3 chân relay; giả định chân đực module đi kèm module |
+| K1: Module relay 1 kênh 5V opto | 1 | Chưa xác nhận | Chưa xác nhận | Chưa khảo sát giá; không dùng giá giữ chỗ trong tổng |
 | [SK1: Đế IC 40 chân](https://chotroihn.vn/de-ic) | 1 | 1.500đ | 1.500đ | Biến thể 40 chân; xác nhận loại rộng cho AT89S52 DIP40 |
 | TP1,TP2,TP3: Test point tự làm | 0 | 0đ | 0đ | Tận dụng chân/dây cắt thừa của header đã tính; không mua thêm |
 | PCB: In PCB theo giá người dùng | 1 | 120.000đ | 120.000đ | Giá người dùng cung cấp, không phải giá nhà sản xuất đã khảo sát |
@@ -69,8 +72,8 @@ Giá tham khảo ngày **01/11/2026**, đơn vị VND. Bảng đầu ghi **đơn
 - Linh kiện mua mới theo gói/thanh: **283.500đ**, chưa gồm F1.
 - In PCB theo giá người dùng: **120.000đ**.
 - **Tổng tiền mua + PCB: 403.500đ, chưa gồm F1.**
-- Nếu chỉ phân bổ lượng linh kiện dùng trên một PCB: **343.690đ**, chưa gồm F1. Phần chênh lệch là linh kiện dư từ gói/thanh mua.
-- F1 chưa có giá đúng quy cách, để trống trong CSV; không tính thành 0đ. Giá tụ tham khảo cần xác nhận đúng điện môi; trở 10kΩ/100kΩ ở nguồn giá đang báo hết hàng.
+- Nếu chỉ phân bổ lượng linh kiện dùng trên một PCB: **343.840đ**, chưa gồm F1. Phần chênh lệch là linh kiện dư từ gói/thanh mua.
+- F1 và K1 (module relay) chưa có giá đúng quy cách, để trống trong CSV; không tính thành 0đ. Giá tụ tham khảo cần xác nhận đúng điện môi; trở 10kΩ/100kΩ ở nguồn giá đang báo hết hàng.
 - Chưa gồm vận chuyển, adapter/cáp, vỏ, thiếc/flux và công hàn. Burn-E đã có nên không mua lại.
 
 ## Vật tư đi kèm, không hàn trực tiếp
