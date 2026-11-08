@@ -1,0 +1,4 @@
+(fp_lib_table
+	(version 7)
+	(lib (name "env-monitor") (type "KiCad") (uri "${KIPRJMOD}/env-monitor.pretty") (options "") (descr "Project modules"))
+)

@@ -91,17 +91,20 @@ J3 dùng khi đã chọn đúng AT89S52 và đối chiếu pinout trong Burn-E. 
 
 Đánh dấu chân 1. Nếu dùng ISP, chọn nguồn target theo hướng dẫn Burn-E; không cấp đồng thời nguồn mạch nạp và adapter nếu không được thiết kế cho phép. AT89S52 dùng reset mức cao 5 V khi ISP; không dùng cấu hình VPP của PIC.
 
-## 6b. Relay K1 qua header J6 (firmware v0.2.0)
+## 6b. Relay K1 trên board (firmware v0.2.0)
 
-| J6 | Kết nối |
+| Linh kiện | Kết nối |
 |---|---|
-| 1 VCC | +5 V |
-| 2 GND | GND |
-| 3 IN | AT89S52 P2.0 chân 21 |
+| R5 1 kΩ | AT89S52 P2.0 chân 21 → base Q1 |
+| R6 10 kΩ | Base Q1 → +5 V (giữ Q1 tắt khi P2.0 mức cao/thả nổi) |
+| Q1 S8550 PNP (E-B-C) | E → +5 V; C → cuộn K1 (chân 5) |
+| K1 SRD-05VDC-SL-C | Cuộn: chân 5 (từ Q1) và chân 2 (GND); COM chân 1, NO chân 3, NC chân 4 |
+| D3 1N4007 | Song song cuộn: cathode ở chân 5 (phía Q1), anode GND |
+| J6 domino 3 chân | 1 COM, 2 NO, 3 NC |
 
-K1 là module relay 1 kênh 5 V có opto, **kích mức thấp**, nối J6 bằng dây. Module đã có transistor, diode chống ngược và LED; không lắp thêm trên PCB. Chân 8051 kéo xuống mạnh nhưng đẩy lên yếu, nên không dùng module kích mức cao. Lúc khởi động P2.0 ở mức cao nên relay tắt.
+P2.0 **mức thấp** → Q1 dẫn → relay bật; đúng logic firmware hiện có (`RELAY_PIN=0` là bật), không cần sửa code. Lúc khởi động P2.0 ở mức cao và R6 giữ base lên 5 V nên relay tắt. Dòng base khoảng (5 − 0,7)/1 kΩ ≈ 4 mA, AT89S52 kéo xuống được; cuộn khoảng 70 mA, trong khả năng S8550.
 
-Firmware bật relay khi nhiệt độ ≥ 32,0 °C, tắt khi ≤ 30,0 °C, và tắt khi DHT11 lỗi. Ngưỡng đặt trong `firmware/v0.2.0/at89s52/board.h`. Tiếp điểm relay chỉ đóng cắt tải điện áp thấp (quạt 5–12 V) trong phạm vi đồ án; không đưa điện lưới lên PCB. Dòng cuộn dây khoảng 70–90 mA lấy từ rail 5 V; adapter 5 V/2 A vẫn đủ.
+Firmware bật relay khi nhiệt độ ≥ 32,0 °C, tắt khi ≤ 30,0 °C, và tắt khi DHT11 lỗi. Ngưỡng đặt trong `firmware/v0.2.0/at89s52/board.h`. Tiếp điểm chỉ đóng cắt tải điện áp thấp (quạt 5–12 V); không đưa điện lưới lên PCB. Dòng cuộn lấy từ rail 5 V qua LM7805, đã tính trong phần nguồn.
 
 ## 7. Trình tự kiểm tra trước khi cắm IC
 

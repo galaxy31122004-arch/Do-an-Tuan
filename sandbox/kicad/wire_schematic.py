@@ -18,82 +18,10 @@ G = 2.54
 POWER = {'+5V', '+3V3', 'GND'}
 POWER_LIB = Path(r'C:\Program Files\KiCad\10.0\share\kicad\symbols\power.kicad_sym')
 
-# ---------------------------------------------------------------- placement
-# ref: (x_g, y_g, rotation, mirror_y)   positions in 2.54 mm grid units
-PLACE = {
-    # left column (AT89S52 side), each part in its own horizontal band
-    'J3': (34, 22, 0, True), 'J5B': (34, 33, 0, True), 'U5': (34, 44, 0, False),
-    'R2': (34, 52, 0, False), 'Y1': (34, 60, 90, False), 'C9': (34, 67, 0, False),
-    'C10': (34, 74, 0, False), 'C2': (34, 81, 0, False), 'R1': (34, 88, 0, False),
-    'SW2': (34, 94, 0, False), 'R3': (34, 100, 0, False), 'SW1': (34, 107, 0, True),
-    'U1': (82, 60, 0, False), 'J6': (100, 62, 0, False),
-    # 3V3 side
-    'J4': (120, 30, 0, True), 'J2A': (120, 46, 0, True), 'J2B': (120, 60, 0, True),
-    'R4': (126, 70, 0, False), 'J5A': (150, 40, 0, False),
-    # power row
-    # DC jack -> D2 (reverse polarity) -> LM7805 lying flat, tab screwed to GND copper
-    'J1X': (4, 10, 0, False), 'D2X': (11, 9, 0, True), 'C14': (15, 12.5, 0, False),
-    'C15': (17, 12.5, 0, False), 'U7': (21, 9, 0, False), 'C16': (26, 12.5, 0, False),
-    'R10': (30, 11.5, 0, False), 'D1': (34, 15, 0, True),
-    # decoupling caps sit next to the part they serve, wired to its supply pin
-    'C1': (92, 45.5, 0, False), 'C11': (96, 45.5, 0, False),          # AT89S52 VCC
-    'C6': (126, 40.5, 0, False), 'C7': (129, 40.5, 0, False),         # ESP32 5V
-    'C3': (39.5, 27, 90, False),                                       # TXS VCCB 5V
-    'C13': (144.5, 34, 270, False),                                    # TXS VCCA 3V3
-    'C12': (30, 42.5, 0, False),                                       # DHT11 VDD
-    'C5': (126, 26.5, 0, False), 'C8': (129, 26.5, 0, False),         # OLED 3V3
-    'TP1': (78, 10, 0, False), 'TP2': (82, 10, 0, False), 'TP3': (86, 10, 0, False),
-    '#FLG01': (13, 7, 0, False), '#FLG02': (96, 10, 0, False), '#FLG03': (100, 10, 0, False),
-}
+from layout_v2 import (CAPTIONS, EXTRA_POWER, MANUAL, MANUAL_JUNCTIONS, NC, NETS, NEW_PARTS,  # noqa: E402
+                       PLACE, RENAME, SKIP_POWER, TMP_LIB, TRUNK, VALUES)
 
-# ---------------------------------------------------------------- netlist
-NETS = {
-    '+5V': 'U1.40 U1.31 U7.3 C16.1 R10.1 C6.1 C7.1 TP1.1 C1.1 C11.1 C2.1 SW2.1 R3.1 U5.1 R2.1 C12.1 J3.2 J6.1 J5B.1 C3.1 J2A.1',
-    'GND': 'U1.20 J1X.2 U7.2 C14.2 C15.2 C16.2 D1.1 C6.2 C7.2 TP3.1 #FLG02.1 C1.2 C11.2 C9.2 C10.2 R1.2 SW1.2 U5.4 C12.2 J3.3 J6.2 J5B.10 C13.2 C3.2 R4.2 J2A.2 J4.1 C5.2 C8.2',
-    '+3V3': 'TP2.1 #FLG03.1 J5A.1 C13.1 J2A.3 J4.2 C5.1 C8.1',
-    'VJACK': 'J1X.1 D2X.2', 'VIN': 'D2X.1 C14.1 C15.1 U7.1 #FLG01.1', 'LED_A': 'R10.2 D1.2',
-    'RST': 'U1.9 C2.2 R1.1 SW2.2 J3.1', 'XTAL1': 'U1.19 Y1.1 C9.1', 'XTAL2': 'U1.18 Y1.2 C10.1',
-    'SDA5': 'U1.1 J5B.2', 'SCL5': 'U1.2 J5B.3', 'MOSI': 'U1.6 J3.6', 'MISO': 'U1.7 J3.4', 'SCK': 'U1.8 J3.5',
-    'RX51': 'U1.10 J5B.5', 'TX51': 'U1.11 J5B.4', 'DHT_DATA': 'U1.12 U5.2 R2.2', 'BTN_PAGE': 'U1.13 R3.2 SW1.1',
-    'RELAY_IN': 'U1.21 J6.3',
-    'SDA3': 'J5A.2 J4.4', 'SCL3': 'J5A.3 J4.3', 'TX51_3V3': 'J5A.4 J2A.4', 'RX51_3V3': 'J5A.5 J2B.1', 'OE': 'J5A.10 J2B.2 R4.1',
-}
-TRUNK = {  # x in grid units
-    'RST': 74, 'SDA5': 72, 'SCL5': 70, 'MOSI': 68, 'MISO': 66, 'SCK': 64, 'RX51': 62, 'TX51': 60,
-    'DHT_DATA': 58, 'BTN_PAGE': 56, 'XTAL2': 54, 'XTAL1': 52, 'RELAY_IN': 93,
-    'SDA3': 140, 'SCL3': 138, 'TX51_3V3': 136, 'RX51_3V3': 134, 'OE': 132,
-}
-MANUAL = {  # explicit polylines (grid units) for tiny local nets
-    'VJACK': [[(7, 9), (9.5, 9)]],
-    'VIN': [[(12.5, 9), (18, 9)], [(15, 11), (15, 9)], [(17, 11), (17, 9)], [(13, 7), (13, 9)]],
-    'LED_A': [[(30, 13), (30, 15), (32.5, 15)]],
-    '+5V': [[(82, 44), (96, 44)],                               # U1 VCC -> C1, C11
-            [(122, 43), (124, 43), (124, 39), (129, 39)],       # ESP32 5V -> C6, C7
-            [(36, 29), (37, 29), (37, 27), (38, 27)],           # TXS VCCB -> C3
-            [(34, 41), (30, 41)],                               # DHT11 VDD -> C12
-            [(24, 9), (26, 9), (26, 11)]],                      # LM7805 OUT -> C16
-    '+3V3': [[(148, 36), (147, 36), (147, 34), (146, 34)],      # TXS VCCA -> C13
-             [(122, 30), (124, 30), (124, 25), (129, 25)]],     # OLED VCC -> C5, C8
-}
-MANUAL_JUNCTIONS = [(13, 9), (15, 9), (17, 9), (92, 44), (126, 39), (37, 27), (147, 34), (126, 25), (26, 9)]
-# supply pins already joined to a cap by wire: one power symbol per cap group is enough
-SKIP_POWER = {'U1.40', 'C11.1', 'J2A.1', 'C7.1', 'J5B.1', 'C3.1', 'J5A.1', 'C13.1', 'U5.1',
-              'J4.2', 'C8.1', 'U7.3', 'C16.1'}
-EXTRA_POWER = [('+5V', 37, 27), ('+3V3', 147, 34), ('+5V', 26, 9)]   # symbols on wire corners, pointing up
-RENAME = {'J1X': 'J1', 'D2X': 'D2'
-}
-NC = 'J1X.3 U1.3 U1.4 U1.5 U1.14 U1.15 U1.16 U1.17 U1.22 U1.23 U1.24 U1.25 U1.26 U1.27 U1.28 U1.29 U1.30 ' \
-     'U1.32 U1.33 U1.34 U1.35 U1.36 U1.37 U1.38 U1.39 U5.3 J5A.6 J5A.7 J5A.8 J5A.9 J5B.6 J5B.7 J5B.8 J5B.9 ' \
-     'J2A.5 J2A.6 J2A.7 J2A.8 J2B.3 J2B.4 J2B.5 J2B.6 J2B.7 J2B.8'
-
-
-VALUES = {'J2A': 'ESP32-C3 SuperMini - hang phai (5V side)',
-          'J2B': 'ESP32-C3 SuperMini - hang trai (GPIO5 side)'}
-# pin captions drawn left of mirrored headers: ref -> names for pins 1..n
-CAPTIONS = {
-    'J2A': ['5V', 'GND', '3V3', 'GPIO4 / RX1', 'GPIO3', 'GPIO2', 'GPIO1', 'GPIO0'],
-    'J2B': ['GPIO5 / TX1', 'GPIO6 / OE', 'GPIO7', 'GPIO8', 'GPIO9', 'GPIO10', 'GPIO20', 'GPIO21'],
-}
+PROJECT_LIB = Path(__file__).resolve().parents[2] / 'hardware' / 'pcb' / 'env-monitor.kicad_sym'
 
 
 def uid():
@@ -107,8 +35,10 @@ def r(v):
 # ---------------------------------------------------------------- geometry
 def transform(px, py, rot, mirror):
     x, y = px, -py                      # library y-up -> schematic y-down
-    if mirror:
+    if mirror in ('y', True):
         x = -x
+    elif mirror == 'x':
+        y = -y
     a = math.radians(rot)
     return (x * math.cos(a) + y * math.sin(a), -x * math.sin(a) + y * math.cos(a))
 
@@ -124,6 +54,17 @@ def lib_pins(lib):
                 walk(x)
     walk(lib)
     return out
+
+
+def new_instance(ref, lib_id, value, footprint, lib):
+    def prop(k, v, hide=False):
+        e = [Sym('effects'), [Sym('font'), [Sym('size'), 1.27, 1.27]]] + ([[Sym('hide'), Sym('yes')]] if hide else [])
+        return [Sym('property'), k, v, [Sym('at'), 0, 0, 0], e]
+    return [Sym('symbol'), [Sym('lib_id'), lib_id], [Sym('at'), 0, 0, 0], [Sym('unit'), 1],
+            [Sym('exclude_from_sim'), Sym('no')], [Sym('in_bom'), Sym('yes')], [Sym('on_board'), Sym('yes')],
+            [Sym('dnp'), Sym('no')], [Sym('uuid'), uid()],
+            prop('Reference', ref), prop('Value', value), prop('Footprint', footprint, True), prop('Datasheet', '', True),
+            *[[Sym('pin'), n, [Sym('uuid'), uid()]] for n in lib_pins(lib)]]
 
 
 def on_segment(p, a, b, eps=1e-3):
@@ -149,15 +90,23 @@ def overlap(a, b):
 def main():
     path = Path(sys.argv[1])
     sch = parse(path.read_text(encoding='utf-8'))
-    libs = {s[1]: s for s in find(first(sch, 'lib_symbols'), 'symbol')}
+    lib_block = first(sch, 'lib_symbols')
+    for s in find(parse(PROJECT_LIB.read_text(encoding='utf-8')), 'symbol'):
+        name = f'env-monitor:{s[1]}'
+        lib_block[:] = [x for x in lib_block if not (isinstance(x, list) and x and x[0] == 'symbol' and x[1] == name)]
+        s[1] = name
+        lib_block.append(s)
+    libs = {s[1]: s for s in find(lib_block, 'symbol')}
     insts = {}
     for s in find(sch, 'symbol'):
         ref = next(p[2] for p in find(s, 'property') if p[1] == 'Reference')
         insts[ref] = s
     for tmp, real in RENAME.items():   # file already rewritten: J1 is the renamed J1X
-        if tmp not in insts and real in insts and first(insts[real], 'lib_id')[1] in (
-                'Connector:Barrel_Jack_Switch', 'Device:D'):
+        if tmp not in insts and real in insts and first(insts[real], 'lib_id')[1] == TMP_LIB[tmp]:
             insts[tmp] = insts[real]
+    for ref, (sym, value) in NEW_PARTS.items():
+        if ref not in insts:
+            insts[ref] = new_instance(ref, f'env-monitor:{sym}', value, f'env-monitor:{sym}', libs[f'env-monitor:{sym}'])
 
     # pin endpoints and outward directions
     pins = {}
@@ -245,8 +194,11 @@ def main():
         at[1], at[2], at[3] = nx, ny, rot
         s[:] = [x for x in s if not (isinstance(x, list) and x and x[0] == 'mirror')]
         if mir:
-            s.insert(s.index(at) + 1, [Sym('mirror'), Sym('y')])
-        for prop in find(s, 'property'):
+            s.insert(s.index(at) + 1, [Sym('mirror'), Sym('x' if mir == 'x' else 'y')])
+        new = ref in NEW_PARTS and abs(ox) < 1e-6 and abs(oy) < 1e-6
+        for i, prop in enumerate(find(s, 'property')):
+            if new:   # fresh instance: put reference above and value below the body
+                first(prop, 'at')[2] = {0: -24, 1: 24}.get(i, 0)
             if prop[1] == 'Value' and ref in VALUES:
                 prop[2] = VALUES[ref]
             if prop[1] == 'Reference' and ref in RENAME:

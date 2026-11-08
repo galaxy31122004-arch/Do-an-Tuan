@@ -11,10 +11,10 @@ PARTS=[
 ('U5',1,'DHT11 cảm biến rời','4 chân','VCC/DATA/NC/GND; không nhầm pin module 3 chân'),
 ('U6',1,'OLED trắng 0,96 inch SSD1315 I²C 128x64','Module 4 chân','Module Hshop đã chọn; cấp 3,3 V, kiểm tra thứ tự chân in trên module'),
 ('Y1',1,'Thạch anh 11,0592 MHz','HC-49S','Dao động 11,0592 MHz cho UART 9600; đối chiếu điện dung tải'),
-('R1,R3',2,'10 kΩ 1% 0,25 W','Axial THT','R1 kéo RST chân 9 xuống GND; R3 kéo nút trang lên 5 V'),
+('R1,R3,R6',3,'10 kΩ 1% 0,25 W','Axial THT','R1 kéo RST chân 9 xuống GND; R3 kéo nút trang lên 5 V; R6 kéo base Q1 lên 5 V để relay tắt chắc'),
 ('R2',1,'4,7 kΩ 1% 0,25 W','Axial THT','Kéo DATA DHT11 lên 5 V'),
 ('R4',1,'100 kΩ 1% 0,25 W','Axial THT','Kéo OE TXS0108E xuống GND khi ESP32 khởi động; bỏ pull-up OE trên module nếu có'),
-('R10',1,'1 kΩ 0,25 W','Axial THT','Hạn dòng LED nguồn'),
+('R10,R5',2,'1 kΩ 0,25 W','Axial THT','R10 hạn dòng LED nguồn; R5 trở base Q1 từ P2.0'),
 ('C1,C3,C5,C6,C16',5,'100 nF X7R ≥16 V','THT 2,54 mm','VCC AT89S52, TXS VCCB 5V, OLED 3V3, ESP32 5V, đầu ra LM7805; đặt sát tải'),
 ('C14',1,'100 µF ≥25 V','Tụ hóa radial','Đầu vào LM7805 sau D2; đúng cực'),
 ('C15',1,'330 nF ≥25 V','Tụ gốm THT','Sát chân IN LM7805 theo datasheet'),
@@ -33,8 +33,10 @@ PARTS=[
 ('J4',1,'Header cái 1x4','Pitch 2,54 mm','Đế cắm OLED'),
 ('J3',1,'Header ISP AT89S52 1x6','Pitch 2,54 mm','RST/VCC/GND/MISO/SCK/MOSI; nạp chính bằng Burn-E ngoài mạch'),
 ('J5A,J5B',2,'Header cái 1x10 cho module TXS0108E','Pitch 2,54 mm, xác minh hàng mua','Hàn đế module; chỉnh số chân/footprint nếu module thực tế khác'),
-('J6',1,'Header đực 1x3 cho relay','Pitch 2,54 mm','+5V/GND/IN; IN nối AT89S52 P2.0 chân 21; ghi rõ thứ tự chân trên PCB'),
-('K1',1,'Module relay 1 kênh 5 V có opto, kích mức thấp','Module ngoài, cắm dây vào J6','Nối J6 bằng dây; tiếp điểm chỉ dùng tải điện áp thấp trong đồ án; xác minh mức kích và jumper trên module'),
+('J6',1,'Domino 3 chân 5,08 mm','Pitch 5,08 mm','COM/NO/NC tiếp điểm relay K1; chỉ tải điện áp thấp'),
+('K1',1,'Relay SRD-05VDC-SL-C','Hàn PCB, SPDT','Cuộn 5 V ~70 mA; chân 2/5 cuộn, 1 COM, 3 NO, 4 NC'),
+('Q1',1,'S8550 PNP','TO-92 E-B-C','Đóng cuộn relay; P2.0 mức thấp = relay bật (firmware giữ nguyên)'),
+('D3',1,'1N4007','DO-41','Điốt dập xung ngược song song cuộn relay'),
 ('SK1',1,'Đế IC DIP-40','Wide 15,24 mm','Đế AT89S52, hàn đế rồi cắm IC'),
 ('TP1,TP2,TP3',3,'Test point vòng dây','THT','Đo 5 V / 3,3 V / GND')
 ]
@@ -49,10 +51,10 @@ def main():
         quote=by_ref[ref]
         if not quote['Price per purchase unit VND']: return None
         price=int(quote['Price per purchase unit VND'])
-        if ref in {'R1','R2','R3','R4','R10'}: return price//50
+        if ref in {'R1','R2','R3','R4','R5','R6','R10'}: return price//50
         if ref=='D1': return price//100
         if ref in {'SW1','SW2'}: return price//10
-        pins={'J2A':8,'J2B':8,'J4':4,'J5A':10,'J5B':10,'J3':6,'J6':3}
+        pins={'J2A':8,'J2B':8,'J4':4,'J5A':10,'J5B':10,'J3':6}
         if ref in pins: return price*pins[ref]//40
         return price
     def money(value):
@@ -95,7 +97,7 @@ def main():
         f'- In PCB theo giá người dùng: **{money(pcb)}**.',
         f'- **Tổng tiền mua + PCB: {money(parts_purchase+pcb)}, chưa gồm mục chưa có giá.**',
         f'- Nếu chỉ phân bổ lượng linh kiện dùng trên một PCB: **{money(used_total+pcb)}**, chưa gồm mục chưa có giá. Phần chênh lệch là linh kiện dư từ gói/thanh mua.',
-        '- J1, U7, D2, C14, C15 và K1 chưa khảo sát giá, để trống trong CSV; không tính thành 0đ. Giá tụ tham khảo cần xác nhận đúng điện môi; trở 10kΩ/100kΩ ở nguồn giá đang báo hết hàng.',
+        '- J1, J6, U7, D2, D3, Q1, C14, C15 và K1 chưa khảo sát giá, để trống trong CSV; không tính thành 0đ. Giá tụ tham khảo cần xác nhận đúng điện môi; trở 10kΩ/100kΩ ở nguồn giá đang báo hết hàng.',
         '- Chưa gồm vận chuyển, adapter/cáp, vỏ, thiếc/flux và công hàn. Burn-E đã có nên không mua lại.',
         '', '## Vật tư đi kèm, không hàn trực tiếp', '',
         '- 1 adapter DC 7,5–9 V / 1 A, jack 5,5x2,1 mm tâm dương; dây USB lập trình ESP32.',
