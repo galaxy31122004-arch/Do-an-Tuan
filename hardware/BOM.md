@@ -35,7 +35,7 @@ Giá tham khảo ngày **01/11/2026**, đơn vị VND. Bảng đầu ghi **đơn
 | J4 | 1 | [Header cái 1x4](https://chotroihn.vn/jump-cai-don-1-40p-2-54) | 200đ | 200đ | Pitch 2,54 mm | Đế cắm OLED. Giá: 2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt |
 | J3 | 1 | [Header ISP AT89S52 1x6](https://chotroihn.vn/jump-duc-don-1x40p-2-54) | 300đ | 300đ | Pitch 2,54 mm | RST/VCC/GND/MISO/SCK/MOSI; nạp chính bằng Burn-E ngoài mạch. Giá: 1 thanh 40 chân, dùng 6 chân ISP AT89S52; giả định chân đực module đi kèm module |
 | J5A,J5B | 2 | [Header cái 1x10 cho module TXS0108E](https://chotroihn.vn/jump-cai-don-1-40p-2-54) | 500đ | 1.000đ | Pitch 2,54 mm, xác minh hàng mua | Hàn đế module; chỉnh số chân/footprint nếu module thực tế khác. Giá: 2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt |
-| J6 | 1 | Domino 3 chân 5,08 mm | Chưa xác nhận | Chưa xác nhận | Pitch 5,08 mm | COM/NO/NC tiếp điểm relay K1; chỉ tải điện áp thấp. Giá: Chưa khảo sát giá |
+| J6 | 1 | Domino 2 chân 5,08 mm | Chưa xác nhận | Chưa xác nhận | Pitch 5,08 mm | COM/NC của relay K1 (NO bỏ trống); tải có điện khi relay tắt; chỉ tải điện áp thấp. Giá: Chưa khảo sát giá |
 | K1 | 1 | Relay SRD-05VDC-SL-C | Chưa xác nhận | Chưa xác nhận | Hàn PCB, SPDT | Cuộn 5 V ~70 mA; chân 2/5 cuộn, 1 COM, 3 NO, 4 NC. Giá: Chưa khảo sát giá |
 | Q1 | 1 | 2SC1815-GR NPN | Chưa xác nhận | Chưa xác nhận | TO-92 E-C-B | Đóng phía GND cuộn relay; P2.0 mức cao = relay bật (firmware v0.2.0). Giá: Chưa khảo sát giá |
 | D3 | 1 | 1N4007 | Chưa xác nhận | Chưa xác nhận | DO-41 | Điốt dập xung ngược song song cuộn relay. Giá: Chưa khảo sát giá |
@@ -76,7 +76,7 @@ Giá tham khảo ngày **01/11/2026**, đơn vị VND. Bảng đầu ghi **đơn
 | [J2A,J2B,J4,J5A,J5B: Header cái 2,54mm](https://chotroihn.vn/jump-cai-don-1-40p-2-54) | 2 | 2.000đ | 4.000đ | 2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt |
 | [J3: Header đực 2,54mm](https://chotroihn.vn/jump-duc-don-1x40p-2-54) | 1 | 2.000đ | 2.000đ | 1 thanh 40 chân, dùng 6 chân ISP AT89S52; giả định chân đực module đi kèm module |
 | K1: Relay SRD-05VDC-SL-C | 1 | Chưa xác nhận | Chưa xác nhận | Chưa khảo sát giá |
-| J6: Domino 3 chân 5.08mm | 1 | Chưa xác nhận | Chưa xác nhận | Chưa khảo sát giá |
+| J6: Domino 2 chân 5.08mm | 1 | Chưa xác nhận | Chưa xác nhận | Chưa khảo sát giá |
 | [SK1: Đế IC 40 chân](https://chotroihn.vn/de-ic) | 1 | 1.500đ | 1.500đ | Biến thể 40 chân; xác nhận loại rộng cho AT89S52 DIP40 |
 | TP1,TP2,TP3: Test point tự làm | 0 | 0đ | 0đ | Tận dụng chân/dây cắt thừa của header đã tính; không mua thêm |
 | PCB: In PCB theo giá người dùng | 1 | 120.000đ | 120.000đ | Giá người dùng cung cấp, không phải giá nhà sản xuất đã khảo sát |

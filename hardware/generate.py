@@ -34,7 +34,7 @@ PARTS=[
 ('J4',1,'Header cái 1x4','Pitch 2,54 mm','Đế cắm OLED'),
 ('J3',1,'Header ISP AT89S52 1x6','Pitch 2,54 mm','RST/VCC/GND/MISO/SCK/MOSI; nạp chính bằng Burn-E ngoài mạch'),
 ('J5A,J5B',2,'Header cái 1x10 cho module TXS0108E','Pitch 2,54 mm, xác minh hàng mua','Hàn đế module; chỉnh số chân/footprint nếu module thực tế khác'),
-('J6',1,'Domino 3 chân 5,08 mm','Pitch 5,08 mm','COM/NO/NC tiếp điểm relay K1; chỉ tải điện áp thấp'),
+('J6',1,'Domino 2 chân 5,08 mm','Pitch 5,08 mm','COM/NC của relay K1 (NO bỏ trống); tải có điện khi relay tắt; chỉ tải điện áp thấp'),
 ('K1',1,'Relay SRD-05VDC-SL-C','Hàn PCB, SPDT','Cuộn 5 V ~70 mA; chân 2/5 cuộn, 1 COM, 3 NO, 4 NC'),
 ('Q1',1,'2SC1815-GR NPN','TO-92 E-C-B','Đóng phía GND cuộn relay; P2.0 mức cao = relay bật (firmware v0.2.0)'),
 ('D3',1,'1N4007','DO-41','Điốt dập xung ngược song song cuộn relay'),
