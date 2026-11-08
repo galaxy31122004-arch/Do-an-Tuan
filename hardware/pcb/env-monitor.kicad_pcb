@@ -5178,11 +5178,11 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Connector_PinSocket_2.54mm:PinSocket_1x04_P2.54mm_Vertical"
+	(footprint "env-monitor:OLED_0.96_I2C_Module"
 		(layer "F.Cu")
 		(uuid "53098575-b1c3-4308-8f80-6159582c536b")
 		(at 153.92 140 90)
-		(descr "Through hole straight socket strip, 1x04, 2.54mm pitch, single row (from Kicad 4.0.7), script generated")
+		(descr "OLED 0.96in I2C module outline 27.3 x 27.8 mm")
 		(tags "Through hole socket strip THT 1x04 2.54mm single row")
 		(property "Reference" "J4"
 			(at 0 -2.77 90)
@@ -5252,167 +5252,6 @@
 		)
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
-		(fp_line
-			(start 1.33 -1.33)
-			(end 1.33 0)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "c2aab17b-7f04-4a25-abae-c106248ea776")
-		)
-		(fp_line
-			(start 0 -1.33)
-			(end 1.33 -1.33)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "0bc54b8c-aad4-4178-b38a-6d1000e8218a")
-		)
-		(fp_line
-			(start 1.33 1.27)
-			(end 1.33 8.95)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "93a7e36b-ab6b-48d1-af35-74563e7757a2")
-		)
-		(fp_line
-			(start -1.33 1.27)
-			(end 1.33 1.27)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "a75f1df6-860f-4e4e-8f1c-db0263376691")
-		)
-		(fp_line
-			(start -1.33 1.27)
-			(end -1.33 8.95)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "9aea3515-c4b1-4bd2-8136-95f37f955269")
-		)
-		(fp_line
-			(start -1.33 8.95)
-			(end 1.33 8.95)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "81399009-ccb9-4721-be8d-929c92c8050d")
-		)
-		(fp_line
-			(start 1.77 -1.77)
-			(end 1.77 9.39)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-			(uuid "2d49dbfb-a2a4-463e-a194-abfd655d536a")
-		)
-		(fp_line
-			(start -1.77 -1.77)
-			(end 1.77 -1.77)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-			(uuid "f7271ae9-4fce-415e-a068-428e83212dbf")
-		)
-		(fp_line
-			(start 1.77 9.39)
-			(end -1.77 9.39)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-			(uuid "7c31df6b-50cf-427a-9fd0-899286049e7a")
-		)
-		(fp_line
-			(start -1.77 9.39)
-			(end -1.77 -1.77)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-			(uuid "acf058cb-c9d7-45f0-ab1f-6e54ba25e719")
-		)
-		(fp_line
-			(start 0.635 -1.27)
-			(end 1.27 -0.635)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "b5ce1564-33ae-4c3b-b0d3-7b2b4e818a63")
-		)
-		(fp_line
-			(start -1.27 -1.27)
-			(end 0.635 -1.27)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "28085b7b-e16c-4b85-9c8c-bbcbcbba1e35")
-		)
-		(fp_line
-			(start 1.27 -0.635)
-			(end 1.27 8.89)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "7194cdd3-0e69-4638-91aa-b8d752e94758")
-		)
-		(fp_line
-			(start 1.27 8.89)
-			(end -1.27 8.89)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "c604db09-df45-4e67-805b-b56f9d6d2a4f")
-		)
-		(fp_line
-			(start -1.27 8.89)
-			(end -1.27 -1.27)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "7ca7043d-b3c5-423a-94bc-ac6985e09a84")
-		)
-		(fp_text user "${REFERENCE}"
-			(at 0 3.81 0)
-			(layer "F.Fab")
-			(uuid "c69ac7f7-a012-4138-97a8-928ee646bd8a")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" thru_hole rect
 			(at 0 0 90)
 			(size 1.7 1.7)
@@ -5469,6 +5308,16 @@
 				(xyz 0 0 0)
 			)
 		)
+	
+		(fp_rect (start -26.2 -9.84) (end 1.6 17.46) (stroke (width 0.12) (type solid)) (fill no) (layer "F.SilkS") (uuid "6b1f0a10-0001-4c00-9000-000000000003"))
+		(fp_rect (start -26.7 -10.34) (end 2.1 17.96) (stroke (width 0.05) (type solid)) (fill no) (layer "F.CrtYd") (uuid "6b1f0a10-0001-4c00-9000-000000000004"))
+		(fp_rect (start -26.2 -9.84) (end 1.6 17.46) (stroke (width 0.1) (type solid)) (fill no) (layer "F.Fab") (uuid "6b1f0a10-0001-4c00-9000-000000000005"))
+		(fp_rect (start -23.8 -9.54) (end -4.5 17.16) (stroke (width 0.12) (type dash)) (fill no) (layer "F.SilkS") (uuid "6b1f0a10-0001-4c00-9000-000000000006"))
+		(pad "" np_thru_hole circle (at -0.4 -7.84) (size 2.2 2.2) (drill 2.2) (layers "*.Cu" "*.Mask") (uuid "6b1f0a10-0001-4c00-9000-000000000021"))
+		(pad "" np_thru_hole circle (at -0.4 15.46) (size 2.2 2.2) (drill 2.2) (layers "*.Cu" "*.Mask") (uuid "6b1f0a10-0001-4c00-9000-000000000022"))
+		(pad "" np_thru_hole circle (at -24.2 -7.84) (size 2.2 2.2) (drill 2.2) (layers "*.Cu" "*.Mask") (uuid "6b1f0a10-0001-4c00-9000-000000000023"))
+		(pad "" np_thru_hole circle (at -24.2 15.46) (size 2.2 2.2) (drill 2.2) (layers "*.Cu" "*.Mask") (uuid "6b1f0a10-0001-4c00-9000-000000000024"))
+		(fp_text user "OLED 0.96in 27x28mm" (at -14 3.81 90) (layer "F.SilkS") (uuid "6b1f0a10-0001-4c00-9000-000000000007") (effects (font (size 1.2 1.2) (thickness 0.15))))
 	)
 	(footprint "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal"
 		(layer "F.Cu")
