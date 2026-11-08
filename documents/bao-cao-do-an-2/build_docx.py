@@ -17,6 +17,7 @@ FIGS = {  # caption prefix -> (image, caption, width cm)
     'Hình 2.1': ('so-do-khoi.png', 'Hình 2.1. Sơ đồ khối hệ thống', 16),
     'Hình 2.2': ('so-do-nguyen-ly.png', 'Hình 2.2. Sơ đồ nguyên lý toàn mạch (KiCad)', 16),
     'Hình 2.3': ('pcb-top.png', 'Hình 2.3. Mạch in hai lớp, mặt trên (dựng 3D từ KiCad)', 14),
+    'Hình 2.4': ('pcb-3d.png', 'Hình 2.4. Mạch in nhìn nghiêng (dựng 3D từ KiCad)', 15),
     'Hình 3.1': ('luu-do-at89s52.png', 'Hình 3.1. Lưu đồ vòng lặp chính firmware AT89S52', 11),
     'Hình 3.2': ('luu-do-esp32.png', 'Hình 3.2. Lưu đồ firmware ESP32-C3', 11),
 }

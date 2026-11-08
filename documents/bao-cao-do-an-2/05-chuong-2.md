@@ -198,6 +198,8 @@ Sơ đồ nguyên lý được vẽ trên KiCad 10 (dự án `env-monitor`).
 
 *Hình 2.3. Mạch in, mặt trên.*
 
+*Hình 2.4. Mạch in nhìn nghiêng, có mô hình 3D của các module và linh kiện.*
+
 ## 2.11. Bảng vật tư và dự toán chi phí
 
 Bảng vật tư đầy đủ gồm 42 chi tiết, xem Phụ lục. Giá tham khảo ngày 01/11/2026:
