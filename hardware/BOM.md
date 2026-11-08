@@ -33,7 +33,6 @@ Giá tham khảo ngày **01/11/2026**, đơn vị VND. Bảng đầu ghi **đơn
 | SW1,SW2 | 2 | [Nút nhấn thường hở](https://chotroihn.vn/bo-10-nut-nhan-4-chan) | 500đ | 1.000đ | Tactile 6x6 mm | SW1 đổi trang; SW2 reset AT89S52. Giá: Mua gói 10, dùng 2 |
 | J1 | 1 | Jack DC 5,5x2,1 mm hàn mạch | Chưa xác nhận | Chưa xác nhận | DC-005, 3 chân | Tâm dương; chân switch để trống. Giá: Chưa khảo sát giá |
 | J7 | 1 | Domino 2 chân 5,08 mm | Chưa xác nhận | Chưa xác nhận | Pitch 5,08 mm | Đầu vào 12 V song song jack J1: chân 1 (+), chân 2 GND; chỉ cấp một nguồn. Giá: Chưa khảo sát giá |
-| J8 | 1 | Domino 2 chân 5,08 mm | Chưa xác nhận | Chưa xác nhận | Pitch 5,08 mm | Nguồn RIÊNG cho tầng relay: chân 1 +5 V ngoài, chân 2 GND ngoài; không nối với GND mạch. Giá: Chưa khảo sát giá |
 | J2A,J2B | 2 | [Header cái 1x8](https://chotroihn.vn/jump-cai-don-1-40p-2-54) | 400đ | 800đ | Pitch 2,54 mm | Đế cắm ESP32; đo khoảng cách hai hàng của board thực tế. Giá: 2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt |
 | J4 | 1 | [Header cái 1x4](https://chotroihn.vn/jump-cai-don-1-40p-2-54) | 200đ | 200đ | Pitch 2,54 mm | Đế cắm OLED. Giá: 2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt |
 | J3 | 1 | [Header ISP AT89S52 1x6](https://chotroihn.vn/jump-duc-don-1x40p-2-54) | 300đ | 300đ | Pitch 2,54 mm | RST/VCC/GND/MISO/SCK/MOSI; nạp chính bằng Burn-E ngoài mạch. Giá: 1 thanh 40 chân, dùng 6 chân ISP AT89S52; giả định chân đực module đi kèm module |
@@ -45,7 +44,7 @@ Giá tham khảo ngày **01/11/2026**, đơn vị VND. Bảng đầu ghi **đơn
 | SK1 | 1 | [Đế IC DIP-40](https://chotroihn.vn/de-ic) | 1.500đ | 1.500đ | Wide 15,24 mm | Đế AT89S52, hàn đế rồi cắm IC. Giá: Biến thể 40 chân; xác nhận loại rộng cho AT89S52 DIP40 |
 | TP1,TP2,TP3 | 3 | Test point vòng dây | 0đ | 0đ | THT | Đo 5 V / 3,3 V / GND. Giá: Tận dụng chân/dây cắt thừa của header đã tính; không mua thêm |
 
-**Tổng số chi tiết trong bảng:** 52 (bao gồm IC/module/đế; không gồm PCB và vật tư ngoài mạch).
+**Tổng số chi tiết trong bảng:** 51 (bao gồm IC/module/đế; không gồm PCB và vật tư ngoài mạch).
 
 **Giá trị linh kiện dùng trên một mạch: 222.930đ, chưa gồm mục chưa có giá.**
 
@@ -79,7 +78,6 @@ Giá tham khảo ngày **01/11/2026**, đơn vị VND. Bảng đầu ghi **đơn
 | [SW1,SW2: Nút nhấn 6x6](https://chotroihn.vn/bo-10-nut-nhan-4-chan) | 1 | 5.000đ | 5.000đ | Mua gói 10, dùng 2 |
 | J1: Jack DC 5.5x2.1 hàn mạch | 1 | Chưa xác nhận | Chưa xác nhận | Chưa khảo sát giá |
 | J7: Domino 2 chân 5.08mm | 1 | Chưa xác nhận | Chưa xác nhận | Chưa khảo sát giá |
-| J8: Domino 2 chân 5.08mm | 1 | Chưa xác nhận | Chưa xác nhận | Chưa khảo sát giá |
 | [J2A,J2B,J4,J5A,J5B: Header cái 2,54mm](https://chotroihn.vn/jump-cai-don-1-40p-2-54) | 2 | 2.000đ | 4.000đ | 2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt |
 | [J3: Header đực 2,54mm](https://chotroihn.vn/jump-duc-don-1x40p-2-54) | 1 | 2.000đ | 2.000đ | 1 thanh 40 chân, dùng 6 chân ISP AT89S52; giả định chân đực module đi kèm module |
 | K1: Relay SRD-05VDC-SL-C | 1 | Chưa xác nhận | Chưa xác nhận | Chưa khảo sát giá |
@@ -92,7 +90,7 @@ Giá tham khảo ngày **01/11/2026**, đơn vị VND. Bảng đầu ghi **đơn
 - In PCB theo giá người dùng: **120.000đ**.
 - **Tổng tiền mua + PCB: 402.500đ, chưa gồm mục chưa có giá.**
 - Nếu chỉ phân bổ lượng linh kiện dùng trên một PCB: **342.930đ**, chưa gồm mục chưa có giá. Phần chênh lệch là linh kiện dư từ gói/thanh mua.
-- J1, J6, J7, J8, U7, D2, D3, Q1, R6, U8, C14, C15 và K1 chưa khảo sát giá, để trống trong CSV; không tính thành 0đ. Giá tụ tham khảo cần xác nhận đúng điện môi; trở 10kΩ/100kΩ ở nguồn giá đang báo hết hàng.
+- J1, J6, J7, U7, D2, D3, Q1, R6, U8, C14, C15 và K1 chưa khảo sát giá, để trống trong CSV; không tính thành 0đ. Giá tụ tham khảo cần xác nhận đúng điện môi; trở 10kΩ/100kΩ ở nguồn giá đang báo hết hàng.
 - Chưa gồm vận chuyển, adapter/cáp, vỏ, thiếc/flux và công hàn. Burn-E đã có nên không mua lại.
 
 ## Vật tư đi kèm, không hàn trực tiếp
