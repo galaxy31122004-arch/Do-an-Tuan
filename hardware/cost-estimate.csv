@@ -15,13 +15,15 @@ C7,Tụ hóa 470uF 10V,1,1000,1000,https://chotroihn.vn/tu-hoa-10v,1 tụ
 "C9,C10",Tụ gốm 22pF,2,500,1000,https://chotroihn.vn/tu-gom-vang-50v,Giá biến thể 22P; xác nhận C0G/NP0 và tải thạch anh trước khi mua
 D1,LED xanh lá 3mm,1,29000,29000,https://chotroihn.vn/goi-100-con-led-duc-3mm,"Mua gói 100, dùng 1"
 U7,LM7805 TO-220,1,,,,Chưa khảo sát giá
-"D2,D3",Diode 1N4007,2,,,,Chưa khảo sát giá
+D2,Diode Schottky SR360 DO-201AD,1,,,,Chưa khảo sát giá
+D3,Diode 1N4007,1,,,,Chưa khảo sát giá
 Q1,Transistor 2SC1815-GR TO-92,1,,,,Chưa khảo sát giá
 R6,Điện trở 3.3kΩ 1/4W,1,,,,Chưa khảo sát giá
 C14,Tụ hóa 100uF 25V,1,,,,Chưa khảo sát giá
 C15,Tụ gốm 330nF,1,,,,Chưa khảo sát giá
 "SW1,SW2",Nút nhấn 6x6,1,5000,5000,https://chotroihn.vn/bo-10-nut-nhan-4-chan,"Mua gói 10, dùng 2"
 J1,Jack DC 5.5x2.1 hàn mạch,1,,,,Chưa khảo sát giá
+J7,Domino 2 chân 5.08mm,1,,,,Chưa khảo sát giá
 "J2A,J2B,J4,J5A,J5B","Header cái 2,54mm",2,2000,4000,https://chotroihn.vn/jump-cai-don-1-40p-2-54,2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt
 J3,"Header đực 2,54mm",1,2000,2000,https://chotroihn.vn/jump-duc-don-1x40p-2-54,"1 thanh 40 chân, dùng 6 chân ISP AT89S52; giả định chân đực module đi kèm module"
 K1,Relay SRD-05VDC-SL-C,1,,,,Chưa khảo sát giá

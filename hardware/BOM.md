@@ -27,10 +27,11 @@ Giá tham khảo ngày **01/11/2026**, đơn vị VND. Bảng đầu ghi **đơn
 | C12 | 1 | [100 nF X7R ≥16 V](https://chotroihn.vn/tu-gom-vang-50v) | 500đ | 500đ | THT 2,54 mm | Lọc nguồn sát VCC/GND DHT11. Giá: Giá biến thể 0.1uF/104; đối chiếu điện môi X7R theo BOM trước khi mua |
 | C13 | 1 | [100 nF X7R ≥16 V](https://chotroihn.vn/tu-gom-vang-50v) | 500đ | 500đ | THT 2,54 mm | Lọc VCCA 3,3 V của TXS0108E sát module. Giá: Giá biến thể 0.1uF/104; đối chiếu điện môi X7R theo BOM trước khi mua |
 | D1 | 1 | [LED xanh 3 mm](https://chotroihn.vn/goi-100-con-led-duc-3mm) | 290đ | 290đ | THT | LED báo có nguồn 5 V. Giá: Mua gói 100, dùng 1 |
-| U7 | 1 | LM7805 ổn áp 5 V 1,5 A | Chưa xác nhận | Chưa xác nhận | TO-220 nằm ngang, vít xuống PCB | Tab = GND: vít M3 xuống vùng đồng GND hai mặt làm tản nhiệt; adapter 7,5–9 V để giảm nhiệt. Giá: Chưa khảo sát giá |
-| D2 | 1 | 1N4007 | Chưa xác nhận | Chưa xác nhận | DO-41 | Chống cắm ngược cực jack DC, nối tiếp trước LM7805. Giá: Chưa khảo sát giá |
+| U7 | 1 | LM7805 ổn áp 5 V 1,5 A | Chưa xác nhận | Chưa xác nhận | TO-220 nằm ngang, vít xuống PCB | Tab = GND: vít M3 xuống vùng đồng GND hai mặt; với 12 V tỏa ~1,6 W, cần vùng đồng lớn hoặc tản phụ. Giá: Chưa khảo sát giá |
+| D2 | 1 | SR360 Schottky 3 A 60 V | Chưa xác nhận | Chưa xác nhận | DO-201AD | Chống cắm ngược cực nguồn 12 V, sụt áp ~0,5 V; nối tiếp trước LM7805. Giá: Chưa khảo sát giá |
 | SW1,SW2 | 2 | [Nút nhấn thường hở](https://chotroihn.vn/bo-10-nut-nhan-4-chan) | 500đ | 1.000đ | Tactile 6x6 mm | SW1 đổi trang; SW2 reset AT89S52. Giá: Mua gói 10, dùng 2 |
 | J1 | 1 | Jack DC 5,5x2,1 mm hàn mạch | Chưa xác nhận | Chưa xác nhận | DC-005, 3 chân | Tâm dương; chân switch để trống. Giá: Chưa khảo sát giá |
+| J7 | 1 | Domino 2 chân 5,08 mm | Chưa xác nhận | Chưa xác nhận | Pitch 5,08 mm | Đầu vào 12 V song song jack J1: chân 1 (+), chân 2 GND; chỉ cấp một nguồn. Giá: Chưa khảo sát giá |
 | J2A,J2B | 2 | [Header cái 1x8](https://chotroihn.vn/jump-cai-don-1-40p-2-54) | 400đ | 800đ | Pitch 2,54 mm | Đế cắm ESP32; đo khoảng cách hai hàng của board thực tế. Giá: 2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt |
 | J4 | 1 | [Header cái 1x4](https://chotroihn.vn/jump-cai-don-1-40p-2-54) | 200đ | 200đ | Pitch 2,54 mm | Đế cắm OLED. Giá: 2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt |
 | J3 | 1 | [Header ISP AT89S52 1x6](https://chotroihn.vn/jump-duc-don-1x40p-2-54) | 300đ | 300đ | Pitch 2,54 mm | RST/VCC/GND/MISO/SCK/MOSI; nạp chính bằng Burn-E ngoài mạch. Giá: 1 thanh 40 chân, dùng 6 chân ISP AT89S52; giả định chân đực module đi kèm module |
@@ -42,7 +43,7 @@ Giá tham khảo ngày **01/11/2026**, đơn vị VND. Bảng đầu ghi **đơn
 | SK1 | 1 | [Đế IC DIP-40](https://chotroihn.vn/de-ic) | 1.500đ | 1.500đ | Wide 15,24 mm | Đế AT89S52, hàn đế rồi cắm IC. Giá: Biến thể 40 chân; xác nhận loại rộng cho AT89S52 DIP40 |
 | TP1,TP2,TP3 | 3 | Test point vòng dây | 0đ | 0đ | THT | Đo 5 V / 3,3 V / GND. Giá: Tận dụng chân/dây cắt thừa của header đã tính; không mua thêm |
 
-**Tổng số chi tiết trong bảng:** 49 (bao gồm IC/module/đế; không gồm PCB và vật tư ngoài mạch).
+**Tổng số chi tiết trong bảng:** 50 (bao gồm IC/module/đế; không gồm PCB và vật tư ngoài mạch).
 
 **Giá trị linh kiện dùng trên một mạch: 222.930đ, chưa gồm mục chưa có giá.**
 
@@ -66,13 +67,15 @@ Giá tham khảo ngày **01/11/2026**, đơn vị VND. Bảng đầu ghi **đơn
 | [C9,C10: Tụ gốm 22pF](https://chotroihn.vn/tu-gom-vang-50v) | 2 | 500đ | 1.000đ | Giá biến thể 22P; xác nhận C0G/NP0 và tải thạch anh trước khi mua |
 | [D1: LED xanh lá 3mm](https://chotroihn.vn/goi-100-con-led-duc-3mm) | 1 | 29.000đ | 29.000đ | Mua gói 100, dùng 1 |
 | U7: LM7805 TO-220 | 1 | Chưa xác nhận | Chưa xác nhận | Chưa khảo sát giá |
-| D2,D3: Diode 1N4007 | 2 | Chưa xác nhận | Chưa xác nhận | Chưa khảo sát giá |
+| D2: Diode Schottky SR360 DO-201AD | 1 | Chưa xác nhận | Chưa xác nhận | Chưa khảo sát giá |
+| D3: Diode 1N4007 | 1 | Chưa xác nhận | Chưa xác nhận | Chưa khảo sát giá |
 | Q1: Transistor 2SC1815-GR TO-92 | 1 | Chưa xác nhận | Chưa xác nhận | Chưa khảo sát giá |
 | R6: Điện trở 3.3kΩ 1/4W | 1 | Chưa xác nhận | Chưa xác nhận | Chưa khảo sát giá |
 | C14: Tụ hóa 100uF 25V | 1 | Chưa xác nhận | Chưa xác nhận | Chưa khảo sát giá |
 | C15: Tụ gốm 330nF | 1 | Chưa xác nhận | Chưa xác nhận | Chưa khảo sát giá |
 | [SW1,SW2: Nút nhấn 6x6](https://chotroihn.vn/bo-10-nut-nhan-4-chan) | 1 | 5.000đ | 5.000đ | Mua gói 10, dùng 2 |
 | J1: Jack DC 5.5x2.1 hàn mạch | 1 | Chưa xác nhận | Chưa xác nhận | Chưa khảo sát giá |
+| J7: Domino 2 chân 5.08mm | 1 | Chưa xác nhận | Chưa xác nhận | Chưa khảo sát giá |
 | [J2A,J2B,J4,J5A,J5B: Header cái 2,54mm](https://chotroihn.vn/jump-cai-don-1-40p-2-54) | 2 | 2.000đ | 4.000đ | 2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt |
 | [J3: Header đực 2,54mm](https://chotroihn.vn/jump-duc-don-1x40p-2-54) | 1 | 2.000đ | 2.000đ | 1 thanh 40 chân, dùng 6 chân ISP AT89S52; giả định chân đực module đi kèm module |
 | K1: Relay SRD-05VDC-SL-C | 1 | Chưa xác nhận | Chưa xác nhận | Chưa khảo sát giá |
@@ -85,12 +88,12 @@ Giá tham khảo ngày **01/11/2026**, đơn vị VND. Bảng đầu ghi **đơn
 - In PCB theo giá người dùng: **120.000đ**.
 - **Tổng tiền mua + PCB: 402.500đ, chưa gồm mục chưa có giá.**
 - Nếu chỉ phân bổ lượng linh kiện dùng trên một PCB: **342.930đ**, chưa gồm mục chưa có giá. Phần chênh lệch là linh kiện dư từ gói/thanh mua.
-- J1, J6, U7, D2, D3, Q1, R6, C14, C15 và K1 chưa khảo sát giá, để trống trong CSV; không tính thành 0đ. Giá tụ tham khảo cần xác nhận đúng điện môi; trở 10kΩ/100kΩ ở nguồn giá đang báo hết hàng.
+- J1, J6, J7, U7, D2, D3, Q1, R6, C14, C15 và K1 chưa khảo sát giá, để trống trong CSV; không tính thành 0đ. Giá tụ tham khảo cần xác nhận đúng điện môi; trở 10kΩ/100kΩ ở nguồn giá đang báo hết hàng.
 - Chưa gồm vận chuyển, adapter/cáp, vỏ, thiếc/flux và công hàn. Burn-E đã có nên không mua lại.
 
 ## Vật tư đi kèm, không hàn trực tiếp
 
-- 1 adapter DC 7,5–9 V / 1 A, jack 5,5x2,1 mm tâm dương; dây USB lập trình ESP32.
+- 1 adapter DC 12 V / 1 A, jack 5,5x2,1 mm tâm dương (hoặc đấu dây vào domino J7); dây USB lập trình ESP32.
 - 1 PCB theo kích thước thực tế ESP32/OLED; thiếc, flux và dây nối cho bản thử.
 - Mạch nạp Burn-E đang sử dụng, cáp USB và phần mềm đúng phiên bản để nạp/verify HEX AT89S52; đây là dụng cụ dùng lại, không hàn lên mạch.
 

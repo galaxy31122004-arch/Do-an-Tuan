@@ -20,10 +20,11 @@ C8,1,10 µF ≥10 V,Tụ hóa radial,"Lọc nhánh 3,3 V OLED; đúng cực",100
 C12,1,100 nF X7R ≥16 V,"THT 2,54 mm",Lọc nguồn sát VCC/GND DHT11,500,500,https://chotroihn.vn/tu-gom-vang-50v,Giá biến thể 0.1uF/104; đối chiếu điện môi X7R theo BOM trước khi mua
 C13,1,100 nF X7R ≥16 V,"THT 2,54 mm","Lọc VCCA 3,3 V của TXS0108E sát module",500,500,https://chotroihn.vn/tu-gom-vang-50v,Giá biến thể 0.1uF/104; đối chiếu điện môi X7R theo BOM trước khi mua
 D1,1,LED xanh 3 mm,THT,LED báo có nguồn 5 V,290,290,https://chotroihn.vn/goi-100-con-led-duc-3mm,"Mua gói 100, dùng 1"
-U7,1,"LM7805 ổn áp 5 V 1,5 A","TO-220 nằm ngang, vít xuống PCB","Tab = GND: vít M3 xuống vùng đồng GND hai mặt làm tản nhiệt; adapter 7,5–9 V để giảm nhiệt",,,,Chưa khảo sát giá
-D2,1,1N4007,DO-41,"Chống cắm ngược cực jack DC, nối tiếp trước LM7805",,,,Chưa khảo sát giá
+U7,1,"LM7805 ổn áp 5 V 1,5 A","TO-220 nằm ngang, vít xuống PCB","Tab = GND: vít M3 xuống vùng đồng GND hai mặt; với 12 V tỏa ~1,6 W, cần vùng đồng lớn hoặc tản phụ",,,,Chưa khảo sát giá
+D2,1,SR360 Schottky 3 A 60 V,DO-201AD,"Chống cắm ngược cực nguồn 12 V, sụt áp ~0,5 V; nối tiếp trước LM7805",,,,Chưa khảo sát giá
 "SW1,SW2",2,Nút nhấn thường hở,Tactile 6x6 mm,SW1 đổi trang; SW2 reset AT89S52,500,1000,https://chotroihn.vn/bo-10-nut-nhan-4-chan,"Mua gói 10, dùng 2"
 J1,1,"Jack DC 5,5x2,1 mm hàn mạch","DC-005, 3 chân",Tâm dương; chân switch để trống,,,,Chưa khảo sát giá
+J7,1,"Domino 2 chân 5,08 mm","Pitch 5,08 mm","Đầu vào 12 V song song jack J1: chân 1 (+), chân 2 GND; chỉ cấp một nguồn",,,,Chưa khảo sát giá
 "J2A,J2B",2,Header cái 1x8,"Pitch 2,54 mm",Đế cắm ESP32; đo khoảng cách hai hàng của board thực tế,400,800,https://chotroihn.vn/jump-cai-don-1-40p-2-54,2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt
 J4,1,Header cái 1x4,"Pitch 2,54 mm",Đế cắm OLED,200,200,https://chotroihn.vn/jump-cai-don-1-40p-2-54,2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt
 J3,1,Header ISP AT89S52 1x6,"Pitch 2,54 mm",RST/VCC/GND/MISO/SCK/MOSI; nạp chính bằng Burn-E ngoài mạch,300,300,https://chotroihn.vn/jump-duc-don-1x40p-2-54,"1 thanh 40 chân, dùng 6 chân ISP AT89S52; giả định chân đực module đi kèm module"

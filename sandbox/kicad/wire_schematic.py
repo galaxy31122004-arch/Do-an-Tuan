@@ -19,7 +19,7 @@ POWER = {'+5V', '+3V3', 'GND'}
 POWER_LIB = Path(r'C:\Program Files\KiCad\10.0\share\kicad\symbols\power.kicad_sym')
 
 from layout_v2 import (CAPTIONS, EXTRA_POWER, MANUAL, MANUAL_JUNCTIONS, NC, NETS, NEW_PARTS,  # noqa: E402
-                       PLACE, RENAME, SKIP_POWER, TMP_LIB, TRUNK, VALUES)
+                       PLACE, RENAME, SKIP_POWER, TMP_LIB, TRUNK, VALUES, FOOTPRINTS)
 
 PROJECT_LIB = Path(__file__).resolve().parents[2] / 'hardware' / 'pcb' / 'env-monitor.kicad_sym'
 
@@ -201,6 +201,8 @@ def main():
                 first(prop, 'at')[2] = {0: -24, 1: 24}.get(i, 0)
             if prop[1] == 'Value' and ref in VALUES:
                 prop[2] = VALUES[ref]
+            if prop[1] == 'Footprint' and ref in FOOTPRINTS:
+                prop[2] = FOOTPRINTS[ref]
             if prop[1] == 'Reference' and ref in RENAME:
                 prop[2] = RENAME[ref]
             pa = first(prop, 'at')

@@ -6,10 +6,10 @@
 
 | Kết nối | Đi đến |
 |---|---|
-| J1 jack DC tâm (+) → D2 1N4007 anode | Cathode D2 = VIN: C14 100 µF + C15 330 nF xuống GND, vào LM7805 IN |
+| J1 jack DC tâm (+) và J7 domino chân 1 (song song) → D2 SR360 anode | Cathode D2 = VIN: C14 100 µF + C15 330 nF xuống GND, vào LM7805 IN |
 | U7 LM7805 OUT | Rail +5 V; C16 100 nF sát chân OUT |
 | U7 LM7805 GND / tab | GND; tab vít M3 xuống vùng đồng GND làm tản nhiệt |
-| J1 vỏ (−) | GND chung toàn mạch; chân switch của jack để trống |
+| J1 vỏ (−), J7 chân 2 | GND chung toàn mạch; chân switch của jack để trống |
 | AT89S52 VCC chân 40 | +5 V; C1 100 nF giữa chân 40/20 |
 | AT89S52 GND chân 20 | GND |
 | AT89S52 XTAL1 chân 19 ↔ Y1 11,0592 MHz ↔ XTAL2 chân 18 | C9/C10 22 pF từ từng đầu thạch anh xuống GND |
@@ -24,7 +24,7 @@
 | +5 V → R10 1 kΩ → anode D1 | Cathode LED xuống GND |
 | TP1 / TP2 / TP3 | +5 V / 3,3 V / GND |
 
-**Nguồn LM7805:** dùng adapter **7,5–9 V / 1 A**. Dòng tải ước tính khoảng 250 mA (ESP32 Wi-Fi, relay, AT89S52, OLED), đỉnh tới khoảng 450 mA khi ESP32 phát. Với 9 V, LM7805 tỏa khoảng (9 − 0,7 − 5) × 0,25 ≈ 0,8 W; với 12 V khoảng 1,6 W, nóng hơn nhiều khi chỉ tản qua PCB. LM7805 nằm ngang, tab vít M3 xuống vùng đồng GND rộng tối thiểu khoảng 25×25 mm, nên có ở cả hai mặt nối bằng nhiều via; bôi keo tản nhiệt. Tab của 7805 là GND nên không cần đệm cách điện. Không cắm USB vào ESP32 khi đang cấp nguồn jack.
+**Nguồn LM7805 từ 12 V:** cấp 12 V qua jack J1 **hoặc** domino J7, không cấp cả hai cùng lúc. Dòng tải ước tính khoảng 250 mA (ESP32 Wi-Fi, relay, AT89S52, OLED), đỉnh khoảng 450 mA khi ESP32 phát. LM7805 tỏa khoảng (12 − 0,5 − 5) × 0,25 ≈ **1,6 W**, đỉnh gần 3 W. Chỉ tản qua PCB thì cần vùng đồng GND dưới tab rộng khoảng 40×40 mm ở cả hai mặt, nối nhiều via, bôi keo tản nhiệt, và để thoáng; nếu tab vẫn quá nóng khi chạm (trên ~80 °C), gắn thêm tản nhôm nhỏ hoặc hạ adapter xuống 9 V. Tab của 7805 là GND nên vít thẳng xuống đồng GND không cần đệm cách điện. Không cắm USB vào ESP32 khi đang cấp nguồn 12 V.
 
 EA/VPP chân 31 nối thẳng +5 V để chạy Flash trong; PSEN chân 29 và ALE chân 30 để hở. P0 không dùng để hở (P0 cần pull-up nếu sử dụng). Các chân I/O còn lại không dùng để NC; không nối ngẫu nhiên vào nguồn. Nút 4 chân tactile có hai cặp nối sẵn: chọn hai chân khác tiếp điểm, đo thông mạch trước khi hàn.
 
