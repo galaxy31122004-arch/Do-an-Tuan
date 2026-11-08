@@ -6,7 +6,12 @@ import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from wire_schematic import NETS  # noqa: E402
+from wire_schematic import NETS, RENAME  # noqa: E402
+
+
+def final(pin):
+    ref, num = pin.split('.')
+    return f'{RENAME.get(ref, ref)}.{num}'
 
 CLI = r'C:\Program Files\KiCad\10.0\bin\kicad-cli.exe'
 sch = sys.argv[1]
@@ -23,7 +28,7 @@ for block in text.split('(net')[1:]:
     pins = frozenset(f'{a}.{b}' for a, b in nodes if not a.startswith('#PWR'))
     if len(pins) > 1 or not name.group(1).startswith('unconnected'):
         actual[name.group(1).lstrip('/')] = pins
-want = {n: frozenset(x for x in p.split() if not x.startswith('#')) for n, p in NETS.items()}  # PWR_FLAGs are not in netlists
+want = {n: frozenset(final(x) for x in p.split() if not x.startswith('#')) for n, p in NETS.items()}  # PWR_FLAGs are not in netlists
 ok = True
 for n, pins in want.items():
     match = [a for a, ap in actual.items() if ap == pins]

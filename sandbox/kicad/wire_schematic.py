@@ -31,21 +31,23 @@ PLACE = {
     'J4': (120, 30, 0, True), 'J2A': (120, 46, 0, True), 'J2B': (120, 60, 0, True),
     'R4': (126, 70, 0, False), 'J5A': (150, 40, 0, False),
     # power row
-    'J1': (6, 10, 0, True), 'F1': (12, 11.5, 0, False), 'R10': (18, 11.5, 0, False),
-    'D1': (22, 15, 0, True),
-    'C1': (30, 11.5, 0, False), 'C11': (34, 11.5, 0, False), 'C6': (38, 11.5, 0, False),
-    'C7': (42, 11.5, 0, False), 'C3': (46, 11.5, 0, False), 'C12': (50, 11.5, 0, False),
-    'C13': (54, 11.5, 0, False), 'C5': (58, 11.5, 0, False), 'C8': (62, 11.5, 0, False),
-    'TP1': (68, 10, 0, False), 'TP2': (72, 10, 0, False), 'TP3': (76, 10, 0, False),
-    '#FLG01': (82, 10, 0, False), '#FLG02': (86, 10, 0, False), '#FLG03': (90, 10, 0, False),
+    # DC jack -> D2 (reverse polarity) -> LM7805 lying flat, tab screwed to GND copper
+    'J1X': (4, 10, 0, False), 'D2X': (11, 9, 0, True), 'C14': (15, 12.5, 0, False),
+    'C15': (17, 12.5, 0, False), 'U7': (21, 9, 0, False), 'C16': (26, 12.5, 0, False),
+    'R10': (30, 11.5, 0, False), 'D1': (34, 15, 0, True),
+    'C1': (40, 11.5, 0, False), 'C11': (44, 11.5, 0, False), 'C6': (48, 11.5, 0, False),
+    'C7': (52, 11.5, 0, False), 'C3': (56, 11.5, 0, False), 'C12': (60, 11.5, 0, False),
+    'C13': (64, 11.5, 0, False), 'C5': (68, 11.5, 0, False), 'C8': (72, 11.5, 0, False),
+    'TP1': (78, 10, 0, False), 'TP2': (82, 10, 0, False), 'TP3': (86, 10, 0, False),
+    '#FLG01': (13, 7, 0, False), '#FLG02': (96, 10, 0, False), '#FLG03': (100, 10, 0, False),
 }
 
 # ---------------------------------------------------------------- netlist
 NETS = {
-    '+5V': 'U1.40 U1.31 F1.2 R10.1 C6.1 C7.1 TP1.1 #FLG01.1 C1.1 C11.1 C2.1 SW2.1 R3.1 U5.1 R2.1 C12.1 J3.2 J6.1 J5B.1 C3.1 J2A.1',
-    'GND': 'U1.20 J1.2 D1.1 C6.2 C7.2 TP3.1 #FLG02.1 C1.2 C11.2 C9.2 C10.2 R1.2 SW1.2 U5.4 C12.2 J3.3 J6.2 J5B.10 C13.2 C3.2 R4.2 J2A.2 J4.1 C5.2 C8.2',
+    '+5V': 'U1.40 U1.31 U7.3 C16.1 R10.1 C6.1 C7.1 TP1.1 C1.1 C11.1 C2.1 SW2.1 R3.1 U5.1 R2.1 C12.1 J3.2 J6.1 J5B.1 C3.1 J2A.1',
+    'GND': 'U1.20 J1X.2 U7.2 C14.2 C15.2 C16.2 D1.1 C6.2 C7.2 TP3.1 #FLG02.1 C1.2 C11.2 C9.2 C10.2 R1.2 SW1.2 U5.4 C12.2 J3.3 J6.2 J5B.10 C13.2 C3.2 R4.2 J2A.2 J4.1 C5.2 C8.2',
     '+3V3': 'TP2.1 #FLG03.1 J5A.1 C13.1 J2A.3 J4.2 C5.1 C8.1',
-    'VIN_5V': 'J1.1 F1.1', 'LED_A': 'R10.2 D1.2',
+    'VJACK': 'J1X.1 D2X.2', 'VIN': 'D2X.1 C14.1 C15.1 U7.1 #FLG01.1', 'LED_A': 'R10.2 D1.2',
     'RST': 'U1.9 C2.2 R1.1 SW2.2 J3.1', 'XTAL1': 'U1.19 Y1.1 C9.1', 'XTAL2': 'U1.18 Y1.2 C10.1',
     'SDA5': 'U1.1 J5B.2', 'SCL5': 'U1.2 J5B.3', 'MOSI': 'U1.6 J3.6', 'MISO': 'U1.7 J3.4', 'SCK': 'U1.8 J3.5',
     'RX51': 'U1.10 J5B.5', 'TX51': 'U1.11 J5B.4', 'DHT_DATA': 'U1.12 U5.2 R2.2', 'BTN_PAGE': 'U1.13 R3.2 SW1.1',
@@ -58,10 +60,14 @@ TRUNK = {  # x in grid units
     'SDA3': 140, 'SCL3': 138, 'TX51_3V3': 136, 'RX51_3V3': 134, 'OE': 132,
 }
 MANUAL = {  # explicit polylines (grid units) for tiny local nets
-    'VIN_5V': [[(8, 10), (12, 10)]],
-    'LED_A': [[(18, 13), (18, 15), (20.5, 15)]],
+    'VJACK': [[(7, 9), (9.5, 9)]],
+    'VIN': [[(12.5, 9), (18, 9)], [(15, 11), (15, 9)], [(17, 11), (17, 9)], [(13, 7), (13, 9)]],
+    'LED_A': [[(30, 13), (30, 15), (32.5, 15)]],
 }
-NC = 'U1.3 U1.4 U1.5 U1.14 U1.15 U1.16 U1.17 U1.22 U1.23 U1.24 U1.25 U1.26 U1.27 U1.28 U1.29 U1.30 ' \
+MANUAL_JUNCTIONS = [(13, 9), (15, 9), (17, 9)]
+RENAME = {'J1X': 'J1', 'D2X': 'D2'
+}
+NC = 'J1X.3 U1.3 U1.4 U1.5 U1.14 U1.15 U1.16 U1.17 U1.22 U1.23 U1.24 U1.25 U1.26 U1.27 U1.28 U1.29 U1.30 ' \
      'U1.32 U1.33 U1.34 U1.35 U1.36 U1.37 U1.38 U1.39 U5.3 J5A.6 J5A.7 J5A.8 J5A.9 J5B.6 J5B.7 J5B.8 J5B.9 ' \
      'J2A.5 J2A.6 J2A.7 J2A.8 J2B.3 J2B.4 J2B.5 J2B.6 J2B.7 J2B.8'
 
@@ -133,6 +139,10 @@ def main():
     for s in find(sch, 'symbol'):
         ref = next(p[2] for p in find(s, 'property') if p[1] == 'Reference')
         insts[ref] = s
+    for tmp, real in RENAME.items():   # file already rewritten: J1 is the renamed J1X
+        if tmp not in insts and real in insts and first(insts[real], 'lib_id')[1] in (
+                'Connector:Barrel_Jack_Switch', 'Device:D'):
+            insts[tmp] = insts[real]
 
     # pin endpoints and outward directions
     pins = {}
@@ -155,6 +165,7 @@ def main():
         for poly in polys:
             pts = [(r(x * G), r(y * G)) for x, y in poly]
             wires += [(net, a, b) for a, b in zip(pts, pts[1:])]
+    junctions += [(r(x * G), r(y * G)) for x, y in MANUAL_JUNCTIONS]
     for net, tx in TRUNK.items():
         T = r(tx * G)
         attach = []
@@ -223,6 +234,8 @@ def main():
         for prop in find(s, 'property'):
             if prop[1] == 'Value' and ref in VALUES:
                 prop[2] = VALUES[ref]
+            if prop[1] == 'Reference' and ref in RENAME:
+                prop[2] = RENAME[ref]
             pa = first(prop, 'at')
             pa[1], pa[2] = r(float(pa[1]) - ox + nx), r(float(pa[2]) - oy + ny)
             if len(pa) > 3:
@@ -269,6 +282,9 @@ def main():
                         [Sym('at'), r((gx - 2) * G), y, 0],
                         [Sym('effects'), [Sym('font'), [Sym('size'), 1.27, 1.27]], [Sym('justify'), Sym('right')]],
                         [Sym('uuid'), uid()]])
+
+    used = {first(s, 'lib_id')[1] for s in out if s[0] == 'symbol'}
+    lib_block[:] = [x for x in lib_block if not (isinstance(x, list) and x and x[0] == 'symbol' and x[1] not in used)]
 
     idx = body.index(first(body, 'sheet_instances'))
     body[idx:idx] = out

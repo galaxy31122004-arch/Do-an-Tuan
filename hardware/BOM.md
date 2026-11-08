@@ -16,7 +16,9 @@ Giá tham khảo ngày **01/11/2026**, đơn vị VND. Bảng đầu ghi **đơn
 | R2 | 1 | [4,7 kΩ 1% 0,25 W](https://chotroihn.vn/tro-vach-1-4w-1-50c) | 120đ | 120đ | Axial THT | Kéo DATA DHT11 lên 5 V. Giá: Mua gói 50, dùng 1 |
 | R4 | 1 | [100 kΩ 1% 0,25 W](https://chotroihn.vn/tro-vach-1-4w-1-50c) | 120đ | 120đ | Axial THT | Kéo OE TXS0108E xuống GND khi ESP32 khởi động; bỏ pull-up OE trên module nếu có. Giá: Mua gói 50, dùng 1; trang báo hết hàng biến thể này; cần xác nhận nguồn khác |
 | R10 | 1 | [1 kΩ 0,25 W](https://chotroihn.vn/tro-vach-1-4w-1-50c) | 120đ | 120đ | Axial THT | Hạn dòng LED nguồn. Giá: Mua gói 50, dùng 1 |
-| C1,C3,C5,C6 | 4 | [100 nF X7R ≥16 V](https://chotroihn.vn/tu-gom-vang-50v) | 500đ | 2.000đ | THT 2,54 mm | VCC AT89S52, TXS VCCB 5V, OLED 3V3, ESP32 5V; đặt sát tải. Giá: Giá biến thể 0.1uF/104; đối chiếu điện môi X7R theo BOM trước khi mua |
+| C1,C3,C5,C6,C16 | 5 | [100 nF X7R ≥16 V](https://chotroihn.vn/tu-gom-vang-50v) | 500đ | 2.500đ | THT 2,54 mm | VCC AT89S52, TXS VCCB 5V, OLED 3V3, ESP32 5V, đầu ra LM7805; đặt sát tải. Giá: Giá biến thể 0.1uF/104; đối chiếu điện môi X7R theo BOM trước khi mua |
+| C14 | 1 | 100 µF ≥25 V | Chưa xác nhận | Chưa xác nhận | Tụ hóa radial | Đầu vào LM7805 sau D2; đúng cực. Giá: Chưa khảo sát giá |
+| C15 | 1 | 330 nF ≥25 V | Chưa xác nhận | Chưa xác nhận | Tụ gốm THT | Sát chân IN LM7805 theo datasheet. Giá: Chưa khảo sát giá |
 | C7 | 1 | [470 µF ≥10 V](https://chotroihn.vn/tu-hoa-10v) | 1.000đ | 1.000đ | Tụ hóa radial | Tụ nguồn 5 V gần ESP32; đúng cực. Giá: 1 tụ |
 | C8 | 1 | [10 µF ≥10 V](https://chotroihn.vn/tu-hoa-16v) | 1.000đ | 1.000đ | Tụ hóa radial | Lọc nhánh 3,3 V OLED; đúng cực. Giá: 3 tụ 10uF 16V; C2 reset, C8/C11 lọc nguồn; kiểm tra cực tính |
 | C9,C10 | 2 | [22 pF C0G/NP0 ≥25 V](https://chotroihn.vn/tu-gom-vang-50v) | 500đ | 1.000đ | Tụ gốm THT | Hai tụ Y1; giá trị khởi đầu, đối chiếu CL thạch anh trước khi chốt PCB. Giá: Giá biến thể 22P; xác nhận C0G/NP0 và tải thạch anh trước khi mua |
@@ -24,9 +26,10 @@ Giá tham khảo ngày **01/11/2026**, đơn vị VND. Bảng đầu ghi **đơn
 | C12 | 1 | [100 nF X7R ≥16 V](https://chotroihn.vn/tu-gom-vang-50v) | 500đ | 500đ | THT 2,54 mm | Lọc nguồn sát VCC/GND DHT11. Giá: Giá biến thể 0.1uF/104; đối chiếu điện môi X7R theo BOM trước khi mua |
 | C13 | 1 | [100 nF X7R ≥16 V](https://chotroihn.vn/tu-gom-vang-50v) | 500đ | 500đ | THT 2,54 mm | Lọc VCCA 3,3 V của TXS0108E sát module. Giá: Giá biến thể 0.1uF/104; đối chiếu điện môi X7R theo BOM trước khi mua |
 | D1 | 1 | [LED xanh 3 mm](https://chotroihn.vn/goi-100-con-led-duc-3mm) | 290đ | 290đ | THT | LED báo có nguồn 5 V. Giá: Mua gói 100, dùng 1 |
-| F1 | 1 | Cầu chì tự phục hồi Ihold 1 A ≥6 V | Chưa xác nhận | Chưa xác nhận | Radial THT | Mắc nối tiếp đầu vào 5 V; đối chiếu dòng khởi động thực tế. Giá: Chưa có giá hợp lệ đúng quy cách. Không dùng giá giữ chỗ 0/1đ hoặc thay bằng SMD1.1A trong tổng |
+| U7 | 1 | LM7805 ổn áp 5 V 1,5 A | Chưa xác nhận | Chưa xác nhận | TO-220 nằm ngang, vít xuống PCB | Tab = GND: vít M3 xuống vùng đồng GND hai mặt làm tản nhiệt; adapter 7,5–9 V để giảm nhiệt. Giá: Chưa khảo sát giá |
+| D2 | 1 | 1N4007 | Chưa xác nhận | Chưa xác nhận | DO-41 | Chống cắm ngược cực jack DC, nối tiếp trước LM7805. Giá: Chưa khảo sát giá |
 | SW1,SW2 | 2 | [Nút nhấn thường hở](https://chotroihn.vn/bo-10-nut-nhan-4-chan) | 500đ | 1.000đ | Tactile 6x6 mm | SW1 đổi trang; SW2 reset AT89S52. Giá: Mua gói 10, dùng 2 |
-| J1 | 1 | [Terminal cấp nguồn 2 chân](https://chotroihn.vn/terminal-kf301-300v-15a) | 1.500đ | 1.500đ | Pitch 5,08 mm | Đầu vào 5 V và GND; ghi rõ cực tính. Giá: 1 terminal |
+| J1 | 1 | Jack DC 5,5x2,1 mm hàn mạch | Chưa xác nhận | Chưa xác nhận | DC-005, 3 chân | Tâm dương; chân switch để trống. Giá: Chưa khảo sát giá |
 | J2A,J2B | 2 | [Header cái 1x8](https://chotroihn.vn/jump-cai-don-1-40p-2-54) | 400đ | 800đ | Pitch 2,54 mm | Đế cắm ESP32; đo khoảng cách hai hàng của board thực tế. Giá: 2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt |
 | J4 | 1 | [Header cái 1x4](https://chotroihn.vn/jump-cai-don-1-40p-2-54) | 200đ | 200đ | Pitch 2,54 mm | Đế cắm OLED. Giá: 2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt |
 | J3 | 1 | [Header ISP AT89S52 1x6](https://chotroihn.vn/jump-duc-don-1x40p-2-54) | 300đ | 300đ | Pitch 2,54 mm | RST/VCC/GND/MISO/SCK/MOSI; nạp chính bằng Burn-E ngoài mạch. Giá: 1 thanh 40 chân, dùng 6 chân ISP AT89S52 + 3 chân relay; giả định chân đực module đi kèm module |
@@ -36,9 +39,9 @@ Giá tham khảo ngày **01/11/2026**, đơn vị VND. Bảng đầu ghi **đơn
 | SK1 | 1 | [Đế IC DIP-40](https://chotroihn.vn/de-ic) | 1.500đ | 1.500đ | Wide 15,24 mm | Đế AT89S52, hàn đế rồi cắm IC. Giá: Biến thể 40 chân; xác nhận loại rộng cho AT89S52 DIP40 |
 | TP1,TP2,TP3 | 3 | Test point vòng dây | 0đ | 0đ | THT | Đo 5 V / 3,3 V / GND. Giá: Tận dụng chân/dây cắt thừa của header đã tính; không mua thêm |
 
-**Tổng số chi tiết trong bảng:** 40 (bao gồm IC/module/đế; không gồm PCB và vật tư ngoài mạch).
+**Tổng số chi tiết trong bảng:** 44 (bao gồm IC/module/đế; không gồm PCB và vật tư ngoài mạch).
 
-**Giá trị linh kiện dùng trên một mạch: 223.840đ, chưa gồm F1.**
+**Giá trị linh kiện dùng trên một mạch: 222.840đ, chưa gồm mục chưa có giá.**
 
 ## Tiền mua thực tế theo gói/thanh
 
@@ -54,14 +57,17 @@ Giá tham khảo ngày **01/11/2026**, đơn vị VND. Bảng đầu ghi **đơn
 | [R2: Điện trở 4,7kΩ 1/4W 1%](https://chotroihn.vn/tro-vach-1-4w-1-50c) | 1 | 6.000đ | 6.000đ | Mua gói 50, dùng 1 |
 | [R4: Điện trở 100kΩ 1/4W 1%](https://chotroihn.vn/tro-vach-1-4w-1-50c) | 1 | 6.000đ | 6.000đ | Mua gói 50, dùng 1; trang báo hết hàng biến thể này; cần xác nhận nguồn khác |
 | [R10: Điện trở 1kΩ 1/4W 1%](https://chotroihn.vn/tro-vach-1-4w-1-50c) | 1 | 6.000đ | 6.000đ | Mua gói 50, dùng 1 |
-| [C1,C3,C5,C6,C12,C13: Tụ gốm 100nF](https://chotroihn.vn/tu-gom-vang-50v) | 6 | 500đ | 3.000đ | Giá biến thể 0.1uF/104; đối chiếu điện môi X7R theo BOM trước khi mua |
+| [C1,C3,C5,C6,C12,C13,C16: Tụ gốm 100nF](https://chotroihn.vn/tu-gom-vang-50v) | 7 | 500đ | 3.500đ | Giá biến thể 0.1uF/104; đối chiếu điện môi X7R theo BOM trước khi mua |
 | [C7: Tụ hóa 470uF 10V](https://chotroihn.vn/tu-hoa-10v) | 1 | 1.000đ | 1.000đ | 1 tụ |
 | [C2,C8,C11: Tụ hóa 10uF 16V](https://chotroihn.vn/tu-hoa-16v) | 3 | 1.000đ | 3.000đ | 3 tụ 10uF 16V; C2 reset, C8/C11 lọc nguồn; kiểm tra cực tính |
 | [C9,C10: Tụ gốm 22pF](https://chotroihn.vn/tu-gom-vang-50v) | 2 | 500đ | 1.000đ | Giá biến thể 22P; xác nhận C0G/NP0 và tải thạch anh trước khi mua |
 | [D1: LED xanh lá 3mm](https://chotroihn.vn/goi-100-con-led-duc-3mm) | 1 | 29.000đ | 29.000đ | Mua gói 100, dùng 1 |
-| F1: Cầu chì PTC radial Ihold 1A | 1 | Chưa xác nhận | Chưa xác nhận | Chưa có giá hợp lệ đúng quy cách. Không dùng giá giữ chỗ 0/1đ hoặc thay bằng SMD1.1A trong tổng |
+| U7: LM7805 TO-220 | 1 | Chưa xác nhận | Chưa xác nhận | Chưa khảo sát giá |
+| D2: Diode 1N4007 | 1 | Chưa xác nhận | Chưa xác nhận | Chưa khảo sát giá |
+| C14: Tụ hóa 100uF 25V | 1 | Chưa xác nhận | Chưa xác nhận | Chưa khảo sát giá |
+| C15: Tụ gốm 330nF | 1 | Chưa xác nhận | Chưa xác nhận | Chưa khảo sát giá |
 | [SW1,SW2: Nút nhấn 6x6](https://chotroihn.vn/bo-10-nut-nhan-4-chan) | 1 | 5.000đ | 5.000đ | Mua gói 10, dùng 2 |
-| [J1: Terminal KF301 2 chân](https://chotroihn.vn/terminal-kf301-300v-15a) | 1 | 1.500đ | 1.500đ | 1 terminal |
+| J1: Jack DC 5.5x2.1 hàn mạch | 1 | Chưa xác nhận | Chưa xác nhận | Chưa khảo sát giá |
 | [J2A,J2B,J4,J5A,J5B: Header cái 2,54mm](https://chotroihn.vn/jump-cai-don-1-40p-2-54) | 2 | 2.000đ | 4.000đ | 2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt |
 | [J3,J6: Header đực 2,54mm](https://chotroihn.vn/jump-duc-don-1x40p-2-54) | 1 | 2.000đ | 2.000đ | 1 thanh 40 chân, dùng 6 chân ISP AT89S52 + 3 chân relay; giả định chân đực module đi kèm module |
 | K1: Module relay 1 kênh 5V opto | 1 | Chưa xác nhận | Chưa xác nhận | Chưa khảo sát giá; không dùng giá giữ chỗ trong tổng |
@@ -69,16 +75,16 @@ Giá tham khảo ngày **01/11/2026**, đơn vị VND. Bảng đầu ghi **đơn
 | TP1,TP2,TP3: Test point tự làm | 0 | 0đ | 0đ | Tận dụng chân/dây cắt thừa của header đã tính; không mua thêm |
 | PCB: In PCB theo giá người dùng | 1 | 120.000đ | 120.000đ | Giá người dùng cung cấp, không phải giá nhà sản xuất đã khảo sát |
 
-- Linh kiện mua mới theo gói/thanh: **283.500đ**, chưa gồm F1.
+- Linh kiện mua mới theo gói/thanh: **282.500đ**, chưa gồm mục chưa có giá.
 - In PCB theo giá người dùng: **120.000đ**.
-- **Tổng tiền mua + PCB: 403.500đ, chưa gồm F1.**
-- Nếu chỉ phân bổ lượng linh kiện dùng trên một PCB: **343.840đ**, chưa gồm F1. Phần chênh lệch là linh kiện dư từ gói/thanh mua.
-- F1 và K1 (module relay) chưa có giá đúng quy cách, để trống trong CSV; không tính thành 0đ. Giá tụ tham khảo cần xác nhận đúng điện môi; trở 10kΩ/100kΩ ở nguồn giá đang báo hết hàng.
+- **Tổng tiền mua + PCB: 402.500đ, chưa gồm mục chưa có giá.**
+- Nếu chỉ phân bổ lượng linh kiện dùng trên một PCB: **342.840đ**, chưa gồm mục chưa có giá. Phần chênh lệch là linh kiện dư từ gói/thanh mua.
+- J1, U7, D2, C14, C15 và K1 chưa khảo sát giá, để trống trong CSV; không tính thành 0đ. Giá tụ tham khảo cần xác nhận đúng điện môi; trở 10kΩ/100kΩ ở nguồn giá đang báo hết hàng.
 - Chưa gồm vận chuyển, adapter/cáp, vỏ, thiếc/flux và công hàn. Burn-E đã có nên không mua lại.
 
 ## Vật tư đi kèm, không hàn trực tiếp
 
-- 1 adapter DC 5 V / 2 A ổn áp, dây cấp nguồn và dây USB lập trình ESP32.
+- 1 adapter DC 7,5–9 V / 1 A, jack 5,5x2,1 mm tâm dương; dây USB lập trình ESP32.
 - 1 PCB theo kích thước thực tế ESP32/OLED; thiếc, flux và dây nối cho bản thử.
 - Mạch nạp Burn-E đang sử dụng, cáp USB và phần mềm đúng phiên bản để nạp/verify HEX AT89S52; đây là dụng cụ dùng lại, không hàn lên mạch.
 
@@ -88,5 +94,5 @@ Giá tham khảo ngày **01/11/2026**, đơn vị VND. Bảng đầu ghi **đơn
 - TXS0108E có pull-up nội. Không lắp thêm bốn điện trở 4,7 kΩ kéo bus như thiết kế cũ; kiểm tra pull-up có sẵn trên OLED/module và đo dạng sóng.
 - OE nối GPIO6 và R4 100 kΩ xuống GND; không để module kéo cứng OE lên nguồn. Phải kiểm tra/tháo cầu nối hoặc pull-up OE nếu module đã gắn.
 - Chọn ESP32-C3 SuperMini đã hàn chân đực. Nếu hàng mua chưa có chân, bổ sung 2 thanh header đực 1x8; không tính trùng với header có sẵn.
-- Chỉ dùng một nguồn cấp 5 V: tháo nguồn ngoài khi cắm USB nếu board không có bảo vệ chống cấp ngược. Không nối adapter vào chân 3V3.
+- Không cắm USB ESP32 khi đang cấp nguồn jack nếu board không có bảo vệ chống cấp ngược. Không nối adapter vào chân 5V/3V3.
 - Giá trị/điện áp từng linh kiện là cấu hình thiết kế; xác minh nguồn và dạng sóng trên mạch thật trước khi vận hành.
