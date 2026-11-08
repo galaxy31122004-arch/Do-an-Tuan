@@ -49,7 +49,10 @@ def prune():
                 b.Delete(v); gone += 1
         if not gone: return
 
-if sys.argv[1] == 'prep':
+if sys.argv[1] == 'prune':
+    n0 = len(b.GetTracks()); prune(); print('pruned', n0 - len(b.GetTracks()))
+    pcbnew.ZONE_FILLER(b).Fill(b.Zones())
+elif sys.argv[1] == 'prep':
     u1 = b.FindFootprintByReference('U1'); pad = {p.GetNumber(): p for p in u1.Pads()}
     pad['38'].SetNet(net('unconnected-(U1-P0.1{slash}AD1-Pad38)'))
     pad['37'].SetNet(net('unconnected-(U1-P0.2{slash}AD2-Pad37)'))
