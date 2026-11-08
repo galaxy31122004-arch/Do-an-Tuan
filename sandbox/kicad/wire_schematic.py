@@ -35,9 +35,13 @@ PLACE = {
     'J1X': (4, 10, 0, False), 'D2X': (11, 9, 0, True), 'C14': (15, 12.5, 0, False),
     'C15': (17, 12.5, 0, False), 'U7': (21, 9, 0, False), 'C16': (26, 12.5, 0, False),
     'R10': (30, 11.5, 0, False), 'D1': (34, 15, 0, True),
-    'C1': (40, 11.5, 0, False), 'C11': (44, 11.5, 0, False), 'C6': (48, 11.5, 0, False),
-    'C7': (52, 11.5, 0, False), 'C3': (56, 11.5, 0, False), 'C12': (60, 11.5, 0, False),
-    'C13': (64, 11.5, 0, False), 'C5': (68, 11.5, 0, False), 'C8': (72, 11.5, 0, False),
+    # decoupling caps sit next to the part they serve, wired to its supply pin
+    'C1': (92, 45.5, 0, False), 'C11': (96, 45.5, 0, False),          # AT89S52 VCC
+    'C6': (126, 40.5, 0, False), 'C7': (129, 40.5, 0, False),         # ESP32 5V
+    'C3': (39.5, 27, 90, False),                                       # TXS VCCB 5V
+    'C13': (144.5, 34, 270, False),                                    # TXS VCCA 3V3
+    'C12': (30, 42.5, 0, False),                                       # DHT11 VDD
+    'C5': (126, 26.5, 0, False), 'C8': (129, 26.5, 0, False),         # OLED 3V3
     'TP1': (78, 10, 0, False), 'TP2': (82, 10, 0, False), 'TP3': (86, 10, 0, False),
     '#FLG01': (13, 7, 0, False), '#FLG02': (96, 10, 0, False), '#FLG03': (100, 10, 0, False),
 }
@@ -63,8 +67,19 @@ MANUAL = {  # explicit polylines (grid units) for tiny local nets
     'VJACK': [[(7, 9), (9.5, 9)]],
     'VIN': [[(12.5, 9), (18, 9)], [(15, 11), (15, 9)], [(17, 11), (17, 9)], [(13, 7), (13, 9)]],
     'LED_A': [[(30, 13), (30, 15), (32.5, 15)]],
+    '+5V': [[(82, 44), (96, 44)],                               # U1 VCC -> C1, C11
+            [(122, 43), (124, 43), (124, 39), (129, 39)],       # ESP32 5V -> C6, C7
+            [(36, 29), (37, 29), (37, 27), (38, 27)],           # TXS VCCB -> C3
+            [(34, 41), (30, 41)],                               # DHT11 VDD -> C12
+            [(24, 9), (26, 9), (26, 11)]],                      # LM7805 OUT -> C16
+    '+3V3': [[(148, 36), (147, 36), (147, 34), (146, 34)],      # TXS VCCA -> C13
+             [(122, 30), (124, 30), (124, 25), (129, 25)]],     # OLED VCC -> C5, C8
 }
-MANUAL_JUNCTIONS = [(13, 9), (15, 9), (17, 9)]
+MANUAL_JUNCTIONS = [(13, 9), (15, 9), (17, 9), (92, 44), (126, 39), (37, 27), (147, 34), (126, 25), (26, 9)]
+# supply pins already joined to a cap by wire: one power symbol per cap group is enough
+SKIP_POWER = {'U1.40', 'C11.1', 'J2A.1', 'C7.1', 'J5B.1', 'C3.1', 'J5A.1', 'C13.1', 'U5.1',
+              'J4.2', 'C8.1', 'U7.3', 'C16.1'}
+EXTRA_POWER = [('+5V', 37, 27), ('+3V3', 147, 34), ('+5V', 26, 9)]   # symbols on wire corners, pointing up
 RENAME = {'J1X': 'J1', 'D2X': 'D2'
 }
 NC = 'J1X.3 U1.3 U1.4 U1.5 U1.14 U1.15 U1.16 U1.17 U1.22 U1.23 U1.24 U1.25 U1.26 U1.27 U1.28 U1.29 U1.30 ' \
@@ -243,10 +258,9 @@ def main():
         out.append(s)
 
     n = 0
-    for p, ((x, y), (ox, oy)) in pins.items():
-        net = net_of[p]
-        if net not in POWER:
-            continue
+    spots = [(net_of[p], xy, d) for p, (xy, d) in pins.items() if net_of[p] in POWER and p not in SKIP_POWER]
+    spots += [(net, (r(x * G), r(y * G)), (0, -1)) for net, x, y in EXTRA_POWER]
+    for net, (x, y), (ox, oy) in spots:
         n += 1
         down = net == 'GND'
         # rotate the symbol so its body points away from the pin
