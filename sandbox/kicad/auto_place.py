@@ -10,6 +10,12 @@ VERT = (SYS + r'\Resistor_THT.pretty', 'R_Axial_DIN0207_L6.3mm_D2.5mm_P2.54mm_Ve
 PLAN = [('Q1', None, '131.5,116.5'), ('R8', VERT, 'U4.19'), ('R9', VERT, 'U4.18'),
         ('R1', VERT, 'U1.9'), ('R3', VERT, 'U1.13'),
         ('TP1', None, 'U7.3'), ('TP2', None, 'U2.3'), ('TP3', None, 'U7.2')]
+import sys
+if len(sys.argv) > 1:  # REF=lib_dir|fp_name@target ...  (fp part may be '-' to keep the footprint)
+    PLAN = []
+    for a in sys.argv[1:]:
+        ref, rest = a.split('=', 1); fp, tgt = rest.rsplit('@', 1)
+        PLAN.append((ref, None if fp == '-' else tuple(fp.split('|')), tgt))
 
 def swap(ref, lib, fp):
     old = FP[ref]

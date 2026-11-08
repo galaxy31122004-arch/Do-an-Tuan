@@ -49,7 +49,14 @@ def prune():
                 b.Delete(v); gone += 1
         if not gone: return
 
-if sys.argv[1] == 'prune':
+if sys.argv[1] == 'rip':  # rip tracks touching the pads of the given refs, then prune stubs
+    refs = set(sys.argv[2:])
+    rp = [p for p in b.GetPads() if p.GetParentFootprint().GetReference() in refs]
+    dead = [t for t in b.GetTracks() if any(p.GetNetCode() == t.GetNetCode() and p.HitTest(pt) for p in rp
+            for pt in ([t.GetPosition()] if t.GetClass() == 'PCB_VIA' else [t.GetStart(), t.GetEnd()]))]
+    for t in dead: b.Delete(t)
+    prune(); print('ripped', len(dead), 'tracks now', len(b.GetTracks()))
+elif sys.argv[1] == 'prune':
     n0 = len(b.GetTracks()); prune(); print('pruned', n0 - len(b.GetTracks()))
     pcbnew.ZONE_FILLER(b).Fill(b.Zones())
 elif sys.argv[1] == 'prep':
