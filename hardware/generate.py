@@ -11,7 +11,7 @@ PARTS=[
 ('U5',1,'DHT11 cảm biến rời','4 chân','VCC/DATA/NC/GND; không nhầm pin module 3 chân'),
 ('U6',1,'OLED trắng 0,96 inch SSD1315 I²C 128x64','Module 4 chân','Module Hshop đã chọn; cấp 3,3 V, kiểm tra thứ tự chân in trên module'),
 ('Y1',1,'Thạch anh 11,0592 MHz','HC-49S','Dao động 11,0592 MHz cho UART 9600; đối chiếu điện dung tải'),
-('R1,R3,R7,R8,R9',5,'10 kΩ 1% 0,25 W','Axial THT','R1 kéo RST chân 9 xuống GND; R3 kéo nút trang lên 5 V; R7 base-emitter Q1 giữ Q1 tắt; R8/R9 kéo SDA/SCL (P0.1/P0.2, cực máng hở) lên 5 V'),
+('R1,R3,R7,R8,R9',5,'10 kΩ 1% 0,25 W','Axial THT','R1 kéo RST chân 9 xuống GND; R3 kéo nút trang lên 5 V; R7 base-emitter Q1 giữ Q1 tắt; R8/R9 kéo SDA/SCL (P0.3/P0.4, cực máng hở) lên 5 V'),
 ('R6',1,'2,2 kΩ 0,25 W','Axial THT','Hạn dòng LED PC817 (~1,5 mA khi P2.0 kéo xuống)'),
 ('U8',1,'PC817 opto','DIP-4','LED phía 5 V: +5 V-R6-anode, cathode-P2.0; transistor phía 12 V: C lên +12V, E qua R5 vào base Q1'),
 ('R2',1,'4,7 kΩ 1% 0,25 W','Axial THT','Kéo DATA DHT11 lên 5 V'),

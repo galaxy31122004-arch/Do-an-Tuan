@@ -5804,10 +5804,6 @@
 		(uuid "85295a23-3383-41e8-913c-47aba8d89b57")
 	)
 	(no_connect
-		(at 274.32 139.7)
-		(uuid "904af3aa-c9a6-44b6-9e7d-8f1c2da0725c")
-	)
-	(no_connect
 		(at 45.72 104.14)
 		(uuid "91b8a03d-e8c6-4fde-81c0-728a3170e4e4")
 	)
@@ -5846,10 +5842,6 @@
 	(no_connect
 		(at 274.32 129.54)
 		(uuid "ce3dfcf1-f935-457f-9c19-a0544db877df")
-	)
-	(no_connect
-		(at 274.32 137.16)
-		(uuid "ec6aeb6e-b772-45c3-aace-f56a7e84fa43")
 	)
 	(no_connect
 		(at 274.32 144.78)
@@ -13150,17 +13142,6 @@
 		(at 243.84 132.08)
 		(uuid "20e6f5de-2fa9-4b36-87a6-f0ea4f8b9b4f")
 	)
-	(label "SDA5"
-		(at 274.32 132.08 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e80107ca-639d-4bb9-b57d-4b19d1f51605")
-	)
 	(symbol
 		(lib_id "Device:R")
 		(at 299.72 111.76 0)
@@ -13323,17 +13304,6 @@
 				)
 			)
 		)
-	)
-	(label "SCL5"
-		(at 274.32 134.62 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "344bf571-266c-4ea2-b76e-3e4caff7ac5b")
 	)
 	(symbol
 		(lib_id "Device:R")
@@ -13579,6 +13549,36 @@
 	(no_connect
 		(at 129.54 86.36)
 		(uuid "50258039-d3da-4c34-9d29-30f0ab94dc34")
+	)
+	(label "SDA5"
+		(at 274.32 137.16 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c838dceb-876a-48e2-80aa-692a09cf3757")
+	)
+	(no_connect
+		(at 274.32 132.08)
+		(uuid "8419dc5e-d257-45f7-9e06-189256ec1f53")
+	)
+	(label "SCL5"
+		(at 274.32 139.7 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "94e99ab2-b2b4-46c9-b9ac-d2a21cf4b43d")
+	)
+	(no_connect
+		(at 274.32 134.62)
+		(uuid "26feba0c-300e-4508-b3d3-d0208042b12c")
 	)
 	(sheet_instances
 		(path "/"

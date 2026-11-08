@@ -47,13 +47,13 @@ Không lắp module thời gian thực hoặc pin dự phòng. ESP32 lấy UTC t
 
 | Kênh | Phía A: 3,3 V | Phía B: 5 V |
 |---|---|---|
-| A8/B8 — SDA | OLED SDA | AT89S52 P0.1/38 (R8 10 kΩ lên 5 V) |
-| A7/B7 — SCL | OLED SCL | AT89S52 P0.2/37 (R9 10 kΩ lên 5 V) |
+| A8/B8 — SDA | OLED SDA | AT89S52 P0.3/36 (R8 10 kΩ lên 5 V) |
+| A7/B7 — SCL | OLED SCL | AT89S52 P0.4/35 (R9 10 kΩ lên 5 V) |
 | A1/B1 — AT89S52 phát | ESP32 GPIO3/RX1 | AT89S52 P3.1/TX/11 |
 | A2/B2 — ESP32 phát | ESP32 GPIO4/TX1 | AT89S52 P3.0/RX/10 |
 | A1–A3, A6/B1–B3, B6 | NC | NC |
 
-Kênh chọn theo vị trí trên PCB: B1/B2 nằm ngay trên P3.1/P3.0 (chân 11/10), A1/A2 đi lên GPIO3/GPIO4 không bắt chéo; A7/A8 gần J4, B7/B8 nằm ngay trên P0.2/P0.1 (chân 37/38).
+Kênh chọn theo vị trí trên PCB: B1/B2 nằm ngay trên P3.1/P3.0 (chân 11/10), A1/A2 đi lên GPIO3/GPIO4 không bắt chéo; A7/A8 gần J4, B7/B8 nằm gần P0.4/P0.3 (chân 35/36).
 | OLED VCC/GND | 3,3 V/GND (tụ có sẵn trên module) | — |
 
 Đấu module theo nhãn A/B và VCCA/VCCB/OE/GND, không dùng số chân IC trần để suy ra header. J5A/J5B dự kiến hai hàng 1x10, xác minh module thực tế trước khi làm PCB. OLED mặc định `0x3C`; đổi `OLED_ADDR` nếu màn dùng `0x3D`.
