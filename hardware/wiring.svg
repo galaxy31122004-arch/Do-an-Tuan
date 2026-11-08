@@ -38,8 +38,8 @@
  <text x="990" y="440" class="small">C5 100nF + C8 10µF across 3V3/GND</text>
  <rect x="960" y="490" width="435" height="165" rx="12" class="box"/>
  <text x="980" y="523" class="head">U4 · TXS0108E module</text>
- <text x="980" y="553">VCCA=3V3 · VCCB=5V · GND</text><text x="980" y="582">B1 SDA_HV ↔ A1 OLED SDA</text>
- <text x="980" y="612">B2 SCL_HV ↔ A2 OLED SCL</text><text x="980" y="640">C3/C13 100nF · built-in pull-ups</text>
+ <text x="980" y="553">VCCA=3V3 · VCCB=5V · GND</text><text x="980" y="582">B8 SDA_HV ↔ A8 OLED SDA</text>
+ <text x="980" y="612">B7 SCL_HV ↔ A7 OLED SCL</text><text x="980" y="640">R8/R9 10k pull-up (5 V side)</text>
  <path d="M850 459 H909 V550 H960 M850 492 H890 V580 H960" class="sig"/>
  <path d="M1320 490 V460 M1360 490 V460" class="low"/>
  <rect x="45" y="785" width="535" height="245" rx="12" class="box"/>
