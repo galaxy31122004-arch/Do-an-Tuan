@@ -12,7 +12,7 @@ Thiết kế đã thống nhất: **DHT11 → AT89S52 → OLED SSD1315**; **AT89
 
 - Bản gốc: [Tóm tắt đề tài](documents/sources/de-tai/TÓM%20TẮT%20ĐỀ%20TÀI%20ĐỒ%20ÁN%202.docx).
 - Bản cập nhật: [Tóm tắt IoT OLED](documents/sources/de-tai/TÓM%20TẮT%20ĐỀ%20TÀI%20ĐỒ%20ÁN%202%20-%20IoT%20OLED.docx).
-- [Cấu trúc tài liệu](01-cau-truc-tong-the.md) và [phạm vi đã xác nhận](02-yeu-cau-thong-tin.md).
+- [Cấu trúc tài liệu](documents/de-tai/01-cau-truc-tong-the.md) và [phạm vi đã xác nhận](documents/de-tai/02-yeu-cau-thong-tin.md).
 
 ## Workspace
 
