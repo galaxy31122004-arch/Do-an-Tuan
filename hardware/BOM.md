@@ -19,15 +19,10 @@ Giá tham khảo ngày **01/11/2026**, đơn vị VND. Bảng đầu ghi **đơn
 | R4 | 1 | [100 kΩ 1% 0,25 W](https://chotroihn.vn/tro-vach-1-4w-1-50c) | 120đ | 120đ | Axial THT | Kéo OE TXS0108E xuống GND khi ESP32 khởi động; bỏ pull-up OE trên module nếu có. Giá: Mua gói 50, dùng 1; trang báo hết hàng biến thể này; cần xác nhận nguồn khác |
 | R10 | 1 | [1 kΩ 0,25 W](https://chotroihn.vn/tro-vach-1-4w-1-50c) | 120đ | 120đ | Axial THT | Hạn dòng LED nguồn. Giá: Mua gói 50, dùng 1 |
 | R5 | 1 | 4,7 kΩ 0,25 W | Chưa xác nhận | Chưa xác nhận | Axial THT | Từ emitter PC817 (phía 12 V) vào base Q1. Giá: Chưa khảo sát giá; có thể lấy từ gói 4 |
-| C1,C3,C5,C6,C16 | 5 | [100 nF X7R ≥16 V](https://chotroihn.vn/tu-gom-vang-50v) | 500đ | 2.500đ | THT 2,54 mm | VCC AT89S52, TXS VCCB 5V, OLED 3V3, ESP32 5V, đầu ra LM7805; đặt sát tải. Giá: Giá biến thể 0.1uF/104; đối chiếu điện môi X7R theo BOM trước khi mua |
+| C1,C16 | 2 | [100 nF X7R ≥16 V](https://chotroihn.vn/tu-gom-vang-50v) | 500đ | 1.000đ | THT 2,54 mm | VCC AT89S52 và đầu ra LM7805; đặt sát chân. Giá: Giá biến thể 0.1uF/104; đối chiếu điện môi X7R theo BOM trước khi mua |
 | C14 | 1 | 100 µF ≥25 V | Chưa xác nhận | Chưa xác nhận | Tụ hóa radial | Đầu vào LM7805 sau D2; đúng cực. Giá: Chưa khảo sát giá |
-| C15 | 1 | 330 nF ≥25 V | Chưa xác nhận | Chưa xác nhận | Tụ gốm THT | Sát chân IN LM7805 theo datasheet. Giá: Chưa khảo sát giá |
-| C7 | 1 | [470 µF ≥10 V](https://chotroihn.vn/tu-hoa-10v) | 1.000đ | 1.000đ | Tụ hóa radial | Tụ nguồn 5 V gần ESP32; đúng cực. Giá: 1 tụ |
-| C8 | 1 | [10 µF ≥10 V](https://chotroihn.vn/tu-hoa-16v) | 1.000đ | 1.000đ | Tụ hóa radial | Lọc nhánh 3,3 V OLED; đúng cực. Giá: 3 tụ 10uF 16V; C2 reset, C8/C11 lọc nguồn; kiểm tra cực tính |
 | C9,C10 | 2 | [22 pF C0G/NP0 ≥25 V](https://chotroihn.vn/tu-gom-vang-50v) | 500đ | 1.000đ | Tụ gốm THT | Hai tụ Y1; giá trị khởi đầu, đối chiếu CL thạch anh trước khi chốt PCB. Giá: Giá biến thể 22P; xác nhận C0G/NP0 và tải thạch anh trước khi mua |
-| C2,C11 | 2 | [10 µF ≥10 V](https://chotroihn.vn/tu-hoa-16v) | 1.000đ | 2.000đ | Tụ hóa radial | C11 lọc 5 V; C2 reset: cực + lên 5 V, cực - vào RST chân 9. Giá: 3 tụ 10uF 16V; C2 reset, C8/C11 lọc nguồn; kiểm tra cực tính |
-| C12 | 1 | [100 nF X7R ≥16 V](https://chotroihn.vn/tu-gom-vang-50v) | 500đ | 500đ | THT 2,54 mm | Lọc nguồn sát VCC/GND DHT11. Giá: Giá biến thể 0.1uF/104; đối chiếu điện môi X7R theo BOM trước khi mua |
-| C13 | 1 | [100 nF X7R ≥16 V](https://chotroihn.vn/tu-gom-vang-50v) | 500đ | 500đ | THT 2,54 mm | Lọc VCCA 3,3 V của TXS0108E sát module. Giá: Giá biến thể 0.1uF/104; đối chiếu điện môi X7R theo BOM trước khi mua |
+| C2 | 1 | [10 µF ≥10 V](https://chotroihn.vn/tu-hoa-16v) | 1.000đ | 1.000đ | Tụ hóa radial | C2 reset: cực + lên 5 V, cực - vào RST chân 9. Giá: 3 tụ 10uF 16V; C2 reset, C8/C11 lọc nguồn; kiểm tra cực tính |
 | D1 | 1 | [LED xanh 3 mm](https://chotroihn.vn/goi-100-con-led-duc-3mm) | 290đ | 290đ | THT | LED báo có nguồn 5 V. Giá: Mua gói 100, dùng 1 |
 | U7 | 1 | LM7805 ổn áp 5 V 1,5 A | Chưa xác nhận | Chưa xác nhận | TO-220 nằm ngang, vít xuống PCB | Tab = GND: vít M3 xuống vùng đồng GND hai mặt; với 12 V tỏa ~1,6 W, cần vùng đồng lớn hoặc tản phụ. Giá: Chưa khảo sát giá |
 | D2 | 1 | SR360 Schottky 3 A 60 V | Chưa xác nhận | Chưa xác nhận | DO-201AD | Chống cắm ngược cực nguồn 12 V, sụt áp ~0,5 V; nối tiếp trước LM7805. Giá: Chưa khảo sát giá |
@@ -45,9 +40,9 @@ Giá tham khảo ngày **01/11/2026**, đơn vị VND. Bảng đầu ghi **đơn
 | SK1 | 1 | [Đế IC DIP-40](https://chotroihn.vn/de-ic) | 1.500đ | 1.500đ | Wide 15,24 mm | Đế AT89S52, hàn đế rồi cắm IC. Giá: Biến thể 40 chân; xác nhận loại rộng cho AT89S52 DIP40 |
 | TP1,TP2,TP3 | 3 | Test point vòng dây | 0đ | 0đ | THT | Đo 5 V / 3,3 V / GND. Giá: Tận dụng chân/dây cắt thừa của header đã tính; không mua thêm |
 
-**Tổng số chi tiết trong bảng:** 51 (bao gồm IC/module/đế; không gồm PCB và vật tư ngoài mạch).
+**Tổng số chi tiết trong bảng:** 42 (bao gồm IC/module/đế; không gồm PCB và vật tư ngoài mạch).
 
-**Giá trị linh kiện dùng trên một mạch: 222.810đ, chưa gồm mục chưa có giá.**
+**Giá trị linh kiện dùng trên một mạch: 217.310đ, chưa gồm mục chưa có giá.**
 
 ## Tiền mua thực tế theo gói/thanh
 
@@ -91,8 +86,8 @@ Giá tham khảo ngày **01/11/2026**, đơn vị VND. Bảng đầu ghi **đơn
 - Linh kiện mua mới theo gói/thanh: **282.500đ**, chưa gồm mục chưa có giá.
 - In PCB theo giá người dùng: **120.000đ**.
 - **Tổng tiền mua + PCB: 402.500đ, chưa gồm mục chưa có giá.**
-- Nếu chỉ phân bổ lượng linh kiện dùng trên một PCB: **342.810đ**, chưa gồm mục chưa có giá. Phần chênh lệch là linh kiện dư từ gói/thanh mua.
-- J1, J6, J7, U7, D2, D3, Q1, R5, R6, U8, C14, C15 và K1 chưa khảo sát giá, để trống trong CSV; không tính thành 0đ. Giá tụ tham khảo cần xác nhận đúng điện môi; trở 10kΩ/100kΩ ở nguồn giá đang báo hết hàng.
+- Nếu chỉ phân bổ lượng linh kiện dùng trên một PCB: **337.310đ**, chưa gồm mục chưa có giá. Phần chênh lệch là linh kiện dư từ gói/thanh mua.
+- J1, J6, J7, U7, D2, D3, Q1, R5, R6, U8, C14 và K1 chưa khảo sát giá, để trống trong CSV; không tính thành 0đ. Giá tụ tham khảo cần xác nhận đúng điện môi; trở 10kΩ/100kΩ ở nguồn giá đang báo hết hàng.
 - Chưa gồm vận chuyển, adapter/cáp, vỏ, thiếc/flux và công hàn. Burn-E đã có nên không mua lại.
 
 ## Vật tư đi kèm, không hàn trực tiếp

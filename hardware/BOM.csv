@@ -12,15 +12,10 @@ R2,1,"4,7 kΩ 1% 0,25 W",Axial THT,Kéo DATA DHT11 lên 5 V,120,120,https://chot
 R4,1,"100 kΩ 1% 0,25 W",Axial THT,Kéo OE TXS0108E xuống GND khi ESP32 khởi động; bỏ pull-up OE trên module nếu có,120,120,https://chotroihn.vn/tro-vach-1-4w-1-50c,"Mua gói 50, dùng 1; trang báo hết hàng biến thể này; cần xác nhận nguồn khác"
 R10,1,"1 kΩ 0,25 W",Axial THT,Hạn dòng LED nguồn,120,120,https://chotroihn.vn/tro-vach-1-4w-1-50c,"Mua gói 50, dùng 1"
 R5,1,"4,7 kΩ 0,25 W",Axial THT,Từ emitter PC817 (phía 12 V) vào base Q1,,,,Chưa khảo sát giá; có thể lấy từ gói 4
-"C1,C3,C5,C6,C16",5,100 nF X7R ≥16 V,"THT 2,54 mm","VCC AT89S52, TXS VCCB 5V, OLED 3V3, ESP32 5V, đầu ra LM7805; đặt sát tải",500,2500,https://chotroihn.vn/tu-gom-vang-50v,Giá biến thể 0.1uF/104; đối chiếu điện môi X7R theo BOM trước khi mua
+"C1,C16",2,100 nF X7R ≥16 V,"THT 2,54 mm",VCC AT89S52 và đầu ra LM7805; đặt sát chân,500,1000,https://chotroihn.vn/tu-gom-vang-50v,Giá biến thể 0.1uF/104; đối chiếu điện môi X7R theo BOM trước khi mua
 C14,1,100 µF ≥25 V,Tụ hóa radial,Đầu vào LM7805 sau D2; đúng cực,,,,Chưa khảo sát giá
-C15,1,330 nF ≥25 V,Tụ gốm THT,Sát chân IN LM7805 theo datasheet,,,,Chưa khảo sát giá
-C7,1,470 µF ≥10 V,Tụ hóa radial,Tụ nguồn 5 V gần ESP32; đúng cực,1000,1000,https://chotroihn.vn/tu-hoa-10v,1 tụ
-C8,1,10 µF ≥10 V,Tụ hóa radial,"Lọc nhánh 3,3 V OLED; đúng cực",1000,1000,https://chotroihn.vn/tu-hoa-16v,"3 tụ 10uF 16V; C2 reset, C8/C11 lọc nguồn; kiểm tra cực tính"
 "C9,C10",2,22 pF C0G/NP0 ≥25 V,Tụ gốm THT,"Hai tụ Y1; giá trị khởi đầu, đối chiếu CL thạch anh trước khi chốt PCB",500,1000,https://chotroihn.vn/tu-gom-vang-50v,Giá biến thể 22P; xác nhận C0G/NP0 và tải thạch anh trước khi mua
-"C2,C11",2,10 µF ≥10 V,Tụ hóa radial,"C11 lọc 5 V; C2 reset: cực + lên 5 V, cực - vào RST chân 9",1000,2000,https://chotroihn.vn/tu-hoa-16v,"3 tụ 10uF 16V; C2 reset, C8/C11 lọc nguồn; kiểm tra cực tính"
-C12,1,100 nF X7R ≥16 V,"THT 2,54 mm",Lọc nguồn sát VCC/GND DHT11,500,500,https://chotroihn.vn/tu-gom-vang-50v,Giá biến thể 0.1uF/104; đối chiếu điện môi X7R theo BOM trước khi mua
-C13,1,100 nF X7R ≥16 V,"THT 2,54 mm","Lọc VCCA 3,3 V của TXS0108E sát module",500,500,https://chotroihn.vn/tu-gom-vang-50v,Giá biến thể 0.1uF/104; đối chiếu điện môi X7R theo BOM trước khi mua
+C2,1,10 µF ≥10 V,Tụ hóa radial,"C2 reset: cực + lên 5 V, cực - vào RST chân 9",1000,1000,https://chotroihn.vn/tu-hoa-16v,"3 tụ 10uF 16V; C2 reset, C8/C11 lọc nguồn; kiểm tra cực tính"
 D1,1,LED xanh 3 mm,THT,LED báo có nguồn 5 V,290,290,https://chotroihn.vn/goi-100-con-led-duc-3mm,"Mua gói 100, dùng 1"
 U7,1,"LM7805 ổn áp 5 V 1,5 A","TO-220 nằm ngang, vít xuống PCB","Tab = GND: vít M3 xuống vùng đồng GND hai mặt; với 12 V tỏa ~1,6 W, cần vùng đồng lớn hoặc tản phụ",,,,Chưa khảo sát giá
 D2,1,SR360 Schottky 3 A 60 V,DO-201AD,"Chống cắm ngược cực nguồn 12 V, sụt áp ~0,5 V; nối tiếp trước LM7805",,,,Chưa khảo sát giá
