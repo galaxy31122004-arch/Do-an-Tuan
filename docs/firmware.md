@@ -2,7 +2,7 @@
 
 ## Phần cứng mặc định
 
-AT89S52 DIP-40 / 11,0592 MHz / 5 V; DHT11 P3.2/12; nút trang P3.3/13; I²C phần mềm SDA P1.0/1, SCL P1.1/2 (dưới 100 kHz); UART TX P3.1/11, RX P3.0/10, 9600 8N1. ESP32-C3 SuperMini RX GPIO4, TX GPIO3, OE TXS0108E GPIO0. Xem `hardware/wiring.md`.
+AT89S52 DIP-40 / 11,0592 MHz / 5 V; DHT11 P3.2/12; nút trang P3.3/13; I²C phần mềm SDA P0.1/38, SCL P0.2/37 (dưới 100 kHz; P0 cực máng hở, kéo lên 10 kΩ R8/R9); UART TX P3.1/11, RX P3.0/10, 9600 8N1. ESP32-C3 SuperMini RX GPIO4, TX GPIO3, OE TXS0108E GPIO0. Xem `hardware/wiring.md`.
 
 ## ESP32 — PlatformIO
 

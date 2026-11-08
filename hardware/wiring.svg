@@ -13,8 +13,8 @@
  <text x="485" y="320" class="head">U1 · AT89S52</text>
  <text x="485" y="356">VCC 40 → +5V</text><text x="485" y="384">GND 20; EA 31 → +5V → GND</text>
  <text x="485" y="422">P3.2 / 12 ← DHT11 DATA</text>
- <text x="485" y="459">P1.1 / 2 → SCL_HV</text>
- <text x="485" y="492">P1.0 / 1 ↔ SDA_HV</text>
+ <text x="485" y="459">P0.2 / 37 → SCL_HV</text>
+ <text x="485" y="492">P0.1 / 38 ↔ SDA_HV</text>
  <text x="485" y="533">P3.1 TX / 11 → TXS B3</text>
  <text x="485" y="568">P3.0 RX / 10 ← TXS B4</text>
  <text x="485" y="607">P3.3 / 13 ← SW1 page button</text>

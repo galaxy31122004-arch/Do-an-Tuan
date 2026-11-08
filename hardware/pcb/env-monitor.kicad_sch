@@ -5788,10 +5788,6 @@
 		(uuid "61735c59-16ac-4104-ab9d-21b42a29c6f6")
 	)
 	(no_connect
-		(at 274.32 132.08)
-		(uuid "619aa843-7357-4ebb-8009-f2f48cfdd435")
-	)
-	(no_connect
 		(at 274.32 160.02)
 		(uuid "6bd580a2-191a-450f-b5e4-bc5d47474f98")
 	)
@@ -5850,10 +5846,6 @@
 	(no_connect
 		(at 274.32 129.54)
 		(uuid "ce3dfcf1-f935-457f-9c19-a0544db877df")
-	)
-	(no_connect
-		(at 274.32 134.62)
-		(uuid "e4668950-db16-4f01-a308-5f249defc0b9")
 	)
 	(no_connect
 		(at 274.32 137.16)
@@ -13006,17 +12998,6 @@
 		)
 	)
 	(label "SDA5"
-		(at 243.84 129.54 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "869af4a9-5e47-4c4f-a5e1-02ab49a760cb")
-	)
-	(label "SDA5"
 		(at 144.78 93.98 0)
 		(fields_autoplaced yes)
 		(effects
@@ -13026,17 +13007,6 @@
 			(justify left bottom)
 		)
 		(uuid "3e201708-827e-4522-8f37-648a8b6eed32")
-	)
-	(label "SCL5"
-		(at 243.84 132.08 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "62aa7370-5acc-4a02-b178-59992afd81f5")
 	)
 	(label "SCL5"
 		(at 144.78 91.44 0)
@@ -13254,7 +13224,359 @@
 		(at 45.72 91.44)
 		(uuid "0a4f3d71-4e3f-4dd2-aa94-9ee127425d8f")
 	)
-	(sheet_instances
+	(no_connect
+		(at 243.84 129.54)
+		(uuid "f6a0d6e2-cce0-439b-a4e5-d803c0968d56")
+	)
+	(no_connect
+		(at 243.84 132.08)
+		(uuid "20e6f5de-2fa9-4b36-87a6-f0ea4f8b9b4f")
+	)
+	(label "SDA5"
+		(at 274.32 132.08 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e80107ca-639d-4bb9-b57d-4b19d1f51605")
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 299.72 111.76 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "869ea462-4a8b-4ed9-bedf-800a5f407e75")
+		(property "Reference" "R8"
+			(at 299.72 106.76 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10k"
+			(at 299.72 114.3 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal"
+			(at 299.72 116.84 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 299.72 111.76 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 299.72 111.76 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "7942326a-cfef-43b9-88c3-7dacfbec9a82")
+		)
+		(pin "2"
+			(uuid "be9f5786-19ae-4896-870b-56f5b2619900")
+		)
+		(instances
+			(project "env-monitor"
+				(path "/4214cdde-033a-40a9-a171-6a71dc32e0ae"
+					(reference "R8")
+					(unit 1)
+				)
+			)
+		)
+	)	(label "SDA5"
+		(at 299.72 115.57 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9b3bb55f-148b-4484-9d76-f64c0ba1316b")
+	)
+	(symbol
+		(lib_id "power:+5V")
+		(at 299.72 107.95 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "09eeee03-3517-4b73-96ca-d11925a91ba1")
+		(property "Reference" "#PWR058"
+			(at 299.72 107.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+5V"
+			(at 299.72 104.75 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 299.72 107.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 299.72 107.95 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 299.72 107.95 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "70094526-caef-4975-acc3-a1f880a77b1d")
+		)
+		(instances
+			(project "env-monitor"
+				(path "/4214cdde-033a-40a9-a171-6a71dc32e0ae"
+					(reference "#PWR058")
+					(unit 1)
+				)
+			)
+		)
+	)	(label "SCL5"
+		(at 274.32 134.62 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "344bf571-266c-4ea2-b76e-3e4caff7ac5b")
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 307.34 114.3 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "2849db31-b219-4181-9a8c-f2b4e155af7c")
+		(property "Reference" "R9"
+			(at 307.34 109.3 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10k"
+			(at 307.34 116.84 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal"
+			(at 307.34 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 307.34 114.3 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 307.34 114.3 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "d0e76ea0-651e-48b5-ab49-f97917d7d793")
+		)
+		(pin "2"
+			(uuid "cda81277-0a6a-4480-9c4a-c916894469b0")
+		)
+		(instances
+			(project "env-monitor"
+				(path "/4214cdde-033a-40a9-a171-6a71dc32e0ae"
+					(reference "R9")
+					(unit 1)
+				)
+			)
+		)
+	)	(label "SCL5"
+		(at 307.34 118.11 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "36038239-34de-4a33-bc76-a966b5977b61")
+	)
+	(symbol
+		(lib_id "power:+5V")
+		(at 307.34 110.49 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "b0daed66-0d9d-49c6-af92-efac84c47ba7")
+		(property "Reference" "#PWR059"
+			(at 307.34 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+5V"
+			(at 307.34 107.29 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 307.34 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 307.34 110.49 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 307.34 110.49 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a4ecf821-7209-4949-8f3b-ca909a215a3b")
+		)
+		(instances
+			(project "env-monitor"
+				(path "/4214cdde-033a-40a9-a171-6a71dc32e0ae"
+					(reference "#PWR059")
+					(unit 1)
+				)
+			)
+		)
+	)	(sheet_instances
 		(path "/"
 			(page "1")
 		)
