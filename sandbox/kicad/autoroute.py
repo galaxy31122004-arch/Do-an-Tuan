@@ -20,6 +20,7 @@ if mode == 'export':
     for t in b.GetTracks():
         t.SetLocked(True); n += 1
     print('locked', n)
+    for z in list(b.Zones()): b.Remove(z)  # pours are refilled after routing (gnd_pour.py)
     assert pcbnew.ExportSpecctraDSN(b, path)
 else:
     assert pcbnew.ImportSpecctraSES(b, path)
