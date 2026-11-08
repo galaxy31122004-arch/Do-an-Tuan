@@ -66,6 +66,15 @@ NC = 'U1.3 U1.4 U1.5 U1.14 U1.15 U1.16 U1.17 U1.22 U1.23 U1.24 U1.25 U1.26 U1.27
      'J2A.5 J2A.6 J2A.7 J2A.8 J2B.3 J2B.4 J2B.5 J2B.6 J2B.7 J2B.8'
 
 
+VALUES = {'J2A': 'ESP32-C3 SuperMini - hang phai (5V side)',
+          'J2B': 'ESP32-C3 SuperMini - hang trai (GPIO5 side)'}
+# pin captions drawn left of mirrored headers: ref -> names for pins 1..n
+CAPTIONS = {
+    'J2A': ['5V', 'GND', '3V3', 'GPIO4 / RX1', 'GPIO3', 'GPIO2', 'GPIO1', 'GPIO0'],
+    'J2B': ['GPIO5 / TX1', 'GPIO6 / OE', 'GPIO7', 'GPIO8', 'GPIO9', 'GPIO10', 'GPIO20', 'GPIO21'],
+}
+
+
 def uid():
     return str(uuid.uuid4())
 
@@ -192,7 +201,7 @@ def main():
 
     # ------------------------------------------------ rebuild the file
     body = [x for x in sch if not (isinstance(x, list) and x and x[0] in
-            ('symbol', 'global_label', 'label', 'wire', 'junction', 'no_connect'))]
+            ('symbol', 'global_label', 'label', 'wire', 'junction', 'no_connect', 'text'))]
     first(body, 'paper')[1] = 'A3'
     power_src = parse(POWER_LIB.read_text(encoding='utf-8'))
     lib_block = first(body, 'lib_symbols')
@@ -212,6 +221,8 @@ def main():
         if mir:
             s.insert(s.index(at) + 1, [Sym('mirror'), Sym('y')])
         for prop in find(s, 'property'):
+            if prop[1] == 'Value' and ref in VALUES:
+                prop[2] = VALUES[ref]
             pa = first(prop, 'at')
             pa[1], pa[2] = r(float(pa[1]) - ox + nx), r(float(pa[2]) - oy + ny)
             if len(pa) > 3:
@@ -249,6 +260,15 @@ def main():
     for p in NC.split():
         (x, y), _ = pins[p]
         out.append([Sym('no_connect'), [Sym('at'), x, y], [Sym('uuid'), uid()]])
+
+    for ref, names in CAPTIONS.items():
+        gx, gy, _, _ = PLACE[ref]
+        for i, name in enumerate(names, 1):
+            (_, y), _ = pins[f'{ref}.{i}']
+            out.append([Sym('text'), name, [Sym('exclude_from_sim'), Sym('no')],
+                        [Sym('at'), r((gx - 2) * G), y, 0],
+                        [Sym('effects'), [Sym('font'), [Sym('size'), 1.27, 1.27]], [Sym('justify'), Sym('right')]],
+                        [Sym('uuid'), uid()]])
 
     idx = body.index(first(body, 'sheet_instances'))
     body[idx:idx] = out

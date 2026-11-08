@@ -15,3 +15,7 @@ dashboard/local/session.json
 dashboard/local/demo.log
 tests/protocol-test.exe
 tests/protocol-test
+hardware/pcb/.history/
+*.lck
+*-backups/
+fp-info-cache
