@@ -64,6 +64,8 @@ sandbox/simulation/               Mô phỏng và thử nghiệm độc lập
 versions/                         Bản đã giao/phát hành, luôn theo vX.Y.Z; không sửa, không ghi đè
 documents/<ten>/                  Tài liệu Word đang soạn (kế hoạch, figures, drafts)
 versions/documents/<ten>/         Mỗi bản giao gồm DOCX và PDF
+documents/presentations/<topic>/  Slide đang soạn (dàn ý, file deck)
+versions/presentations/<topic>/   Mỗi bản giao gồm PPTX, NOI_DUNG.md, KICH_BAN_THUYET_TRINH.md
 versions/firmware/<project>/      Mỗi bản giao gồm .bin theo phiên bản
 considerations/                   Ý tưởng và vấn đề chưa chốt
 ```
