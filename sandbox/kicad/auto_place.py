@@ -42,7 +42,13 @@ def pad(spec):
 refs = {r for r, _, _ in PLAN}
 e = b.GetBoardEdgesBoundingBox()
 L, T, R, B = mm(e.GetLeft()) + 1, mm(e.GetTop()) + 1, mm(e.GetRight()) - 1, mm(e.GetBottom()) - 1
-obs = [crt(f) for f in b.GetFootprints() if f.GetReference() not in refs]
+import os  # IGNORE=U4 lets parts go under a module's courtyard (e.g. under a raised breakout board)
+ign = set(filter(None, os.environ.get('IGNORE', '').split(',')))
+obs = [crt(f) for f in b.GetFootprints() if f.GetReference() not in refs | ign]
+if ign:  # still keep clear of the module's pads
+    obs += [(mm(p.GetBoundingBox().GetLeft()) - .5, mm(p.GetBoundingBox().GetTop()) - .5,
+             mm(p.GetBoundingBox().GetRight()) + .5, mm(p.GetBoundingBox().GetBottom()) + .5)
+            for f in b.GetFootprints() if f.GetReference() in ign for p in f.Pads()]
 for t in b.GetTracks():
     bb = t.GetBoundingBox()
     obs.append((mm(bb.GetLeft()) - .3, mm(bb.GetTop()) - .3, mm(bb.GetRight()) + .3, mm(bb.GetBottom()) + .3))

@@ -15,6 +15,9 @@ for d in b.GetDrawings():
     if d.GetLayer() == pcbnew.F_SilkS: obs.append(box(d))
 texts = {r: box(FP[r].Reference()) for r in FP if FP[r].Reference().IsVisible()}
 for ref in sys.argv[1:]:
+    if ref.startswith('='):  # =REF: put the reference text back next to the part's first pad
+        f = FP[ref[1:]]; p = next(iter(f.Pads())).GetPosition()
+        f.Reference().SetPosition(pcbnew.VECTOR2I(p.x - MM(1.8), p.y)); print(ref, 'reset'); continue
     t = FP[ref].Reference(); p0 = t.GetPosition(); best = None
     others = [v for k, v in texts.items() if k != ref]
     for dx in range(-80, 81, 5):
