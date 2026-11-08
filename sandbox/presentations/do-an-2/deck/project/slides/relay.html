@@ -1,0 +1,24 @@
+<section id="relay" data-transition="fade" style="background:#F7F3EC;color:#1E2B2F;font-family:'Be Vietnam Pro', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:row;align-items:baseline;gap:32px"><p style="font-family:'Lora', Georgia, serif;font-size:60px;font-weight:700;color:#0F766E">07</p><h2 style="font-family:'Lora', Georgia, serif;font-size:60px;font-weight:700;line-height:1.15">Khối relay cách ly quang</h2></div>
+<div style="flex:1;display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:24px">
+<table style="font-size:26px">
+<tr style="background:#1E2B2F"><th style="width:14%;color:#F7F3EC;padding:12px 16px">Phía</th><th style="width:34%;color:#F7F3EC">Linh kiện</th><th style="width:52%;color:#F7F3EC">Kết nối</th></tr>
+<tr style="background:#FFFFFF"><td>5 V</td><td>R6 2,2 kΩ, PC817</td><td>+5V → LED → P2.0</td></tr>
+<tr style="background:#EFE8DB"><td>12 V</td><td>PC817 C–E, R5 4,7 kΩ</td><td>+12V → base Q1</td></tr>
+<tr style="background:#FFFFFF"><td>12 V</td><td>Q1 2SC1815, R7 10 kΩ</td><td>Đóng phía GND cuộn K1</td></tr>
+<tr style="background:#EFE8DB"><td>12 V</td><td>K1 SRD-12VDC, D3</td><td>Cuộn 12 V, diode dập</td></tr>
+<tr style="background:#CDE8E3"><td>Tải</td><td>J6</td><td>COM + NO, nguồn ngoài</td></tr>
+</table>
+<p style="font-size:26px;color:#0F766E;font-weight:600">P2.0 thấp → LED sáng → Q1 dẫn → relay bật → tải có điện</p>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+<div style="background:#FFFFFF;border-top:8px solid #0F766E;border-radius:12px;padding:22px 26px"><p style="font-family:'Lora', Georgia, serif;font-size:52px;font-weight:700;color:#0F766E">1,7 mA</p><p style="font-size:24px;color:#55606A">Dòng LED (5 − 1,2) / 2,2 kΩ</p></div>
+<div style="background:#FFFFFF;border-top:8px solid #0F766E;border-radius:12px;padding:22px 26px"><p style="font-family:'Lora', Georgia, serif;font-size:52px;font-weight:700;color:#0F766E">~30 mA</p><p style="font-size:24px;color:#55606A">Cuộn relay 12 V</p></div>
+<div style="background:#FFFFFF;border-top:8px solid #C2410C;border-radius:12px;padding:22px 26px"><p style="font-family:'Lora', Georgia, serif;font-size:52px;font-weight:700;color:#C2410C">≥ 32 °C</p><p style="font-size:24px;color:#55606A">Bật relay; ≤ 30 °C tắt</p></div>
+<div style="background:#FFFFFF;border-top:8px solid #C2410C;border-radius:12px;padding:22px 26px"><h3 style="font-size:28px;font-weight:600">An toàn</h3><p style="font-size:24px;color:#55606A">Tắt khi reset và khi DHT11 lỗi</p></div>
+</div>
+</div>
+<div style="position:absolute;left:128px;right:128px;bottom:64px;height:40px;display:flex;flex-direction:row;justify-content:space-between"><p style="font-size:24px;color:#55606A">Giám sát nhiệt độ, độ ẩm IoT · Tuấn – Sinh</p><p style="font-size:24px;color:#55606A">07 / 10</p></div>
+<aside>Relay điều khiển qua opto PC817. Phía LED dùng 5 V, phía relay dùng 12 V, chung GND nên đây là tách nguồn. Q1 C1815 khuếch đại dòng cho cuộn. Tải nối COM và NO, có điện khi nhiệt độ từ 32 độ trở lên, tắt khi về 30 độ. Sau reset và khi cảm biến lỗi relay luôn tắt. Các dòng là số tính toán.</aside>
+</section>

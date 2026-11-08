@@ -1,0 +1,24 @@
+<section id="muc-tieu" data-transition="fade" style="background:#F7F3EC;color:#1E2B2F;font-family:'Be Vietnam Pro', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:row;align-items:baseline;gap:32px"><p style="font-family:'Lora', Georgia, serif;font-size:60px;font-weight:700;color:#0F766E">02</p><h2 style="font-family:'Lora', Georgia, serif;font-size:60px;font-weight:700;line-height:1.15">Đặt vấn đề và mục tiêu</h2></div>
+<div style="flex:1;display:grid;grid-template-columns:560px 1fr;gap:48px;align-items:center">
+<div style="background:#1E2B2F;border-radius:12px;padding:36px;display:flex;flex-direction:column;gap:20px">
+<h3 style="font-size:32px;font-weight:600;color:#E07A3F">Nhiệt ẩm kế tại chỗ</h3>
+<p style="font-size:26px;color:#F7F3EC;line-height:1.45">− Chỉ xem được khi đứng cạnh thiết bị</p>
+<p style="font-size:26px;color:#F7F3EC;line-height:1.45">− Không lưu diễn biến theo thời gian</p>
+<p style="font-size:26px;color:#F7F3EC;line-height:1.45">− Không tự cảnh báo, không điều khiển tải</p>
+<h3 style="font-size:32px;font-weight:600;color:#7FC8BE">Hướng giải quyết</h3>
+<p style="font-size:26px;color:#B9C3C0;line-height:1.45">Giữ phần đo tại chỗ trên AT89S52, thêm ESP32-C3 đưa dữ liệu lên ThingsBoard</p>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+<div style="background:#FFFFFF;border-top:8px solid #0F766E;border-radius:12px;padding:24px 28px"><h3 style="font-size:28px;font-weight:600">Đo và hiển thị</h3><p style="font-size:24px;color:#55606A">DHT11 → AT89S52 → OLED 2 trang, nút đổi trang</p></div>
+<div style="background:#FFFFFF;border-top:8px solid #0F766E;border-radius:12px;padding:24px 28px"><h3 style="font-size:28px;font-weight:600">Giao tiếp 5 V ↔ 3,3 V</h3><p style="font-size:24px;color:#55606A">UART 9600 + I²C qua TXS0108E</p></div>
+<div style="background:#FFFFFF;border-top:8px solid #0F766E;border-radius:12px;padding:24px 28px"><h3 style="font-size:28px;font-weight:600">Kết nối Internet</h3><p style="font-size:24px;color:#55606A">ESP32-C3: Wi-Fi, NTP, HTTPS lên ThingsBoard</p></div>
+<div style="background:#FFFFFF;border-top:8px solid #0F766E;border-radius:12px;padding:24px 28px"><h3 style="font-size:28px;font-weight:600">Dashboard web</h3><p style="font-size:24px;color:#55606A">Số đo, lịch sử, xuất CSV, cảnh báo ngưỡng</p></div>
+<div style="background:#FFFFFF;border-top:8px solid #C2410C;border-radius:12px;padding:24px 28px"><h3 style="font-size:28px;font-weight:600">Relay theo nhiệt độ</h3><p style="font-size:24px;color:#55606A">Opto PC817, bật ≥ 32 °C, tắt ≤ 30 °C</p></div>
+<div style="background:#FFFFFF;border-top:8px solid #C2410C;border-radius:12px;padding:24px 28px"><h3 style="font-size:28px;font-weight:600">Mạch in KiCad</h3><p style="font-size:24px;color:#55606A">Sơ đồ nguyên lý, PCB, BOM và chi phí</p></div>
+</div>
+</div>
+<p style="font-size:24px;color:#0F766E;font-weight:600">Phạm vi: 1 thiết bị, 1 tài khoản · mất mạng vẫn đo, hiển thị và điều khiển relay</p>
+<div style="position:absolute;left:128px;right:128px;bottom:64px;height:40px;display:flex;flex-direction:row;justify-content:space-between"><p style="font-size:24px;color:#55606A">Giám sát nhiệt độ, độ ẩm IoT · Tuấn – Sinh</p><p style="font-size:24px;color:#55606A">02 / 10</p></div>
+<aside>Nhiệt ẩm kế thông thường chỉ xem tại chỗ, không lưu lịch sử và không cảnh báo. Đề tài giữ phần đo trên AT89S52 và thêm ESP32-C3 để đưa dữ liệu lên Internet. Sáu mục tiêu gồm: đo và hiển thị, giao tiếp hai mức điện áp, kết nối Internet, dashboard, relay theo nhiệt độ và thiết kế mạch in.</aside>
+</section>

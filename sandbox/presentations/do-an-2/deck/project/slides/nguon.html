@@ -1,0 +1,29 @@
+<section id="nguon" data-transition="fade" style="background:#EFE8DB;color:#1E2B2F;font-family:'Be Vietnam Pro', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:row;align-items:baseline;gap:32px"><p style="font-family:'Lora', Georgia, serif;font-size:60px;font-weight:700;color:#0F766E">04</p><h2 style="font-family:'Lora', Georgia, serif;font-size:60px;font-weight:700;line-height:1.15">Khối nguồn 12 V → 5 V → 3,3 V</h2></div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:36px">
+<div style="display:flex;flex-direction:row;align-items:center;gap:16px">
+<p style="background:#1E2B2F;color:#F7F3EC;font-size:26px;padding:18px 24px;border-radius:12px;white-space:nowrap">Jack J1 / domino J7</p>
+<x-shape kind="arrow-right" style="background:#0F766E;width:56px;height:28px"></x-shape>
+<p style="background:#FFFFFF;font-size:26px;padding:18px 24px;border-radius:12px;white-space:nowrap">SR360 chống ngược cực</p>
+<x-shape kind="arrow-right" style="background:#0F766E;width:56px;height:28px"></x-shape>
+<p style="background:#C2410C;color:#F7F3EC;font-size:26px;padding:18px 24px;border-radius:12px;white-space:nowrap">+12V</p>
+<x-shape kind="arrow-right" style="background:#0F766E;width:56px;height:28px"></x-shape>
+<p style="background:#FFFFFF;font-size:26px;padding:18px 24px;border-radius:12px;white-space:nowrap">LM7805 → +5V</p>
+<x-shape kind="arrow-right" style="background:#0F766E;width:56px;height:28px"></x-shape>
+<p style="background:#FFFFFF;font-size:26px;padding:18px 24px;border-radius:12px;white-space:nowrap">ESP32 → +3V3</p>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1.35fr;gap:24px;align-items:start">
+<div style="background:#FFFFFF;border-top:8px solid #0F766E;border-radius:12px;padding:24px 28px"><p style="font-family:'Lora', Georgia, serif;font-size:56px;font-weight:700;color:#0F766E">~180 mA</p><p style="font-size:24px;color:#55606A">Tải 5 V (ước tính), đỉnh ~450 mA khi Wi-Fi phát</p></div>
+<div style="background:#FFFFFF;border-top:8px solid #C2410C;border-radius:12px;padding:24px 28px"><p style="font-family:'Lora', Georgia, serif;font-size:56px;font-weight:700;color:#C2410C">~1,2 W</p><p style="font-size:24px;color:#55606A">Tỏa trên LM7805: (12 − 0,5 − 5) × 0,18 A</p></div>
+<div style="background:#FFFFFF;border-top:8px solid #0F766E;border-radius:12px;padding:24px 28px"><h3 style="font-size:28px;font-weight:600">Relay lấy +12V</h3><p style="font-size:24px;color:#55606A">Dòng cuộn không qua LM7805; tab vít xuống đồng GND tản nhiệt</p></div>
+<table style="font-size:26px;border-radius:12px">
+<tr style="background:#1E2B2F"><th style="width:52%;color:#F7F3EC;padding:14px 16px">Lớp net</th><th style="width:48%;color:#F7F3EC">Rộng dây</th></tr>
+<tr style="background:#FFFFFF"><td>Tín hiệu</td><td>0,5 mm</td></tr>
+<tr style="background:#EFE8DB"><td>+5V, +3V3, GND</td><td>1,0 mm</td></tr>
+<tr style="background:#CDE8E3"><td>+12V, tải J6</td><td>2,0 mm</td></tr>
+</table>
+</div>
+</div>
+<div style="position:absolute;left:128px;right:128px;bottom:64px;height:40px;display:flex;flex-direction:row;justify-content:space-between"><p style="font-size:24px;color:#55606A">Giám sát nhiệt độ, độ ẩm IoT · Tuấn – Sinh</p><p style="font-size:24px;color:#55606A">04 / 10</p></div>
+<aside>Nguồn 12 V vào qua jack hoặc domino, qua diode Schottky SR360 chống cắm ngược. LM7805 tạo 5 V, ESP32 tạo 3,3 V. Dòng tải và công suất là số ước tính, chưa đo. Relay lấy thẳng 12 V để không tải lên LM7805. Đường 12 V rộng 2 mm, nguồn 1 mm, tín hiệu 0,5 mm.</aside>
+</section>

@@ -1,0 +1,20 @@
+<section id="txs-esp32" data-transition="fade" style="background:#EFE8DB;color:#1E2B2F;font-family:'Be Vietnam Pro', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:row;align-items:baseline;gap:32px"><p style="font-family:'Lora', Georgia, serif;font-size:60px;font-weight:700;color:#0F766E">06</p><h2 style="font-family:'Lora', Georgia, serif;font-size:60px;font-weight:700;line-height:1.15">Chuyển mức TXS0108E và ESP32-C3</h2></div>
+<div style="flex:1;display:grid;grid-template-columns:1.5fr 1fr;gap:40px;align-items:center">
+<table style="font-size:26px">
+<tr style="background:#1E2B2F"><th style="width:16%;color:#F7F3EC;padding:14px 16px">Kênh</th><th style="width:36%;color:#F7F3EC">Phía A 3,3 V</th><th style="width:28%;color:#F7F3EC">Phía B 5 V</th><th style="width:20%;color:#F7F3EC">Tín hiệu</th></tr>
+<tr style="background:#FFFFFF"><td>A4/B4</td><td>ESP32 GPIO4 (RX)</td><td>P3.1 TXD</td><td>UART →</td></tr>
+<tr style="background:#EFE8DB"><td>A5/B5</td><td>ESP32 GPIO3 (TX)</td><td>P3.0 RXD</td><td>UART ←</td></tr>
+<tr style="background:#FFFFFF"><td>A7/B7</td><td>OLED SCL</td><td>P1.1</td><td>I²C</td></tr>
+<tr style="background:#EFE8DB"><td>A8/B8</td><td>OLED SDA</td><td>P1.0</td><td>I²C</td></tr>
+<tr style="background:#CDE8E3"><td>OE</td><td>GPIO0 + R4 100 kΩ</td><td>—</td><td>Bật kênh</td></tr>
+</table>
+<div style="display:flex;flex-direction:column;gap:20px">
+<div style="background:#FFFFFF;border-left:8px solid #0F766E;border-radius:12px;padding:24px 28px"><h3 style="font-size:28px;font-weight:600">Chọn kênh theo PCB</h3><p style="font-size:24px;color:#55606A">GPIO4/3/0 nằm thẳng trên A4/A5/OE; A7/A8 gần OLED, B7/B8 về phía P1.0/P1.1 → dây không bắt chéo</p></div>
+<div style="background:#FFFFFF;border-left:8px solid #C2410C;border-radius:12px;padding:24px 28px"><h3 style="font-size:28px;font-weight:600">Trình tự OE</h3><p style="font-size:24px;color:#55606A">R4 giữ OE thấp lúc khởi động; sau 100 ms ESP32 mới bật kênh</p></div>
+<div style="background:#FFFFFF;border-left:8px solid #0F766E;border-radius:12px;padding:24px 28px"><h3 style="font-size:28px;font-weight:600">Không thêm pull-up</h3><p style="font-size:24px;color:#55606A">TXS0108E có pull-up nội cho I²C</p></div>
+</div>
+</div>
+<div style="position:absolute;left:128px;right:128px;bottom:64px;height:40px;display:flex;flex-direction:row;justify-content:space-between"><p style="font-size:24px;color:#55606A">Giám sát nhiệt độ, độ ẩm IoT · Tuấn – Sinh</p><p style="font-size:24px;color:#55606A">06 / 10</p></div>
+<aside>AT89S52 chạy 5 V, ESP32 và OLED chạy 3,3 V, nên dùng TXS0108E chuyển mức hai chiều. Bốn kênh dùng cho UART và I²C. Kênh được chọn theo vị trí trên mạch in để dây đi thẳng. Chân OE được kéo xuống bằng R4 và chỉ bật sau khi nguồn hai phía ổn định.</aside>
+</section>
