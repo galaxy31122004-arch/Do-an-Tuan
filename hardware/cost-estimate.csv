@@ -25,6 +25,7 @@ C15,Tụ gốm 330nF,1,,,,Chưa khảo sát giá
 "SW1,SW2",Nút nhấn 6x6,1,5000,5000,https://chotroihn.vn/bo-10-nut-nhan-4-chan,"Mua gói 10, dùng 2"
 J1,Jack DC 5.5x2.1 hàn mạch,1,,,,Chưa khảo sát giá
 J7,Domino 2 chân 5.08mm,1,,,,Chưa khảo sát giá
+J8,Domino 2 chân 5.08mm,1,,,,Chưa khảo sát giá
 "J2A,J2B,J4,J5A,J5B","Header cái 2,54mm",2,2000,4000,https://chotroihn.vn/jump-cai-don-1-40p-2-54,2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt
 J3,"Header đực 2,54mm",1,2000,2000,https://chotroihn.vn/jump-duc-don-1x40p-2-54,"1 thanh 40 chân, dùng 6 chân ISP AT89S52; giả định chân đực module đi kèm module"
 K1,Relay SRD-05VDC-SL-C,1,,,,Chưa khảo sát giá
