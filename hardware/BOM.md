@@ -8,7 +8,7 @@ Giá tham khảo ngày **01/11/2026**, đơn vị VND. Bảng đầu ghi **đơn
 |---|---:|---|---:|---:|---|---|
 | U1 | 1 | [AT89S52-24PU](https://chotroihn.vn/at89s52-24pu-dip40) | 27.000đ | 27.000đ | DIP-40 | Bộ xử lý đo/hiển thị; nguồn 5 V. Giá: 1 IC DIP40; RSCH-20261101-0011; shop khác có giá 79.000đ |
 | U2 | 1 | [ESP32-C3 SuperMini](https://icdayroi.com/kit-phat-trien-wifi-bluetooth-esp32-c3-super-mini-4mb) | 75.000đ | 75.000đ | 16 chân, 2 hàng 1x8 | Board ESP32-C3 SuperMini; xác minh footprint và nhãn GPIO trước khi làm PCB. Giá: 1 board; RSCH-20261101-0009 |
-| U4 | 1 | [Module TXS0108E 8 kênh](https://icdayroi.com/txs0108e-8-kenh-chuyen-muc-logic-1-8v-3-3v-5v) | 15.000đ | 15.000đ | Module 2 hàng, đối chiếu footprint | A=3,3 V; B=5 V; bốn kênh I²C/UART; OE từ ESP32 GPIO6. Giá: 1 module; RSCH-20261101-0009 |
+| U4 | 1 | [Module TXS0108E 8 kênh](https://icdayroi.com/txs0108e-8-kenh-chuyen-muc-logic-1-8v-3-3v-5v) | 15.000đ | 15.000đ | Module 2 hàng, đối chiếu footprint | A=3,3 V; B=5 V; bốn kênh I²C/UART; OE từ ESP32 GPIO0. Giá: 1 module; RSCH-20261101-0009 |
 | U5 | 1 | [DHT11 cảm biến rời](https://chotroihn.vn/cam-bien-nhiet-do-do-am-dht11) | 25.000đ | 25.000đ | 4 chân | VCC/DATA/NC/GND; không nhầm pin module 3 chân. Giá: 1 cảm biến; RSCH-20261101-0009 |
 | U6 | 1 | [OLED trắng 0,96 inch SSD1315 I²C 128x64](https://hshop.vn/lcd-oled-trang-0-96-inch-i2c) | 65.000đ | 65.000đ | Module 4 chân | Module Hshop đã chọn; cấp 3,3 V, kiểm tra thứ tự chân in trên module. Giá: 1 màn hình; RSCH-20261101-0009 |
 | Y1 | 1 | [Thạch anh 11,0592 MHz](https://icdayroi.com/thach-anh-11-0592mhz-hc49-dip) | 1.500đ | 1.500đ | HC-49S | Dao động 11,0592 MHz cho UART 9600; đối chiếu điện dung tải. Giá: 1 thạch anh; RSCH-20261101-0011 |
@@ -100,7 +100,7 @@ Giá tham khảo ngày **01/11/2026**, đơn vị VND. Bảng đầu ghi **đơn
 
 - Nguồn giá chi tiết và quy cách mua nằm ngay trong hai bảng trên; ledger RSCH-20261101-0009/0010/0011. Không đặt PCB chỉ dựa vào sơ đồ luồng: cần schematic/netlist và kiểm tra footprint.
 - TXS0108E có pull-up nội. Không lắp thêm bốn điện trở 4,7 kΩ kéo bus như thiết kế cũ; kiểm tra pull-up có sẵn trên OLED/module và đo dạng sóng.
-- OE nối GPIO6 và R4 100 kΩ xuống GND; không để module kéo cứng OE lên nguồn. Phải kiểm tra/tháo cầu nối hoặc pull-up OE nếu module đã gắn.
+- OE nối GPIO0 và R4 100 kΩ xuống GND; không để module kéo cứng OE lên nguồn. Phải kiểm tra/tháo cầu nối hoặc pull-up OE nếu module đã gắn.
 - Chọn ESP32-C3 SuperMini đã hàn chân đực. Nếu hàng mua chưa có chân, bổ sung 2 thanh header đực 1x8; không tính trùng với header có sẵn.
 - Không cắm USB ESP32 khi đang cấp nguồn jack nếu board không có bảo vệ chống cấp ngược. Không nối adapter vào chân 5V/3V3.
 - Giá trị/điện áp từng linh kiện là cấu hình thiết kế; xác minh nguồn và dạng sóng trên mạch thật trước khi vận hành.

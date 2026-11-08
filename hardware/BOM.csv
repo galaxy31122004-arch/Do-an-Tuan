@@ -1,7 +1,7 @@
 ﻿Reference,Quantity,Component,Package,Assembly note,Unit price VND,Fitted subtotal VND,Price source,Price basis / purchasing note
 U1,1,AT89S52-24PU,DIP-40,Bộ xử lý đo/hiển thị; nguồn 5 V,27000,27000,https://chotroihn.vn/at89s52-24pu-dip40,1 IC DIP40; RSCH-20261101-0011; shop khác có giá 79.000đ
 U2,1,ESP32-C3 SuperMini,"16 chân, 2 hàng 1x8",Board ESP32-C3 SuperMini; xác minh footprint và nhãn GPIO trước khi làm PCB,75000,75000,https://icdayroi.com/kit-phat-trien-wifi-bluetooth-esp32-c3-super-mini-4mb,1 board; RSCH-20261101-0009
-U4,1,Module TXS0108E 8 kênh,"Module 2 hàng, đối chiếu footprint","A=3,3 V; B=5 V; bốn kênh I²C/UART; OE từ ESP32 GPIO6",15000,15000,https://icdayroi.com/txs0108e-8-kenh-chuyen-muc-logic-1-8v-3-3v-5v,1 module; RSCH-20261101-0009
+U4,1,Module TXS0108E 8 kênh,"Module 2 hàng, đối chiếu footprint","A=3,3 V; B=5 V; bốn kênh I²C/UART; OE từ ESP32 GPIO0",15000,15000,https://icdayroi.com/txs0108e-8-kenh-chuyen-muc-logic-1-8v-3-3v-5v,1 module; RSCH-20261101-0009
 U5,1,DHT11 cảm biến rời,4 chân,VCC/DATA/NC/GND; không nhầm pin module 3 chân,25000,25000,https://chotroihn.vn/cam-bien-nhiet-do-do-am-dht11,1 cảm biến; RSCH-20261101-0009
 U6,1,"OLED trắng 0,96 inch SSD1315 I²C 128x64",Module 4 chân,"Module Hshop đã chọn; cấp 3,3 V, kiểm tra thứ tự chân in trên module",65000,65000,https://hshop.vn/lcd-oled-trang-0-96-inch-i2c,1 màn hình; RSCH-20261101-0009
 Y1,1,"Thạch anh 11,0592 MHz",HC-49S,"Dao động 11,0592 MHz cho UART 9600; đối chiếu điện dung tải",1500,1500,https://icdayroi.com/thach-anh-11-0592mhz-hc49-dip,1 thạch anh; RSCH-20261101-0011

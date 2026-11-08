@@ -7,7 +7,7 @@ ROOT=Path(__file__).resolve().parent
 PARTS=[
 ('U1',1,'AT89S52-24PU','DIP-40','Bộ xử lý đo/hiển thị; nguồn 5 V'),
 ('U2',1,'ESP32-C3 SuperMini','16 chân, 2 hàng 1x8','Board ESP32-C3 SuperMini; xác minh footprint và nhãn GPIO trước khi làm PCB'),
-('U4',1,'Module TXS0108E 8 kênh','Module 2 hàng, đối chiếu footprint','A=3,3 V; B=5 V; bốn kênh I²C/UART; OE từ ESP32 GPIO6'),
+('U4',1,'Module TXS0108E 8 kênh','Module 2 hàng, đối chiếu footprint','A=3,3 V; B=5 V; bốn kênh I²C/UART; OE từ ESP32 GPIO0'),
 ('U5',1,'DHT11 cảm biến rời','4 chân','VCC/DATA/NC/GND; không nhầm pin module 3 chân'),
 ('U6',1,'OLED trắng 0,96 inch SSD1315 I²C 128x64','Module 4 chân','Module Hshop đã chọn; cấp 3,3 V, kiểm tra thứ tự chân in trên module'),
 ('Y1',1,'Thạch anh 11,0592 MHz','HC-49S','Dao động 11,0592 MHz cho UART 9600; đối chiếu điện dung tải'),
@@ -105,7 +105,7 @@ def main():
         '', '## Điều kiện mua/lắp', '',
         '- Nguồn giá chi tiết và quy cách mua nằm ngay trong hai bảng trên; ledger RSCH-20261101-0009/0010/0011. Không đặt PCB chỉ dựa vào sơ đồ luồng: cần schematic/netlist và kiểm tra footprint.',
         '- TXS0108E có pull-up nội. Không lắp thêm bốn điện trở 4,7 kΩ kéo bus như thiết kế cũ; kiểm tra pull-up có sẵn trên OLED/module và đo dạng sóng.',
-        '- OE nối GPIO6 và R4 100 kΩ xuống GND; không để module kéo cứng OE lên nguồn. Phải kiểm tra/tháo cầu nối hoặc pull-up OE nếu module đã gắn.',
+        '- OE nối GPIO0 và R4 100 kΩ xuống GND; không để module kéo cứng OE lên nguồn. Phải kiểm tra/tháo cầu nối hoặc pull-up OE nếu module đã gắn.',
         '- Chọn ESP32-C3 SuperMini đã hàn chân đực. Nếu hàng mua chưa có chân, bổ sung 2 thanh header đực 1x8; không tính trùng với header có sẵn.',
         '- Không cắm USB ESP32 khi đang cấp nguồn jack nếu board không có bảo vệ chống cấp ngược. Không nối adapter vào chân 5V/3V3.',
         '- Giá trị/điện áp từng linh kiện là cấu hình thiết kế; xác minh nguồn và dạng sóng trên mạch thật trước khi vận hành.', '']

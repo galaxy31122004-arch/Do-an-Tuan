@@ -10,5 +10,5 @@
 static const uint32_t SEND_INTERVAL_MS=10000;
 static const uint32_t STALE_MS=6000;
 static const uint32_t WIFI_RETRY_MS=15000;
-static const int AT89S52_RX_PIN=4, AT89S52_TX_PIN=5;
-static const int LEVEL_OE_PIN=6;
+static const int AT89S52_RX_PIN=4, AT89S52_TX_PIN=3;
+static const int LEVEL_OE_PIN=0;

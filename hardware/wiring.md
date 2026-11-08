@@ -18,7 +18,7 @@
 | ESP32 chân 5V/VIN theo board | +5 V, không phải chân 3V3 |
 | ESP32 3V3 | Rail 3,3 V cấp OLED và TXS0108E VCCA |
 | TXS0108E VCCB / VCCA | +5 V / 3,3 V; C3/C13 100 nF lọc từng rail sang GND |
-| TXS0108E OE | ESP32 GPIO6; R4 100 kΩ từ OE xuống GND |
+| TXS0108E OE | ESP32 GPIO0; R4 100 kΩ từ OE xuống GND |
 | C6 100 nF, C7 470 µF | +5 V–GND sát ESP32 |
 | C11 10 µF | +5 V–GND gần AT89S52 |
 | +5 V → R10 1 kΩ → anode D1 | Cathode LED xuống GND |
@@ -51,28 +51,30 @@ Không lắp module thời gian thực hoặc pin dự phòng. ESP32 lấy UTC t
 
 | Kênh | Phía A: 3,3 V | Phía B: 5 V |
 |---|---|---|
-| A1/B1 — SDA | OLED SDA | AT89S52 P1.0/1 |
-| A2/B2 — SCL | OLED SCL | AT89S52 P1.1/2 |
-| A3/B3 — AT89S52 phát | ESP32 GPIO4/RX1 | AT89S52 P3.1/TX/11 |
-| A4/B4 — ESP32 phát | ESP32 GPIO5/TX1 | AT89S52 P3.0/RX/10 |
-| A5–A8/B5–B8 | NC | NC |
+| A8/B8 — SDA | OLED SDA | AT89S52 P1.0/1 |
+| A7/B7 — SCL | OLED SCL | AT89S52 P1.1/2 |
+| A4/B4 — AT89S52 phát | ESP32 GPIO4/RX1 | AT89S52 P3.1/TX/11 |
+| A5/B5 — ESP32 phát | ESP32 GPIO3/TX1 | AT89S52 P3.0/RX/10 |
+| A1–A3, A6/B1–B3, B6 | NC | NC |
+
+Kênh chọn theo vị trí trên PCB: GPIO4/GPIO3/GPIO0 nằm thẳng trên A4/A5/OE; A7/A8 gần J4, B7/B8 về phía P1.0/P1.1.
 | OLED VCC/GND | 3,3 V/GND; C5 100 nF + C8 10 µF | — |
 
 Đấu module theo nhãn A/B và VCCA/VCCB/OE/GND, không dùng số chân IC trần để suy ra header. J5A/J5B dự kiến hai hàng 1x10, xác minh module thực tế trước khi làm PCB. OLED mặc định `0x3C`; đổi `OLED_ADDR` nếu màn dùng `0x3D`.
 
-OE=GPIO6, R4 100 kΩ kéo xuống GND. ESP32 giữ thấp lúc boot, chờ 100 ms rồi bật mức 3,3 V. Kiểm tra/tháo pull-up hoặc cầu nối kéo cứng OE lên nguồn nếu module có; không đưa 5 V vào GPIO6/OE. AT89S52 thử khởi tạo OLED lại khi TXS chưa bật lúc boot.
+OE=GPIO0, R4 100 kΩ kéo xuống GND. ESP32 giữ thấp lúc boot, chờ 100 ms rồi bật mức 3,3 V. Kiểm tra/tháo pull-up hoặc cầu nối kéo cứng OE lên nguồn nếu module có; không đưa 5 V vào GPIO6/OE. AT89S52 thử khởi tạo OLED lại khi TXS chưa bật lúc boot.
 
 TXS có pull-up nội, không lắp R6–R9 của thiết kế cũ. Đối chiếu pull-up đã có trên OLED/module, đo tải bus và giữ dây ngắn. C3/C13 100 nF lọc VCCB/VCCA; xem datasheet TI trong `docs/sources.md`.
 
 ## 5. UART hai chiều, 9600 baud 8N1
 
 ```text
-AT89S52 P3.1/TX/11 → TXS B3 ↔ A3 → ESP32 GPIO4/RX1
-AT89S52 P3.0/RX/10 ← TXS B4 ↔ A4 ← ESP32 GPIO5/TX1
-TXS VCCB=5V, VCCA=3V3, GND chung, OE=GPIO6 + R4 100k xuống GND
+AT89S52 P3.1/TX/11 → TXS B4 ↔ A4 → ESP32 GPIO4/RX1
+AT89S52 P3.0/RX/10 ← TXS B5 ↔ A5 ← ESP32 GPIO3/TX1
+TXS VCCB=5V, VCCA=3V3, GND chung, OE=GPIO0 + R4 100k xuống GND
 ```
 
-Không còn bộ chia áp TX hoặc buffer riêng. Không nối AT89S52 TX thẳng vào GPIO4 hoặc thêm bộ chia áp trên đường đã qua TXS. Dùng đúng sơ đồ SuperMini C3: UART1 RX=GPIO4, TX=GPIO5 và OE=GPIO6.
+Không còn bộ chia áp TX hoặc buffer riêng. Không nối AT89S52 TX thẳng vào GPIO4 hoặc thêm bộ chia áp trên đường đã qua TXS. Dùng đúng sơ đồ SuperMini C3: UART1 RX=GPIO4, TX=GPIO3 và OE=GPIO0.
 
 ## 6. Burn-E nạp AT89S52; J3 ISP
 

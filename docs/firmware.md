@@ -2,11 +2,11 @@
 
 ## Phần cứng mặc định
 
-AT89S52 DIP-40 / 11,0592 MHz / 5 V; DHT11 P3.2/12; nút trang P3.3/13; I²C phần mềm SDA P1.0/1, SCL P1.1/2 (dưới 100 kHz); UART TX P3.1/11, RX P3.0/10, 9600 8N1. ESP32-C3 SuperMini RX GPIO4, TX GPIO5, OE TXS0108E GPIO6. Xem `hardware/wiring.md`.
+AT89S52 DIP-40 / 11,0592 MHz / 5 V; DHT11 P3.2/12; nút trang P3.3/13; I²C phần mềm SDA P1.0/1, SCL P1.1/2 (dưới 100 kHz); UART TX P3.1/11, RX P3.0/10, 9600 8N1. ESP32-C3 SuperMini RX GPIO4, TX GPIO3, OE TXS0108E GPIO0. Xem `hardware/wiring.md`.
 
 ## ESP32 — PlatformIO
 
-Đích hiện tại là ESP32-C3 SuperMini 4 MB: dùng cấu hình chip `esp32-c3-devkitm-1` với USB CDC làm console. UART1 nối AT89S52 tại RX=GPIO4, TX=GPIO5; OE=GPIO6. Không dùng Serial2 hoặc sơ đồ chân WROOM cũ. Nếu lần đầu chưa thấy cổng USB để nạp, giữ BOOT, nhấn/thả RESET rồi thả BOOT để vào download mode theo board thực tế. Chừa GPIO18/19 cho USB; không dùng chân strap GPIO2/8/9 cho UART/OE trong thiết kế này.
+Đích hiện tại là ESP32-C3 SuperMini 4 MB: dùng cấu hình chip `esp32-c3-devkitm-1` với USB CDC làm console. UART1 nối AT89S52 tại RX=GPIO4, TX=GPIO3; OE=GPIO0. Không dùng Serial2 hoặc sơ đồ chân WROOM cũ. Nếu lần đầu chưa thấy cổng USB để nạp, giữ BOOT, nhấn/thả RESET rồi thả BOOT để vào download mode theo board thực tế. Chừa GPIO18/19 cho USB; không dùng chân strap GPIO2/8/9 cho UART/OE trong thiết kế này.
 
 ```powershell
 Copy-Item firmware/v0.2.0/esp32/include/secrets.example.h firmware/v0.2.0/esp32/include/secrets.h
