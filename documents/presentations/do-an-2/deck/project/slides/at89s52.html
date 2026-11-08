@@ -3,8 +3,8 @@
 <div style="flex:1;display:grid;grid-template-columns:1.45fr 1fr;gap:40px;align-items:center">
 <table style="font-size:26px">
 <tr style="background:#1E2B2F"><th style="width:26%;color:#F7F3EC;padding:12px 16px">Chân</th><th style="width:30%;color:#F7F3EC">Chức năng</th><th style="width:44%;color:#F7F3EC">Nối tới</th></tr>
-<tr style="background:#FFFFFF"><td>P1.0 / P1.1</td><td>SDA / SCL</td><td>TXS B8 / B7 → OLED</td></tr>
-<tr style="background:#EFE8DB"><td>P3.0 / P3.1</td><td>RXD / TXD</td><td>TXS B5 / B4 → ESP32</td></tr>
+<tr style="background:#FFFFFF"><td>P0.3 / P0.4</td><td>SDA / SCL</td><td>TXS B8 / B7, R8/R9 10 kΩ</td></tr>
+<tr style="background:#EFE8DB"><td>P3.0 / P3.1</td><td>RXD / TXD</td><td>TXS B2 / B1 → ESP32</td></tr>
 <tr style="background:#FFFFFF"><td>P3.2</td><td>DATA</td><td>DHT11, R2 4,7 kΩ</td></tr>
 <tr style="background:#EFE8DB"><td>P3.3</td><td>Nút trang</td><td>SW1, R3 10 kΩ</td></tr>
 <tr style="background:#CDE8E3"><td>P2.0</td><td>Relay</td><td>Cathode LED PC817</td></tr>
@@ -19,5 +19,5 @@
 </div>
 </div>
 <div style="position:absolute;left:128px;right:128px;bottom:64px;height:40px;display:flex;flex-direction:row;justify-content:space-between"><p style="font-size:24px;color:#55606A">Giám sát nhiệt độ, độ ẩm IoT · Tuấn – Sinh</p><p style="font-size:24px;color:#55606A">05 / 10</p></div>
-<aside>Bảng phân bổ chân AT89S52. I²C làm bằng phần mềm trên P1.0, P1.1; UART dùng P3.0, P3.1; DHT11 ở P3.2; nút trang P3.3; relay ở P2.0. Thạch anh 11,0592 MHz cho tốc độ 9600 baud chính xác. Reset mức cao bằng tụ và điện trở.</aside>
+<aside>Bảng phân bổ chân AT89S52. I²C làm bằng phần mềm trên P0.3, P0.4, hai chân nằm ngay dưới module chuyển mức; vì P0 là cực máng hở nên có R8, R9 kéo lên 5 V; UART dùng P3.0, P3.1; DHT11 ở P3.2; nút trang P3.3; relay ở P2.0. Thạch anh 11,0592 MHz cho tốc độ 9600 baud chính xác. Reset mức cao bằng tụ và điện trở.</aside>
 </section>
