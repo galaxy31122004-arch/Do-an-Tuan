@@ -160,6 +160,8 @@ Tiếp điểm relay chỉ đóng cắt nguồn ngoài của tải và không n�
 
 Sơ đồ nguyên lý được vẽ trên KiCad 10 (dự án `env-monitor`).
 
+- **Bố cục theo khối:** bản vẽ chia thành 9 khối có khung và tiêu đề: nguồn 12 V → 5 V, vi điều khiển AT89S52, nạp ISP, nút chuyển trang, cảm biến DHT11, chuyển mức TXS0108E, ESP32-C3, màn hình OLED và điều khiển relay. Trong mỗi khối, linh kiện nối bằng dây. Giữa các khối, tín hiệu nối bằng nhãn net cùng tên, ví dụ `RST`, `SDA5`, `TX51_3V3`, `DHT_DATA` và `RELAY`.
+
 - **Ký hiệu riêng:** ESP32-C3 SuperMini và module TXS0108E được tạo thành ký hiệu và footprint riêng, mỗi module là một khối, chân ghi đúng nhãn GPIO hoặc nhãn A/B in trên module.
 - **Tụ lọc:** các tụ lọc trên các module đã có sẵn trên bo module, nên mạch chính chỉ giữ 6 tụ:
   - C1: lọc nguồn AT89S52;
