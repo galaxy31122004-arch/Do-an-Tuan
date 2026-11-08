@@ -52,6 +52,7 @@ firmware/v0.2.0/at89s52/                 Firmware AT89S52 (main.c)
 firmware/v0.2.0/esp32/                   Firmware ESP32-C3 (PlatformIO)
 dashboard/                        Dashboard ThingsBoard và bản local
 hardware/                         BOM, bảng giá, generate.py
+hardware/pcb/                     Dự án KiCad 10 (env-monitor): sơ đồ nguyên lý nối bằng global label, PDF xuất kèm
 tests/                            Kiểm thử
 docs/                             Tài liệu kỹ thuật đang duy trì
 .planning/                        Trạng thái AXON
