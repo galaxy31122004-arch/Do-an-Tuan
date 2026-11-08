@@ -13,10 +13,11 @@ PARTS=[
 ('Y1',1,'Thạch anh 11,0592 MHz','HC-49S','Dao động 11,0592 MHz cho UART 9600; đối chiếu điện dung tải'),
 ('R1,R3,R7',3,'10 kΩ 1% 0,25 W','Axial THT','R1 kéo RST chân 9 xuống GND; R3 kéo nút trang lên 5 V; R7 base-emitter Q1 giữ Q1 tắt'),
 ('R6',1,'2,2 kΩ 0,25 W','Axial THT','Hạn dòng LED PC817 (~1,5 mA khi P2.0 kéo xuống)'),
-('U8',1,'PC817 opto','DIP-4','Cách ly chân P2.0 với tầng relay; LED: +5 V-R6-anode, cathode-P2.0; C lên +5 V, E qua R5 vào base Q1'),
+('U8',1,'PC817 opto','DIP-4','LED phía 5 V: +5 V-R6-anode, cathode-P2.0; transistor phía 12 V: C lên +12V, E qua R5 vào base Q1'),
 ('R2',1,'4,7 kΩ 1% 0,25 W','Axial THT','Kéo DATA DHT11 lên 5 V'),
 ('R4',1,'100 kΩ 1% 0,25 W','Axial THT','Kéo OE TXS0108E xuống GND khi ESP32 khởi động; bỏ pull-up OE trên module nếu có'),
-('R10,R5',2,'1 kΩ 0,25 W','Axial THT','R10 hạn dòng LED nguồn; R5 từ emitter PC817 vào base Q1'),
+('R10',1,'1 kΩ 0,25 W','Axial THT','Hạn dòng LED nguồn'),
+('R5',1,'4,7 kΩ 0,25 W','Axial THT','Từ emitter PC817 (phía 12 V) vào base Q1'),
 ('C1,C3,C5,C6,C16',5,'100 nF X7R ≥16 V','THT 2,54 mm','VCC AT89S52, TXS VCCB 5V, OLED 3V3, ESP32 5V, đầu ra LM7805; đặt sát tải'),
 ('C14',1,'100 µF ≥25 V','Tụ hóa radial','Đầu vào LM7805 sau D2; đúng cực'),
 ('C15',1,'330 nF ≥25 V','Tụ gốm THT','Sát chân IN LM7805 theo datasheet'),
@@ -37,7 +38,7 @@ PARTS=[
 ('J3',1,'Header ISP AT89S52 1x6','Pitch 2,54 mm','RST/VCC/GND/MISO/SCK/MOSI; nạp chính bằng Burn-E ngoài mạch'),
 ('J5A,J5B',2,'Header cái 1x10 cho module TXS0108E','Pitch 2,54 mm, xác minh hàng mua','Hàn đế module; chỉnh số chân/footprint nếu module thực tế khác'),
 ('J6',1,'Domino 2 chân 5,08 mm','Pitch 5,08 mm','COM/NC của relay K1 (NO bỏ trống); tải có điện khi relay tắt; chỉ tải điện áp thấp'),
-('K1',1,'Relay SRD-05VDC-SL-C','Hàn PCB, SPDT','Cuộn 5 V ~70 mA; chân 2/5 cuộn, 1 COM, 3 NO, 4 NC'),
+('K1',1,'Relay SRD-12VDC-SL-C','Hàn PCB, SPDT','Cuộn 12 V ~30 mA lấy từ +12V sau SR360; chân 2/5 cuộn, 1 COM, 4 NC, NO bỏ trống'),
 ('Q1',1,'2SC1815-GR NPN','TO-92 E-C-B','Đóng phía GND cuộn relay, base từ emitter PC817 qua R5'),
 ('D3',1,'1N4007','DO-41','Điốt dập xung ngược song song cuộn relay'),
 ('SK1',1,'Đế IC DIP-40','Wide 15,24 mm','Đế AT89S52, hàn đế rồi cắm IC'),
@@ -54,7 +55,7 @@ def main():
         quote=by_ref[ref]
         if not quote['Price per purchase unit VND']: return None
         price=int(quote['Price per purchase unit VND'])
-        if ref in {'R1','R2','R3','R4','R5','R7','R10'}: return price//50
+        if ref in {'R1','R2','R3','R4','R7','R10'}: return price//50
         if ref=='D1': return price//100
         if ref in {'SW1','SW2'}: return price//10
         pins={'J2A':8,'J2B':8,'J4':4,'J5A':10,'J5B':10,'J3':6}
@@ -100,7 +101,7 @@ def main():
         f'- In PCB theo giá người dùng: **{money(pcb)}**.',
         f'- **Tổng tiền mua + PCB: {money(parts_purchase+pcb)}, chưa gồm mục chưa có giá.**',
         f'- Nếu chỉ phân bổ lượng linh kiện dùng trên một PCB: **{money(used_total+pcb)}**, chưa gồm mục chưa có giá. Phần chênh lệch là linh kiện dư từ gói/thanh mua.',
-        '- J1, J6, J7, U7, D2, D3, Q1, R6, U8, C14, C15 và K1 chưa khảo sát giá, để trống trong CSV; không tính thành 0đ. Giá tụ tham khảo cần xác nhận đúng điện môi; trở 10kΩ/100kΩ ở nguồn giá đang báo hết hàng.',
+        '- J1, J6, J7, U7, D2, D3, Q1, R5, R6, U8, C14, C15 và K1 chưa khảo sát giá, để trống trong CSV; không tính thành 0đ. Giá tụ tham khảo cần xác nhận đúng điện môi; trở 10kΩ/100kΩ ở nguồn giá đang báo hết hàng.',
         '- Chưa gồm vận chuyển, adapter/cáp, vỏ, thiếc/flux và công hàn. Burn-E đã có nên không mua lại.',
         '', '## Vật tư đi kèm, không hàn trực tiếp', '',
         '- 1 adapter DC 12 V / 1 A, jack 5,5x2,1 mm tâm dương (hoặc đấu dây vào domino J7); dây USB lập trình ESP32.',

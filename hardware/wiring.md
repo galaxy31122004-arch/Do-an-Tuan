@@ -24,7 +24,7 @@
 | +5 V → R10 1 kΩ → anode D1 | Cathode LED xuống GND |
 | TP1 / TP2 / TP3 | +5 V / 3,3 V / GND |
 
-**Nguồn LM7805 từ 12 V:** cấp 12 V qua jack J1 **hoặc** domino J7, không cấp cả hai cùng lúc. Dòng tải ước tính khoảng 250 mA (ESP32 Wi-Fi, relay, AT89S52, OLED), đỉnh khoảng 450 mA khi ESP32 phát. LM7805 tỏa khoảng (12 − 0,5 − 5) × 0,25 ≈ **1,6 W**, đỉnh gần 3 W. Chỉ tản qua PCB thì cần vùng đồng GND dưới tab rộng khoảng 40×40 mm ở cả hai mặt, nối nhiều via, bôi keo tản nhiệt, và để thoáng; nếu tab vẫn quá nóng khi chạm (trên ~80 °C), gắn thêm tản nhôm nhỏ hoặc hạ adapter xuống 9 V. Tab của 7805 là GND nên vít thẳng xuống đồng GND không cần đệm cách điện. Không cắm USB vào ESP32 khi đang cấp nguồn 12 V.
+**Nguồn LM7805 từ 12 V:** cấp 12 V qua jack J1 **hoặc** domino J7, không cấp cả hai cùng lúc. Dòng tải 5 V ước tính khoảng 180 mA (ESP32 Wi-Fi, AT89S52, OLED; relay đã chuyển sang +12V), đỉnh khoảng 450 mA khi ESP32 phát. LM7805 tỏa khoảng (12 − 0,5 − 5) × 0,18 ≈ **1,2 W**, đỉnh gần 2,5 W khi ESP32 phát. Chỉ tản qua PCB thì cần vùng đồng GND dưới tab rộng khoảng 40×40 mm ở cả hai mặt, nối nhiều via, bôi keo tản nhiệt, và để thoáng; nếu tab vẫn quá nóng khi chạm (trên ~80 °C), gắn thêm tản nhôm nhỏ hoặc hạ adapter xuống 9 V. Tab của 7805 là GND nên vít thẳng xuống đồng GND không cần đệm cách điện. Không cắm USB vào ESP32 khi đang cấp nguồn 12 V.
 
 EA/VPP chân 31 nối thẳng +5 V để chạy Flash trong; PSEN chân 29 và ALE chân 30 để hở. P0 không dùng để hở (P0 cần pull-up nếu sử dụng). Các chân I/O còn lại không dùng để NC; không nối ngẫu nhiên vào nguồn. Nút 4 chân tactile có hai cặp nối sẵn: chọn hai chân khác tiếp điểm, đo thông mạch trước khi hàn.
 
@@ -91,26 +91,28 @@ J3 dùng khi đã chọn đúng AT89S52 và đối chiếu pinout trong Burn-E. 
 
 Đánh dấu chân 1. Nếu dùng ISP, chọn nguồn target theo hướng dẫn Burn-E; không cấp đồng thời nguồn mạch nạp và adapter nếu không được thiết kế cho phép. AT89S52 dùng reset mức cao 5 V khi ISP; không dùng cấu hình VPP của PIC.
 
-## 6b. Relay K1 trên board, cách ly bằng PC817 (firmware v0.2.0)
+## 6b. Relay K1 12 V trên board, điều khiển qua PC817 (firmware v0.2.0)
 
-| Linh kiện | Kết nối |
-|---|---|
-| R6 2,2 kΩ | +5 V → anode LED PC817 (chân 1) |
-| U8 PC817 | Cathode (chân 2) → AT89S52 P2.0 chân 21; collector (chân 4) → +5 V; emitter (chân 3) → R5 |
-| R5 1 kΩ | Emitter PC817 → base Q1 |
-| R7 10 kΩ | Base Q1 → GND |
-| Q1 2SC1815-GR NPN (chân E-C-B) | E → GND; C → cuộn K1 chân 2 |
-| K1 SRD-05VDC-SL-C | Cuộn: chân 5 lên +5 V, chân 2 xuống Q1; COM chân 1, NC chân 4; NO chân 3 bỏ trống |
-| D3 1N4007 | Song song cuộn: cathode +5 V (chân 5), anode chân 2 |
-| J6 domino 2 chân | 1 COM, 2 NC |
+Phía điều khiển (LED của PC817) dùng **+5V** sạch từ LM7805. Phía relay (transistor của PC817, Q1, cuộn K1, D3) lấy **+12V** ngay sau SR360, trước LM7805, nên dòng cuộn relay không đi qua LM7805 và không làm nhiễu rail 5 V. Hai phía **chung GND**, nên đây là tách nguồn chứ không phải cách ly hoàn toàn.
 
-P2.0 **mức thấp** → LED PC817 sáng → Q1 dẫn → relay bật. Lúc reset và khi khởi động P2.0 ở mức cao nên LED tắt và **relay không đóng thoáng qua**. Dòng LED khoảng (5 − 1,2 − 0,45)/2,2 kΩ ≈ 1,5 mA, trong giới hạn kéo xuống 1,6 mA của AT89S52. Với CTR của PC817 ≥ 100 % ở dòng này, dòng base Q1 khoảng 1–1,5 mA, đủ cho cuộn 70 mA khi dùng C1815 loại **GR** hoặc **Y**. Nếu relay đóng không dứt khoát khi thử, giảm R6 xuống 1,5 kΩ.
+| Phía | Linh kiện | Kết nối |
+|---|---|---|
+| 5 V | R6 2,2 kΩ | +5V → anode LED PC817 (chân 1) |
+| 5 V | U8 PC817 chân 2 | Cathode → AT89S52 P2.0 chân 21 |
+| 12 V | U8 PC817 chân 4 / 3 | Collector → +12V; emitter → R5 |
+| 12 V | R5 4,7 kΩ, R7 10 kΩ | Emitter PC817 → R5 → base Q1; R7 base → GND |
+| 12 V | Q1 2SC1815-GR (E-C-B) | E → GND; C → cuộn K1 chân 2 |
+| 12 V | K1 SRD-12VDC-SL-C | Cuộn chân 5 → +12V, chân 2 → Q1; COM chân 1, NC chân 4; NO bỏ trống |
+| 12 V | D3 1N4007 | Cathode +12V (chân 5), anode chân 2 |
+| Tải | J6 | 1 COM, 2 NC |
 
-PC817 ở đây bảo vệ chân vi điều khiển và tách logic khỏi tầng relay; vì hai phía dùng chung +5 V và GND nên không phải cách ly điện hoàn toàn. Muốn cách ly thật cần nguồn riêng cho cuộn relay.
+P2.0 **mức thấp** → LED PC817 sáng → Q1 dẫn → relay bật; khi reset P2.0 ở mức cao nên relay không đóng. Dòng LED ≈ 1,5 mA, trong giới hạn kéo xuống của AT89S52. Cuộn 12 V khoảng 30 mA; dòng base qua R5 4,7 kΩ khoảng 1–2 mA (giới hạn bởi CTR của PC817), dư để Q1 bão hòa với C1815 loại **GR**/**Y**.
 
-**Nguồn trong điều khiển, nguồn ngoài đóng cắt:** cuộn relay, PC817 và Q1 dùng +5 V/GND của board; tiếp điểm chỉ đóng cắt nguồn ngoài của tải và không nối điện với mạch. Đấu: (+) nguồn ngoài → J6 chân 1 (COM); J6 chân 2 (NC) → tải → (−) nguồn ngoài.
+**Khi vẽ PCB:** cho dòng GND của cuộn relay (emitter Q1) về điểm GND chung gần C14 bằng đường riêng, không đi vòng dưới vùng AT89S52/ESP32.
 
-Tải nối qua **NC**: relay tắt thì tải có điện, relay bật thì tải bị ngắt. Firmware bật relay khi nhiệt độ ≥ 32,0 °C (ngắt tải), tắt khi ≤ 30,0 °C, và tắt khi DHT11 lỗi (tải có điện). Ngưỡng đặt trong `firmware/v0.2.0/at89s52/board.h`. Chỉ đóng cắt tải điện áp thấp; không đưa điện lưới lên PCB.
+**Nguồn trong điều khiển, nguồn ngoài đóng cắt:** tiếp điểm chỉ đóng cắt nguồn ngoài của tải và không nối điện với mạch. Đấu: (+) nguồn ngoài → J6 chân 1 (COM); J6 chân 2 (NC) → tải → (−) nguồn ngoài.
+
+Tải nối qua **NC**: relay tắt thì tải có điện, relay bật thì tải bị ngắt. Firmware bật relay khi nhiệt độ ≥ 32,0 °C (ngắt tải), tắt khi ≤ 30,0 °C, và tắt khi DHT11 lỗi. Ngưỡng đặt trong `firmware/v0.2.0/at89s52/board.h`. Chỉ đóng cắt tải điện áp thấp; không đưa điện lưới lên PCB.
 
 ## 7. Trình tự kiểm tra trước khi cắm IC
 

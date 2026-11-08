@@ -7,10 +7,11 @@ U6,1,"OLED trắng 0,96 inch SSD1315 I²C 128x64",Module 4 chân,"Module Hshop �
 Y1,1,"Thạch anh 11,0592 MHz",HC-49S,"Dao động 11,0592 MHz cho UART 9600; đối chiếu điện dung tải",1500,1500,https://icdayroi.com/thach-anh-11-0592mhz-hc49-dip,1 thạch anh; RSCH-20261101-0011
 "R1,R3,R7",3,"10 kΩ 1% 0,25 W",Axial THT,R1 kéo RST chân 9 xuống GND; R3 kéo nút trang lên 5 V; R7 base-emitter Q1 giữ Q1 tắt,120,360,https://chotroihn.vn/tro-vach-1-4w-1-50c,"Mua gói 50, dùng 3; trang báo hết hàng biến thể này; cần xác nhận nguồn khác"
 R6,1,"2,2 kΩ 0,25 W",Axial THT,"Hạn dòng LED PC817 (~1,5 mA khi P2.0 kéo xuống)",,,,Chưa khảo sát giá
-U8,1,PC817 opto,DIP-4,"Cách ly chân P2.0 với tầng relay; LED: +5 V-R6-anode, cathode-P2.0; C lên +5 V, E qua R5 vào base Q1",,,,Chưa khảo sát giá
+U8,1,PC817 opto,DIP-4,"LED phía 5 V: +5 V-R6-anode, cathode-P2.0; transistor phía 12 V: C lên +12V, E qua R5 vào base Q1",,,,Chưa khảo sát giá
 R2,1,"4,7 kΩ 1% 0,25 W",Axial THT,Kéo DATA DHT11 lên 5 V,120,120,https://chotroihn.vn/tro-vach-1-4w-1-50c,"Mua gói 50, dùng 1"
 R4,1,"100 kΩ 1% 0,25 W",Axial THT,Kéo OE TXS0108E xuống GND khi ESP32 khởi động; bỏ pull-up OE trên module nếu có,120,120,https://chotroihn.vn/tro-vach-1-4w-1-50c,"Mua gói 50, dùng 1; trang báo hết hàng biến thể này; cần xác nhận nguồn khác"
-"R10,R5",2,"1 kΩ 0,25 W",Axial THT,R10 hạn dòng LED nguồn; R5 từ emitter PC817 vào base Q1,120,240,https://chotroihn.vn/tro-vach-1-4w-1-50c,"Mua gói 50, dùng 2"
+R10,1,"1 kΩ 0,25 W",Axial THT,Hạn dòng LED nguồn,120,120,https://chotroihn.vn/tro-vach-1-4w-1-50c,"Mua gói 50, dùng 1"
+R5,1,"4,7 kΩ 0,25 W",Axial THT,Từ emitter PC817 (phía 12 V) vào base Q1,,,,Chưa khảo sát giá; có thể lấy từ gói 4
 "C1,C3,C5,C6,C16",5,100 nF X7R ≥16 V,"THT 2,54 mm","VCC AT89S52, TXS VCCB 5V, OLED 3V3, ESP32 5V, đầu ra LM7805; đặt sát tải",500,2500,https://chotroihn.vn/tu-gom-vang-50v,Giá biến thể 0.1uF/104; đối chiếu điện môi X7R theo BOM trước khi mua
 C14,1,100 µF ≥25 V,Tụ hóa radial,Đầu vào LM7805 sau D2; đúng cực,,,,Chưa khảo sát giá
 C15,1,330 nF ≥25 V,Tụ gốm THT,Sát chân IN LM7805 theo datasheet,,,,Chưa khảo sát giá
@@ -31,7 +32,7 @@ J4,1,Header cái 1x4,"Pitch 2,54 mm",Đế cắm OLED,200,200,https://chotroihn.
 J3,1,Header ISP AT89S52 1x6,"Pitch 2,54 mm",RST/VCC/GND/MISO/SCK/MOSI; nạp chính bằng Burn-E ngoài mạch,300,300,https://chotroihn.vn/jump-duc-don-1x40p-2-54,"1 thanh 40 chân, dùng 6 chân ISP AT89S52; giả định chân đực module đi kèm module"
 "J5A,J5B",2,Header cái 1x10 cho module TXS0108E,"Pitch 2,54 mm, xác minh hàng mua",Hàn đế module; chỉnh số chân/footprint nếu module thực tế khác,500,1000,https://chotroihn.vn/jump-cai-don-1-40p-2-54,2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt
 J6,1,"Domino 2 chân 5,08 mm","Pitch 5,08 mm",COM/NC của relay K1 (NO bỏ trống); tải có điện khi relay tắt; chỉ tải điện áp thấp,,,,Chưa khảo sát giá
-K1,1,Relay SRD-05VDC-SL-C,"Hàn PCB, SPDT","Cuộn 5 V ~70 mA; chân 2/5 cuộn, 1 COM, 3 NO, 4 NC",,,,Chưa khảo sát giá
+K1,1,Relay SRD-12VDC-SL-C,"Hàn PCB, SPDT","Cuộn 12 V ~30 mA lấy từ +12V sau SR360; chân 2/5 cuộn, 1 COM, 4 NC, NO bỏ trống",,,,Chưa khảo sát giá
 Q1,1,2SC1815-GR NPN,TO-92 E-C-B,"Đóng phía GND cuộn relay, base từ emitter PC817 qua R5",,,,Chưa khảo sát giá
 D3,1,1N4007,DO-41,Điốt dập xung ngược song song cuộn relay,,,,Chưa khảo sát giá
 SK1,1,Đế IC DIP-40,"Wide 15,24 mm","Đế AT89S52, hàn đế rồi cắm IC",1500,1500,https://chotroihn.vn/de-ic,Biến thể 40 chân; xác nhận loại rộng cho AT89S52 DIP40

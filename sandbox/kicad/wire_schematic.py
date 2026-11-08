@@ -15,7 +15,7 @@ from pathlib import Path
 from sexpr import Sym, dump, find, first, parse
 
 G = 2.54
-POWER = {'+5V', '+3V3', 'GND'}
+POWER = {'+12V', '+5V', '+3V3', 'GND'}
 POWER_LIB = Path(r'C:\Program Files\KiCad\10.0\share\kicad\symbols\power.kicad_sym')
 
 from layout_v2 import (CAPTIONS, EXTRA_POWER, MANUAL, MANUAL_JUNCTIONS, NC, NETS, NEW_PARTS,  # noqa: E402

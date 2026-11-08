@@ -8,7 +8,8 @@ Y1,Thạch anh 11.0592MHz HC49 DIP,1,1500,1500,https://icdayroi.com/thach-anh-11
 "R1,R3,R7",Điện trở 10kΩ 1/4W 1%,1,6000,6000,https://chotroihn.vn/tro-vach-1-4w-1-50c,"Mua gói 50, dùng 3; trang báo hết hàng biến thể này; cần xác nhận nguồn khác"
 R2,"Điện trở 4,7kΩ 1/4W 1%",1,6000,6000,https://chotroihn.vn/tro-vach-1-4w-1-50c,"Mua gói 50, dùng 1"
 R4,Điện trở 100kΩ 1/4W 1%,1,6000,6000,https://chotroihn.vn/tro-vach-1-4w-1-50c,"Mua gói 50, dùng 1; trang báo hết hàng biến thể này; cần xác nhận nguồn khác"
-"R10,R5",Điện trở 1kΩ 1/4W 1%,1,6000,6000,https://chotroihn.vn/tro-vach-1-4w-1-50c,"Mua gói 50, dùng 2"
+R10,Điện trở 1kΩ 1/4W 1%,1,6000,6000,https://chotroihn.vn/tro-vach-1-4w-1-50c,"Mua gói 50, dùng 1"
+R5,Điện trở 4.7kΩ 1/4W,1,,,,Chưa khảo sát giá; có thể lấy từ gói 4,7kΩ của R2
 "C1,C3,C5,C6,C12,C13,C16",Tụ gốm 100nF,7,500,3500,https://chotroihn.vn/tu-gom-vang-50v,Giá biến thể 0.1uF/104; đối chiếu điện môi X7R theo BOM trước khi mua
 C7,Tụ hóa 470uF 10V,1,1000,1000,https://chotroihn.vn/tu-hoa-10v,1 tụ
 "C2,C8,C11",Tụ hóa 10uF 16V,3,1000,3000,https://chotroihn.vn/tu-hoa-16v,"3 tụ 10uF 16V; C2 reset, C8/C11 lọc nguồn; kiểm tra cực tính"
@@ -27,7 +28,7 @@ J1,Jack DC 5.5x2.1 hàn mạch,1,,,,Chưa khảo sát giá
 J7,Domino 2 chân 5.08mm,1,,,,Chưa khảo sát giá
 "J2A,J2B,J4,J5A,J5B","Header cái 2,54mm",2,2000,4000,https://chotroihn.vn/jump-cai-don-1-40p-2-54,2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt
 J3,"Header đực 2,54mm",1,2000,2000,https://chotroihn.vn/jump-duc-don-1x40p-2-54,"1 thanh 40 chân, dùng 6 chân ISP AT89S52; giả định chân đực module đi kèm module"
-K1,Relay SRD-05VDC-SL-C,1,,,,Chưa khảo sát giá
+K1,Relay SRD-12VDC-SL-C,1,,,,Chưa khảo sát giá
 J6,Domino 2 chân 5.08mm,1,,,,Chưa khảo sát giá
 SK1,Đế IC 40 chân,1,1500,1500,https://chotroihn.vn/de-ic,Biến thể 40 chân; xác nhận loại rộng cho AT89S52 DIP40
 "TP1,TP2,TP3",Test point tự làm,0,0,0,,Tận dụng chân/dây cắt thừa của header đã tính; không mua thêm
