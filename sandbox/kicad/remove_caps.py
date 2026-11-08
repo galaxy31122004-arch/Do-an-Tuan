@@ -39,35 +39,36 @@ def drop(t, head, indent, pred):
 
 
 ref_of = lambda b: (re.search(r'\(property "Reference" "([^"]+)"', b) or [None, None])[1]
-sch = SCH.read_text(encoding='utf-8')
-sch, n = drop(sch, 'symbol\n\t\t(lib_id', '\t', lambda b: ref_of(b) in REFS)
-print('schematic symbols removed:', n)
-SCH.write_text(sch, encoding='utf-8')
-pcb = PCB.read_text(encoding='utf-8')
-pcb, n = drop(pcb, 'footprint "', '\t', lambda b: ref_of(b) in REFS)
-print('pcb footprints removed:', n)
-PCB.write_text(pcb, encoding='utf-8')
-
-rpt = os.path.join(tempfile.gettempdir(), 'erc_rm.json')
-for it in range(40):
-    subprocess.run([CLI, 'sch', 'erc', '--format', 'json', '--units', 'mm', '-o', rpt, str(SCH)], capture_output=True)
-    v = [x for s in json.load(open(rpt, encoding='utf-8'))['sheets'] for x in s['violations']]
-    pts = set()
-    for x in v:
-        if x['type'] in ('wire_dangling', 'unconnected_wire_endpoint'):
-            for it2 in x['items']:
-                pts.add((round(it2['pos']['x'] * 100, 2), round(it2['pos']['y'] * 100, 2)))
-    if not pts:
-        print('remaining ERC:', sorted({x['type'] for x in v}) or 'none', len(v)); break
+if __name__ == '__main__':
     sch = SCH.read_text(encoding='utf-8')
-
-    def touches(b):
-        xy = re.findall(r'\(xy ([-\d.]+) ([-\d.]+)\)', b)
-        return any((round(float(a), 2), round(float(c), 2)) in pts or
-                   any(abs(float(a) - px) < 0.02 and abs(float(c) - py) < 0.02 for px, py in pts) for a, c in xy)
-    sch, n = drop(sch, 'wire', '\t', touches)
-    if n == 0:
-        print('dangling but no wire matched:', pts, [x['type'] for x in v]); break
+    sch, n = drop(sch, 'symbol\n\t\t(lib_id', '\t', lambda b: ref_of(b) in REFS)
+    print('schematic symbols removed:', n)
     SCH.write_text(sch, encoding='utf-8')
-    print('pass', it, 'wires removed', n)
+    pcb = PCB.read_text(encoding='utf-8')
+    pcb, n = drop(pcb, 'footprint "', '\t', lambda b: ref_of(b) in REFS)
+    print('pcb footprints removed:', n)
+    PCB.write_text(pcb, encoding='utf-8')
+
+    rpt = os.path.join(tempfile.gettempdir(), 'erc_rm.json')
+    for it in range(40):
+        subprocess.run([CLI, 'sch', 'erc', '--format', 'json', '--units', 'mm', '-o', rpt, str(SCH)], capture_output=True)
+        v = [x for s in json.load(open(rpt, encoding='utf-8'))['sheets'] for x in s['violations']]
+        pts = set()
+        for x in v:
+            if x['type'] in ('wire_dangling', 'unconnected_wire_endpoint'):
+                for it2 in x['items']:
+                    pts.add((round(it2['pos']['x'] * 100, 2), round(it2['pos']['y'] * 100, 2)))
+        if not pts:
+            print('remaining ERC:', sorted({x['type'] for x in v}) or 'none', len(v)); break
+        sch = SCH.read_text(encoding='utf-8')
+
+        def touches(b):
+            xy = re.findall(r'\(xy ([-\d.]+) ([-\d.]+)\)', b)
+            return any((round(float(a), 2), round(float(c), 2)) in pts or
+                       any(abs(float(a) - px) < 0.02 and abs(float(c) - py) < 0.02 for px, py in pts) for a, c in xy)
+        sch, n = drop(sch, 'wire', '\t', touches)
+        if n == 0:
+            print('dangling but no wire matched:', pts, [x['type'] for x in v]); break
+        SCH.write_text(sch, encoding='utf-8')
+        print('pass', it, 'wires removed', n)
 
