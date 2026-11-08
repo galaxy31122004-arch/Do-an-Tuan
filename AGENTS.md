@@ -6,7 +6,7 @@
 
 - Workspace: `D:\Randombullsheet\Do-an-Tuan`.
 - Mục đích: Đồ án 2 — giám sát nhiệt độ/độ ẩm qua Internet. DHT11 → AT89S52 → OLED SSD1315; AT89S52 ↔ ESP32-C3 → Wi-Fi → ThingsBoard dashboard.
-- Repo có sẵn trước khi áp cấu trúc này: code và tài nguyên đang duy trì nằm ở `firmware/`, `dashboard/`, `hardware/`, `tests/`, `docs/`; giữ nguyên các đường dẫn đó, không chuyển sang `source-code/` khi chưa được yêu cầu.
+- Repo có sẵn trước khi áp cấu trúc này: code và tài nguyên đang duy trì nằm ở `firmware/`, `dashboard/`, `hardware/`, `tests/`, `docs/`; giữ nguyên các đường dẫn đó.
 - Mạch PCB sẽ vẽ thủ công; không liên kết tới workspace KiCad bên ngoài.
 - Trạng thái AXON ở `.planning/`. Thử nghiệm mới đặt ở `sandbox/`.
 
@@ -28,7 +28,7 @@ Chỉ ghi dự án, đường dẫn và quyền chỉnh sửa đã được ngư
 
 Mọi sản phẩm giao trong workspace này đều phải có phiên bản `vX.Y.Z` và nằm trong thư mục mới `versions/<loại>/<tên>/v<X.Y.Z>/`; không có bản giao nào không đánh số, không sửa trong `versions/`, không ghi đè bản đã giao. Mọi skill cá nhân dùng trong workspace đều tuân theo cấu trúc này.
 
-Mỗi project trong `source-code/<project>/` có một số phiên bản đặt ở một chỗ (`VERSION` hoặc manifest build như `package.json`, `pyproject.toml`, `platformio.ini`) và `CHANGELOG.md` ghi từng phiên bản. Bắt đầu từ `0.1.0`; sửa lỗi tăng PATCH, thêm tính năng tăng MINOR, đổi không tương thích tăng MAJOR. Mỗi lần phát hành chép bản build hoặc gói nguồn sang `versions/source-code/<project>/v<X.Y.Z>/` kèm README (phiên bản, ngày, thay đổi, tình trạng kiểm thử); repo Git thì gắn tag `v<X.Y.Z>`. Không xác định được phiên bản trước thì hỏi, không đoán.
+Workspace này không dùng thư mục `source-code/`. Code firmware đánh phiên bản theo mục Phiên bản firmware bên dưới. Không xác định được phiên bản trước thì hỏi, không đoán.
 
 ## Phiên bản tài liệu Word
 
@@ -60,7 +60,6 @@ documents/verification/           Báo cáo kiểm thử
 sandbox/                          Thử nghiệm, bản nháp và bản làm dở
 sandbox/simulation/               Mô phỏng và thử nghiệm độc lập
 versions/                         Bản đã giao/phát hành, luôn theo vX.Y.Z; không sửa, không ghi đè
-versions/source-code/<project>/   Mỗi bản phát hành code theo phiên bản
 documents/<ten>/                  Tài liệu Word đang soạn (kế hoạch, figures, drafts)
 versions/documents/<ten>/         Mỗi bản giao gồm DOCX và PDF
 versions/firmware/<project>/      Mỗi bản giao gồm .bin theo phiên bản
