@@ -108,6 +108,8 @@ P2.0 **mức thấp** → LED PC817 sáng → Q1 dẫn → relay bật. Lúc res
 
 PC817 ở đây bảo vệ chân vi điều khiển và tách logic khỏi tầng relay; vì hai phía dùng chung +5 V và GND nên không phải cách ly điện hoàn toàn. Muốn cách ly thật cần nguồn riêng cho cuộn relay.
 
+**Nguồn trong điều khiển, nguồn ngoài đóng cắt:** cuộn relay, PC817 và Q1 dùng +5 V/GND của board; tiếp điểm chỉ đóng cắt nguồn ngoài của tải và không nối điện với mạch. Đấu: (+) nguồn ngoài → J6 chân 1 (COM); J6 chân 2 (NC) → tải → (−) nguồn ngoài.
+
 Tải nối qua **NC**: relay tắt thì tải có điện, relay bật thì tải bị ngắt. Firmware bật relay khi nhiệt độ ≥ 32,0 °C (ngắt tải), tắt khi ≤ 30,0 °C, và tắt khi DHT11 lỗi (tải có điện). Ngưỡng đặt trong `firmware/v0.2.0/at89s52/board.h`. Chỉ đóng cắt tải điện áp thấp; không đưa điện lưới lên PCB.
 
 ## 7. Trình tự kiểm tra trước khi cắm IC
