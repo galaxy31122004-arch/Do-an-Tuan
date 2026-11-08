@@ -7,7 +7,7 @@
 #define PAGE_BUTTON P3_3 /* pin 13, active low */
 #define I2C_SDA P1_0 /* pin 1 */
 #define I2C_SCL P1_1 /* pin 2 */
-#define RELAY_PIN P2_0 /* pin 21 -> J6 IN, relay module active low */
+#define RELAY_PIN P2_0 /* pin 21 -> 2SC1815 base node; high = relay on, low = off */
 #define RELAY_ON_T10 320 /* switch on at >= 32.0 C */
 #define RELAY_OFF_T10 300 /* switch off at <= 30.0 C (hysteresis) */
 /* RXD=P3.0 pin10, TXD=P3.1 pin11; EA/VPP pin31 tied to +5V. */

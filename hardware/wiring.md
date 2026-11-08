@@ -95,16 +95,19 @@ J3 dùng khi đã chọn đúng AT89S52 và đối chiếu pinout trong Burn-E. 
 
 | Linh kiện | Kết nối |
 |---|---|
-| R5 1 kΩ | AT89S52 P2.0 chân 21 → base Q1 |
-| R6 10 kΩ | Base Q1 → +5 V (giữ Q1 tắt khi P2.0 mức cao/thả nổi) |
-| Q1 S8550 PNP (E-B-C) | E → +5 V; C → cuộn K1 (chân 5) |
-| K1 SRD-05VDC-SL-C | Cuộn: chân 5 (từ Q1) và chân 2 (GND); COM chân 1, NO chân 3, NC chân 4 |
-| D3 1N4007 | Song song cuộn: cathode ở chân 5 (phía Q1), anode GND |
+| R6 3,3 kΩ | +5 V → nút điều khiển (cùng net với AT89S52 P2.0 chân 21) |
+| R5 1 kΩ | Nút điều khiển → base Q1 |
+| R7 10 kΩ | Base Q1 → GND |
+| Q1 2SC1815-GR NPN (chân E-C-B) | E → GND; C → cuộn K1 chân 2 |
+| K1 SRD-05VDC-SL-C | Cuộn: chân 5 lên +5 V, chân 2 xuống Q1; COM chân 1, NO chân 3, NC chân 4 |
+| D3 1N4007 | Song song cuộn: cathode +5 V (chân 5), anode chân 2 |
 | J6 domino 3 chân | 1 COM, 2 NO, 3 NC |
 
-P2.0 **mức thấp** → Q1 dẫn → relay bật; đúng logic firmware hiện có (`RELAY_PIN=0` là bật), không cần sửa code. Lúc khởi động P2.0 ở mức cao và R6 giữ base lên 5 V nên relay tắt. Dòng base khoảng (5 − 0,7)/1 kΩ ≈ 4 mA, AT89S52 kéo xuống được; cuộn khoảng 70 mA, trong khả năng S8550.
+P2.0 **mức cao** (chân thả, R6 kéo lên) → Q1 dẫn → relay bật; P2.0 **mức thấp** → relay tắt. Firmware v0.2.0 đã đảo logic theo mạch này và đặt P2.0 = 0 ngay khi khởi động. Trong lúc reset (khoảng 0,1 s sau khi cấp nguồn) chân P2.0 ở mức cao nên **relay đóng thoáng qua mỗi lần bật nguồn**; không nối tải không chịu được việc này.
 
-Firmware bật relay khi nhiệt độ ≥ 32,0 °C, tắt khi ≤ 30,0 °C, và tắt khi DHT11 lỗi. Ngưỡng đặt trong `firmware/v0.2.0/at89s52/board.h`. Tiếp điểm chỉ đóng cắt tải điện áp thấp (quạt 5–12 V); không đưa điện lưới lên PCB. Dòng cuộn lấy từ rail 5 V qua LM7805, đã tính trong phần nguồn.
+Dòng base khoảng (5 − 0,7)/(3,3 k + 1 k) ≈ 1 mA; cuộn khoảng 70 mA nên cần C1815 loại **GR** (hFE 200–400) hoặc **Y**, không dùng loại O. Khi P2.0 kéo xuống, dòng vào chân khoảng 1,5 mA, nằm trong giới hạn 1,6 mA của AT89S52; R5/R7 giữ base dưới 0,5 V để Q1 tắt hẳn.
+
+Firmware bật relay khi nhiệt độ ≥ 32,0 °C, tắt khi ≤ 30,0 °C, và tắt khi DHT11 lỗi. Ngưỡng đặt trong `firmware/v0.2.0/at89s52/board.h`. Tiếp điểm chỉ đóng cắt tải điện áp thấp (quạt 5–12 V); không đưa điện lưới lên PCB.
 
 ## 7. Trình tự kiểm tra trước khi cắm IC
 

@@ -5,7 +5,7 @@ U4,Module TXS0108E,1,15000,15000,https://icdayroi.com/txs0108e-8-kenh-chuyen-muc
 U5,DHT11 rời 4 chân,1,25000,25000,https://chotroihn.vn/cam-bien-nhiet-do-do-am-dht11,1 cảm biến; RSCH-20261101-0009
 U6,"OLED SSD1315 0,96 inch",1,65000,65000,https://hshop.vn/lcd-oled-trang-0-96-inch-i2c,1 màn hình; RSCH-20261101-0009
 Y1,Thạch anh 11.0592MHz HC49 DIP,1,1500,1500,https://icdayroi.com/thach-anh-11-0592mhz-hc49-dip,1 thạch anh; RSCH-20261101-0011
-"R1,R3,R6",Điện trở 10kΩ 1/4W 1%,1,6000,6000,https://chotroihn.vn/tro-vach-1-4w-1-50c,"Mua gói 50, dùng 3; trang báo hết hàng biến thể này; cần xác nhận nguồn khác"
+"R1,R3,R7",Điện trở 10kΩ 1/4W 1%,1,6000,6000,https://chotroihn.vn/tro-vach-1-4w-1-50c,"Mua gói 50, dùng 3; trang báo hết hàng biến thể này; cần xác nhận nguồn khác"
 R2,"Điện trở 4,7kΩ 1/4W 1%",1,6000,6000,https://chotroihn.vn/tro-vach-1-4w-1-50c,"Mua gói 50, dùng 1"
 R4,Điện trở 100kΩ 1/4W 1%,1,6000,6000,https://chotroihn.vn/tro-vach-1-4w-1-50c,"Mua gói 50, dùng 1; trang báo hết hàng biến thể này; cần xác nhận nguồn khác"
 "R10,R5",Điện trở 1kΩ 1/4W 1%,1,6000,6000,https://chotroihn.vn/tro-vach-1-4w-1-50c,"Mua gói 50, dùng 2"
@@ -16,7 +16,8 @@ C7,Tụ hóa 470uF 10V,1,1000,1000,https://chotroihn.vn/tu-hoa-10v,1 tụ
 D1,LED xanh lá 3mm,1,29000,29000,https://chotroihn.vn/goi-100-con-led-duc-3mm,"Mua gói 100, dùng 1"
 U7,LM7805 TO-220,1,,,,Chưa khảo sát giá
 "D2,D3",Diode 1N4007,2,,,,Chưa khảo sát giá
-Q1,Transistor S8550 TO-92,1,,,,Chưa khảo sát giá
+Q1,Transistor 2SC1815-GR TO-92,1,,,,Chưa khảo sát giá
+R6,Điện trở 3.3kΩ 1/4W,1,,,,Chưa khảo sát giá
 C14,Tụ hóa 100uF 25V,1,,,,Chưa khảo sát giá
 C15,Tụ gốm 330nF,1,,,,Chưa khảo sát giá
 "SW1,SW2",Nút nhấn 6x6,1,5000,5000,https://chotroihn.vn/bo-10-nut-nhan-4-chan,"Mua gói 10, dùng 2"

@@ -266,7 +266,7 @@ static void screen(void) __reentrant {
 void main(void) {
     uint16_t tick=0;
     uint8_t debounce=0,refresh=1;
-    P1=0xFF; P2=0xFF; P3=0xFF; /* P2.0 high = relay off */
+    P1=0xFF; P2=0xFE; P3=0xFF; /* P2.0 low = relay off (pulled up only during reset) */
     TMOD=0x21; /* T1 8-bit auto-reload UART; T0 16-bit delay/pulse timer. */
     PCON&=0x7F; TH1=0xFD; TL1=0xFD; SCON=0x50; TI=0; RI=0;
     TR1=1; ES=1; EA=1;
@@ -287,7 +287,7 @@ void main(void) {
                 if(temp>=RELAY_ON_T10) relay_on=1;
                 else if(temp<=RELAY_OFF_T10) relay_on=0;
             } else relay_on=0; /* fail safe: no reading, load off */
-            RELAY_PIN=relay_on?0:1;
+            RELAY_PIN=relay_on?1:0;
             if(relay_on) flags|=4;
             if(utc_mirror_get(&clock_mirror,&epoch)) flags|=2;
             ++seq; measurement(); refresh=1;
