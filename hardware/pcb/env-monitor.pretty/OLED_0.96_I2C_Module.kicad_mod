@@ -19,4 +19,15 @@
 	(pad "" np_thru_hole circle (at -0.4 15.46) (size 2.2 2.2) (drill 2.2) (layers "*.Cu" "*.Mask") (uuid "6b1f0a10-0001-4c00-9000-000000000022"))
 	(pad "" np_thru_hole circle (at -24.2 -7.84) (size 2.2 2.2) (drill 2.2) (layers "*.Cu" "*.Mask") (uuid "6b1f0a10-0001-4c00-9000-000000000023"))
 	(pad "" np_thru_hole circle (at -24.2 15.46) (size 2.2 2.2) (drill 2.2) (layers "*.Cu" "*.Mask") (uuid "6b1f0a10-0001-4c00-9000-000000000024"))
+	(model "${KIPRJMOD}/env-monitor.3dshapes/OLED_0.96_I2C_Module.wrl"
+		(offset
+			(xyz 0 0 0.0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
 )

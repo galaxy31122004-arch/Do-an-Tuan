@@ -4210,7 +4210,18 @@
 			(uuid "cde67bb8-586a-4f04-802b-484950855a5a")
 		)
 		(embedded_fonts no)
-	)
+			(model "${KIPRJMOD}/env-monitor.3dshapes/OLED_0.96_I2C_Module.wrl"
+			(offset
+				(xyz 0 0 0.0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+)
 	(footprint "Capacitor_THT:C_Disc_D3.0mm_W1.6mm_P2.50mm"
 		(layer "F.Cu")
 		(uuid "846b911a-81fc-4646-9541-63949c42fbec")
@@ -4888,7 +4899,18 @@
 			(uuid "09d5db7b-5629-417e-aa28-370bf3edbb70")
 		)
 		(embedded_fonts no)
-	)
+			(model "${KIPRJMOD}/env-monitor.3dshapes/TXS0108E_Module.wrl"
+			(offset
+				(xyz 0 0 0.0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+)
 	(footprint "Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal"
 		(layer "F.Cu")
 		(uuid "8e38f70f-cc37-4581-ab04-bf210a103541")
@@ -5548,7 +5570,18 @@
 			(uuid "a849ac40-4760-4aa4-a1f9-05453e85343e")
 		)
 		(embedded_fonts no)
-	)
+			(model "${KIPRJMOD}/env-monitor.3dshapes/ESP32-C3_SuperMini.wrl"
+			(offset
+				(xyz 0 0 0.0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+)
 	(footprint "Capacitor_THT:C_Disc_D3.0mm_W1.6mm_P2.50mm"
 		(layer "F.Cu")
 		(uuid "9695198d-5948-4bb5-a1b3-f0e8f90b6d8d")
@@ -11715,7 +11748,18 @@
 				(xyz 0 0 0)
 			)
 		)
-	)
+			(model "${KICAD10_3DMODEL_DIR}/Package_DIP.3dshapes/DIP-40_W15.24mm.step"
+			(offset
+				(xyz 0 0 3.0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+)
 	(footprint "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal"
 		(layer "F.Cu")
 		(uuid "fc2f7cb8-4246-4aa9-95f7-0f5eb0ab0834")

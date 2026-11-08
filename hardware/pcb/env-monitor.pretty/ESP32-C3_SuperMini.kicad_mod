@@ -24,4 +24,15 @@
 	(pad "14" thru_hole circle (at -7.62 3.81) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (uuid "02e33375-f5a8-4f6c-947c-9c10cf92c353"))
 	(pad "15" thru_hole circle (at -7.62 6.35) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (uuid "00fcc870-891d-44b3-9525-f2c396d487e4"))
 	(pad "16" thru_hole circle (at -7.62 8.89) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (uuid "10cbf33e-3220-4d44-b5d4-17acf4f6d6d3"))
+	(model "${KIPRJMOD}/env-monitor.3dshapes/ESP32-C3_SuperMini.wrl"
+		(offset
+			(xyz 0 0 0.0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
 )

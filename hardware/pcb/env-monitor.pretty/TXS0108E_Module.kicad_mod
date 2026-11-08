@@ -28,4 +28,15 @@
 	(pad "18" thru_hole circle (at 6.35 6.35) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (uuid "ae50862b-63bf-411d-89c0-0d9e43d5d6d3"))
 	(pad "19" thru_hole circle (at 6.35 8.89) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (uuid "af40af24-1fe7-4c72-a339-11ac7b2dbd96"))
 	(pad "20" thru_hole circle (at 6.35 11.43) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (uuid "08326c44-489e-47e7-ae4f-e6446fe118f8"))
+	(model "${KIPRJMOD}/env-monitor.3dshapes/TXS0108E_Module.wrl"
+		(offset
+			(xyz 0 0 0.0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
 )
