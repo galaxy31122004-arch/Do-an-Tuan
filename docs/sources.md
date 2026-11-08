@@ -14,7 +14,7 @@ Chưa có kết quả thực nghiệm phần cứng. Không có cam kết độ 
 
 - **RSCH-20261101-0006:** [ThingsBoard Docker](https://thingsboard.io/docs/user-guide/install/docker/): bản cài CE cục bộ, PostgreSQL và bước khởi tạo dữ liệu.
 - **RSCH-20261101-0007:** [Device profile model](https://github.com/thingsboard/thingsboard/blob/master/ui-ngx/src/app/shared/models/device.models.ts), [query model](https://github.com/thingsboard/thingsboard/blob/master/ui-ngx/src/app/shared/models/query/query.models.ts): alarm rules với ngưỡng động từ attributes; cấu hình đã chạy trên bản local.
-- **RSCH-20261101-0008:** [ESP32-C3 UART](https://docs.espressif.com/projects/esp-idf/en/stable/esp32c3/api-reference/peripherals/uart.html): dùng UART1 và GPIO matrix; SuperMini chọn GPIO4 (RX)/GPIO3 (TX), OE GPIO0 (theo bố trí PCB).
+- **RSCH-20261101-0008:** [ESP32-C3 UART](https://docs.espressif.com/projects/esp-idf/en/stable/esp32c3/api-reference/peripherals/uart.html): dùng UART1 và GPIO matrix; SuperMini chọn GPIO3 (RX)/GPIO4 (TX), OE GPIO0 (theo bố trí PCB).
 - **RSCH-20261101-0009/0010:** giá bán IC/module và linh kiện nhỏ ngày 01/11/2026; xem liên kết từng dòng tại `hardware/cost-estimate.md`. PCB120.000đ do người dùng cung cấp, không phải giá tra từ nhà sản xuất.
 
 - **RSCH-20261101-0011:** [Microchip AT89S52 doc1919](https://ww1.microchip.com/downloads/en/DeviceDoc/doc1919.pdf): pinout, reset mức cao, ISP, 8 KB Flash/256 byte RAM. [AT89S52-24PU 27.000đ](https://chotroihn.vn/at89s52-24pu-dip40), [nguồn khác 79.000đ](https://icdayroi.com/at89s52-24pu), [thạch anh 11,0592 MHz 1.500đ](https://icdayroi.com/thach-anh-11-0592mhz-hc49-dip).

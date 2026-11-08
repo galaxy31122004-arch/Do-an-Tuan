@@ -47,7 +47,7 @@ def clone(src, ref, x, y, value=None):
     b = re.sub(r'"Reference" "[^"]+"', f'"Reference" "{ref}"', b)
     b = re.sub(r'\(reference "[^"]+"\)', f'(reference "{ref}")', b)
     if value: b = re.sub(r'"Value" "[^"]+"', f'"Value" "{value}"', b)
-    return b
+    return b + '\n'
 
 add = ''
 for (x, y), net in zip(old, ('SDA5', 'SCL5')):

@@ -49,11 +49,11 @@ Không lắp module thời gian thực hoặc pin dự phòng. ESP32 lấy UTC t
 |---|---|---|
 | A8/B8 — SDA | OLED SDA | AT89S52 P0.1/38 (R8 10 kΩ lên 5 V) |
 | A7/B7 — SCL | OLED SCL | AT89S52 P0.2/37 (R9 10 kΩ lên 5 V) |
-| A4/B4 — AT89S52 phát | ESP32 GPIO4/RX1 | AT89S52 P3.1/TX/11 |
-| A5/B5 — ESP32 phát | ESP32 GPIO3/TX1 | AT89S52 P3.0/RX/10 |
+| A1/B1 — AT89S52 phát | ESP32 GPIO3/RX1 | AT89S52 P3.1/TX/11 |
+| A2/B2 — ESP32 phát | ESP32 GPIO4/TX1 | AT89S52 P3.0/RX/10 |
 | A1–A3, A6/B1–B3, B6 | NC | NC |
 
-Kênh chọn theo vị trí trên PCB: GPIO4/GPIO3/GPIO0 nằm thẳng trên A4/A5/OE; A7/A8 gần J4, B7/B8 nằm ngay trên P0.2/P0.1 (chân 37/38).
+Kênh chọn theo vị trí trên PCB: B1/B2 nằm ngay trên P3.1/P3.0 (chân 11/10), A1/A2 đi lên GPIO3/GPIO4 không bắt chéo; A7/A8 gần J4, B7/B8 nằm ngay trên P0.2/P0.1 (chân 37/38).
 | OLED VCC/GND | 3,3 V/GND (tụ có sẵn trên module) | — |
 
 Đấu module theo nhãn A/B và VCCA/VCCB/OE/GND, không dùng số chân IC trần để suy ra header. J5A/J5B dự kiến hai hàng 1x10, xác minh module thực tế trước khi làm PCB. OLED mặc định `0x3C`; đổi `OLED_ADDR` nếu màn dùng `0x3D`.
@@ -65,12 +65,12 @@ TXS có pull-up nội, không lắp R6–R9 của thiết kế cũ. Đối chi�
 ## 5. UART hai chiều, 9600 baud 8N1
 
 ```text
-AT89S52 P3.1/TX/11 → TXS B4 ↔ A4 → ESP32 GPIO4/RX1
-AT89S52 P3.0/RX/10 ← TXS B5 ↔ A5 ← ESP32 GPIO3/TX1
+AT89S52 P3.1/TX/11 → TXS B1 ↔ A1 → ESP32 GPIO3/RX1
+AT89S52 P3.0/RX/10 ← TXS B2 ↔ A2 ← ESP32 GPIO4/TX1
 TXS VCCB=5V, VCCA=3V3, GND chung, OE=GPIO0 + R4 100k xuống GND
 ```
 
-Không còn bộ chia áp TX hoặc buffer riêng. Không nối AT89S52 TX thẳng vào GPIO4 hoặc thêm bộ chia áp trên đường đã qua TXS. Dùng đúng sơ đồ SuperMini C3: UART1 RX=GPIO4, TX=GPIO3 và OE=GPIO0.
+Không còn bộ chia áp TX hoặc buffer riêng. Không nối AT89S52 TX thẳng vào GPIO3 hoặc thêm bộ chia áp trên đường đã qua TXS. Dùng đúng sơ đồ SuperMini C3: UART1 RX=GPIO3, TX=GPIO4 và OE=GPIO0.
 
 ## 6. Burn-E nạp AT89S52; J3 ISP
 

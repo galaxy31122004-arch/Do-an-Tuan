@@ -13030,17 +13030,6 @@
 		)
 		(uuid "bf63a482-c67e-4d6d-a2e5-949386ff6eda")
 	)
-	(label "TX51"
-		(at 144.78 83.82 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "a1b4161b-69d9-497d-bb04-fde262f54b7a")
-	)
 	(label "RX51"
 		(at 243.84 154.94 0)
 		(fields_autoplaced yes)
@@ -13051,17 +13040,6 @@
 			(justify left bottom)
 		)
 		(uuid "1f9c9b74-967c-4d0b-8962-5f358e09dedf")
-	)
-	(label "RX51"
-		(at 144.78 86.36 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "0459ee88-708f-424a-b3be-eb20d04d2578")
 	)
 	(label "SDA3"
 		(at 129.54 93.98 0)
@@ -13107,50 +13085,6 @@
 		)
 		(uuid "4d85a66f-d30f-4cb4-ac0f-dc2e224fbd25")
 	)
-	(label "TX51_3V3"
-		(at 129.54 83.82 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "3c8254c3-49a0-4733-b88a-a7f4680a9865")
-	)
-	(label "TX51_3V3"
-		(at 45.72 86.36 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "c66f1c6e-e352-417d-a176-1b3608b6b312")
-	)
-	(label "RX51_3V3"
-		(at 129.54 86.36 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "712cf95f-2557-47cb-881b-36f7877a4f69")
-	)
-	(label "RX51_3V3"
-		(at 45.72 101.6 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "1cf80054-46fb-4a7a-926a-1a225daadb8c")
-	)
 	(label "OE"
 		(at 129.54 96.52 0)
 		(fields_autoplaced yes)
@@ -13185,28 +13119,12 @@
 		(uuid "fbf3e23c-fb69-4970-ac6f-44a265b8dc3d")
 	)
 	(no_connect
-		(at 129.54 76.2)
-		(uuid "6878dda0-3cbc-43cd-923a-1ce20098f8bb")
-	)
-	(no_connect
-		(at 129.54 78.74)
-		(uuid "0ced383a-3fbe-4ba7-9e3e-9061f72f0c6f")
-	)
-	(no_connect
 		(at 129.54 81.28)
 		(uuid "9d1cc393-bcec-4dde-8a46-f91f973ee72d")
 	)
 	(no_connect
 		(at 129.54 88.9)
 		(uuid "45b11203-be8c-4a29-aade-66f18ee50631")
-	)
-	(no_connect
-		(at 144.78 76.2)
-		(uuid "ca5bf4bf-c4e3-405a-a897-59eb1b9a100f")
-	)
-	(no_connect
-		(at 144.78 78.74)
-		(uuid "81349d1a-588e-4627-b3c9-0bca4a9450e5")
 	)
 	(no_connect
 		(at 144.78 81.28)
@@ -13319,7 +13237,8 @@
 				)
 			)
 		)
-	)	(label "SDA5"
+	)
+	(label "SDA5"
 		(at 299.72 115.57 0)
 		(fields_autoplaced yes)
 		(effects
@@ -13404,7 +13323,8 @@
 				)
 			)
 		)
-	)	(label "SCL5"
+	)
+	(label "SCL5"
 		(at 274.32 134.62 0)
 		(fields_autoplaced yes)
 		(effects
@@ -13491,7 +13411,8 @@
 				)
 			)
 		)
-	)	(label "SCL5"
+	)
+	(label "SCL5"
 		(at 307.34 118.11 0)
 		(fields_autoplaced yes)
 		(effects
@@ -13576,7 +13497,90 @@
 				)
 			)
 		)
-	)	(sheet_instances
+	)
+	(label "TX51"
+		(at 144.78 76.2 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "af274fe7-fed9-4c66-801d-88e526d9eeda")
+	)
+	(label "RX51"
+		(at 144.78 78.74 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1ca04618-57fd-4dd9-be5b-bea4cca9991c")
+	)
+	(label "TX51_3V3"
+		(at 129.54 76.2 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "387d5cc4-591b-4482-8ed3-75bb8b2736f2")
+	)
+	(label "RX51_3V3"
+		(at 129.54 78.74 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "85c67600-da47-4878-9f43-a9f0525eec81")
+	)
+	(label "TX51_3V3"
+		(at 45.72 101.6 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5f460501-aaee-4c8d-8240-717d1f1ccb39")
+	)
+	(label "RX51_3V3"
+		(at 45.72 86.36 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "38c63be7-866a-4909-a7d2-0e2e843057d4")
+	)
+	(no_connect
+		(at 144.78 83.82)
+		(uuid "e91e2903-caed-46dc-945b-d8714ca6d82a")
+	)
+	(no_connect
+		(at 144.78 86.36)
+		(uuid "f6403398-8b67-4d26-abfb-585f93fb9a70")
+	)
+	(no_connect
+		(at 129.54 83.82)
+		(uuid "33956e44-c3f9-4611-aa35-ddbfd6c12d54")
+	)
+	(no_connect
+		(at 129.54 86.36)
+		(uuid "50258039-d3da-4c34-9d29-30f0ab94dc34")
+	)
+	(sheet_instances
 		(path "/"
 			(page "1")
 		)

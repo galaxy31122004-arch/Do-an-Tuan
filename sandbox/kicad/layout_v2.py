@@ -38,11 +38,11 @@ NETS = {
     # +12V = after SR360, before LM7805; the relay side (opto collector, coil, D3) runs from it
     'VJACK': 'J1X.1 J7.1 D2X.2', '+12V': 'D2X.1 C14.1 C15.1 U7.1 #FLG01.1 U8.4 K1.5 D3.1', 'LED_A': 'R10.2 D1.2',
     'RST': 'U1.9 C2.2 R1.1 SW2.2 J3.1', 'XTAL1': 'U1.19 Y1.1 C9.1', 'XTAL2': 'U1.18 Y1.2 C10.1',
-    'SDA5': 'U1.1 U4.19', 'SCL5': 'U1.2 U4.18', 'MOSI': 'U1.6 J3.6', 'MISO': 'U1.7 J3.4', 'SCK': 'U1.8 J3.5',
-    'TX51': 'U1.11 U4.15', 'RX51': 'U1.10 U4.16', 'DHT_DATA': 'U1.12 U5.2 R2.2', 'BTN_PAGE': 'U1.13 R3.2 SW1.1',
+    'SDA5': 'U1.38 U4.19 R8.2', 'SCL5': 'U1.37 U4.18 R9.2', 'MOSI': 'U1.6 J3.6', 'MISO': 'U1.7 J3.4', 'SCK': 'U1.8 J3.5',
+    'TX51': 'U1.11 U4.12', 'RX51': 'U1.10 U4.13', 'DHT_DATA': 'U1.12 U5.2 R2.2', 'BTN_PAGE': 'U1.13 R3.2 SW1.1',
     'RELAY_IN': 'U1.21 U8.2', 'LED_RLY': 'R6.2 U8.1', 'OPTO_E': 'U8.3 R5.1', 'QB': 'R5.2 Q1Y.3 R7.1', 'COIL_LO': 'Q1Y.2 K1.2 D3.2',
     'RLY_COM': 'K1.1 J6Y.1', 'RLY_NO': 'K1.3 J6Y.2',
-    'SDA3': 'U4.9 J4.4', 'SCL3': 'U4.8 J4.3', 'TX51_3V3': 'U4.5 U2.4', 'RX51_3V3': 'U4.6 U2.5',
+    'SDA3': 'U4.9 J4.4', 'SCL3': 'U4.8 J4.3', 'TX51_3V3': 'U4.2 U2.5', 'RX51_3V3': 'U4.3 U2.4',
     'OE': 'U4.10 U2.8 R4.1',
 }
 TRUNK = {

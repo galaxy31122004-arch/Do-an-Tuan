@@ -52,7 +52,7 @@
  <text x="65" y="1001">C2 10uF: (+) +5V, (-) RST. J3 ISP: wiring.md.</text>
  <rect x="660" y="755" width="735" height="275" rx="12" class="box"/>
  <text x="680" y="790" class="head">U2 ESP32 + U4 TXS0108E UART</text>
- <text x="680" y="827" class="wire">AT89S52 TX/11 → TXS B3 ↔ A3 → ESP32 GPIO4 RX</text>
+ <text x="680" y="827" class="wire">AT89S52 TX/11 → TXS B1 ↔ A1 → ESP32 GPIO3 RX</text>
  <text x="680" y="857">No divider or separate UART buffer.</text>
  <text x="680" y="894" class="wire">ESP32 GPIO5 TX → TXS A4 ↔ B4 → AT89S52 RX/10</text>
  <text x="680" y="926">GPIO6 → OE; R4 100k OE → GND; enable after 100ms.</text>
