@@ -35,8 +35,8 @@ for row in rows:
         assert name not in refs, name
         refs.add(name)
 assert all(f'C{i}' in refs for i in [1,2,9,10,14,16])
-assert {'R1','R2','R3','R4','R10'}<=refs
-assert not {'Q2','SK3','U3','Y2','BH1','SK2','C4'} & refs
+assert {'R1','R2','R3','R4'}<=refs
+assert not {'D1','R10','Q2','SK3','U3','Y2','BH1','SK2','C4'} & refs
 assert {'K1','Q1','R5','R6','R7','R8','R9','D3','J6','U7'} <= refs  # on-board relay driver and LM7805 supply
 assert any(row['Reference']=='U4' and 'TXS0108E' in row['Component'] for row in rows)
 assert {'U1','U2','U4','U5','U6','Y1','SW1','SW2','J3','J5A','J5B'}<=refs

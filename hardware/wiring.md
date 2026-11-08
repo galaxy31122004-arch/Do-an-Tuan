@@ -1,6 +1,6 @@
 # Sơ đồ nối dây — bản lắp mạch thật
 
-Đối chiếu với `firmware/v0.2.0/at89s52/board.h` và `firmware/v0.2.0/esp32/include/settings.h`. Số chân AT89S52 áp dụng **DIP-40**; board mạng là **ESP32-C3 SuperMini, hai hàng chân 1x8**, tra theo nhãn GPIO trên hàng mua. Đây là hướng dẫn kết nối, chưa phải bộ PCB sản xuất đã ERC/DRC.
+Đối chiếu với `firmware/v0.2.0/at89s52/board.h` và `firmware/v0.2.0/esp32/include/settings.h`. Số chân AT89S52 áp dụng **DIP-40**; board mạng là **ESP32-C3 SuperMini, hai hàng chân 1x8**, tra theo nhãn GPIO trên hàng mua. Sơ đồ nguyên lý và PCB nằm trong `hardware/pcb/` (ERC 0 lỗi, DRC 0 lỗi điện; xem mục 8). Mạch thật chưa lắp, các mục kiểm tra ở mục 7 chưa chạy.
 
 ## 1. Nguồn và khối AT89S52
 
@@ -10,7 +10,7 @@
 | U7 LM7805 OUT | Rail +5 V; C16 100 nF sát chân OUT |
 | U7 LM7805 GND / tab | GND; tab vít M3 xuống vùng đồng GND làm tản nhiệt |
 | J1 vỏ (−), J7 chân 2 | GND chung toàn mạch; chân switch của jack để trống |
-| AT89S52 VCC chân 40 | +5 V; C1 100 nF giữa chân 40/20 |
+| AT89S52 VCC chân 40 | +5 V; C1 100 nF đặt cạnh chân 40 (khoảng 7 mm), chân GND của C1 về vùng đồng GND |
 | AT89S52 GND chân 20 | GND |
 | AT89S52 XTAL1 chân 19 ↔ Y1 11,0592 MHz ↔ XTAL2 chân 18 | C9/C10 22 pF từ từng đầu thạch anh xuống GND |
 | AT89S52 RST chân 9 | R1 10 kΩ xuống GND; SW2 từ RST lên +5 V; C2 10 µF cực + lên +5 V, cực - vào RST |
@@ -19,12 +19,11 @@
 | ESP32 3V3 | Rail 3,3 V cấp OLED và TXS0108E VCCA |
 | TXS0108E VCCB / VCCA | +5 V / 3,3 V (tụ lọc có sẵn trên module) |
 | TXS0108E OE | ESP32 GPIO0; R4 100 kΩ từ OE xuống GND |
-| +5 V → R10 1 kΩ → anode D1 | Cathode LED xuống GND |
 | TP1 / TP2 / TP3 | +5 V / 3,3 V / GND |
 
 **Nguồn LM7805 từ 12 V:** cấp 12 V qua jack J1 **hoặc** domino J7, không cấp cả hai cùng lúc. Dòng tải 5 V ước tính khoảng 180 mA (ESP32 Wi-Fi, AT89S52, OLED; relay đã chuyển sang +12V), đỉnh khoảng 450 mA khi ESP32 phát. LM7805 tỏa khoảng (12 − 0,5 − 5) × 0,18 ≈ **1,2 W**, đỉnh gần 2,5 W khi ESP32 phát. Chỉ tản qua PCB thì cần vùng đồng GND dưới tab rộng khoảng 40×40 mm ở cả hai mặt, nối nhiều via, bôi keo tản nhiệt, và để thoáng; nếu tab vẫn quá nóng khi chạm (trên ~80 °C), gắn thêm tản nhôm nhỏ hoặc hạ adapter xuống 9 V. Tab của 7805 là GND nên vít thẳng xuống đồng GND không cần đệm cách điện. Không cắm USB vào ESP32 khi đang cấp nguồn 12 V.
 
-EA/VPP chân 31 nối thẳng +5 V để chạy Flash trong; PSEN chân 29 và ALE chân 30 để hở. P0 không dùng để hở (P0 cần pull-up nếu sử dụng). Các chân I/O còn lại không dùng để NC; không nối ngẫu nhiên vào nguồn. Nút 4 chân tactile có hai cặp nối sẵn: chọn hai chân khác tiếp điểm, đo thông mạch trước khi hàn.
+EA/VPP chân 31 nối thẳng +5 V để chạy Flash trong; PSEN chân 29 và ALE chân 30 để hở. P0 là cực máng hở: P0.3/P0.4 (chân 36/35) dùng cho I²C nên có R8/R9 kéo lên; các chân P0 khác để hở. Các chân I/O còn lại không dùng để NC; không nối ngẫu nhiên vào nguồn. Nút 4 chân tactile có hai cặp nối sẵn: chọn hai chân khác tiếp điểm, đo thông mạch trước khi hàn.
 
 ## 2. DHT11 rời
 
@@ -51,16 +50,16 @@ Không lắp module thời gian thực hoặc pin dự phòng. ESP32 lấy UTC t
 | A7/B7 — SCL | OLED SCL | AT89S52 P0.4/35 (R9 10 kΩ lên 5 V) |
 | A1/B1 — AT89S52 phát | ESP32 GPIO3/RX1 | AT89S52 P3.1/TX/11 |
 | A2/B2 — ESP32 phát | ESP32 GPIO4/TX1 | AT89S52 P3.0/RX/10 |
-| A1–A3, A6/B1–B3, B6 | NC | NC |
-
-Kênh chọn theo vị trí trên PCB: B1/B2 nằm ngay trên P3.1/P3.0 (chân 11/10), A1/A2 đi lên GPIO3/GPIO4 không bắt chéo; A7/A8 gần J4, B7/B8 nằm gần P0.4/P0.3 (chân 35/36).
+| A3–A6/B3–B6 | NC | NC |
 | OLED VCC/GND | 3,3 V/GND (tụ có sẵn trên module) | — |
 
-Đấu module theo nhãn A/B và VCCA/VCCB/OE/GND, không dùng số chân IC trần để suy ra header. J5A/J5B dự kiến hai hàng 1x10, xác minh module thực tế trước khi làm PCB. OLED mặc định `0x3C`; đổi `OLED_ADDR` nếu màn dùng `0x3D`.
+Kênh chọn theo vị trí trên PCB: B1/B2 nằm ngay trên P3.1/P3.0 (chân 11/10), A1/A2 đi lên GPIO3/GPIO4 không bắt chéo; A7/A8 gần J4, B7/B8 nằm gần P0.4/P0.3 (chân 35/36).
 
-OE=GPIO0, R4 100 kΩ kéo xuống GND. ESP32 giữ thấp lúc boot, chờ 100 ms rồi bật mức 3,3 V. Kiểm tra/tháo pull-up hoặc cầu nối kéo cứng OE lên nguồn nếu module có; không đưa 5 V vào GPIO6/OE. AT89S52 thử khởi tạo OLED lại khi TXS chưa bật lúc boot.
+Đấu module theo nhãn A/B và VCCA/VCCB/OE/GND, không dùng số chân IC trần để suy ra header. J5A/J5B là hai hàng 1x10 theo footprint `TXS0108E_Module`; đo module thực tế trước khi đặt in PCB. OLED mặc định `0x3C`; đổi `OLED_ADDR` nếu màn dùng `0x3D`.
 
-TXS có pull-up nội, không lắp R6–R9 của thiết kế cũ. Đối chiếu pull-up đã có trên OLED/module, đo tải bus và giữ dây ngắn. xem datasheet TI trong `docs/sources.md`.
+OE=GPIO0, R4 100 kΩ kéo xuống GND. ESP32 giữ thấp lúc boot, chờ 100 ms rồi bật mức 3,3 V. Kiểm tra/tháo pull-up hoặc cầu nối kéo cứng OE lên nguồn nếu module có; không đưa 5 V vào GPIO0/OE. AT89S52 thử khởi tạo OLED lại khi TXS chưa bật lúc boot.
+
+Pull-up I²C: phía 5 V bắt buộc có R8/R9 10 kΩ lên +5 V vì P0 của AT89S52 là cực máng hở, không có pull-up nội. Phía 3,3 V dùng pull-up nội của TXS0108E và pull-up có sẵn trên module OLED. R8/R9 nằm ngang dưới module TXS0108E: hàn sát mặt bo trước khi cắm module. Xem datasheet TI trong `docs/sources.md`.
 
 ## 5. UART hai chiều, 9600 baud 8N1
 
@@ -119,5 +118,21 @@ Tải nối qua **NO**: relay bật thì tải có điện (ví dụ chạy qu�
 3. Nạp/verify AT89S52 bằng Burn-E ngoài mạch rồi cắm AT89S52 khi tắt nguồn. Cắm OLED và ESP32, xác nhận OE=3,3 V sau boot rồi kiểm tra thạch anh và ACK I²C.
 4. Gắn DHT11, kiểm tra số đo và nút chuyển trang; quan sát TX AT89S52 bằng USB-UART/logic analyzer đúng mức điện áp.
 5. Gắn chuyển mức UART và ESP32; xác nhận gói M/S/T, đồng bộ giờ NTP, rồi mới kiểm tra cloud.
+
+## 8. Mạch in (PCB)
+
+Dự án KiCad 10: `hardware/pcb/env-monitor.kicad_pro`; sơ đồ nguyên lý xuất kèm `hardware/pcb/env-monitor-schematic.pdf`.
+
+| Hạng mục | Thông số |
+|---|---|
+| Kích thước, số lớp | 92,5 × 84,7 mm, 2 lớp, linh kiện xuyên lỗ một mặt (mặt trên) |
+| Vùng đồng | GND phủ cả mặt trên (F.Cu) và mặt dưới (B.Cu); không phủ +5V để tránh chập |
+| Độ rộng dây | +12V và tiếp điểm relay (J6) 2 mm; +5V/GND 1 mm (một số nhánh +5V 0,5 mm); +3V3 0,5–1 mm; tín hiệu 0,3–0,5 mm |
+| Via | 4 via 0,6/0,3 mm |
+| Lỗ bắt vít | H1 M3 (góc phải dưới), H2 M2.5 (góc trái dưới); hai góc trên không còn chỗ vì J1 và OLED |
+| Footprint đáng chú ý | R1, R3 dựng đứng (bước chân 2,54 mm); R8, R9 nằm ngang bước chân 7,62 mm dưới module TXS0108E; C1 tụ đĩa nhỏ bước 2,5 mm; Q1 TO-92 chân rộng |
+| Kiểm tra | ERC 0 lỗi; DRC 0 chân chưa nối, 0 lỗi điện; DRC còn 6 cảnh báo cố ý (R8/R9 nằm trong vùng chiếm chỗ của module TXS0108E) và 3 lỗi chữ in lụa nhỏ |
+
+Trước khi đặt in: đo khoảng cách hai hàng chân ESP32-C3 SuperMini và module TXS0108E mua về so với footprint; xác nhận module OLED nằm trọn trong bo; xuất Gerber và drill từ KiCad.
 
 Nguồn: Microchip AT89S52 doc1919 (RSCH-20261101-0011), TI TXS0108E (RSCH-20261101-0005), OLED (RSCH-20261101-0004). Burn-E do người dùng xác nhận; phần mềm đang mở là Burn-E Programmer 9.00.88; xác nhận kết nối phần cứng và pinout hiển thị cho AT89S52 trước khi nạp.

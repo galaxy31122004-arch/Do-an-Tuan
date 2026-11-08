@@ -8,15 +8,15 @@
  <rect x="35" y="102" width="1370" height="125" rx="12" class="note"/>
  <text x="55" y="133" class="head">Power: one regulated 5 V / 2 A source</text>
  <text x="55" y="166">J1 +5V → F1 (1 A hold) → +5V: AT89S52, TXS VCCB, DHT11, ESP32 5V/VIN</text>
- <text x="55" y="195">ESP32 3V3 → OLED VCC + TXS VCCA. All grounds common. OE → GPIO6 + R4 100k to GND.</text>
+ <text x="55" y="195">ESP32 3V3 → OLED VCC + TXS VCCA. All grounds common. OE → GPIO0 + R4 100k to GND.</text>
  <rect x="460" y="280" width="390" height="355" rx="12" class="box"/>
  <text x="485" y="320" class="head">U1 · AT89S52</text>
  <text x="485" y="356">VCC 40 → +5V</text><text x="485" y="384">GND 20; EA 31 → +5V → GND</text>
  <text x="485" y="422">P3.2 / 12 ← DHT11 DATA</text>
  <text x="485" y="459">P0.4 / 35 → SCL_HV</text>
  <text x="485" y="492">P0.3 / 36 ↔ SDA_HV</text>
- <text x="485" y="533">P3.1 TX / 11 → TXS B3</text>
- <text x="485" y="568">P3.0 RX / 10 ← TXS B4</text>
+ <text x="485" y="533">P3.1 TX / 11 → TXS B1</text>
+ <text x="485" y="568">P3.0 RX / 10 ← TXS B2</text>
  <text x="485" y="607">P3.3 / 13 ← SW1 page button</text>
  <rect x="45" y="280" width="300" height="190" rx="12" class="box"/>
  <text x="65" y="316" class="head">U5 · DHT11 bare</text>
@@ -33,7 +33,7 @@
  <text x="65" y="725" class="small">No external RTC / backup battery</text>
  <rect x="970" y="280" width="425" height="180" rx="12" class="box"/>
  <text x="990" y="316" class="head">OLED SSD1315 · 0.96 inch</text>
- <text x="990" y="350">VCC → 3V3 · GND → GND</text><text x="990" y="380">SDA/SCL → TXS A1/A2</text>
+ <text x="990" y="350">VCC → 3V3 · GND → GND</text><text x="990" y="380">SDA/SCL → TXS A8/A7</text>
  <text x="990" y="410">0x3C default · check module labels</text>
  <text x="990" y="440" class="small">C5 100nF + C8 10µF across 3V3/GND</text>
  <rect x="960" y="490" width="435" height="165" rx="12" class="box"/>
@@ -54,8 +54,8 @@
  <text x="680" y="790" class="head">U2 ESP32 + U4 TXS0108E UART</text>
  <text x="680" y="827" class="wire">AT89S52 TX/11 → TXS B1 ↔ A1 → ESP32 GPIO3 RX</text>
  <text x="680" y="857">No divider or separate UART buffer.</text>
- <text x="680" y="894" class="wire">ESP32 GPIO5 TX → TXS A4 ↔ B4 → AT89S52 RX/10</text>
- <text x="680" y="926">GPIO6 → OE; R4 100k OE → GND; enable after 100ms.</text>
+ <text x="680" y="894" class="wire">ESP32 GPIO4 TX → TXS A2 ↔ B2 → AT89S52 RX/10</text>
+ <text x="680" y="926">GPIO0 → OE; R4 100k OE → GND; enable after 100ms.</text>
  <text x="680" y="956">A5–A8/B5–B8 NC. Inspect any module OE jumper.</text>
  <text x="680" y="986">C7 470µF at ESP32. Module headers J5A/J5B: check footprint.</text>
  <path d="M850 533 H920 V705 H1060 V755 M850 568 H880 V725 H1120 V755" class="sig"/>
