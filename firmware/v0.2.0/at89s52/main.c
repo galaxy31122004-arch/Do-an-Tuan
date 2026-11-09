@@ -57,7 +57,7 @@ static void measurement(void) {
     uart_body(','); uart_num(humidity); uart_body(','); uart_num(flags);
     uart_raw('*'); uart_raw(hex[tx_crc>>4]); uart_raw(hex[tx_crc&15]); uart_raw('\n');
 }
-/* Quasi-bidirectional P1: write 1 to release, 0 to pull low. */
+/* Open-drain P0 (R8/R9 pull-ups): write 1 to release, 0 to pull low. */
 static bool scl_release(void) {
     uint8_t guard=255; I2C_SCL=1;
     while(!I2C_SCL) if(!--guard) return false;

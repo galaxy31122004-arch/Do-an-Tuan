@@ -6,7 +6,7 @@ Mức viết: `khái quát` · `vừa đủ` · `chuyên sâu` · `tùy chỉnh`
 |---|---|---|---|---|
 | Mở đầu | vừa đủ | Bản tóm tắt đề tài | — | chờ duyệt |
 | Chương 1 | vừa đủ | Datasheet công khai, docs/sources.md | Có giới hạn trang cho chương lý thuyết không | chờ duyệt |
-| Chương 2 | chuyên sâu | KiCad, BOM, wiring.md, net class | PCB chưa đi dây xong; kích thước header ESP32/TXS chưa đo; giá một số linh kiện chưa khảo sát | chờ duyệt |
+| Chương 2 | chuyên sâu | KiCad, BOM, wiring.md, net class | Kích thước header ESP32/TXS chưa đo; giá một số linh kiện chưa khảo sát | đã giao v1.0.0 |
 | Chương 3 | chuyên sâu | firmware v0.2.0, dashboard/generate.py | Ảnh dashboard chạy thật (nếu có) | chờ duyệt |
 | Chương 4 | vừa đủ | Kế hoạch kiểm thử, kiểm thử phần mềm (checksum HEX, artifact) | **Ảnh mạch thật, số đo nhiệt độ/độ ẩm, kết quả gửi cloud** — chưa có, không tự tạo | chờ dữ liệu |
 | Kết luận | khái quát | — | Phụ thuộc chương 4 | chờ |
@@ -18,7 +18,8 @@ Mức viết: `khái quát` · `vừa đủ` · `chuyên sâu` · `tùy chỉnh`
 - Đồng ý mức viết từng chương như bảng.
 - Mạch thật chưa làm/đo: chương 4 viết dạng kế hoạch kiểm thử, kết quả bổ sung sau.
 - Không có lời cảm ơn.
-- 2026-11-08: cập nhật theo PCB bản cuối (I²C P0.3/P0.4 + R8/R9, UART qua TXS B1/B2, ESP32 RX=GPIO3/TX=GPIO4, bo 92,5 × 84,7 mm đã đi dây, GND phủ hai mặt, bỏ LED D1/R10); hình 2.2, 2.3 và lưu đồ ESP32 dựng lại; Word 40 trang chờ duyệt.
+- 2026-11-08: cập nhật theo PCB bản cuối (I²C P0.3/P0.4 + R8/R9, UART qua TXS B1/B2, ESP32 RX=GPIO3/TX=GPIO4, bo 92,5 × 84,7 mm đã đi dây, GND phủ hai mặt, bỏ LED D1/R10); hình 2.2, 2.3 và lưu đồ ESP32 dựng lại.
+- 2026-11-09: sơ đồ nguyên lý vẽ lại theo 9 khối; PCB đi dây chỉ góc 45°, R1/R3 nằm sát bo; người dùng duyệt, giao `versions/documents/bao-cao-do-an-2/v1.0.0/` (41 trang).
 - Dàn ý tệp 01 đã duyệt. Tiến độ: Mở đầu, Chương 1, 2 đã duyệt; Chương 3, 4, Kết luận, TLTK, Phụ lục viết theo yêu cầu "viết hết" và dựng Word `drafts/bao-cao-do-an-2.docx`, chờ duyệt.
 
 ## Câu hỏi ưu tiên (đã trả lời)

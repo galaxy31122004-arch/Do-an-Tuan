@@ -23,7 +23,7 @@
   },
   "source_hash_format": "UTF-8 file bytes, CRLF normalized to LF",
   "source_sha256": {
-    "firmware/v0.2.0/at89s52/main.c": "1802b0c078d3029c392a027c4c8e4d1cd6ed6c5a39553caac67a39887707e487",
+    "firmware/v0.2.0/at89s52/main.c": "f21999f9fa4eed5626bcd96de792a4d372bf40f94eac53a9049eb39a07cda5b7",
     "firmware/v0.2.0/at89s52/board.h": "201d41bdf8655d8344423e9b3daa2d16e3150be33e750b2bfd3b41b275b54fdc",
     "firmware/v0.2.0/at89s52/build.py": "5c5c4662591901a930b6ad3d87267bd57d8503e4b8da5e903e9959930c2dcc4b",
     "firmware/v0.2.0/common/protocol.h": "4f307361b39e0352d36eb93a73aef7615bb9da2d032cb71b3e841b295263c6a1",

@@ -15,7 +15,7 @@ Trạng thái: **chờ duyệt** (bản đề xuất, chưa viết nội dung).
 | Bìa, lời cảm ơn, mục lục, danh mục hình/bảng/viết tắt | | — | |
 | Mở đầu | Lý do chọn đề tài, mục tiêu, phạm vi, phương pháp, bố cục báo cáo | ngắn | |
 | Chương 1. Tổng quan và cơ sở lý thuyết | IoT giám sát môi trường; AT89S52; ESP32-C3; DHT11 (giao thức 1 dây); OLED SSD1315 (I²C); UART; TXS0108E chuyển mức; relay + opto PC817; LM7805; ThingsBoard, MQTT/HTTP, NTP | dài | Hình chân/khối linh kiện, bảng so sánh |
-| Chương 2. Thiết kế phần cứng | Sơ đồ khối; khối nguồn (jack/domino 12 V → SR360 → LM7805); khối vi điều khiển, reset, thạch anh, ISP; cảm biến, nút; OLED; chuyển mức và ESP32; khối relay cách ly; sơ đồ nguyên lý KiCad; thiết kế PCB (100×100 mm, net class); BOM và chi phí | dài | Sơ đồ nguyên lý, ảnh PCB, bảng nối chân, BOM |
+| Chương 2. Thiết kế phần cứng | Sơ đồ khối; khối nguồn (jack/domino 12 V → SR360 → LM7805); khối vi điều khiển, reset, thạch anh, ISP; cảm biến, nút; OLED; chuyển mức và ESP32; khối relay cách ly; sơ đồ nguyên lý KiCad; thiết kế PCB (92,5 × 84,7 mm, net class, đi dây 45°); BOM và chi phí | dài | Sơ đồ nguyên lý, ảnh PCB, bảng nối chân, BOM |
 | Chương 3. Thiết kế phần mềm | Firmware AT89S52 (đọc DHT11, OLED 2 trang, khung truyền UART, relay trễ 32/30 °C); firmware ESP32-C3 (Wi-Fi, NTP, gửi telemetry, OE); giao thức khung truyền; dashboard ThingsBoard (12 widget, cảnh báo, CSV) | dài | Lưu đồ, bảng khung truyền, ảnh dashboard |
 | Chương 4. Thi công, kiểm thử và đánh giá | Chế tạo mạch, nạp chương trình, kịch bản kiểm thử, kết quả đo, đánh giá | trung bình | **Phụ thuộc số liệu đo thật** — chưa có |
 | Kết luận và hướng phát triển | Kết quả đạt được, hạn chế, hướng phát triển | ngắn | |

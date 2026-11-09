@@ -108,6 +108,14 @@ def main():
         '- Không cắm USB ESP32 khi đang cấp nguồn jack nếu board không có bảo vệ chống cấp ngược. Không nối adapter vào chân 5V/3V3.',
         '- Giá trị/điện áp từng linh kiện là cấu hình thiết kế; xác minh nguồn và dạng sóng trên mạch thật trước khi vận hành.', '']
     (ROOT/'BOM.md').write_text('\n'.join(lines),encoding='utf-8')
+    start=lines.index('## Tiền mua thực tế theo gói/thanh')
+    end=lines.index('## Vật tư đi kèm, không hàn trực tiếp')
+    cost=['# Dự toán mua linh kiện và in PCB — 1 bộ','',
+        'Sinh tự động từ `cost-estimate.csv` bởi `hardware/generate.py`; danh sách lắp đầy đủ ở [BOM.md](BOM.md). '
+        'Giá tham khảo ngày **01/11/2026**, đơn vị VND; ledger RSCH-20261101-0009/0010/0011. PCB 120.000đ do người dùng cung cấp.','',
+        f'- Linh kiện dùng trên một mạch (phân bổ theo số lượng lắp): **{money(used_total)}**, chưa gồm mục chưa có giá.','']
+    cost+=lines[start:end]
+    (ROOT/'cost-estimate.md').write_text('\n'.join(cost),encoding='utf-8')
     print(f'BOM: {len(PARTS)} rows, {sum(p[1] for p in PARTS)} parts')
 
 if __name__=='__main__': main()
