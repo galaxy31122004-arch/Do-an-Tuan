@@ -181,8 +181,8 @@ Sơ đồ nguyên lý được vẽ trên KiCad 10 (dự án `env-monitor`).
 
   | Lớp net | Các net | Độ rộng | Khoảng cách |
   |---|---|---|---|
-  | Tín hiệu (mặc định) | Các net còn lại | 0,3–0,5 mm | 0,25 mm |
-  | Power | +5V, +3V3, GND | 1,0 mm (một số nhánh ngắn 0,5 mm) | 0,3 mm |
+  | Tín hiệu (mặc định) | Các net còn lại | 0,3 mm | 0,35 mm |
+  | Power | +5V, +3V3, GND | 1,0 mm (một số nhánh ngắn 0,5 mm) | 0,35 mm |
   | Power_12V | +12V, đường jack → SR360, hai đường tải qua J6 | 2,0 mm | 0,5 mm |
 
 - **Vùng đồng:** GND được phủ ở cả mặt trên và mặt dưới. Đường +5V đi bằng dây, không phủ đồng, để tránh nguy cơ chập giữa +5V và các chân khác khi hàn.
@@ -194,11 +194,12 @@ Sơ đồ nguyên lý được vẽ trên KiCad 10 (dự án `env-monitor`).
   - R8, R9 (điện trở kéo lên I²C) nằm ngang bên dưới module TXS0108E; phải hàn sát mặt bo trước khi cắm module.
   - Module OLED nằm trọn trong bo, ở góc trên bên phải.
 - **Lỗ bắt vít:** một lỗ M3 ở góc phải dưới và một lỗ M2.5 ở góc trái dưới. Hai góc trên không còn chỗ do jack nguồn và module OLED.
-  - Các điện trở đều nằm sát mặt bo; R1 đặt dưới header ISP, R3 đặt dọc cạnh phải module TXS0108E.
+  - Các điện trở đều nằm sát mặt bo; R1 đặt dưới header ISP, R3 đặt dọc cạnh phải module TXS0108E, vắt qua đường +5V: chân +5V ở trên nối thẳng xuống đường nguồn, chân BTN_PAGE ở dưới đi tiếp cùng mặt.
 - **Đi dây:** các đường chính được đi tay; phần còn lại đi bằng công cụ tự động Freerouting, sau đó kiểm tra và sửa bằng KiCad. Đường mạch chỉ đi thẳng hoặc chéo 45°; các góc cua 90° và mẩu dây thừa sát chân linh kiện đã được vát hoặc gộp lại.
 - **Kiểm tra luật thiết kế (DRC):** không còn chân chưa nối và không có lỗi điện. Còn 6 cảnh báo do R8, R9 nằm trong vùng chiếm chỗ của module TXS0108E (bố trí có chủ ý); không còn cảnh báo về chữ in lụa.
 - **Đối chiếu footprint module:** theo thông số nhà bán công bố, ESP32-C3 SuperMini có hai hàng chân cách nhau 15,24 mm (0,6″), module TXS0108E có hai hàng cách nhau 12,7 mm (0,5″), bước chân 2,54 mm; footprint tự tạo dùng đúng các khoảng này.
-- **Via:** chỉ còn 2 via, ở hai chỗ dây BTN_PAGE và RELAY phải băng qua đường +5V; các dây còn lại đi trọn trên một mặt.
+- **Via:** chỉ còn 1 via, ở chỗ dây RELAY phải băng qua đường +5V; các dây còn lại đi trọn trên một mặt.
+- **Khoảng cách giữa các dây:** dây tín hiệu thu còn 0,3 mm và khoảng cách tối thiểu nâng từ 0,25 mm lên 0,35 mm cho lớp tín hiệu và lớp nguồn 5 V/3,3 V, giúp dễ in và hàn hơn.
 - **Trước khi đặt in:** xuất tệp Gerber và tệp khoan.
 
 *Hình 2.3. Mạch in, mặt trên.*

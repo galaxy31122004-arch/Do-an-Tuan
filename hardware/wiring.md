@@ -127,8 +127,9 @@ Dự án KiCad 10: `hardware/pcb/env-monitor.kicad_pro`; sơ đồ nguyên lý x
 |---|---|
 | Kích thước, số lớp | 92,5 × 84,7 mm, 2 lớp, linh kiện xuyên lỗ một mặt (mặt trên) |
 | Vùng đồng | GND phủ cả mặt trên (F.Cu) và mặt dưới (B.Cu); không phủ +5V để tránh chập |
-| Độ rộng dây | +12V và tiếp điểm relay (J6) 2 mm; +5V/GND 1 mm (một số nhánh +5V 0,5 mm); +3V3 0,5–1 mm; tín hiệu 0,3–0,5 mm |
-| Via | 2 via 0,6/0,3 mm (BTN_PAGE và RELAY, chỗ phải băng qua đường +5V); các dây khác đi trọn trên một mặt |
+| Độ rộng dây | +12V và tiếp điểm relay (J6) 2 mm; +5V/GND 1 mm (một số nhánh +5V 0,5 mm); +3V3 0,5–1 mm; tín hiệu 0,3 mm |
+| Khoảng cách tối thiểu | Tín hiệu và +5V/+3V3/GND 0,35 mm; +12V/tải relay 0,5 mm |
+| Via | 1 via 0,6/0,3 mm (RELAY, chỗ phải băng qua đường +5V); các dây khác đi trọn trên một mặt. R3 đặt vắt qua đường +5V để BTN_PAGE không cần via |
 | Lỗ bắt vít | H1 M3 (góc phải dưới), H2 M2.5 (góc trái dưới); hai góc trên không còn chỗ vì J1 và OLED |
 | Footprint đáng chú ý | Mọi điện trở nằm sát bo: R1, R3, R8, R9 bước chân 7,62 mm (R8, R9 dưới module TXS0108E), các điện trở còn lại bước 10,16 mm; C1 tụ đĩa nhỏ bước 2,5 mm; Q1 TO-92 chân rộng |
 | Góc đi dây | Đường mạch chỉ đi thẳng hoặc chéo 45°, không có góc cua 90° hay gắt hơn (kiểm bằng `sandbox/kicad/angles.py`) |
