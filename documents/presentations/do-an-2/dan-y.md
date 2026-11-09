@@ -9,7 +9,7 @@ Nguồn: `documents/bao-cao-do-an-2/` (Mở đầu → Chương 4), firmware v0.
 5. **AT89S52 & ngoại vi** — Bảng phân bổ chân (P0.3/P0.4 I²C + R8/R9 kéo lên, P3.0/P3.1 UART, P3.2 DHT11, P3.3 nút, P2.0 relay, XTAL 11,0592 MHz, RST, ISP J3); thẻ: reset R1·C2 ≈ 100 ms, EA lên 5V, nạp Burn-E.
 6. **Chuyển mức TXS0108E & ESP32-C3** — Bảng phân kênh A1/B1, A2/B2 (UART, ESP32 RX=GPIO3, TX=GPIO4), A7/B7, A8/B8 (I²C), OE=GPIO0 + R4 100k; thẻ: chọn kênh theo vị trí PCB (thẳng hàng, không chéo dây), trình tự bật OE sau 100 ms.
 7. **Relay cách ly quang** — bảng linh kiện (R6, PC817, R5/R7, C1815, K1, D3, J6 COM/NO); thẻ số: LED ~1,7 mA, cuộn ~30 mA, base 1–2 mA; logic P2.0 thấp = bật, mặc định tắt khi reset/lỗi cảm biến; tải có điện khi ≥ 32 °C.
-8. **Sơ đồ nguyên lý & PCB** — ảnh schematic + ảnh 3D PCB 92,5×84,7 mm; thẻ: ERC 0 lỗi, DRC 0 lỗi điện (GND phủ hai mặt), PCB 2 lớp đã đi dây; chi phí linh kiện 217.310đ + PCB 120.000đ (chưa gồm mục chưa có giá).
+8. **Sơ đồ nguyên lý & PCB** — ảnh schematic chia 9 khối + ảnh PCB 92,5×84,7 mm; thẻ: ERC 0 lỗi, DRC 0 lỗi điện (GND phủ hai mặt), PCB 2 lớp đã đi dây, chỉ góc 45°, điện trở đều nằm; chi phí linh kiện 217.140đ + PCB 120.000đ (chưa gồm mục chưa có giá).
 9. **Phần mềm** — bảng khung truyền M/S/T (chiều, nội dung, chu kỳ) + CRC-8; hai cột: AT89S52 (vòng 2 s, DHT11 hợp ngữ, relay trễ, OLED 2 trang) và ESP32 (task UART, HTTPS mỗi 10 s, không gửi số giả); dashboard 12 widget.
 10. **Kế hoạch kiểm thử, kết luận & cảm ơn (nền tối)** — tóm tắt 16 kịch bản (nguồn, OLED, DHT11, UART, NTP, cloud, mất mạng, relay, cảnh báo, CSV); kết quả đã đạt: ERC 0 lỗi, kiểm thử phần mềm PASS; hạn chế & hướng phát triển; "Cảm ơn thầy và các bạn đã lắng nghe".
 
