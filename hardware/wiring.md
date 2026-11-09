@@ -130,8 +130,9 @@ Dự án KiCad 10: `hardware/pcb/env-monitor.kicad_pro`; sơ đồ nguyên lý x
 | Độ rộng dây | +12V và tiếp điểm relay (J6) 2 mm; +5V/GND 1 mm (một số nhánh +5V 0,5 mm); +3V3 0,5–1 mm; tín hiệu 0,3–0,5 mm |
 | Via | 4 via 0,6/0,3 mm |
 | Lỗ bắt vít | H1 M3 (góc phải dưới), H2 M2.5 (góc trái dưới); hai góc trên không còn chỗ vì J1 và OLED |
-| Footprint đáng chú ý | R1, R3 dựng đứng (bước chân 2,54 mm); R8, R9 nằm ngang bước chân 7,62 mm dưới module TXS0108E; C1 tụ đĩa nhỏ bước 2,5 mm; Q1 TO-92 chân rộng |
-| Kiểm tra | ERC 0 lỗi; DRC 0 chân chưa nối, 0 lỗi điện; DRC còn 6 cảnh báo cố ý (R8/R9 nằm trong vùng chiếm chỗ của module TXS0108E) và 3 lỗi chữ in lụa nhỏ |
+| Footprint đáng chú ý | Mọi điện trở nằm sát bo: R1, R3, R8, R9 bước chân 7,62 mm (R8, R9 dưới module TXS0108E), các điện trở còn lại bước 10,16 mm; C1 tụ đĩa nhỏ bước 2,5 mm; Q1 TO-92 chân rộng |
+| Góc đi dây | Đường mạch chỉ đi thẳng hoặc chéo 45°, không có góc cua 90° hay gắt hơn (kiểm bằng `sandbox/kicad/angles.py`) |
+| Kiểm tra | ERC 0 lỗi; DRC 0 chân chưa nối, 0 lỗi điện; DRC còn 6 cảnh báo cố ý (R8/R9 nằm trong vùng chiếm chỗ của module TXS0108E) và 4 cảnh báo chữ in lụa |
 
 Trước khi đặt in: đo khoảng cách hai hàng chân ESP32-C3 SuperMini và module TXS0108E mua về so với footprint; xác nhận module OLED nằm trọn trong bo; xuất Gerber và drill từ KiCad.
 
