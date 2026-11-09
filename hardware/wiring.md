@@ -55,7 +55,7 @@ Không lắp module thời gian thực hoặc pin dự phòng. ESP32 lấy UTC t
 
 Kênh chọn theo vị trí trên PCB: B1/B2 nằm ngay trên P3.1/P3.0 (chân 11/10), A1/A2 đi lên GPIO3/GPIO4 không bắt chéo; A7/A8 gần J4, B7/B8 nằm gần P0.4/P0.3 (chân 35/36).
 
-Đấu module theo nhãn A/B và VCCA/VCCB/OE/GND, không dùng số chân IC trần để suy ra header. J5A/J5B là hai hàng 1x10 theo footprint `TXS0108E_Module`; đo module thực tế trước khi đặt in PCB. OLED mặc định `0x3C`; đổi `OLED_ADDR` nếu màn dùng `0x3D`.
+Đấu module theo nhãn A/B và VCCA/VCCB/OE/GND, không dùng số chân IC trần để suy ra header. J5A/J5B là hai hàng 1x10 cách nhau 12,7 mm (0,5″) theo footprint `TXS0108E_Module`, khớp thông số module phổ thông (RSCH-20261109-0001). OLED mặc định `0x3C`; đổi `OLED_ADDR` nếu màn dùng `0x3D`.
 
 OE=GPIO0, R4 100 kΩ kéo xuống GND. ESP32 giữ thấp lúc boot, chờ 100 ms rồi bật mức 3,3 V. Kiểm tra/tháo pull-up hoặc cầu nối kéo cứng OE lên nguồn nếu module có; không đưa 5 V vào GPIO0/OE. AT89S52 thử khởi tạo OLED lại khi TXS chưa bật lúc boot.
 
@@ -128,12 +128,12 @@ Dự án KiCad 10: `hardware/pcb/env-monitor.kicad_pro`; sơ đồ nguyên lý x
 | Kích thước, số lớp | 92,5 × 84,7 mm, 2 lớp, linh kiện xuyên lỗ một mặt (mặt trên) |
 | Vùng đồng | GND phủ cả mặt trên (F.Cu) và mặt dưới (B.Cu); không phủ +5V để tránh chập |
 | Độ rộng dây | +12V và tiếp điểm relay (J6) 2 mm; +5V/GND 1 mm (một số nhánh +5V 0,5 mm); +3V3 0,5–1 mm; tín hiệu 0,3–0,5 mm |
-| Via | 4 via 0,6/0,3 mm |
+| Via | 2 via 0,6/0,3 mm (BTN_PAGE và RELAY, chỗ phải băng qua đường +5V); các dây khác đi trọn trên một mặt |
 | Lỗ bắt vít | H1 M3 (góc phải dưới), H2 M2.5 (góc trái dưới); hai góc trên không còn chỗ vì J1 và OLED |
 | Footprint đáng chú ý | Mọi điện trở nằm sát bo: R1, R3, R8, R9 bước chân 7,62 mm (R8, R9 dưới module TXS0108E), các điện trở còn lại bước 10,16 mm; C1 tụ đĩa nhỏ bước 2,5 mm; Q1 TO-92 chân rộng |
 | Góc đi dây | Đường mạch chỉ đi thẳng hoặc chéo 45°, không có góc cua 90° hay gắt hơn (kiểm bằng `sandbox/kicad/angles.py`) |
 | Kiểm tra | ERC 0 lỗi; DRC 0 chân chưa nối, 0 lỗi điện; DRC còn 6 cảnh báo cố ý (R8/R9 nằm trong vùng chiếm chỗ của module TXS0108E); không còn cảnh báo chữ in lụa |
 
-Trước khi đặt in: đo khoảng cách hai hàng chân ESP32-C3 SuperMini và module TXS0108E mua về so với footprint; xác nhận module OLED nằm trọn trong bo; xuất Gerber và drill từ KiCad.
+Footprint module đã đối chiếu thông số công bố: ESP32-C3 SuperMini hai hàng cách 15,24 mm (0,6″), bo 22,5 × 18 mm (Protosupplies); module TXS0108E hai hàng cách 12,7 mm (DIP-20, 0,5″), bo 26 × 17 mm (Protosupplies); bước chân 2,54 mm; footprint dùng ±7,62 mm và ±6,35 mm, khớp. Thứ tự chân ESP32 khớp ảnh pinout (`documents/sources/esp32-c3-supermini/`). Trước khi đặt in: xuất Gerber và drill từ KiCad; khi nhận module vẫn nên xem nhãn chân in trên module trùng footprint.
 
 Nguồn: Microchip AT89S52 doc1919 (RSCH-20261101-0011), TI TXS0108E (RSCH-20261101-0005), OLED (RSCH-20261101-0004). Burn-E do người dùng xác nhận; phần mềm đang mở là Burn-E Programmer 9.00.88; xác nhận kết nối phần cứng và pinout hiển thị cho AT89S52 trước khi nạp.

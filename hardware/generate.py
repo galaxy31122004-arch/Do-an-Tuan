@@ -26,7 +26,7 @@ PARTS=[
 ('SW1,SW2',2,'Nút nhấn thường hở','Tactile 6x6 mm','SW1 đổi trang; SW2 reset AT89S52'),
 ('J1',1,'Jack DC 5,5x2,1 mm hàn mạch','DC-005, 3 chân','Tâm dương; chân switch để trống'),
 ('J7',1,'Domino 2 chân 5,08 mm','Pitch 5,08 mm','Đầu vào 12 V song song jack J1: chân 1 (+), chân 2 GND; chỉ cấp một nguồn'),
-('J2A,J2B',2,'Header cái 1x8','Pitch 2,54 mm','Đế cắm ESP32; đo khoảng cách hai hàng của board thực tế'),
+('J2A,J2B',2,'Header cái 1x8','Pitch 2,54 mm','Đế cắm ESP32; hai hàng cách 15,24 mm (0,6″) theo thông số board'),
 ('J4',1,'Header cái 1x4','Pitch 2,54 mm','Đế cắm OLED'),
 ('J3',1,'Header ISP AT89S52 1x6','Pitch 2,54 mm','RST/VCC/GND/MISO/SCK/MOSI; nạp chính bằng Burn-E ngoài mạch'),
 ('J5A,J5B',2,'Header cái 1x10 cho module TXS0108E','Pitch 2,54 mm, xác minh hàng mua','Hàn đế module; chỉnh số chân/footprint nếu module thực tế khác'),

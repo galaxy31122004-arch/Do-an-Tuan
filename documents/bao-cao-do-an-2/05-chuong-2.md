@@ -197,7 +197,9 @@ Sơ đồ nguyên lý được vẽ trên KiCad 10 (dự án `env-monitor`).
   - Các điện trở đều nằm sát mặt bo; R1 đặt dưới header ISP, R3 đặt dọc cạnh phải module TXS0108E.
 - **Đi dây:** các đường chính được đi tay; phần còn lại đi bằng công cụ tự động Freerouting, sau đó kiểm tra và sửa bằng KiCad. Đường mạch chỉ đi thẳng hoặc chéo 45°; các góc cua 90° và mẩu dây thừa sát chân linh kiện đã được vát hoặc gộp lại.
 - **Kiểm tra luật thiết kế (DRC):** không còn chân chưa nối và không có lỗi điện. Còn 6 cảnh báo do R8, R9 nằm trong vùng chiếm chỗ của module TXS0108E (bố trí có chủ ý); không còn cảnh báo về chữ in lụa.
-- **Trước khi đặt in:** đo khoảng cách hai hàng chân của module ESP32-C3 và TXS0108E mua về để đối chiếu footprint, sau đó xuất tệp Gerber và tệp khoan.
+- **Đối chiếu footprint module:** theo thông số nhà bán công bố, ESP32-C3 SuperMini có hai hàng chân cách nhau 15,24 mm (0,6″), module TXS0108E có hai hàng cách nhau 12,7 mm (0,5″), bước chân 2,54 mm; footprint tự tạo dùng đúng các khoảng này.
+- **Via:** chỉ còn 2 via, ở hai chỗ dây BTN_PAGE và RELAY phải băng qua đường +5V; các dây còn lại đi trọn trên một mặt.
+- **Trước khi đặt in:** xuất tệp Gerber và tệp khoan.
 
 *Hình 2.3. Mạch in, mặt trên.*
 

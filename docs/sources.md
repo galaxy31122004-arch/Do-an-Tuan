@@ -12,6 +12,7 @@ Ngày tra cứu: 2026-11-01. Các lựa chọn chức năng xuất phát từ ph
 
 Chưa có kết quả thực nghiệm phần cứng. Không có cam kết độ chính xác cảm biến hoặc hiệu năng mạng chưa đo.
 
+- **RSCH-20261109-0001:** kích thước module theo nhà bán, đọc ngày 09/11/2026. [ESP32-C3 SuperMini (Protosupplies)](https://protosupplies.com/?p=20591): 22,5 × 18 mm, hai hàng cách 15,24 mm (0,6″), bước 0,1″. [TXS0108E module (Protosupplies)](https://protosupplies.com/product/txs0108e-8-ch-logic-level-converter-module/): 26 × 17 mm, chân DIP-20 tâm 0,5″ (12,7 mm). Footprint trong `hardware/pcb/env-monitor.pretty` dùng đúng các khoảng này. Thứ tự VA/A1–A8/OE và VB/B1–B8/GND theo nhãn in trên module, nguồn không ghi; xem nhãn khi nhận hàng.
 - **RSCH-20261101-0006:** [ThingsBoard Docker](https://thingsboard.io/docs/user-guide/install/docker/): bản cài CE cục bộ, PostgreSQL và bước khởi tạo dữ liệu.
 - **RSCH-20261101-0007:** [Device profile model](https://github.com/thingsboard/thingsboard/blob/master/ui-ngx/src/app/shared/models/device.models.ts), [query model](https://github.com/thingsboard/thingsboard/blob/master/ui-ngx/src/app/shared/models/query/query.models.ts): alarm rules với ngưỡng động từ attributes; cấu hình đã chạy trên bản local.
 - **RSCH-20261101-0008:** [ESP32-C3 UART](https://docs.espressif.com/projects/esp-idf/en/stable/esp32c3/api-reference/peripherals/uart.html): dùng UART1 và GPIO matrix; SuperMini chọn GPIO3 (RX)/GPIO4 (TX), OE GPIO0 (theo bố trí PCB).

@@ -27,7 +27,7 @@ Giá tham khảo ngày **01/11/2026**, đơn vị VND. Bảng đầu ghi **đơn
 | SW1,SW2 | 2 | [Nút nhấn thường hở](https://chotroihn.vn/bo-10-nut-nhan-4-chan) | 500đ | 1.000đ | Tactile 6x6 mm | SW1 đổi trang; SW2 reset AT89S52. Giá: Mua gói 10, dùng 2 |
 | J1 | 1 | Jack DC 5,5x2,1 mm hàn mạch | Chưa xác nhận | Chưa xác nhận | DC-005, 3 chân | Tâm dương; chân switch để trống. Giá: Chưa khảo sát giá |
 | J7 | 1 | Domino 2 chân 5,08 mm | Chưa xác nhận | Chưa xác nhận | Pitch 5,08 mm | Đầu vào 12 V song song jack J1: chân 1 (+), chân 2 GND; chỉ cấp một nguồn. Giá: Chưa khảo sát giá |
-| J2A,J2B | 2 | [Header cái 1x8](https://chotroihn.vn/jump-cai-don-1-40p-2-54) | 400đ | 800đ | Pitch 2,54 mm | Đế cắm ESP32; đo khoảng cách hai hàng của board thực tế. Giá: 2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt |
+| J2A,J2B | 2 | [Header cái 1x8](https://chotroihn.vn/jump-cai-don-1-40p-2-54) | 400đ | 800đ | Pitch 2,54 mm | Đế cắm ESP32; hai hàng cách 15,24 mm (0,6″) theo thông số board. Giá: 2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt |
 | J4 | 1 | [Header cái 1x4](https://chotroihn.vn/jump-cai-don-1-40p-2-54) | 200đ | 200đ | Pitch 2,54 mm | Đế cắm OLED. Giá: 2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt |
 | J3 | 1 | [Header ISP AT89S52 1x6](https://chotroihn.vn/jump-duc-don-1x40p-2-54) | 300đ | 300đ | Pitch 2,54 mm | RST/VCC/GND/MISO/SCK/MOSI; nạp chính bằng Burn-E ngoài mạch. Giá: 1 thanh 40 chân, dùng 6 chân ISP AT89S52; giả định chân đực module đi kèm module |
 | J5A,J5B | 2 | [Header cái 1x10 cho module TXS0108E](https://chotroihn.vn/jump-cai-don-1-40p-2-54) | 500đ | 1.000đ | Pitch 2,54 mm, xác minh hàng mua | Hàn đế module; chỉnh số chân/footprint nếu module thực tế khác. Giá: 2 thanh 40 chân để cắt 8+8+4+10+10; chừa hao hụt khi cắt |

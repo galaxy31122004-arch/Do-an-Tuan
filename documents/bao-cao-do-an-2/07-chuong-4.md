@@ -4,7 +4,7 @@ Tại thời điểm hoàn thành báo cáo, mạch thật chưa được chế 
 
 ## 4.1. Quy trình thi công
 
-1. Đo khoảng cách hai hàng chân của module ESP32-C3 SuperMini và TXS0108E thật, đối chiếu footprint; nếu lệch thì sửa footprint, đi lại dây đoạn liên quan và chạy lại DRC.
+1. Cắm thử module ESP32-C3 SuperMini và TXS0108E thật vào header trên PCB, xác nhận nhãn chân trên module trùng footprint (khoảng cách hàng đã đối chiếu theo thông số nhà bán: 15,24 mm và 12,7 mm).
 2. Xuất tệp Gerber và tệp khoan từ KiCad để đặt in mạch hai lớp 92,5 × 84,7 mm.
 3. Hàn linh kiện theo thứ tự từ thấp đến cao:
    - điện trở, diode (R8, R9 nằm dưới module TXS0108E nên hàn sát mặt bo);
