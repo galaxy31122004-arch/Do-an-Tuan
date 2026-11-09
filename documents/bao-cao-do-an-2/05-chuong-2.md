@@ -196,7 +196,7 @@ Sơ đồ nguyên lý được vẽ trên KiCad 10 (dự án `env-monitor`).
 - **Lỗ bắt vít:** một lỗ M3 ở góc phải dưới và một lỗ M2.5 ở góc trái dưới. Hai góc trên không còn chỗ do jack nguồn và module OLED.
   - Các điện trở đều nằm sát mặt bo; R1 đặt dưới header ISP, R3 đặt dọc cạnh phải module TXS0108E.
 - **Đi dây:** các đường chính được đi tay; phần còn lại đi bằng công cụ tự động Freerouting, sau đó kiểm tra và sửa bằng KiCad. Đường mạch chỉ đi thẳng hoặc chéo 45°; các góc cua 90° và mẩu dây thừa sát chân linh kiện đã được vát hoặc gộp lại.
-- **Kiểm tra luật thiết kế (DRC):** không còn chân chưa nối và không có lỗi điện. Còn 6 cảnh báo do R8, R9 nằm trong vùng chiếm chỗ của module TXS0108E (bố trí có chủ ý) và 4 cảnh báo nhỏ về chữ in lụa.
+- **Kiểm tra luật thiết kế (DRC):** không còn chân chưa nối và không có lỗi điện. Còn 6 cảnh báo do R8, R9 nằm trong vùng chiếm chỗ của module TXS0108E (bố trí có chủ ý); không còn cảnh báo về chữ in lụa.
 - **Trước khi đặt in:** đo khoảng cách hai hàng chân của module ESP32-C3 và TXS0108E mua về để đối chiếu footprint, sau đó xuất tệp Gerber và tệp khoan.
 
 *Hình 2.3. Mạch in, mặt trên.*

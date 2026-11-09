@@ -8,7 +8,7 @@
 	(fp_rect (start -26.2 -9.84) (end 1.6 17.46) (stroke (width 0.12) (type solid)) (fill no) (layer "F.SilkS") (uuid "6b1f0a10-0001-4c00-9000-000000000003"))
 	(fp_rect (start -26.7 -10.34) (end 2.1 17.96) (stroke (width 0.05) (type solid)) (fill no) (layer "F.CrtYd") (uuid "6b1f0a10-0001-4c00-9000-000000000004"))
 	(fp_rect (start -26.2 -9.84) (end 1.6 17.46) (stroke (width 0.1) (type solid)) (fill no) (layer "F.Fab") (uuid "6b1f0a10-0001-4c00-9000-000000000005"))
-	(fp_rect (start -23.8 -9.54) (end -4.5 17.16) (stroke (width 0.12) (type dash)) (fill no) (layer "F.SilkS") (uuid "6b1f0a10-0001-4c00-9000-000000000006"))
+	(fp_rect (start -22.6 -9.54) (end -4.5 17.16) (stroke (width 0.12) (type dash)) (fill no) (layer "F.SilkS") (uuid "6b1f0a10-0001-4c00-9000-000000000006"))
 	(fp_text user "OLED 0.96in 27x28mm" (at -14 3.81 90) (layer "F.SilkS") (uuid "6b1f0a10-0001-4c00-9000-000000000007")
 		(effects (font (size 1.2 1.2) (thickness 0.15))))
 	(pad "1" thru_hole rect (at 0 0) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (uuid "6b1f0a10-0001-4c00-9000-000000000011"))
