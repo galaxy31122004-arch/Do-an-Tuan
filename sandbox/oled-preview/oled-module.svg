@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="Consolas, monospace">
+  <rect width="900" height="470" fill="#1f5a3a"/>
+  <text x="20" y="30" fill="#e8f5e9" font-size="16" font-family="Segoe UI, sans-serif">Module OLED SSD1315 0.96" (128x64, I2C 0x3C) gắn vào J4 — minh hoạ theo firmware v0.2.0</text>
+  <!-- module template -->
+  <defs>
+    <g id="mod">
+      <rect x="0" y="0" width="300" height="310" rx="10" fill="#1d3f8f" stroke="#0e2457" stroke-width="3"/>
+      <circle cx="18" cy="18" r="8" fill="#c9b37a"/><circle cx="282" cy="18" r="8" fill="#c9b37a"/>
+      <circle cx="18" cy="292" r="8" fill="#c9b37a"/><circle cx="282" cy="292" r="8" fill="#c9b37a"/>
+      <g font-size="13" fill="#fff" text-anchor="middle">
+        <text x="105" y="58">GND</text><text x="135" y="58">VCC</text><text x="165" y="58">SCL</text><text x="195" y="58">SDA</text>
+      </g>
+      <g fill="#d8b84a"><rect x="97" y="12" width="16" height="30"/><rect x="127" y="12" width="16" height="30"/>
+        <rect x="157" y="12" width="16" height="30"/><rect x="187" y="12" width="16" height="30"/></g>
+      <rect x="10" y="72" width="280" height="200" fill="#111" stroke="#333" stroke-width="2"/>
+      <rect x="22" y="84" width="256" height="150" fill="#000"/>
+      <rect x="110" y="272" width="80" height="22" fill="#c8a24a"/>
+    </g>
+  </defs>
+  <!-- page 0 -->
+  <use href="#mod" x="60" y="80"/>
+  <g fill="#7fd6ff" font-size="12.5">
+    <text x="90" y="179">ENVIRONMENT MONITOR</text>
+    <text x="90" y="216">TEMP: 31.5 C</text>
+    <text x="90" y="253">HUM:  065.0 %</text>
+    <text x="90" y="271">RELAY: OFF</text>
+    <text x="90" y="290">2026-11-08 14:30:05</text>
+    <text x="90" y="308">BTN: CHANGE PAGE</text>
+  </g>
+  <text x="210" y="420" fill="#e8f5e9" font-size="14" text-anchor="middle" font-family="Segoe UI">Trang 0 – Môi trường</text>
+  <!-- page 1 -->
+  <use href="#mod" x="420" y="80"/>
+  <g fill="#7fd6ff" font-size="12.5">
+    <text x="450" y="179">NETWORK STATUS</text>
+    <text x="450" y="216">WIFI: CONNECTED</text>
+    <text x="450" y="253">CLOUD: HTTP OK</text>
+    <text x="450" y="290">LAST SEND: 14:29:58</text>
+    <text x="450" y="308">BTN: CHANGE PAGE</text>
+  </g>
+  <text x="570" y="420" fill="#e8f5e9" font-size="14" text-anchor="middle" font-family="Segoe UI">Trang 1 – Mạng (nhấn SW1)</text>
+  <!-- J4 wiring legend -->
+  <g font-family="Segoe UI" font-size="13" fill="#e8f5e9">
+    <text x="760" y="110">J4 trên mạch</text>
+    <text x="760" y="135">1 GND → GND</text>
+    <text x="760" y="157">2 VCC → +3V3</text>
+    <text x="760" y="179">3 SCL → SCL3</text>
+    <text x="760" y="201">4 SDA → SDA3</text>
+    <text x="760" y="235" font-size="11">SCL3/SDA3 từ</text>
+    <text x="760" y="251" font-size="11">TXS0108E (B→A)</text>
+    <text x="760" y="275" font-size="11">Tụ C5, C8 sát J4</text>
+    <text x="20" y="455" font-size="12" fill="#b9dcc4">Chữ và số đo là ví dụ; bố cục dòng lấy từ screen() trong firmware/v0.2.0/at89s52/main.c (dòng 0,2,4,5,6,7).</text>
+  </g>
+</svg>
