@@ -22,8 +22,8 @@ Phần cứng cần đáp ứng các yêu cầu sau:
                     │ P0.3/P0.4 (I²C 5 V)    ┌──► OLED SSD1315 (I²C 3,3 V)
                     ├──────────────► TXS0108E ┤
                     │ P3.0/P3.1 (UART 5 V)   └──► ESP32-C3 UART1 ──Wi-Fi──► ThingsBoard
-                    │                              GPIO0 ──► OE của TXS0108E
-                    └── P2.0 ──► PC817 ──► Q1 ──► Relay K1 ──► J6 (tải ngoài)
+                    │                              GPIO10 ──► OE của TXS0108E
+                    └── P1.0 ──► PC817 ──► Q1 ──► Relay K1 ──► J6 (tải ngoài)
 ```
 
 *Hình 2.1. Sơ đồ khối hệ thống (sẽ vẽ lại dạng hình trong bản Word).*
@@ -73,6 +73,7 @@ Vì vậy LM7805 được đặt nằm ngang, vít tab xuống mạch in. Tab c�
 
 | Chân | Tên | Chức năng | Nối tới |
 |---|---|---|---|
+| 1 | P1.0 | Điều khiển relay | Cathode LED PC817 |
 | 6, 7, 8 | P1.5, P1.6, P1.7 | MOSI, MISO, SCK | J3 (ISP) |
 | 9 | RST | Reset | C2, R1, SW2, J3 |
 | 10 | P3.0/RXD | Nhận UART | TXS0108E B2 |
@@ -80,7 +81,6 @@ Vì vậy LM7805 được đặt nằm ngang, vít tab xuống mạch in. Tab c�
 | 12 | P3.2 | Dữ liệu DHT11 | U5 chân 2, R2 kéo lên |
 | 13 | P3.3 | Nút đổi trang | SW1, R3 kéo lên |
 | 18, 19 | XTAL2, XTAL1 | Dao động | Y1, C9, C10 |
-| 21 | P2.0 | Điều khiển relay | Cathode LED PC817 |
 | 35 | P0.4 | SCL I²C (phần mềm) | TXS0108E B7, R9 kéo lên |
 | 36 | P0.3 | SDA I²C (phần mềm) | TXS0108E B8, R8 kéo lên |
 | 31 | EA | Chạy Flash nội | +5V |
@@ -107,7 +107,7 @@ TXS0108E dùng dạng module cắm vào hai hàng đế 1×10 chân.
 
 - **Nguồn:** VCCB nối +5V, VCCA nối +3V3 từ ESP32, GND chung.
 - **Chân OE:**
-  - Nối GPIO0 của ESP32-C3. Điện trở R4 100 kΩ kéo OE xuống GND.
+  - Nối GPIO10 của ESP32-C3. Điện trở R4 100 kΩ kéo OE xuống GND.
   - Khi ESP32 đang khởi động, OE ở mức thấp nên mọi kênh ở trạng thái trở kháng cao.
   - Sau khoảng 100 ms, khi nguồn hai phía đã ổn định, firmware ESP32 mới đưa OE lên mức cao để bật các kênh.
 - **Điện trở kéo lên I²C:** cổng P0 của AT89S52 là cực máng hở và không có điện trở kéo lên nội, nên phía 5 V có R8, R9 (10 kΩ) kéo SDA, SCL lên +5V. Phía 3,3 V dùng điện trở kéo lên nội của TXS0108E và điện trở có sẵn trên module OLED.
@@ -121,7 +121,7 @@ TXS0108E dùng dạng module cắm vào hai hàng đế 1×10 chân.
 | A2/B2 | ESP32 GPIO4 (TX UART1) | AT89S52 P3.0 (RXD) | ESP32 → AT89S52 |
 | A7/B7 | OLED SCL | AT89S52 P0.4 | Xung nhịp I²C |
 | A8/B8 | OLED SDA | AT89S52 P0.3 | Dữ liệu I²C |
-| OE | ESP32 GPIO0, R4 xuống GND | — | Bật/tắt bộ chuyển mức |
+| OE | ESP32 GPIO10, R4 xuống GND | — | Bật/tắt bộ chuyển mức |
 | A3–A6, B3–B6 | Để trống | Để trống | — |
 
 Các kênh và chân được chọn theo vị trí linh kiện trên mạch in. Kênh B1, B2 nằm ngay phía trên chân 11, 10 (P3.1, P3.0) của AT89S52; GPIO3, GPIO4 của ESP32 được gán sao cho hai đường từ A1, A2 lên ESP32 không bắt chéo. I²C được đưa sang P0.3, P0.4 (chân 36, 35) vì hai chân này nằm ngay dưới kênh B8, B7. Kênh A7, A8 gần đế OLED. Cách chọn này giúp đường mạch ngắn và ít bắt chéo. UART không chuyển sang P0 được vì bộ UART phần cứng của AT89S52 chỉ ra ở P3.0, P3.1.
@@ -135,7 +135,7 @@ Các kênh và chân được chọn theo vị trí linh kiện trên mạch in.
 | Phía | Linh kiện | Kết nối |
 |---|---|---|
 | 5 V | R6 2,2 kΩ | +5V → anode LED PC817 (chân 1) |
-| 5 V | U8 PC817 chân 2 | Cathode LED → P2.0 AT89S52 |
+| 5 V | U8 PC817 chân 2 | Cathode LED → P1.0 AT89S52 |
 | 12 V | U8 chân 4, chân 3 | Collector → +12V; emitter → R5 |
 | 12 V | R5 4,7 kΩ; R7 10 kΩ | Emitter PC817 → R5 → base Q1; R7 từ base xuống GND |
 | 12 V | Q1 2SC1815-GR | Emitter → GND; collector → cuộn K1 |
@@ -145,8 +145,8 @@ Các kênh và chân được chọn theo vị trí linh kiện trên mạch in.
 
 **Nguyên lý:**
 
-- P2.0 ở **mức thấp** thì LED của PC817 sáng, phototransistor dẫn, có dòng vào base Q1, Q1 bão hòa và cuộn relay có điện.
-- P2.0 ở mức cao thì relay nhả.
+- P1.0 ở **mức thấp** thì LED của PC817 sáng, phototransistor dẫn, có dòng vào base Q1, Q1 bão hòa và cuộn relay có điện.
+- P1.0 ở mức cao thì relay nhả.
 - Sau khi reset, các cổng của AT89S52 ở mức cao, nên relay không đóng nhầm khi vừa cấp nguồn.
 - Dòng LED khoảng (5 − 1,2) / 2,2 kΩ ≈ 1,7 mA, nằm trong khả năng kéo dòng xuống của chân AT89S52.
 - Cuộn relay 12 V tiêu thụ khoảng 30 mA. Dòng base của Q1 qua R5 cỡ 1–2 mA, tùy hệ số truyền dòng (CTR) của PC817, đủ để C1815 loại GR bão hòa.

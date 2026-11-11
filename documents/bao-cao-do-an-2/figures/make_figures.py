@@ -48,8 +48,8 @@ arrow(ax, (3.9, 6.4), (6, 6.4), '1 dây'); arrow(ax, (3.9, 3.8), (6, 4.8))
 arrow(ax, (10.4, 6.6), (12.4, 6.6), 'I²C 5 V', True); arrow(ax, (10.4, 5.0), (12.4, 5.0), 'UART 5 V', True)
 arrow(ax, (16.2, 6.8), (17.6, 6.8), 'I²C 3,3 V', True); arrow(ax, (16.2, 5.0), (17.6, 4.3), 'UART', True)
 arrow(ax, (19.6, 3.4), (19.6, 1.9), 'Wi-Fi / HTTPS', True)
-arrow(ax, (8.2, 4.2), (8.2, 2.1), 'P2.0')
-arrow(ax, (17.6, 3.8), (14.3, 4.2)); ax.text(15.2, 3.4, 'OE (GPIO0)', fontsize=9)
+arrow(ax, (8.2, 4.2), (8.2, 2.1), 'P1.0')
+arrow(ax, (17.6, 3.8), (14.3, 4.2)); ax.text(15.2, 3.4, 'OE (GPIO10)', fontsize=9)
 fig.savefig(D / 'so-do-khoi.png', dpi=200, bbox_inches='tight'); plt.close(fig)
 
 

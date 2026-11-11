@@ -11,7 +11,7 @@
 | Phải (J2A) | 5V, GND, 3V3, GPIO4, GPIO3, GPIO2, GPIO1, GPIO0 |
 | Trái (J2B) | GPIO5, GPIO6, GPIO7, GPIO8, GPIO9, GPIO10, GPIO20 (RX), GPIO21 (TX) |
 
-Ảnh còn ghi nhãn phụ: GPIO6/7 = SDA/SCL, GPIO8/9/10 = SCK/MISO/MOSI, GPIO20/21 = RX/TX (UART0). Firmware không dùng các nhãn này: UART1 RX=GPIO3, TX=GPIO4, OE TXS=GPIO0.
+Ảnh còn ghi nhãn phụ: GPIO6/7 = SDA/SCL, GPIO8/9/10 = SCK/MISO/MOSI, GPIO20/21 = RX/TX (UART0). Firmware không dùng các nhãn này: UART1 RX=GPIO3, TX=GPIO4, OE TXS=GPIO10 (chân 14).
 
 ## Chưa xác định từ ảnh
 

@@ -1,0 +1,22 @@
+(version 1)
+
+# Duong nguon (netclass Power, Power_12V): toi thieu 1.0 mm
+(rule "power_min_width"
+  (condition "A.Type == 'track' && (A.hasNetclass('Power') || A.hasNetclass('Power_12V'))")
+  (constraint track_width (min 1.0mm)))
+
+# Khoang cach dong toi thieu 0.5 mm cho moi doi tuong dong
+(rule "min_clearance_all"
+  (condition "A.Type == 'track' || A.Type == 'pad' || A.Type == 'via' || A.Type == 'zone'")
+  (constraint clearance (min 0.5mm)))
+
+# R8/R9 dat co y duoi bung module TXS0108E (U4 cam tren header, cach mat PCB)
+(rule "r8_r9_under_txs_module"
+  (condition "A.Reference == 'U4' && (B.Reference == 'R8' || B.Reference == 'R9')")
+  (constraint courtyard_clearance (min -50mm))
+  (constraint silk_clearance (min -50mm)))
+
+# Duong tin hieu: toi thieu 0.5 mm (min_track_width chung cung = 0.5 mm)
+(rule "signal_min_width"
+  (condition "A.Type == 'track' && !A.hasNetclass('Power') && !A.hasNetclass('Power_12V')")
+  (constraint track_width (min 0.5mm)))

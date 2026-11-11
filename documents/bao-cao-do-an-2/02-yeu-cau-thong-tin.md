@@ -33,4 +33,4 @@ Mức viết: `khái quát` · `vừa đủ` · `chuyên sâu` · `tùy chỉnh`
 
 ## Ghi chú
 - Không suy diễn kết quả đo hay độ chính xác chưa kiểm chứng.
-- Thiết kế đã thay đổi so với bản tóm tắt: thêm relay (PC817 + C1815, bật ≥ 32 °C, tắt ≤ 30 °C), nguồn 12 V qua LM7805, OE = GPIO0, TX ESP32 = GPIO3.
+- Thiết kế đã thay đổi so với bản tóm tắt: thêm relay (PC817 + C1815, bật ≥ 32 °C, tắt ≤ 30 °C), nguồn 12 V qua LM7805, OE = GPIO10, TX ESP32 = GPIO3.

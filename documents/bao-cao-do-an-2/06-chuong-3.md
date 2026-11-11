@@ -64,7 +64,7 @@ Nhiệt độ và độ ẩm truyền dạng số nguyên gấp 10 lần giá tr
 - **Timer 1:** chế độ tự nạp lại 8 bit, TH1 = 0xFD, tạo tốc độ baud 9600 với thạch anh 11,0592 MHz.
 - **Cổng nối tiếp:** chế độ 1 (SCON = 0x50), bật ngắt nối tiếp.
 - **Timer 0:** chế độ 16 bit, dùng để tạo trễ và đo độ rộng xung khi đọc DHT11. Mỗi nhịp của Timer 0 bằng 12 / 11,0592 MHz ≈ 1,085 µs.
-- **Khởi động:** ngay khi khởi động, P1, P2, P3 được đặt mức cao. Nhờ đó P2.0 ở mức cao và relay tắt.
+- **Khởi động:** ngay khi khởi động, P1, P2, P3 được đặt mức cao. Nhờ đó P1.0 ở mức cao và relay tắt.
 
 ### 3.3.2. Vòng lặp chính
 
@@ -131,7 +131,7 @@ Hai ngưỡng khai báo bằng hằng `RELAY_ON_T10` và `RELAY_OFF_T10` trong t
 
 ### 3.4.1. Khởi động
 
-1. Đặt GPIO0 (chân OE của TXS0108E) ở mức thấp, rồi khởi tạo UART1 với tốc độ 9600 bit/s, RX = GPIO3, TX = GPIO4.
+1. Đặt GPIO10 (nối chân OE của TXS0108E) ở mức thấp, rồi khởi tạo UART1 với tốc độ 9600 bit/s, RX = GPIO3, TX = GPIO4.
 2. Chờ 100 ms cho nguồn ổn định, sau đó đưa OE lên mức cao để bật bộ chuyển mức.
 3. Kết nối Wi-Fi ở chế độ station và bật tự kết nối lại.
 4. Cấu hình NTP với máy chủ `pool.ntp.org` và `time.google.com`.

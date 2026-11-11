@@ -23,12 +23,12 @@
   },
   "source_hash_format": "UTF-8 file bytes, CRLF normalized to LF",
   "source_sha256": {
-    "firmware/v0.2.0/at89s52/main.c": "f21999f9fa4eed5626bcd96de792a4d372bf40f94eac53a9049eb39a07cda5b7",
-    "firmware/v0.2.0/at89s52/board.h": "201d41bdf8655d8344423e9b3daa2d16e3150be33e750b2bfd3b41b275b54fdc",
+    "firmware/v0.2.0/at89s52/main.c": "25e647ded328ac9c8c1625650989f05a1f4600403581c9db42cf808d7d3051d8",
+    "firmware/v0.2.0/at89s52/board.h": "8dfa518c713a60212246cf848aa0f00a80822287e9d440b680faca4a8de996c9",
     "firmware/v0.2.0/at89s52/build.py": "5c5c4662591901a930b6ad3d87267bd57d8503e4b8da5e903e9959930c2dcc4b",
     "firmware/v0.2.0/common/protocol.h": "4f307361b39e0352d36eb93a73aef7615bb9da2d032cb71b3e841b295263c6a1",
     "firmware/v0.2.0/common/clock.h": "3b8bec653fd4c56728ebc54599751c565ec75872b353a2a7305b854b282c30ef"
   },
-  "hex_sha256": "a41586241c7868a41753739a9d55e14af7e2edcf2707953efb8b38307e5a21f1",
+  "hex_sha256": "318166775a89757ca8d8587377de3370256029f976aeda6a76ddb4767311fe72",
   "hardware_verify": "Not performed; user will Verify with Burn-E"
 }

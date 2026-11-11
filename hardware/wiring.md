@@ -18,7 +18,7 @@
 | ESP32 chân 5V/VIN theo board | +5 V, không phải chân 3V3 |
 | ESP32 3V3 | Rail 3,3 V cấp OLED và TXS0108E VCCA |
 | TXS0108E VCCB / VCCA | +5 V / 3,3 V (tụ lọc có sẵn trên module) |
-| TXS0108E OE | ESP32 GPIO0; R4 100 kΩ từ OE xuống GND |
+| TXS0108E OE | ESP32 GPIO10; R4 100 kΩ từ OE xuống GND |
 | TP1 / TP2 / TP3 | +5 V / 3,3 V / GND |
 
 **Nguồn LM7805 từ 12 V:** cấp 12 V qua jack J1 **hoặc** domino J7, không cấp cả hai cùng lúc. Dòng tải 5 V ước tính khoảng 180 mA (ESP32 Wi-Fi, AT89S52, OLED; relay đã chuyển sang +12V), đỉnh khoảng 450 mA khi ESP32 phát. LM7805 tỏa khoảng (12 − 0,5 − 5) × 0,18 ≈ **1,2 W**, đỉnh gần 2,5 W khi ESP32 phát. Chỉ tản qua PCB thì cần vùng đồng GND dưới tab rộng khoảng 40×40 mm ở cả hai mặt, nối nhiều via, bôi keo tản nhiệt, và để thoáng; nếu tab vẫn quá nóng khi chạm (trên ~80 °C), gắn thêm tản nhôm nhỏ hoặc hạ adapter xuống 9 V. Tab của 7805 là GND nên vít thẳng xuống đồng GND không cần đệm cách điện. Không cắm USB vào ESP32 khi đang cấp nguồn 12 V.
@@ -57,7 +57,7 @@ Kênh chọn theo vị trí trên PCB: B1/B2 nằm ngay trên P3.1/P3.0 (chân 1
 
 Đấu module theo nhãn A/B và VCCA/VCCB/OE/GND, không dùng số chân IC trần để suy ra header. J5A/J5B là hai hàng 1x10 cách nhau 12,7 mm (0,5″) theo footprint `TXS0108E_Module`, khớp thông số module phổ thông (RSCH-20261109-0001). OLED mặc định `0x3C`; đổi `OLED_ADDR` nếu màn dùng `0x3D`.
 
-OE=GPIO0, R4 100 kΩ kéo xuống GND. ESP32 giữ thấp lúc boot, chờ 100 ms rồi bật mức 3,3 V. Kiểm tra/tháo pull-up hoặc cầu nối kéo cứng OE lên nguồn nếu module có; không đưa 5 V vào GPIO0/OE. AT89S52 thử khởi tạo OLED lại khi TXS chưa bật lúc boot.
+OE=GPIO10, R4 100 kΩ kéo xuống GND. ESP32 giữ thấp lúc boot, chờ 100 ms rồi bật mức 3,3 V. Kiểm tra/tháo pull-up hoặc cầu nối kéo cứng OE lên nguồn nếu module có; không đưa 5 V vào GPIO10/OE. AT89S52 thử khởi tạo OLED lại khi TXS chưa bật lúc boot.
 
 Pull-up I²C: phía 5 V bắt buộc có R8/R9 10 kΩ lên +5 V vì P0 của AT89S52 là cực máng hở, không có pull-up nội. Phía 3,3 V dùng pull-up nội của TXS0108E và pull-up có sẵn trên module OLED. R8/R9 nằm ngang dưới module TXS0108E: hàn sát mặt bo trước khi cắm module. Xem datasheet TI trong `docs/sources.md`.
 
@@ -66,10 +66,10 @@ Pull-up I²C: phía 5 V bắt buộc có R8/R9 10 kΩ lên +5 V vì P0 của AT8
 ```text
 AT89S52 P3.1/TX/11 → TXS B1 ↔ A1 → ESP32 GPIO3/RX1
 AT89S52 P3.0/RX/10 ← TXS B2 ↔ A2 ← ESP32 GPIO4/TX1
-TXS VCCB=5V, VCCA=3V3, GND chung, OE=GPIO0 + R4 100k xuống GND
+TXS VCCB=5V, VCCA=3V3, GND chung, OE=GPIO10 + R4 100k xuống GND
 ```
 
-Không còn bộ chia áp TX hoặc buffer riêng. Không nối AT89S52 TX thẳng vào GPIO3 hoặc thêm bộ chia áp trên đường đã qua TXS. Dùng đúng sơ đồ SuperMini C3: UART1 RX=GPIO3, TX=GPIO4 và OE=GPIO0.
+Không còn bộ chia áp TX hoặc buffer riêng. Không nối AT89S52 TX thẳng vào GPIO3 hoặc thêm bộ chia áp trên đường đã qua TXS. Dùng đúng sơ đồ SuperMini C3: UART1 RX=GPIO3, TX=GPIO4 và OE=GPIO10.
 
 ## 6. Burn-E nạp AT89S52; J3 ISP
 
@@ -95,7 +95,7 @@ Phía điều khiển (LED của PC817) dùng **+5V** sạch từ LM7805. Phía 
 | Phía | Linh kiện | Kết nối |
 |---|---|---|
 | 5 V | R6 2,2 kΩ | +5V → anode LED PC817 (chân 1) |
-| 5 V | U8 PC817 chân 2 | Cathode → AT89S52 P2.0 chân 21 |
+| 5 V | U8 PC817 chân 2 | Cathode → AT89S52 P1.0 chân 1 |
 | 12 V | U8 PC817 chân 4 / 3 | Collector → +12V; emitter → R5 |
 | 12 V | R5 4,7 kΩ, R7 10 kΩ | Emitter PC817 → R5 → base Q1; R7 base → GND |
 | 12 V | Q1 2SC1815-GR (E-C-B) | E → GND; C → cuộn K1 chân 2 |
@@ -103,7 +103,7 @@ Phía điều khiển (LED của PC817) dùng **+5V** sạch từ LM7805. Phía 
 | 12 V | D3 1N4007 | Cathode +12V (chân 5), anode chân 2 |
 | Tải | J6 | 1 COM, 2 NO |
 
-P2.0 **mức thấp** → LED PC817 sáng → Q1 dẫn → relay bật; khi reset P2.0 ở mức cao nên relay không đóng. Dòng LED ≈ 1,5 mA, trong giới hạn kéo xuống của AT89S52. Cuộn 12 V khoảng 30 mA; dòng base qua R5 4,7 kΩ khoảng 1–2 mA (giới hạn bởi CTR của PC817), dư để Q1 bão hòa với C1815 loại **GR**/**Y**.
+P1.0 **mức thấp** → LED PC817 sáng → Q1 dẫn → relay bật; khi reset P1.0 ở mức cao nên relay không đóng. Dòng LED ≈ 1,5 mA, trong giới hạn kéo xuống của AT89S52. Cuộn 12 V khoảng 30 mA; dòng base qua R5 4,7 kΩ khoảng 1–2 mA (giới hạn bởi CTR của PC817), dư để Q1 bão hòa với C1815 loại **GR**/**Y**.
 
 **Khi vẽ PCB:** cho dòng GND của cuộn relay (emitter Q1) về điểm GND chung gần C14 bằng đường riêng, không đi vòng dưới vùng AT89S52/ESP32.
 

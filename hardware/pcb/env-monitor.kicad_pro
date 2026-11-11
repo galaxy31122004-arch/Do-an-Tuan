@@ -70,7 +70,24 @@
         }
       },
       "diff_pair_dimensions": [],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        [
+          "pth_inside_courtyard|154190000|121000000|4fc02d05-68ab-40b5-a953-bba162e50fa4|8da168fb-619c-43a8-923b-3067afe1a362",
+          "R8/R9 nam duoi module TXS0108E (module cam tren header cao), co y"
+        ],
+        [
+          "pth_inside_courtyard|161810000|121000000|8032b5bb-d907-4183-9cf0-1b987618ec5a|8da168fb-619c-43a8-923b-3067afe1a362",
+          "R8/R9 nam duoi module TXS0108E (module cam tren header cao), co y"
+        ],
+        [
+          "pth_inside_courtyard|165590000|121000000|a27560db-3f5d-43d0-9a66-47960f78df8b|8da168fb-619c-43a8-923b-3067afe1a362",
+          "R8/R9 nam duoi module TXS0108E (module cam tren header cao), co y"
+        ],
+        [
+          "pth_inside_courtyard|173210000|121000000|f339d3ad-7849-4b1c-9c73-aa706afcf88e|8da168fb-619c-43a8-923b-3067afe1a362",
+          "R8/R9 nam duoi module TXS0108E (module cam tren header cao), co y"
+        ]
+      ],
       "meta": {
         "version": 2
       },
@@ -140,7 +157,7 @@
       },
       "rules": {
         "max_error": 0.005,
-        "min_clearance": 0.0,
+        "min_clearance": 0.5,
         "min_connection": 0.0,
         "min_copper_edge_clearance": 0.5,
         "min_groove_width": 0.0,
@@ -153,7 +170,7 @@
         "min_text_height": 0.8,
         "min_text_thickness": 0.08,
         "min_through_hole_diameter": 0.3,
-        "min_track_width": 0.2,
+        "min_track_width": 0.5,
         "min_via_annular_width": 0.1,
         "min_via_diameter": 0.5,
         "solder_mask_to_copper_clearance": 0.0,
@@ -513,7 +530,7 @@
     "classes": [
       {
         "bus_width": 12,
-        "clearance": 0.35,
+        "clearance": 0.5,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
@@ -524,7 +541,7 @@
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": 2147483647,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.3,
+        "track_width": 0.5,
         "tuning_profile": "",
         "via_diameter": 0.6,
         "via_drill": 0.3,
@@ -532,7 +549,7 @@
       },
       {
         "bus_width": 12,
-        "clearance": 0.35,
+        "clearance": 0.5,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,

@@ -266,7 +266,7 @@ static void screen(void) __reentrant {
 void main(void) {
     uint16_t tick=0;
     uint8_t debounce=0,refresh=1;
-    P1=0xFF; P2=0xFF; P3=0xFF; /* P2.0 high = opto LED off = relay off (also during reset) */
+    P1=0xFF; P2=0xFF; P3=0xFF; /* P1.0 high = opto LED off = relay off (also during reset) */
     TMOD=0x21; /* T1 8-bit auto-reload UART; T0 16-bit delay/pulse timer. */
     PCON&=0x7F; TH1=0xFD; TL1=0xFD; SCON=0x50; TI=0; RI=0;
     TR1=1; ES=1; EA=1;

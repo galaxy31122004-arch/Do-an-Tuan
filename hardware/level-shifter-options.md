@@ -14,7 +14,7 @@ TI công bố hỗ trợ open-drain và push-pull, VCCA 1,4–3,6 V, VCCB 1,65�
 | A8/B8 | OLED SDA | AT89S52 P0.3 chân 36 (R8 10 kΩ kéo lên 5 V) |
 | A3–A6/B3–B6 | NC | NC |
 
-GND chung; VCCA=3,3 V; VCCB=5 V. OE nối ESP32 GPIO0 và R4 100 kΩ xuống GND. Firmware giữ OE thấp, chờ 100 ms cho nguồn ổn định rồi bật; kiểm tra module không kéo cứng OE lên nguồn. Tụ lọc VCCA/VCCB có sẵn trên module. Không cấp 5 V vào OE/GPIO0; không thêm chia áp vào đường đã qua TXS.
+GND chung; VCCA=3,3 V; VCCB=5 V. OE nối ESP32 GPIO10 và R4 100 kΩ xuống GND. Firmware giữ OE thấp, chờ 100 ms cho nguồn ổn định rồi bật; kiểm tra module không kéo cứng OE lên nguồn. Tụ lọc VCCA/VCCB có sẵn trên module. Không cấp 5 V vào OE/GPIO10; không thêm chia áp vào đường đã qua TXS.
 
 Đã bỏ cặp MOSFET, buffer và chia áp cũ; U4 nay là module TXS0108E. Phía A dùng pull-up nội của TXS và pull-up có sẵn trên OLED. Phía B bắt buộc có R8/R9 vì P0 của AT89S52 là cực máng hở, không có pull-up nội. Đo dạng sóng I²C khi thử. J5A/J5B dự kiến hai header 1x10, phải đo module thực tế. Các kênh còn lại để NC.
 

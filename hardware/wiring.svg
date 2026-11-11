@@ -8,7 +8,7 @@
  <rect x="35" y="102" width="1370" height="125" rx="12" class="note"/>
  <text x="55" y="133" class="head">Power: one regulated 5 V / 2 A source</text>
  <text x="55" y="166">J1 +5V → F1 (1 A hold) → +5V: AT89S52, TXS VCCB, DHT11, ESP32 5V/VIN</text>
- <text x="55" y="195">ESP32 3V3 → OLED VCC + TXS VCCA. All grounds common. OE → GPIO0 + R4 100k to GND.</text>
+ <text x="55" y="195">ESP32 3V3 → OLED VCC + TXS VCCA. All grounds common. OE → GPIO10 + R4 100k to GND.</text>
  <rect x="460" y="280" width="390" height="355" rx="12" class="box"/>
  <text x="485" y="320" class="head">U1 · AT89S52</text>
  <text x="485" y="356">VCC 40 → +5V</text><text x="485" y="384">GND 20; EA 31 → +5V → GND</text>
@@ -55,7 +55,7 @@
  <text x="680" y="827" class="wire">AT89S52 TX/11 → TXS B1 ↔ A1 → ESP32 GPIO3 RX</text>
  <text x="680" y="857">No divider or separate UART buffer.</text>
  <text x="680" y="894" class="wire">ESP32 GPIO4 TX → TXS A2 ↔ B2 → AT89S52 RX/10</text>
- <text x="680" y="926">GPIO0 → OE; R4 100k OE → GND; enable after 100ms.</text>
+ <text x="680" y="926">GPIO10 → OE; R4 100k OE → GND; enable after 100ms.</text>
  <text x="680" y="956">A5–A8/B5–B8 NC. Inspect any module OE jumper.</text>
  <text x="680" y="986">C7 470µF at ESP32. Module headers J5A/J5B: check footprint.</text>
  <path d="M850 533 H920 V705 H1060 V755 M850 568 H880 V725 H1120 V755" class="sig"/>
