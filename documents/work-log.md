@@ -42,3 +42,10 @@
 - `tests/check_artifacts.py` PASS.
 - Chưa kiểm chứng: chưa xem lại bố cục slide sau khi đăng, Gerber trên công cụ của nhà in, mạch thật.
 - Điểm mở: báo cáo và slide chưa đánh phiên bản, chờ người dùng duyệt; chưa commit.
+
+## 2026-11-22 12:25 — Commit và push nhánh release/pcb-v1.0.1
+
+- Yêu cầu: commit và push.
+- Tạo nhánh `release/pcb-v1.0.1`, commit `e3dd015` (37 file), push lên `origin`. Nhánh gồm cả commit `4a8ccca` trước đó chưa push.
+- Quét file đã stage: không có `wifi_secrets.h`, `secrets.h`, `.bin`, `.elf`; các mẫu mật khẩu, token chỉ là giá trị mẫu.
+- Điểm mở: `main` chưa được merge; báo cáo và slide chưa đánh phiên bản.
