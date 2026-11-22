@@ -5,7 +5,7 @@
 		(effects (font (size 1 1) (thickness 0.15))))
 	(property "Value" "TXS0108E_Module" (at 0 15.0 0) (layer "F.Fab") (uuid "3f3aaebb-ba7c-41a0-bee1-1f901d5969d3")
 		(effects (font (size 1 1) (thickness 0.15))))
-	(fp_rect (start -7.85 -13.5) (end 7.85 13.5) (stroke (width 0.12) (type solid)) (fill no) (layer "F.SilkS") (uuid "a03e82b6-9067-45ce-8f2a-abb505e414b9"))
+	(fp_line (start -7.85 -13.5) (end 7.85 -13.5) (stroke (width 0.12) (type solid)) (layer "F.SilkS") (uuid "85665b70-4c15-404e-98ec-2bd32d718400")) (fp_line (start 7.85 -13.5) (end 7.85 13.5) (stroke (width 0.12) (type solid)) (layer "F.SilkS") (uuid "162b41c2-87b8-40ab-bd25-1266bc609594")) (fp_line (start -7.85 13.5) (end -7.85 -13.5) (stroke (width 0.12) (type solid)) (layer "F.SilkS") (uuid "82e84241-7ab7-4c2f-b7b3-ff35da3ec269")) (fp_line (start 7.85 13.5) (end 1.2 13.5) (stroke (width 0.12) (type solid)) (layer "F.SilkS") (uuid "739187fc-9fa3-4187-83c1-c671a590ffe2")) (fp_line (start -1.2 13.5) (end -7.85 13.5) (stroke (width 0.12) (type solid)) (layer "F.SilkS") (uuid "beb258bf-4924-4786-94fa-25b94e5c163a"))
 	(fp_rect (start -8.35 -14.0) (end 8.35 14.0) (stroke (width 0.05) (type solid)) (fill no) (layer "F.CrtYd") (uuid "a3ac92eb-5d82-462e-8332-a68a8c079f9e"))
 	(fp_rect (start -7.85 -13.5) (end 7.85 13.5) (stroke (width 0.1) (type solid)) (fill no) (layer "F.Fab") (uuid "ddf0cc35-2b4e-4a81-a747-2fe5e2cd146e"))
 	(pad "1" thru_hole rect (at -6.35 -11.43) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (uuid "6c5eddda-697b-4937-b3d3-057383d736b1"))

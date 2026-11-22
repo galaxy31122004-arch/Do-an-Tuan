@@ -78,10 +78,10 @@ flow('luu-do-at89s52.png', [
 flow('luu-do-esp32.png', [
     ('round', 'Bắt đầu'),
     ('square', 'OE = thấp; UART1 9600 (RX GPIO3, TX GPIO4)'),
-    ('square', 'Chờ 100 ms → OE = cao; Wi-Fi STA; cấu hình NTP'),
+    ('square', 'Chờ 100 ms → OE = cao; kết nối Wi-Fi đã lưu; cấu hình NTP'),
     ('square', 'Tác vụ host-uart: nhận khung M (kiểm CRC) → hàng đợi;\ngửi khung S mỗi 1 s và khung T'),
     ('diamond', 'Wi-Fi + giờ hợp lệ + đủ 10 s?'),
     ('square', 'Lấy bản ghi mới (≤ 6 s) → HTTPS POST telemetry'),
-    ('square', 'Cập nhật trạng thái cloud; mất Wi-Fi: thử lại sau 15 s'),
+    ('square', 'Cập nhật trạng thái cloud; mất Wi-Fi: tự kết nối lại'),
 ])
 print('figures ok')

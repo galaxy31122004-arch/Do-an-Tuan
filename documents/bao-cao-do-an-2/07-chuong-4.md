@@ -5,7 +5,7 @@ Tại thời điểm hoàn thành báo cáo, mạch thật chưa được chế 
 ## 4.1. Quy trình thi công
 
 1. Cắm thử module ESP32-C3 SuperMini và TXS0108E thật vào header trên PCB, xác nhận nhãn chân trên module trùng footprint (khoảng cách hàng đã đối chiếu theo thông số nhà bán: 15,24 mm và 12,7 mm).
-2. Xuất tệp Gerber và tệp khoan từ KiCad để đặt in mạch hai lớp 92,5 × 84,7 mm.
+2. Đặt in mạch hai lớp 92,5 × 84,7 mm từ gói Gerber và tệp khoan phiên bản 1.0.1, sau khi xem lại trên trang xem trước của nhà in.
 3. Hàn linh kiện theo thứ tự từ thấp đến cao:
    - điện trở, diode (R8, R9 nằm dưới module TXS0108E nên hàn sát mặt bo);
    - đế IC, header;
@@ -20,7 +20,7 @@ Tại thời điểm hoàn thành báo cáo, mạch thật chưa được chế 
   - Biên dịch `main.c` bằng SDCC để tạo tệp HEX.
   - Nạp và kiểm tra lại (verify) bằng mạch nạp Burn-E. Cách nạp chính là đặt chip vào đế của mạch nạp; cổng ISP J3 trên bo dùng cho trường hợp nạp tại chỗ.
 - **ESP32-C3:**
-  - Điền thông tin Wi-Fi, địa chỉ máy chủ, token thiết bị và chứng chỉ CA vào `secrets.h`.
+  - Điền địa chỉ máy chủ, token thiết bị và chứng chỉ CA vào `secrets.h`; sinh danh sách mạng Wi-Fi vào `wifi_secrets.h`.
   - Biên dịch và nạp qua cổng USB-C bằng PlatformIO, khi bo **chưa** cấp nguồn 12 V.
 - **ThingsBoard:**
   - Tạo thiết bị `ENV-MONITOR-01` và import dashboard.

@@ -4,6 +4,7 @@
 #include <HTTPClient.h>
 #include <time.h>
 #include "settings.h"
+#include "wifi_nvs.h"
 #include "../../common/protocol.h"
 
 struct Sample { measurement_t value; uint32_t arrived; };
@@ -65,7 +66,7 @@ static void uartTask(void *) {
 }
 
 static bool configured() {
-    return String(WIFI_SSID)!="YOUR_WIFI_SSID" && String(IOT_TOKEN)!="YOUR_DEVICE_ACCESS_TOKEN"
+    return String(IOT_TOKEN)!="YOUR_DEVICE_ACCESS_TOKEN"
         && String(IOT_ORIGIN).startsWith("https://")
         && String(IOT_ROOT_CA).indexOf("REPLACE_WITH")<0;
 }
@@ -103,22 +104,20 @@ void setup() {
     hostUart.setRxBufferSize(256); hostUart.begin(9600,SERIAL_8N1,AT89S52_RX_PIN,AT89S52_TX_PIN);
     delay(100); /* VCCA/VCCB settle; R4 holds OE low before GPIO configuration. */
     digitalWrite(LEVEL_OE_PIN,HIGH);
-    WiFi.mode(WIFI_STA); WiFi.setAutoReconnect(true);
-    if(configured()) WiFi.begin(WIFI_SSID,WIFI_PASSWORD);
-    else Serial.println("Configure include/secrets.h with Wi-Fi, HTTPS host, device token and CA.");
-    configTime(0,0,"pool.ntp.org","time.google.com");
+    /* UART task starts first: wifinvs::begin() can block while scanning and joining. */
     xTaskCreate(uartTask,"host-uart",4096,nullptr,1,nullptr);
+    if(!configured()) Serial.println("Configure include/secrets.h with HTTPS host, device token and CA.");
+    wifinvs::begin();
+    configTime(0,0,"pool.ntp.org","time.google.com");
     Serial.println(DEMO_MODE?"DEMO: synthetic data, not sensor readings":"LIVE: waiting for AT89S52 frames");
 }
 
 void loop() {
-    static uint32_t attempt=0,wifiAttempt=0,demoAt=0,sequence=0;
+    wifinvs::loop(); /* Reconnects, serves the setup portal and answers #wifi-list. */
+    static uint32_t attempt=0,demoAt=0,sequence=0;
     static bool wasConnected=false;
     uint32_t now=millis(); bool connected=WiFi.status()==WL_CONNECTED;
-    if(!connected) {
-        cloudOk=false;
-        if(configured()&&now-wifiAttempt>=WIFI_RETRY_MS) { WiFi.reconnect(); wifiAttempt=now; }
-    }
+    if(!connected) cloudOk=false;
     if(connected&&!wasConnected) {
         xQueueReset(samples); /* Discard the last offline sample. Await a new measurement. */
         attempt=now-SEND_INTERVAL_MS;

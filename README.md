@@ -38,7 +38,7 @@ AXON lưu trạng thái tại `.planning/state.json`; bối cảnh, kiến trúc
 
 1. Lắp và kiểm tra nguồn theo tài liệu phần cứng; chưa có PCB sản xuất tự động từ sơ đồ này.
 2. Nạp AT89S52 bằng Burn-E với HEX được biên dịch từ đúng mã nguồn, chạy Verify rồi cắm AT89S52 vào mạch. File HEX đã build: `firmware/v0.2.0/at89s52/release/environment-monitor.hex`; bạn tự chạy Verify trên chip bằng Burn-E. Build ESP32 bằng `pio run -d firmware/v0.2.0/esp32 -e esp32c3`.
-3. Tạo `firmware/v0.2.0/esp32/include/secrets.h` từ file example; điền Wi-Fi, HTTPS host, device token và root CA. Không đưa credentials lên Git.
+3. Tạo `firmware/v0.2.0/esp32/include/secrets.h` từ file example; điền HTTPS host, device token và root CA. Mạng Wi-Fi nằm trong `wifi_secrets.h` do script sinh ra, hoặc nhập qua trang cấu hình `ESP32-Setup-XXXX`. Không đưa credentials lên Git.
 4. Tạo device `ENV-MONITOR-01`, import dashboard và cấu hình alarm rules theo hướng dẫn nền tảng.
 5. Có thể dùng environment `demo` để phát dữ liệu giả có nhãn trước khi gắn AT89S52.
 

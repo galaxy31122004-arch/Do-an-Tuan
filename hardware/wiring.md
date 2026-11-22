@@ -1,6 +1,6 @@
 # Sơ đồ nối dây — bản lắp mạch thật
 
-Đối chiếu với `firmware/v0.2.0/at89s52/board.h` và `firmware/v0.2.0/esp32/include/settings.h`. Số chân AT89S52 áp dụng **DIP-40**; board mạng là **ESP32-C3 SuperMini, hai hàng chân 1x8**, tra theo nhãn GPIO trên hàng mua. Sơ đồ nguyên lý và PCB nằm trong `hardware/pcb/` (ERC 0 lỗi, DRC 0 lỗi điện; xem mục 8). Mạch thật chưa lắp, các mục kiểm tra ở mục 7 chưa chạy.
+Đối chiếu với `firmware/v0.2.0/at89s52/board.h` và `firmware/v0.2.0/esp32/include/settings.h`. Số chân AT89S52 áp dụng **DIP-40**; board mạng là **ESP32-C3 SuperMini, hai hàng chân 1x8**, tra theo nhãn GPIO trên hàng mua. Sơ đồ nguyên lý và PCB nằm trong `hardware/pcb/` (ERC 0 lỗi, DRC 0 lỗi và 0 cảnh báo; xem mục 8). Mạch thật chưa lắp, các mục kiểm tra ở mục 7 chưa chạy.
 
 ## 1. Nguồn và khối AT89S52
 
@@ -21,7 +21,7 @@
 | TXS0108E OE | ESP32 GPIO10; R4 100 kΩ từ OE xuống GND |
 | TP1 / TP2 / TP3 | +5 V / 3,3 V / GND |
 
-**Nguồn LM7805 từ 12 V:** cấp 12 V qua jack J1 **hoặc** domino J7, không cấp cả hai cùng lúc. Dòng tải 5 V ước tính khoảng 180 mA (ESP32 Wi-Fi, AT89S52, OLED; relay đã chuyển sang +12V), đỉnh khoảng 450 mA khi ESP32 phát. LM7805 tỏa khoảng (12 − 0,5 − 5) × 0,18 ≈ **1,2 W**, đỉnh gần 2,5 W khi ESP32 phát. Chỉ tản qua PCB thì cần vùng đồng GND dưới tab rộng khoảng 40×40 mm ở cả hai mặt, nối nhiều via, bôi keo tản nhiệt, và để thoáng; nếu tab vẫn quá nóng khi chạm (trên ~80 °C), gắn thêm tản nhôm nhỏ hoặc hạ adapter xuống 9 V. Tab của 7805 là GND nên vít thẳng xuống đồng GND không cần đệm cách điện. Không cắm USB vào ESP32 khi đang cấp nguồn 12 V.
+**Nguồn LM7805 từ 12 V:** cấp 12 V qua jack J1 **hoặc** domino J7, không cấp cả hai cùng lúc. Dòng tải 5 V ước tính khoảng 180 mA (ESP32 Wi-Fi, AT89S52, OLED; relay đã chuyển sang +12V), đỉnh khoảng 450 mA khi ESP32 phát. LM7805 tỏa khoảng (12 − 0,5 − 5) × 0,18 ≈ **1,2 W**, đỉnh gần 2,5 W khi ESP32 phát. Chỉ tản qua PCB thì cần vùng đồng GND dưới tab rộng khoảng 40×40 mm ở cả hai mặt (bản PCB hiện tại không có via, hai mặt GND nối qua các pad xuyên lỗ), bôi keo tản nhiệt, và để thoáng; nếu tab vẫn quá nóng khi chạm (trên ~80 °C), gắn thêm tản nhôm nhỏ hoặc hạ adapter xuống 9 V. Tab của 7805 là GND nên vít thẳng xuống đồng GND không cần đệm cách điện. Không cắm USB vào ESP32 khi đang cấp nguồn 12 V.
 
 EA/VPP chân 31 nối thẳng +5 V để chạy Flash trong; PSEN chân 29 và ALE chân 30 để hở. P0 là cực máng hở: P0.3/P0.4 (chân 36/35) dùng cho I²C nên có R8/R9 kéo lên; các chân P0 khác để hở. Các chân I/O còn lại không dùng để NC; không nối ngẫu nhiên vào nguồn. Nút 4 chân tactile có hai cặp nối sẵn: chọn hai chân khác tiếp điểm, đo thông mạch trước khi hàn.
 
@@ -127,14 +127,15 @@ Dự án KiCad 10: `hardware/pcb/env-monitor.kicad_pro`; sơ đồ nguyên lý x
 |---|---|
 | Kích thước, số lớp | 92,5 × 84,7 mm, 2 lớp, linh kiện xuyên lỗ một mặt (mặt trên) |
 | Vùng đồng | GND phủ cả mặt trên (F.Cu) và mặt dưới (B.Cu); không phủ +5V để tránh chập |
-| Độ rộng dây | +12V và tiếp điểm relay (J6) 2 mm; +5V/GND 1 mm (một số nhánh +5V 0,5 mm); +3V3 0,5–1 mm; tín hiệu 0,3 mm |
-| Khoảng cách tối thiểu | Tín hiệu và +5V/+3V3/GND 0,35 mm; +12V/tải relay 0,5 mm |
-| Via | 1 via 0,6/0,3 mm (RELAY, chỗ phải băng qua đường +5V); các dây khác đi trọn trên một mặt. R3 đặt vắt qua đường +5V để BTN_PAGE không cần via |
+| Độ rộng dây | +12V và tiếp điểm relay (J6) 2 mm; anode D3 1,5 mm; +5V/+3V3/GND 1 mm; tín hiệu 0,5 mm |
+| Khoảng cách tối thiểu | 0,5 mm cho mọi đối tượng đồng |
+| Via | Không có via; mỗi dây đi trọn trên một mặt hoặc đổi mặt tại pad xuyên lỗ |
 | Lỗ bắt vít | H1 M3 (góc phải dưới), H2 M2.5 (góc trái dưới); hai góc trên không còn chỗ vì J1 và OLED |
 | Footprint đáng chú ý | Mọi điện trở nằm sát bo: R1, R3, R8, R9 bước chân 7,62 mm (R8, R9 dưới module TXS0108E), các điện trở còn lại bước 10,16 mm; C1 tụ đĩa nhỏ bước 2,5 mm; Q1 TO-92 chân rộng |
 | Góc đi dây | Đường mạch chỉ đi thẳng hoặc chéo 45°, không có góc cua 90° hay gắt hơn (kiểm bằng `sandbox/kicad/angles.py`) |
-| Kiểm tra | ERC 0 lỗi; DRC 0 chân chưa nối, 0 lỗi điện; DRC còn 6 cảnh báo cố ý (R8/R9 nằm trong vùng chiếm chỗ của module TXS0108E); không còn cảnh báo chữ in lụa |
+| Kiểm tra | ERC 0 lỗi; DRC 0 lỗi, 0 cảnh báo, 0 chân chưa nối, PCB khớp sơ đồ nguyên lý (KiCad 10.0.6, 2026-11-22) |
+| File đặt mạch | `versions/pcb/env-monitor/v1.0.1/env-monitor-gerber_v1.0.1.zip` (Gerber 7 lớp và file khoan) |
 
-Footprint module đã đối chiếu thông số công bố: ESP32-C3 SuperMini hai hàng cách 15,24 mm (0,6″), bo 22,5 × 18 mm (Protosupplies); module TXS0108E hai hàng cách 12,7 mm (DIP-20, 0,5″), bo 26 × 17 mm (Protosupplies); bước chân 2,54 mm; footprint dùng ±7,62 mm và ±6,35 mm, khớp. Thứ tự chân ESP32 khớp ảnh pinout (`documents/sources/esp32-c3-supermini/`). Trước khi đặt in: xuất Gerber và drill từ KiCad; khi nhận module vẫn nên xem nhãn chân in trên module trùng footprint.
+Footprint module đã đối chiếu thông số công bố: ESP32-C3 SuperMini hai hàng cách 15,24 mm (0,6″), bo 22,5 × 18 mm (Protosupplies); module TXS0108E hai hàng cách 12,7 mm (DIP-20, 0,5″), bo 26 × 17 mm (Protosupplies); bước chân 2,54 mm; footprint dùng ±7,62 mm và ±6,35 mm, khớp. Thứ tự chân ESP32 khớp ảnh pinout (`documents/sources/esp32-c3-supermini/`). Trước khi đặt in: xem lại file Gerber trên trang xem trước của nhà in; khi nhận module vẫn nên xem nhãn chân in trên module trùng footprint.
 
 Nguồn: Microchip AT89S52 doc1919 (RSCH-20261101-0011), TI TXS0108E (RSCH-20261101-0005), OLED (RSCH-20261101-0004). Burn-E do người dùng xác nhận; phần mềm đang mở là Burn-E Programmer 9.00.88; xác nhận kết nối phần cứng và pinout hiển thị cho AT89S52 trước khi nạp.

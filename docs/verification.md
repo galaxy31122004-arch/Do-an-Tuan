@@ -23,6 +23,13 @@
 - Người dùng tự nạp/Verify AT89S52 bằng Burn-E. Chưa có Verify PASS trên chip thật, hoặc kiểm tra mọi đường chạy/stack/timing bằng logic analyzer.
 - Không có mạch thật: chưa đo điện áp, thạch anh, I²C/UART hoặc chạy màn OLED SSD1315.
 - Chưa kết nối AT89S52/C3 thật với ThingsBoard hoặc triển khai HTTPS qua Internet; hiện chỉ demo localhost với dữ liệu giả lập.
-- Chưa có schematic CAD/netlist/PCB đã ERC/DRC; SVG và bảng chân phục vụ lắp thử và bước thiết kế schematic tiếp theo.
+- Chưa đặt in PCB; file Gerber chưa được kiểm tra trên công cụ của nhà in.
+- Chưa chạy module Wi-Fi nhiều mạng (`wifi_nvs`) trên ESP32-C3 thật; mới build thành công.
+- Chưa có `secrets.h` thật (HTTPS host, token, root CA), nên bản build hiện tại chưa gửi được dữ liệu lên ThingsBoard.
+
+## Cập nhật 2026-11-22
+
+- KiCad 10.0.6: ERC 0 lỗi; DRC 0 lỗi, 0 cảnh báo, 0 chân chưa nối, 0 sai khác với sơ đồ nguyên lý.
+- PlatformIO `esp32c3`: build thành công, RAM 40.404/327.680 byte, Flash 949.766/1.310.720 byte. `demo`: RAM 40.412/327.680 byte, Flash 949.908/1.310.720 byte.
 
 Các giới hạn này được ghi trong README/hướng dẫn. Chưa nạp thiết bị hoặc tạo dịch vụ cloud ngoài. Tài khoản/thiết bị/profile/rule chain demo chỉ nằm trên ThingsBoard localhost.

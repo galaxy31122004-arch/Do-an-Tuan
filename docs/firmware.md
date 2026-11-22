@@ -10,7 +10,8 @@ AT89S52 DIP-40 / 11,0592 MHz / 5 V; DHT11 P3.2/12; nﾃｺt trang P3.3/13; IﾂｲC ph蘯
 
 ```powershell
 Copy-Item firmware/v0.2.0/esp32/include/secrets.example.h firmware/v0.2.0/esp32/include/secrets.h
-# ﾄ進盻］ Wi-Fi, HTTPS origin, device token vﾃ CA trong secrets.h.
+# ﾄ進盻］ HTTPS origin, device token vﾃ CA trong secrets.h.
+powershell -ExecutionPolicy Bypass -File D:\Personal-Skills\esp32-wifi-provisioning\scripts\make-wifi-secrets.ps1 -Project firmware/v0.2.0/esp32
 pio run -d firmware/v0.2.0/esp32 -e esp32c3
 pio run -d firmware/v0.2.0/esp32 -e esp32c3 -t upload --upload-port COM6
 pio device monitor -b 115200 --port COM6

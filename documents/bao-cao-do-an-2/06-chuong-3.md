@@ -137,7 +137,7 @@ Hai ngưỡng khai báo bằng hằng `RELAY_ON_T10` và `RELAY_OFF_T10` trong t
 4. Cấu hình NTP với máy chủ `pool.ntp.org` và `time.google.com`.
 5. Tạo tác vụ FreeRTOS `host-uart` để xử lý UART.
 
-Thông tin Wi-Fi, địa chỉ máy chủ, mã truy cập thiết bị (token) và chứng chỉ CA được khai báo trong tệp `secrets.h`. Tệp này không đưa lên kho mã nguồn. Nếu cấu hình còn để giá trị mẫu, firmware không kết nối mạng.
+Địa chỉ máy chủ, mã truy cập thiết bị (token) và chứng chỉ CA được khai báo trong tệp `secrets.h`. Danh sách mạng Wi-Fi nằm trong tệp sinh tự động `wifi_secrets.h` và được lưu vào bộ nhớ NVS của ESP32. Hai tệp này không đưa lên kho mã nguồn. Nếu không vào được mạng nào đã lưu, ESP32 mở điểm phát `ESP32-Setup-XXXX` để nhập mạng mới. Nếu cấu hình máy chủ còn để giá trị mẫu, firmware không gửi dữ liệu lên ThingsBoard.
 
 ### 3.4.2. Tác vụ UART
 
@@ -165,7 +165,7 @@ Dữ liệu gửi bằng HTTPS POST tới địa chỉ `/api/v1/<token>/telemetr
 *Ví dụ minh họa định dạng, không phải số đo thật.*
 
 - Khi cảm biến lỗi, ESP32 không gửi trường nhiệt độ và độ ẩm, chỉ gửi `sensor_ok: false`. Nhờ vậy nền tảng không lưu giá trị 0 giả.
-- Gửi thất bại thì bỏ qua bản ghi đó, không lưu bù. Khi mất Wi-Fi, ESP32 thử kết nối lại mỗi 15 s.
+- Gửi thất bại thì bỏ qua bản ghi đó, không lưu bù. Khi mất Wi-Fi, ESP32 tự kết nối lại; sau 60 s vẫn mất mạng thì quét và chuyển sang mạng đã lưu khác.
 - Chế độ `DEMO_MODE` sinh dữ liệu giả để thử dashboard khi chưa có mạch. Mọi bản ghi gửi ở chế độ này có cờ `demo: true` để phân biệt với số đo thật.
 
 *Hình 3.2. Lưu đồ firmware ESP32-C3 (vẽ khi dựng bản Word).*

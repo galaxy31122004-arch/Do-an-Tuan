@@ -1,7 +1,5 @@
 #pragma once
-/* Copy to secrets.h. Never commit Wi-Fi passwords or device credentials. */
-#define WIFI_SSID "YOUR_WIFI_SSID"
-#define WIFI_PASSWORD "YOUR_WIFI_PASSWORD"
+/* Copy to secrets.h. Never commit device credentials. Wi-Fi networks live in wifi_secrets.h (generated). */
 /* Origin only, no trailing slash. The device HTTP API must be enabled. */
 #define IOT_ORIGIN "https://YOUR_THINGSBOARD_HOST"
 #define IOT_TOKEN "YOUR_DEVICE_ACCESS_TOKEN"
